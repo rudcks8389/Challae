@@ -1,0 +1,147 @@
+/* 회원가입 모달 시작 */
+#signup_modal {
+    display: none;
+    width: 1100px;
+    height: 700px;
+    padding: 20px 60px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 1px solid #ccc;
+  }
+  
+  /* 우측상단 창닫기 버튼 */
+  #signup_modal .modal_close_btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  #signup_modal .modal_close_btn:after {
+    /* X 모양 만들기 */
+    content: "\00d7";
+    font-size: 50pt;
+    line-height: 35px;
+  }
+  
+  /* 모달 끝 */
+
+  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+
+
+.signup{
+  border: solid 1px #0068FF;
+  border-radius: 20px;
+  top: 60px;
+  left: 625px;
+  box-shadow: 30px 20px 20px 10px #0068FF40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem;
+}
+
+
+/* 본문 시작 */
+#detailDiv {
+  margin: 0 auto;
+  width: 800px;
+  height: 600px;
+  padding: 20px 70px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 1px solid #ccc;
+}
+
+/* 테이블 */
+#detailDiv .add_table {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  font-size: 25px;
+  line-height: 60px;
+}
+
+/* 테이블 input */
+.signup input {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 90%;
+  font-size: 20px;
+  text-align: center;
+  outline: none;
+}
+
+#logo_flex{
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.logo_btn {
+  width: 120px;
+  font-size: 22px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  margin-bottom: 7px
+}
+
+/* 신청하기, 닫기 */
+#detailDiv .btn_wrap {
+  display: inline-block;
+  text-align: center;
+  font-size: 25px;
+}
+
+#detailDiv .detail_join_btn {
+  margin-right: 5px;
+}
+
+#detailDiv .detail_close_btn {
+  margin-left: 5px;
+}
+
+/* 본문 끝 */
+
+
+#filebox {
+  margin-top: 10px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: flex-end;
+  vertical-align: middle;
+}
+
+#filebox .upload_name {
+  color: #c8c8c8;
+  font-size: 21px;
+  padding-top: 8px;
+}
+
+#filebox label {
+  width: 100px;
+  height: 60px;
+  font-size: 20px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  margin-bottom: 8px;
+}
+
+#filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}

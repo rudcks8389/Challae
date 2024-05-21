@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/template :: template(~{this :: title}, ~{this :: css}, ~{this :: script}, ~{this :: content})}">
+
+
+<title th:fragment="title">:::: 회원 가입 ::::</title>
+
+<th:block th:fragment="css"></th:block>
+
+<th:block th:fragment="script"></th:block>
+
+<th:block th:fragment="content">
+    <div class="bg-pattern text-primary text-opacity-50 opacity-25 w-100 h-100 start-0 top-0 position-absolute">
+    </div>
+    <div class="bg-gradientwhite flip-y w-50 h-100 start-50 top-0 translate-middle-x position-absolute"></div>
+    <div class="container pt-11 pt-lg-14 pb-9 position-relative z-1">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6 col-sm-8 mt-3">
+                <h3>나의 친구가 되어주세요.</h3>
+                <p class="mb-2 w-lg-75">
+                    세부 정보를 입력하여 주세요...
+                </p>
+
+                <div class="width-50x pt-1 bg-primary mb-3"></div>
+
+                <div class="position-relative">
+                    <div>
+                        <form class="needs-validation" novalidate>
+                            <div class="input-icon-group mb-3">
+                      <span class="input-icon">
+                        <i class="bx bx-user-pin"></i>
+                      </span>
+                                <input type="text" class="form-control" required id="uid" autofocus placeholder="아이디">
+                            </div>
+
+                            <div class="input-icon-group mb-3">
+                      <span class="input-icon">
+                        <i class="bx bx-user"></i>
+                      </span>
+                                <input type="text" class="form-control" required id="uname" autofocus placeholder="이름">
+                            </div>
+
+                            <div class="input-icon-group mb-3">
+                      <span class="input-icon">
+                        <i class="bx bx-envelope"></i>
+                      </span>
+                                </span>
+                                <input type="email" class="form-control" required id="email" placeholder="이메일">
+                            </div>
+
+                            <div class="input-icon-group mb-3">
+                      <span class="input-icon">
+                        <i class="bx bx-lock-open"></i>
+                      </span>
+                                </span>
+                                <input type="password" class="form-control" required id="passwd" placeholder="비밀번호">
+                            </div>
+
+                            <div class="input-icon-group mb-3">
+                      <span class="input-icon">
+                        <i class="bx bx-lock-open"></i>
+                      </span>
+                                </span>
+                                <input type="password" class="form-control" required id="re-passwd"
+                                       placeholder="비밀번호 확인">
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-primary" type="submit">가입하기</button>
+                            </div>
+                        </form>
+
+                        <p class="pt-3 small text-body-tertiary">
+                            이미 계정이 있습니까? <a href="/member/login.html" class="ms-2 fw-semibold link-underline">로그인</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</html>
+
+
+
+
+
+
+
+
+
+

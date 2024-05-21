@@ -1,0 +1,85 @@
+*{
+    margin: 0px auto;
+}
+#list{
+    width: 100%;
+    overflow: hidden;
+
+}
+.maintit {
+    font-size: 40px;
+    margin: 30px;
+    /*  */
+}
+.bodywrapper {
+    width: 100%;
+    display: flex;
+    /* border-top:1px solid white; */
+    border-bottom:1px solid lightgray;
+}
+.leftwrap{
+    width: 40%;
+}
+.leftwrap .image{
+    width: 100%;
+    margin: 30px;
+}
+
+
+.rightwrap{
+    margin: 30px 30px 30px 100px;
+    padding: 10px;
+    width: 60%;
+    float: right;
+    font-size: 20px;
+    /* border: 1px solid purple; */
+}
+
+.rightwrap p {
+    padding:  20px 10px;
+}
+
+.rightwrap .btnwrap {
+    width: 60%;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.btnwrap .abtn{
+    width: 47%;
+    height: 40px;
+    float: left;
+    padding-right: 0px;
+    background-color:rgb(132,	140,	181);
+}
+
+.btnwrap .abtn a{
+    text-decoration: none;
+    color: black;
+}
+.btnwrap .abtn:hover{
+    text-decoration: none;
+    color: white;
+    background-color:rgb(132,	140,	181);
+
+}
+.btnwrap .bbtn{
+    width: 47%;
+    height: 40px;
+    float: right;
+    background-color:rgb(166, 184, 196);
+}
+.btnwrap .bbtn a{
+    text-decoration: none;
+    color: black;
+}
+.btnwrap .bbtn:hover{
+    text-decoration: none;
+    color: white;
+    background-color:rgb(166, 184, 196);
+
+}
+
+.rightwrap .tit{
+    border-bottom: 1px solid white;
+}

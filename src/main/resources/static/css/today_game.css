@@ -1,0 +1,99 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: black;
+    color: white;
+    margin: auto;
+    width: 94%;
+}
+
+#header {
+    font-size: 42pt;
+    text-align: center;
+    margin: 30px;
+    height: 100px;
+}
+
+#game-info {
+    /* border: 1px solid white; */
+    width: 50%;
+}
+
+
+
+th, td {
+    background-color:rgb(124, 190, 255);
+    color: black;
+    border-radius: 10px;
+    /* border: 1px solid white; */
+    padding: 15px 10px;
+    margin: auto;
+    font-size: 20pt;
+}
+th {
+    /* text-align: right; */
+}
+
+#info-table{
+    margin: 30px auto;
+   
+}
+
+#tactic-board {
+    margin: auto;
+    width: 95%;
+    height: 65%;
+    border: 1px solid rgb(124, 190, 255);
+}
+
+#info-head{
+    width: 120px;
+}
+
+
+#info-board {
+    display: flex;
+    flex-direction: row;
+}
+
+#map-today{
+
+    margin: auto;
+}
+h2 {
+    text-align: center;
+    border: 1px solid rgb(124, 190, 255);
+    background-color: rgb(124, 190, 255);
+    color: black;
+    border-radius: 20px;
+    width: 200px;
+    margin: 20px auto;
+}
+
+#map-name {
+    height: 30px;
+    margin: 20px auto;
+    font-size: 24pt;
+}
+
+img {
+    width: 500px;
+    padding: 50px ;
+}
+
+#map-today {
+    width: 40%;
+    text-align: center;
+}
+#map-img{
+    margin: auto;
+    height: 600px;
+    width: 600px;
+}
+
+p {
+    font-size: 18pt;
+}

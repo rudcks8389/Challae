@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.ezen.springmvc.domain.member.mapper.MemberMapper">
+	<!-- 회원 전체 조회 -->
+	<select id="findByAll" resultType="MemberDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD') regdate
+		FROM member
+		ORDER BY regdate DESC
+	</select>
+
+	<!-- 아이디로 회원 상세 조회 -->
+	<select id="findById" parameterType="string" resultType="MemberDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
+		FROM member
+		WHERE member_id = #{value}
+	</select>
+
+	<!-- 회원 인증 -->
+	<select id="findByIdAndPasswd" resultType="MemberDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
+		FROM member
+		WHERE member_id = #{id} AND password = #{passwd}
+	</select>
+
+	<!-- 회원 이름으로 Like 검색 -->
+	<select id="findByNameLike" parameterType="string" resultType="MemberDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
+		FROM member
+		WHERE name LIKE '%' || #{value} || '%'
+	</select>
+
+	<!-- 회원 등록 -->
+	<insert id="create" parameterType="MemberDto">
+		INSERT INTO member(member_id, password, name, email)
+		VALUES(#{id}, #{passwd}, #{name}, #{email})
+	</insert>
+
+	<!-- 회원 정보 수정 -->
+	<update id="update" parameterType="MemberDto">
+		UPDATE member
+		SET password = #{passwd}, email = #{email}
+		WHERE member_id = #{id}
+	</update>
+
+	<!-- 검색 타입별 회원 검색 -->
+	<select id="findBySearchType" parameterType="string" resultType="MemberDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
+		FROM member
+		<where>
+			<if test="type != null and type == 'id'">
+				and member_id = #{value}
+			</if>
+			<if test="type != null and type == 'name'">
+				and name LIKE '%' || #{value} || '%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 회원 아이디 또는 이름 회원 통합 검색 -->
+	<select id="findBySearchAll" parameterType="string"	resultType="MemberDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
+		FROM member
+		WHERE member_id = #{value} OR name LIKE '%' || #{value} || '%'
+	</select>
+
+	<!-- 옵션 선택별 회원 통합 검색 -->
+	<select id="findBySearchAllOption" parameterType="MemberSearchCondition" resultType="MemberDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
+		FROM member
+		<where>
+			<if test="memberId != null and memberId != ''">
+				or member_id = #{memberId}
+			</if>
+			<if test="name != null and name != ''">
+				or name LIKE '%' || #{name} || '%'
+			</if>
+			<if test="email != null and email != ''">
+				or email = #{email}
+			</if>
+		</where>
+	</select>
+</mapper>
+

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="css">
+    <link href="/css/today_game.css" rel="stylesheet" />
+</th:block>
+<th:block th:fragment="fontawesome">
+    <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
+
+<th:block th:fragment="script">
+    <script src="/js/rolling-list.js" defer></script>
+</th:block>
+
+<th:block th:fragment="content">
+
+    <h1 id="header"> ??날의 경기정보 </h1>
+
+    <div id="info-board">
+
+        <div id="game-info">
+
+            <table id="info-table">
+
+
+
+                <!-- <thead id="info-head">
+                    <tr>
+                        <th scope="col">날짜</th>
+                        <th scope="col" class="tb">기타<br>전달사항</th>
+                        <th scope="col">구장이름</th>
+                    </tr>
+                </thead>
+
+                <tbody id="info-body">
+                    <tr>
+                        <td>2024년 7월 11일 [11시 55분]</td>
+                        <td>소루 발로차 구장</td>
+                        <td>거 선크림 야무지게 바르고 오슈~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</td>
+                    </tr>
+                </tbody> -->
+
+
+                <tr>
+                    <th scope="col"> 날 짜 </th>
+                    <td>024년 7월 11일 [ 11시 55분 ]</td>
+                </tr>
+
+                <tr>
+                    <th scope="col"> 구장 이름 </th>
+                    <td>소루 발로차 구장</td>
+                </tr>
+
+                <tr>
+                    <th scope="col">기타 전달사항 </th>
+                    <td>거 선크림 야무지게 바르고 오슈~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</td>
+                </tr>
+
+
+            </table>
+
+            <div id="tactic-board">
+                <h2>전략판</h2>
+            </div>
+
+        </div>
+
+
+        <div id="map-today">
+            <h2>경기장 위치</h2>
+            <h3 id="map-name">??????? 구장</h3>
+            <div>
+                <div id="map-img">
+                    <!-- <img src="/project_chal-lae/img/A.jpeg" alt=" 지도 들어갈거임 "> -->
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a3ea03be2bb55d4686b970ff6653edab"></script>
+                    <script>
+                        var container = document.getElementById('map-img');
+                        var options = {
+                            center: new kakao.maps.LatLng(33.450701, 126.570667),
+                            level: 3
+                        };
+
+                        var map = new kakao.maps.Map(container, options);
+                    </script>
+                </div>
+            </div>
+
+
+            <h2>구장 오시는길</h2>
+            <p>블라시 블라구 블라동 777-777 (뚜르뚜주르르 옆)</p>
+        </div>
+
+    </div>
+
+</th:block>
+
+</body>
+
+</html>

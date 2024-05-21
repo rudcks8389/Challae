@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:fragment="template(css, script, content, fontawesome)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>CHAL-LAE !</title>
+
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 부트스트랩 -->
+
+    <!-- 파비콘 -->
+    <link rel="icon" href="/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="/img/favicon.ico" />
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous" defer></script>
+    <!-- Jquery -->
+
+    <!-- 일반 CSS -->
+    <th:block th:replace="${css}"></th:block>
+    <link href="/css/style.css" rel="stylesheet" />
+    <!-- 일반 CSS -->
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=IBM+Plex+Sans+KR&family=Jua&display=swap" rel="stylesheet">
+    <!-- 구글 폰트 -->
+
+    <!-- fontawesome -->
+    <th:block th:replace="${fontawesome}"></th:block>
+    <!-- fontawesome -->
+
+    <!-- 일반 js -->
+    <th:block th:replace="${script}"></th:block>
+    <script src="/js/login.js" defer></script>
+    <script src="/js/signup.js" defer></script>
+    <script src="/js/rolling-list.js" defer></script>
+    <!-- 일반 js -->
+
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- 상단 nav 구역 -->
+    <nav>
+        <!-- 로고 div -->
+        <a class="nav-logo" href="/"><img src="/img/chal-lae2.png" style="height: 100%; width: 90%;" />
+            <span></span>
+        </a>
+        <!-- 상단 메뉴 div 구역 -->
+        <div class="nav-menu">
+            <ul>
+                <li>
+                    <a href="/club/list"><span>팀 목록</span></a>
+                </li>
+                <li>
+                    <a href="/club/myteam"><span>내 팀 보기</span></a>
+                </li>
+                <li>
+                    <a href="/field/list"><span>구장 정보</span></a>
+                </li>
+                <li>
+                    <a href="/board/list"><span>고객센터</span></a>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- 로그인 / 회원가입 div -->
+        <div class="nav-login">
+
+            <!-- 내 정보 toggle창 -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight" style="background-color: #000; border: none; font-size: 20px;">내 정보</button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
+                 style="height: 100%; background-color: #d2d2d2; padding: 10px;">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel"
+                        style="margin-top: 40px; padding-left: 10px; font-size: 25px;"><i class="fa-solid fa-user"></i> 내 정보</h5>
+                    <div id="member-photo">
+                        <img src="/img/cat-sun2.jpeg"
+                             style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;"> <!-- 회원 사진 -->
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body" style="text-align: left;">
+                    <hr>
+                    <!-- 내 정보 상단 -->
+                    <div class="toggle-top" style="margin-bottom: 50px;">
+                        <span> 이름 : </span><br>
+                        <span> H.P : </span><br>
+                        <span> 소속 클럽 : </span>
+
+                    </div>
+                    <hr>
+                    <!-- 내 정보 하단 -->
+                    <div class="toggle-bottom" style="font-size: 25px;"> <!-- 감독일 경우 회원 가입 승인 구역 -->
+                        [ 감독일 경우 회원가입 승인 구역 ]
+                    </div>
+
+                </div>
+            </div>
+            <span id="login">로그인</span>
+            <span id="signup">회원가입<i class="fa-solid fa-right-to-bracket" style="margin-left: 10px;"></i></span>
+        </div>
+    </nav>
+    <!-- 광고 배너 구역-->
+    <main>
+        <section>
+            <article class="rolling-wrap">
+                <div class="rolling-list">
+                    <ul>
+                        <li>
+                            <div class="image-wrap"></div>
+                            <div class="desc">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="image-wrap"></div>
+                            <div class="desc">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="image-wrap"></div>
+                            <div class="desc">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="image-wrap"></div>
+                            <div class="desc">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <!-- main 하단 부분  -->
+
+
+            <th:block th:replace="${content}"></th:block>
+
+    </main>
+
+<!--    &lt;!&ndash; 로그인 모달 시작 &ndash;&gt;-->
+<!--    <div id="login_modal">-->
+
+<!--        &lt;!&ndash; 창 닫기 버튼 &ndash;&gt;-->
+<!--        <a class="modal_close_btn"></a>-->
+
+<!--        <div class="container">-->
+<!--            <h1>Login</h1>-->
+<!--            <form>-->
+<!--                <div class="form-control">-->
+<!--                    <input type="text" required />-->
+<!--                    <label id="id">아이디</label>-->
+<!--                </div>-->
+
+<!--                <div class="form-control">-->
+<!--                    <input type="password" required />-->
+<!--                    <label id="passwd">패스워드</label>-->
+<!--                </div>-->
+
+<!--                <input type="checkbox"><label id="saveId">아이디 기억하기</label>-->
+
+<!--                <button class="login_btn">로그인</button>-->
+
+<!--                <p class="text">아이디를 잊으셨나요? <a href="#">아이디찾기</a></p>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; 로그인 모달 끝 &ndash;&gt;-->
+
+<!--    &lt;!&ndash; 회원가입 모달 시작 &ndash;&gt;-->
+<!--    <div id="signup_modal">-->
+<!--        &lt;!&ndash; 창 닫기 버튼 &ndash;&gt;-->
+<!--        <a class="modal_close_btn"></a>-->
+<!--        <div class="signup" id="detailDiv" style="display: block;">-->
+
+<!--            <div class="layer_cont">-->
+<!--                <div class="table_wrap" id="detail">-->
+<!--                    <table class="add_table">-->
+<!--                        <colgroup>-->
+<!--                            <col class="t01">-->
+<!--                            <col class="t02">-->
+<!--                            <col class="t01">-->
+<!--                            <col class="t02">-->
+<!--                        </colgroup>-->
+<!--                        <tbody>-->
+<!--                        <h1>회원가입을 환영합니다!</h1>-->
+<!--                        <tr>-->
+<!--                            <th scope="row">아이디</th>-->
+<!--                            <td class="al_left"><input type="text"></td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <th scope="row">비밀번호</th>-->
+<!--                            <td class="al_left"><input type="password"></td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <th scope="row">비밀번호 확인</th>-->
+<!--                            <td class="al_left"><input type="password"></td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <th scope="row">이메일</th>-->
+<!--                            <td class="al_left"><input type="email"></td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <th scope="row">연락처</th>-->
+<!--                            <td class="al_left"><input type="text" placeholder="번호만 입력 해 주세요"></td >-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <th scope="row">프로필 사진</th>-->
+<!--                            <td id="filebox">-->
+<!--                                <input class="upload_name" value="No Image" readonly>-->
+<!--                                <label for="file">파일찾기</label>-->
+<!--                                <input type="file" id="file">-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                    <div class="btn_wrap">-->
+<!--                        <a href="javascript:;" onclick="" class="detail_join_btn">신청하기</a>-->
+
+<!--                        <a href="javascript:;" onclick="" class="detail_close_btn">닫기</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--    &lt;!&ndash; 회원가입 모달 끝 &ndash;&gt;-->
+
+    <!-- 풋터 구역 -->
+    <footer id="footer">
+        <div class="footer_wrap">
+            <span class="logo"></span>
+            <div class="foot_util">
+                <ul>
+                    <li><a href="/member/privacy.asp">개인정보처리방침</a></li>
+                    <li><a href="/member/tos.asp">이용약관</a></li>
+                    <li><a href="/member/emailcollection.asp">이메일 무단수집거부</a></li>
+                </ul>
+            </div>
+            <p class="info">서울시 노원구 큰 다이소 있는 건물 7층 709호<span>TEL : 02-111-2222</span><span>FAX : 02-1234-6789</span></p>
+            <p class="copy">COPYRIGHT ⓒCHALLAE. ALLRIGHT RESERVED</p>
+        </div>
+    </footer>
+    <!-- //Footer -->
+</div>
+</body>
+
+</html>

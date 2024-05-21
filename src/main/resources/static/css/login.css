@@ -1,0 +1,134 @@
+/* 로그인 모달 시작 */
+#login_modal {
+    display: none;
+    width: 600px;
+    height: 500px;
+    padding: 20px 60px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 1px solid #ccc;
+  }
+  
+  /* 우측상단 창닫기 버튼 */
+  #login_modal .modal_close_btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  #login_modal .modal_close_btn:after {
+    /* X 모양 만들기 */
+    content: "\00d7";
+    font-size: 50pt;
+    line-height: 35px;
+  }
+  
+  /* 모달 끝 */
+
+  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration-line: none;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px 40px;
+  border-radius: 5px;
+  
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container a {
+  text-decoration: none;
+  color: lightblue;
+}
+
+.login_btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  background: lightblue;
+  padding: 15px;
+  font-family: inherit;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.login_btn:focus {
+  outline: 0;
+}
+
+.login_btn:active {
+  transform: scale(0.98);
+}
+
+.text {
+  margin-top: 30px;
+}
+
+.form-control {
+  position: relative;
+  margin: 20px 0 40px;
+  width: 300px;
+  background-color: black;
+  border: none;
+}
+
+.form-control input {
+  background-color: black;
+  outline: none;
+  border: none;
+  border-bottom: 2px lightblue solid;
+  display: inline-block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 18px;
+  color: white;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+  outline: 0;
+  border-bottom-color: lightblue;
+}
+
+#id,
+#passwd {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  pointer-events: none;
+}
+
+form p {
+  letter-spacing: 0.3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+ #saveId{
+    letter-spacing: 0.3rem;
+    padding-left: 0.3rem;
+  }
+
+#id {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#id,
+#passwd {
+  color: lightblue;
+  transform: translateY(-30px);
+}

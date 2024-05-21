@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+
+<body>
+<th:block th:fragment="css">
+  <link href="/css/clubJoin.css" rel="stylesheet" />
+  <link href="/css/clubList.css" rel="stylesheet" />
+</th:block>
+
+<th:block th:fragment="script">
+  <script src="/js/level_select.js" defer></script>
+
+</th:block>
+
+<th:block th:fragment="fontawesome">
+  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
+
+<th:block th:fragment="content">
+
+
+
+  <!-- 팀 생성 페이지 시작 -->
+  <div class="team_add">
+    <!-- 팀 텍스트 -->
+    <div class="team_add_text">
+      <span id="text1">가입 신청</span><span id="text2">Club join</span>
+    </div>
+
+    <div class="layer_popup class" id="detailDiv" style="display: block;">
+
+      <div class="layer_cont">
+        <div class="table_wrap" id="detail">
+          <table class="add_table">
+            <colgroup>
+              <col class="t01">
+              <col class="t02">
+              <col class="t01">
+              <col class="t02">
+            </colgroup>
+            <tbody>
+            <tr>
+              <th scope="row">이름(DB불러)</th>
+              <td class="al_left"><input type="text" readonly></td>
+            </tr>
+
+            <tr>
+              <th scope="row">연락처(DB불러)</th>
+              <td class="al_left"><input type="text" readonly></td>
+            </tr>
+
+            <tr>
+              <th scope="row">이메일(DB불러)</th>
+              <td class="al_left"><input type="text" readonly></td>
+            </tr>
+
+            <tr>
+              <th scope="row">주소</th>
+              <td class="al_left"><input type="text"></td>
+            </tr>
+
+            <tr>
+              <th scope="row">수준</th>
+              <td class="al_left" id="levelbox">
+                <input type="text" class="level_input" value="수준을 선택해주세요" readonly>
+                <select class="level_select">
+                  <option value>수준선택</option>
+                  <option value="상">상</option>
+                  <option value="중상">중상</option>
+                  <option value="중">중</option>
+                  <option value="중하">중하</option>
+                  <option value="하">하</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row" style="padding-bottom: 200px;">소개</th>
+              <td class="al_left" colspan="3" style="border-bottom: none;">
+                <div class="match_meno">
+                  <textarea name="" id="team_memo"></textarea>
+                </div>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+
+
+          <div class="btn_wrap">
+            <a href="javascript:;" onclick="" class="detail_join_btn">가입신청</a>
+
+            <a href="javascript:;" onclick="" class="detail_close_btn">뒤로가기</a>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- 팀 생성 페이지 끝 -->
+
+</th:block>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<th:block th:fragment="css">
+  <link href="/css/playdetail.css" rel="stylesheet" />
+</th:block>
+
+<th:block th:fragment="fontawesome">
+  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
+
+<th:block th:fragment="script">
+  <script src="/js/weather.js" defer></script>
+
+</th:block>
+
+<th:block th:fragment="content">
+
+  <!-- main 하단 부분  -->
+  <div id="detail">
+    <div class="maintit">동대문점</div>
+    <div class="bodywrapper">
+      <div class="left">
+        <h2>구장사진</h2>
+        <img src="/img/football.jpg" class="img" />
+        <p><i class="fa-solid fa-phone-volume" style=" padding: 0px 5px; border-radius: 100%;"></i>  010-6252-1007 / 010-9505-6646</p>
+      </div>
+
+      <div class="right">
+        <h2>찾아오시는 길</h2>
+        <div class="location">
+          <div class="mapcontent">
+            <div id="map"></div>
+            <p><i class="fa-solid fa-location-dot" style=" padding: 5px 8px; border-radius: 100%;" ></i> 동대문구 천호대로 133 홈플러스 동대문점 옥상층(7F) HM풋살파크</p>
+            <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	94449e96205beb140bfba2b02da6e26e"></script>
+            <script>
+              var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                      mapOption = {
+                        center: new kakao.maps.LatLng(37.6555926, 127.0623312), // 지도의 중심좌표
+                        level: 6, // 지도의 확대 레벨
+                        mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+                      };
+
+              // 지도를 생성한다
+              var map = new kakao.maps.Map(mapContainer, mapOption);
+
+              // 지도 타입 변경 컨트롤을 생성한다
+              var mapTypeControl = new kakao.maps.MapTypeControl();
+
+              // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+              map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+              // 지도에 확대 축소 컨트롤을 생성한다
+              var zoomControl = new kakao.maps.ZoomControl();
+
+              // 지도의 우측에 확대 축소 컨트롤을 추가한다
+              map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+              // 지도에 마커를 생성하고 표시한다
+              var marker = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(37.6555926, 127.0623312), // 마커의 좌표
+                map: map // 마커를 표시할 지도 객체
+              });
+
+              // 마커 위에 표시할 인포윈도우를 생성한다
+              var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="padding:5px;">마커인포 테스트1</div>' // 인포윈도우에 표시할 내용
+              });
+              // 인포윈도우를 지도에 표시한다
+              infowindow.open(map, marker);
+            </script>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="playinfo">
+      <div class="infobtnwrap" >
+
+        <a href="#"><button class="bbtn">구장목록보러가기</button></a>
+      </div>
+      <div class="infowrap">
+        <div class="infowrapleft">
+          <a href="#"><button class="abtn">예약하러가기</button></a>
+          <table class="stadiumtable">
+            <h2>구장안내</h2>
+            <thead>
+            <tr>
+              <th>구분</th>
+              <th>국제풋살규격(m)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th>실외구장</th>
+              <td>40x20</td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="sub">
+            <h2>유의사항</h2>
+            <p> <i class="fa-solid fa-triangle-exclamation"></i> <span> 풋살장 내 음식물섭취 금지 </span>(물 / 음료 제외) <br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 이용시 발생하는 부상 및 상해 분실등 에 대한 책임은 이용자 본인에게 있습니다. (개인보험가입필수)</span><br>
+              <i class="fa-solid fa-triangle-exclamation"></i> <span>차량이용시 무료주차 등록하셔야 요금지불을 하지않습니다. (풋살장 입구 안내데스크 차량번호 등록)</span><br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 문의 전화 - 대관 담당자 : 010-1111-1111 / 010-2222-2222  문의가능시간 : 10:00~18:00<br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 풋살화 외 축구화 착용금지 (금속스터드.일반 스터드 축구화 착용금지)<br>
+              <i class="fa-solid fa-triangle-exclamation"></i> <span>풋살파크 전 구역은 금연 구역입니다. (흡연은 흡연구역을 이용해주세요.) </span> <br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 풋살장 다음달 예약은 매월 20일 오후 2시 이후 오픈 됩니다.(주말일 경우 전일 오픈)<br>
+              <i class="fa-solid fa-triangle-exclamation"></i> Chal-lae 풋살파크는 전구역 CCTV 촬영이 되고 있습니다.<br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 행사 목적의 대관은 사전 문의 주시길 바랍니다.<br>
+            </p>
+          </div>
+        </div>
+
+        <div class="infowrapright">
+          <table class="feetable">
+            <h2>대금요금안내</h2>
+            <thead>
+            <tr>
+              <th>시간</th>
+              <th>대관요금</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th>주간 (10:00 ~ 18:00) </th>
+              <td>110,000원 (2시간)</td>
+            </tr>
+            <tr>
+              <th>야간 (18:00 ~ 24:00) </th>
+              <td>120,000원 (2시간)</td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="sub">
+            <h2>환불규정</h2>
+            <p>
+              <i class="fa-solid fa-triangle-exclamation"></i> 단순 대관날짜 변경은 불가하며 예약 취소 및 환불 규정에 의거해 환불 후 신규 대관일 을 신청하셔야 합니다.<br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 환불 및 취소는 일일단위로 가능합니다. &nbsp;(~ 7일전 : 100% 환불 / 6일전 ~ 4일 전 : 50% 환불 / 3일 전 ~ 당일 : 환불 불가)<br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 대관 취소시 환불 규정  꼭 확인 부탁 드립니다.<br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 당일 환불은 천재지변으로 인한 경우에만 100% 환불됩니다. &nbsp; (호우경보, 대설경보, 태풍주의보, 태풍경보만 적용)<br>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</th:block>
+
+
+</body>
+</html>
+<script defer>
+function getCalendar(v){
+	var stadium_code = document.form.stadium_code.value; 
+	$.get("ajax_calendar.asp?stadium_code="+stadium_code+"&reqdate="+v , function(r){ 
+		$("#calendarDiv").html(r);
+	});
+}
+
+function getCalendarByStadium(e){
+	var stadium_code = e.value;
+	var v; 
+	v = $("#regdate").text();
+	v = v.replace(".","-");
+	v = v.replace(".","-"); 
+ 
+	$.get("ajax_calendar.asp?stadium_code="+stadium_code+"&reqdate="+v , function(r){ 
+		$("#calendarDiv").html(r);
+	});
+}
+</script>

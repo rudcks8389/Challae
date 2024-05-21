@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css"
+        integrity="sha512-aQb0/doxDGrw/OC7drNaJQkIKFu6eSWnVMAwPN64p6sZKeJ4QCDYL42Rumw2ZtL8DB9f66q4CnLIUnAw28dEbg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.slim.min.js" defer></script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" defer></script>
+  <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" defer></script>
+
+</head>
+<body>
+
+<th:block th:fragment="css">
+  <link href="/css/newmatch.css" rel="stylesheet" />
+</th:block>
+
+<th:block th:fragment="fontawesome">
+  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
+
+<th:block th:fragment="script">
+  <script src="/js/weather.js" defer></script>
+  <script src="/js/match-calander.js" defer></script>
+  <script src="/js/newmatch.js" defer></script>
+</th:block>
+
+
+
+    <th:block th:fragment="content">
+
+
+      <p style="width: 100%; text-align: center; font-size: 35px; border-bottom: 2px solid darkgray;">경기 일정 등록</p>
+      <!-- main 하단 부분  -->
+      <div class="main-content">
+
+        <!-- 날짜 정보 -->
+        <div class="match-left">
+          <form>
+            <select class="form-select" aria-label="Default select example" style="width: 50%; margin: 0 auto;">
+              <option selected>혹시 몰라 넣어놓은 select</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <p style="margin-top: 20px; font-size: 19px;"><i class="fa-solid fa-check-double"></i> 전달 사항 ( 최대 100자 )</p>
+            <textarea id="match-notice" maxlength="100" placeholder="100자 내외 입력"></textarea>
+          </form>
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <div class="py-4 text-center"><i class="fa fa-calendar fa-5x"></i></div>
+
+              <!-- Date Picker Input -->
+              <div class="form-group mb-4">
+                <div class="datepicker date input-group p-0 shadow-sm">
+                  <input type="text" placeholder="Choose a reservation date" class="form-control py-4 px-4"
+                         id="reservationDate" readonly>
+                  <div class="input-group-append"><span class="input-group-text px-4"><i
+                          class="fa fa-clock-o"></i></span></div>
+
+                </div>
+                <input type="text" placeholder="시간을 입력하세요" class="form-control py-4 px-4" id="reservationTime"
+                       maxlength="7" style="border-radius: 2px; margin-top: -46px;">
+
+              </div><!-- DEnd ate Picker Input -->
+
+              <div class="text-center">
+                <p class="font-italic text-white mb-2" style="font-style: italic;">선택한 날짜</p>
+                <h4 id="pickedDate" class="font-weight-bold text-primary mb-3">선택한 날짜가 없습니다</h4>
+                <a href="#"
+                   class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm">등록하기</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- 전략판  -->
+        <div class="match-center">
+          <div class="board-preset">
+            <form action="">
+              <input type="radio" id="option1" name="option" value="A"><label for="option1">A</label>
+              <input type="radio" id="option2" name="option" value="B"><label for="option2">B</label>
+              <input type="radio" id="option3" name="option" value="C"><label for="option3">C<label>
+              <button id=""> 저 장 </button>
+            </form>
+          </div>
+
+          <!-- <canvas id="soccer-board" style="width: 670px; height: 550px; background: url('/img/soccer_board.png'); background-repeat: round;"> -->
+          <canvas id="soccer-board"
+                  style="width: 670px; height: 550px; background-image: url('/img/soccer_board.png'); background-repeat: round;">
+          </canvas>
+        </div>
+        <div class="match-right">
+          <p style="font-size: 20px;"><i class="fa-solid fa-list"></i> 클럽원 목록</p>
+          <table>
+            <thead>
+            <tr>
+              <th style="width: 30%;"></th>
+              <th style="width: 70%;">이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                <img src="./img/cat-sun2.jpeg" width="50px" height="100%" draggable="false" >
+              </td>
+              <td class="draggable" draggable="true">
+                <span>민경찬</span>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="draggable" draggable="true">윤인록</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="draggable" draggable="true">이덕재</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="draggable" draggable="true">신연재</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="draggable" draggable="true">박 솔</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </th:block>
+
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+*{
+  margin: 0px auto;
+}
+#detail {
+  width: 70%;
+}
+.maintit {
+  font-size: 40px;
+  text-align: center;
+}
+.bodywrapper{
+  display: flex;
+  width: 100%;
+}
+.left{
+  width: 50%;
+  float: left;
+  text-align: center;
+  padding: 20px;
+}
+.left .img{
+  width: 100%;
+  height: 400px;
+}
+
+
+
+.right{
+  width: 50%;
+  float:left;
+  text-align: center;
+  padding: 20px;
+}
+#map {
+  width: 100%;
+  /* width: 1000px; */
+  height: 400px;
+  /* height: 500px; */
+}
+
+
+
+.playinfo {
+  width: 90%;
+  padding:10px 0;
+}
+.playinfo .infobtnwrap {
+  width: 100%;
+}
+
+.infowrapleft .abtn{
+  width: 80%;
+  height: 60px;
+  background-color:rgb(132,	140,	181);
+}
+
+.infowrapleft .abtn a{
+  text-decoration: none;
+  color: black;
+}
+.infowrapleft .abtn:hover{
+  text-decoration: none;
+  color: white;
+  background-color:rgb(132,	140,	181);
+
+}
+.infobtnwrap .bbtn{
+  width: 46%;
+  height: 60px;
+  float: right;
+  background-color:rgb(166, 184, 196);
+}
+.infobtnwrap .bbtn a{
+  text-decoration: none;
+  color: black;
+}
+.infobtnwrap .bbtn:hover{
+  text-decoration: none;
+  color: white;
+  background-color:rgb(166, 184, 196);
+
+}
+
+
+.playinfo .sub{
+  padding-bottom: 20px;
+}
+.playinfo .sub span{
+  color:rgb(169, 45, 45);
+}
+.infowrap{
+  width: 100%;
+
+}
+.infowrapleft {
+  width: 50%;
+  overflow: hidden;
+  float: left;
+}
+.infowrapleft .stadiumtable{
+  border: 1px solid white;
+  width: 100%;
+  float: left;
+  text-align: center;
+
+}
+.infowrapright{
+  width: 50%;
+  overflow: hidden;
+}
+.infowrapright .feetable {
+  border: 1px solid white;
+  width: 100%;
+  float: left;
+  text-align: center ;
+
+}

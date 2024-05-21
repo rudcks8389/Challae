@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="css">
+  <link href="/css/myteam.css" rel="stylesheet" />
+</th:block>
+
+<th:block th:fragment="fontawesome">
+  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
+
+<th:block th:fragment="script">
+  <script src="/js/weather.js" defer></script>
+</th:block>
+
+
+    <th:block th:fragment="content">
+      <!-- 롤링 리스트를 제외한 main 태그를 감싸는 구역 -->
+      <div class="main-wrapper">
+
+        <!-- team-info : 팀에 대한 소개 구역 -->
+        <div class="team-info">
+
+          <!-- team-info-img : 팀 사진 -->
+          <div class="team-info-img">
+            <img src="/img/cat-sun2.jpeg" alt="" style="width: 50%;">
+          </div>
+
+          <!-- team-info-left : 팀 소개 왼쪽 구역 -->
+          <div class="team-info-left">
+            <div>
+              <h1 id="team-name"> 치즈 고양이들 </h1> <!-- 클럽 이름 -->
+            </div>
+            <div class="team-info-left-detail">
+              <span id="club-master"> 클럽장 : 고등어 고양이 </span> <!-- club-master : 클럽장에 대한 구역 -->
+              <span id="club-creation-date"> 클럽 생성일 : 00000000 </span> <!-- club-creation-date : 클럽 생성일에 대한 구역 -->
+            </div>
+            <div class="team-info-left-detail">
+              <h5> 고양이 축구 클럽입니다. 고양이들의 축구클럽입니다.</h5> <!-- 클럽 소개 보여주는 곳 -->
+            </div>
+          </div>
+
+          <!-- team-info-right : 팀 소개 오른쪽 구역 -->
+          <div class="team-info-right">
+            <span>멤버 수</span><br>
+            <div class="team-info-right-membercount">
+              <span id="member-count"> <!-- 총 팀원 숫자 보여주는 곳 -->
+                <h2>25 명</h2>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- team-content: 팀원 소개구역을 제외한 나머지 main 구역, (팀원 목록과 소통공간이 있는 구역) -->
+        <div class="team-content">
+          <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
+            <table style="text-align: center;">
+              <!-- <caption>팀원 목록</caption> -->
+              <thead>
+              <tr>
+                <th>이름</th>
+                <th>직책</th>
+                <th>전화번호</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row">신연재</th>
+                <td>감독</td>
+                <td>01099999999</td>
+              </tr>
+              <tr>
+                <th scope="row">민경찬</th>
+                <td>선수</td>
+                <td>01099999999</td>
+
+              </tr>
+              <tr>
+                <th scope="row">박 솔</th>
+                <td>선수</td>
+                <td>01099999999</td>
+              </tr>
+              <tr>
+                <th scope="row">윤인록</th>
+                <td>선수</td>
+                <td>01099999999</td>
+              </tr>
+              <tr>
+                <th scope="row">이덕재</th>
+                <td>선수</td>
+                <td>01099999999</td>
+              </tr>
+              </tbody>
+              <tfoot>
+              </tfoot>
+            </table>
+            <div class="pagination"> <!-- 테이블 밑에 숫자(페이징 처리)-->
+              <a href="#">❮❮</a>
+              <a href="#">❮</a>
+              <a href="#" class="active">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+              <a href="#">4</a>
+              <a href="#">5</a>
+              <a href="#">❯</a>
+              <a href="#">❯❯</a>
+            </div>
+          </div>
+
+
+          <!-- 팀 소통 공간 -->
+          <div class="team-chat">
+            <div class="">
+              소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간 소통공간
+            </div>
+          </div>
+        </div>
+
+        <!-- 경기 일정 전체 구역 -->
+        <div class="team-match-schedule">
+
+          <!-- 년월 선택 -->
+          <div class="ctr-box clearfix">
+            <button type="button" title="prev" class="btn-cal prev"></button>
+            <span class="cal-month">May</span>
+            <span class="cal-year">2024</span>
+            <button type="button" title="next" class="btn-cal next"></button>
+          </div>
+          <p> ▲ 년월 변경 참고 사이트 : https://im-developer.tistory.com/115 </p> <!-- 추후 삭제 -->
+
+          <!-- 새 경기 등록 버튼 있는 구역 -->
+          <div class="new-match-add">
+            <a href="/club/create" class="btn-new-match-add">새 경기 등록</a>
+          </div>
+
+          <!-- 각각의 경기들을 보여주는 구역 -->
+          <div class="team-match-schedule-detail">
+            <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
+            <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
+            <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
+            <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
+          </div>
+        </div>
+      </div>
+    </th:block>
+
+
+
+</body>
+
+</html>

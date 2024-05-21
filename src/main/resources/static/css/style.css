@@ -1,0 +1,374 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  width: 100%;
+  height: 70%;
+  background-color: #000000;
+  color: #fff;
+
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  /* overflow-y: hidden; */
+
+}
+
+#wrapper {
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 6rem;
+  margin-right: 6rem;
+}
+
+nav {
+  /* padding: 30px 60px; */
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  width: 20%;
+  margin: 10px 30px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-logo img {}
+
+.nav-logo span {
+  padding-left: 10px;
+  font-size: 25px;
+}
+
+.nav-menu {
+  width: 60%;
+  text-align: center;
+  padding: auto auto;
+  margin: auto auto;
+}
+
+.nav-menu ul {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  list-style: none;
+
+}
+
+.nav-menu ul li {
+  float: left;
+  /* display: inline-block; */
+}
+
+.nav-menu ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-menu span {
+  margin: auto 2.5rem;
+  font-size: 24px;
+}
+
+.nav-menu ul li a :hover {
+  border-bottom: 4px solid #00A5FF;
+  transition: 0.15s;
+}
+
+.nav-login {
+  text-align: center;
+  margin: auto auto;
+  font-size: 30px;
+  width: 30%;
+}
+
+.nav-login i {
+  font-size: 20px;
+  padding-right: 10px;
+}
+
+.nav-login span {
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 10px;
+  border-left: 2px solid #fff;
+}
+
+.nav-login span a {
+  text-decoration: none;
+  color: #fff;
+}
+
+main {
+  margin: 30px auto;
+  width: 100%;
+  height: 100%;
+}
+
+main .index-weather {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+
+  /* background-color: #3b8783; */
+  background-color: #7e826e;
+
+  padding: 25px;
+  color: #fff;
+  height: 150px;
+  border-radius: 2rem 2rem 0 0;
+  margin-top: 20px;
+}
+
+main .main-content {
+  margin-top: 80px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+main .main-content .main-left {
+  text-align: center;
+  width: 40%;
+}
+
+
+main .main-content .main-right {
+  text-align: center;
+  width: 55%;
+  height: 90%;
+  /* background-image: url('/img/challae.png');
+  background-repeat: round;
+  opacity: 40%; */
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+
+  /* border-radius: 30px; */
+}
+
+main .main-content .main-right:hover {
+  /* background-image: url('/img/challae.png');
+  background-repeat: round;
+  opacity: 100%;
+  transition: 0.6s; */
+
+}
+
+
+
+/* rolling-list */
+section article {
+  display: flex;
+  overflow: hidden;
+}
+
+section article .rolling-list ul {
+  display: flex;
+
+}
+
+section article .rolling-list ul li {
+  width: 589px;
+  height: 240px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  margin: 20px 10px;
+  padding: 46px 31px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+section .rolling-wrap .rolling-list ul li:nth-child(1) {
+  color: #dcdcdc;
+  background-image: url('/img/ad_nike.png');
+  background-repeat: round;
+}
+
+section .rolling-wrap .rolling-list ul li:nth-child(2) {
+  color: #dcdcdc;
+  background-image: url('/img/ad_powerade.jpeg');
+  background-repeat: round;
+}
+
+section .rolling-wrap .rolling-list ul li:nth-child(3) {
+  color: #dcdcdc;
+  background-image: url('/img/ad_uniform.png');
+  background-repeat: round;
+}
+
+section .rolling-wrap .rolling-list ul li:nth-child(4) {
+  color: #dcdcdc;
+  background-image: url('/img/ad_water.jpeg');
+  background-repeat: round;
+}
+
+section .rolling-wrap .rolling-list ul li:nth-child(even) {
+  margin-top: 80px;
+}
+
+section .rolling-wrap .rolling-list ul li .image-wrap {
+  padding-right: 30px;
+  width: 150px;
+  flex-shrink: 0;
+}
+
+section .rolling-wrap .rolling-list ul li .image-wrap>img {
+  width: 100%;
+}
+
+section .rolling-wrap .rolling-list ul li .desc {
+  font-family: 'BMJUA';
+}
+
+section .rolling-wrap .rolling-list ul li .desc strong {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 24px;
+}
+
+section .rolling-wrap .rolling-list ul li .desc span {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+section .rolling-wrap .rolling-list.original {
+  animation: rollingleft1 70s linear infinite;
+}
+
+section .rolling-wrap .rolling-list.clone {
+  animation: rollingleft2 70s linear infinite;
+}
+
+@keyframes rollingleft1 {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-100%);
+  }
+
+  50.01% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rollingleft2 {
+  0% {
+    transition: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+/* ----------- rolling-list END -------- */
+
+/* Footer */
+#wrapper #footer {
+  position: relative;
+  padding: 63px 0 85px 0;
+  background: #414141;
+}
+
+#wrapper #footer .footer_wrap {
+  position: relative;
+  margin: 0 auto;
+  width: 1200px
+}
+
+#wrapper #footer .footer_wrap .logo {
+  position: absolute;
+  top: 17px;
+  left: 0;
+  width: 268px;
+  height: 50px;
+  background: url('/img/chal-lae2.png') no-repeat 0 0;
+}
+
+#wrapper #footer .footer_wrap .foot_util {
+  padding-left: 365px
+}
+
+#wrapper #footer .footer_wrap .foot_util ul {
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+#wrapper #footer .footer_wrap .foot_util ul:after {
+  content: "";
+  display: block;
+  clear: both
+}
+
+#wrapper #footer .footer_wrap .foot_util ul li {
+  position: relative;
+  float: left;
+  padding: 0 25px
+}
+
+#wrapper #footer .footer_wrap .foot_util ul li:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -6px;
+  width: 1px;
+  height: 12px;
+  background: #6c6c6c
+}
+
+#wrapper #footer .footer_wrap .foot_util ul li:first-child {
+  padding-left: 0
+}
+
+#wrapper #footer .footer_wrap .foot_util ul li:first-child:after {
+  display: none
+}
+
+#wrapper #footer .footer_wrap .foot_util ul li a {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  line-height: 26px
+}
+
+#wrapper #footer .footer_wrap .info {
+  margin-top: 10px;
+  padding-left: 365px;
+  color: #959595;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+#wrapper #footer .footer_wrap .info span {
+  display: inline-block;
+  margin-left: 18px;
+}
+
+#wrapper #footer .footer_wrap .copy {
+  padding-left: 365px;
+  color: #959595;
+  font-size: 10px;
+  font-family: 'Arial';
+  font-weight: bold;
+  line-height: 20px;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<th:block th:fragment="css">
+  <link href="/css/board.css" rel="stylesheet" />
+</th:block>
+
+<th:block th:fragment="fontawesome">
+  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
+
+<th:block th:fragment="script">
+  <script src="/js/weather.js" defer></script>
+  <script src="/js/filepath.js" defer></script>
+</th:block>
+
+
+<th:block th:fragment="content">
+  <!-- main 하단 부분  -->
+  <div class="main-content">
+
+    <!-- 날씨 정보 -->
+    <div class="main-left">
+      <h1>Q&A 게시판</h1>
+      <!-- 팀목록 테이블 -->
+      <div class="table_wrap list">
+        <table>
+          <thead>
+          <tr>
+            <th scope="col">아이디</th>
+            <th scope="col">이름</th>
+            <th scope="col" class="tb">제목</th>
+            <th scope="col">날짜</th>
+          </tr>
+          </thead>
+
+          <!-- 더미데이터 -->
+          <tbody>
+          <tr id="team_detail">
+            <td>min</td>
+            <td>민경찬</td>
+            <td class="tb">안녕하세요</td>
+            <td>5/9</td>
+          </tr>
+
+          <tr id="team_detail">
+            <td>min</td>
+            <td>민경찬</td>
+            <td class="tb">안녕하세요</td>
+            <td>5/9</td>
+          </tr>
+
+          <tr id="team_detail">
+            <td>min</td>
+            <td>민경찬</td>
+            <td class="tb">안녕하세요</td>
+            <td>5/9</td>
+          </tr>
+
+          <tr id="team_detail">
+            <td>min</td>
+            <td>민경찬</td>
+            <td class="tb">안녕하세요</td>
+            <td>5/9</td>
+          </tr>
+
+          <tr id="team_detail">
+            <td>min</td>
+            <td>민경찬</td>
+            <td class="tb">안녕하세요</td>
+            <td>5/9</td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <!-- 검색 + 페이지 -->
+      <div class="pager_wrap">
+
+
+
+        <!-- 페이지내이션 -->
+        <div class="pagination">
+          <a href="#">❮❮</a>
+          <a href="#">❮</a>
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="#">❯</a>
+          <a href="#">❯❯</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 공지 사항  -->
+    <div class="main-right">
+      <h1>공지사항</h1>
+      <h5>* 매너 게임 부탁드립니다.</h5>
+      <h5>* 매너 게임 부탁드립니다.</h5>
+      <h5>* 매너 게임 부탁드립니다.</h5>
+      <h5>* 매너 게임 부탁드립니다.</h5>
+      <h5>* 매너 게임 부탁드립니다.</h5>
+    </div>
+  </div>
+
+
+</th:block>
+
+
+</body>
+
+</html>

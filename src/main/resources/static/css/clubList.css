@@ -1,0 +1,173 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* 테이블 제목 시작 */
+.team_list_text {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.team_list_text:after {
+  content: "";
+  display: block;
+  width: 150px;
+  border-bottom: 1px solid white;
+  margin: 20px auto;
+}
+
+#text1 {
+  font-size: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#text2 {
+  font-size: 35px;
+  padding-right: 20px;
+}
+
+/* 테이블 제목 끝 */
+
+
+
+/* 팀 상세정보 안내 문구 + 팀 생성하기 버튼 시작 */
+#info_add {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10% auto;
+}
+
+#team_detail_info {
+  margin-right: auto;
+  padding-top: 0.5%;
+  padding-left: 10%;
+}
+
+.team_add_div {
+  margin-right: 10%;
+}
+
+#team_add_btn {
+  background-color: black;
+  border: none;
+  text-align: center;
+}
+
+#team_add_a {
+  font-size: 25px;
+}
+
+.fa-solid {
+  margin-left: 8px;
+}
+
+/* 팀 상세정보 안내 문구 + 팀 생성하기 버튼 끝 */
+
+
+/* 테이블 시작 */
+table {
+  border-collapse: collapse;
+  text-align: center;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+table thead th {
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: rgb(124, 190, 255);
+  border-bottom: 4px solid rgb(124, 190, 255);
+}
+
+table tbody td {
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+/* 테이블 끝 */
+
+/* 검색 시작 */
+.search {
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  height: 40px;
+  width: 500px;
+  border: 3px solid rgb(124, 190, 255);
+}
+
+#search_select {
+  height: 40px;
+  width: 80px;
+  font-size: 15px;
+  border: 0px;
+  outline: none;
+  text-align: center;
+}
+
+#search_input {
+  height: 40px;
+  width: 340px;
+  font-size: 15px;
+  border: 0px;
+  outline: none;
+  padding-left: 20px;
+}
+
+#search_button {
+  height: 40px;
+  width: 80px;
+  font-size: 15px;
+  border: 0px;
+  outline: none;
+  text-align: center;
+  background-color: rgb(174, 228, 255);
+}
+
+/* 검색 끝 */
+
+/* 페이지 시작 */
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a {
+  color: white;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: rgb(124, 190, 255);
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(a.active) {
+  background-color: rgba(158, 229, 255, 0.5);
+  border-radius: 5px;
+}
+
+/* 페이지 끝 */

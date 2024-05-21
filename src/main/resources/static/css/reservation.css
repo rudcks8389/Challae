@@ -1,0 +1,84 @@
+*{
+  margin: 0px auto;
+}
+#reservation {
+  width: 80%;
+}
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 60px;
+  padding:10px;
+}
+.bodywrapper {
+  width: 100%;
+  display: flex;
+}
+.left {
+  width: 50%;
+  float: left;
+  padding:20px;
+}
+.left .leftsub {
+  margin-top: 30px;
+
+}
+.left .leftsub span{
+  color:rgb(169, 45, 45);
+}
+.left .leftmain {
+  width: 100%;
+  text-align: center;
+  background-color:rgb(166, 184, 196);
+  color: black;
+}
+.left .leftmain .playimage{
+  width: 100%;
+}
+
+
+.right {
+  width: 50%;
+  float: right;
+  padding:20px;
+}
+.right .calendararea {
+  width: 100%;
+  text-align: center;
+}
+.inner {
+  width: 90%;
+  margin-top: 40px;
+}
+.inner .sub {
+  padding: 20px 0;
+  border-bottom: 1px solid lightgray;
+}
+.inner .sub span{
+  font-size: 25px;
+}
+
+.inner .table {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid white;
+}
+.inner .table .tabletit{
+  font-size: 25px;
+}
+.payment {
+  text-align: center;
+  width: 60%;
+}
+.payment button {
+  width: 100%;
+  height: 40px;
+  color: black;
+  background-color:rgb(166, 184, 196);
+
+}
+.payment button:hover{
+  color: white;
+  background-color: orange;
+  text-decoration: none;
+}
