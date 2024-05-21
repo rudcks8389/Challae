@@ -1,83 +1,80 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/layout/template :: template(~{this :: title}, ~{this :: css}, ~{this :: script}, ~{this :: content})}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+<head>
+    <meta charset="utf-8">
+</head>
 
+<body>
+<th:block th:fragment="css">
+    <link href="/css/signup.css" rel="stylesheet">
+</th:block>
 
-<title th:fragment="title">:::: 회원 가입 ::::</title>
+<th:block th:fragment="fontawesome">
 
-<th:block th:fragment="css"></th:block>
+</th:block>
+<th:block th:fragment="script">
 
-<th:block th:fragment="script"></th:block>
+</th:block>
 
 <th:block th:fragment="content">
-    <div class="bg-pattern text-primary text-opacity-50 opacity-25 w-100 h-100 start-0 top-0 position-absolute">
-    </div>
-    <div class="bg-gradientwhite flip-y w-50 h-100 start-50 top-0 translate-middle-x position-absolute"></div>
-    <div class="container pt-11 pt-lg-14 pb-9 position-relative z-1">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md-6 col-sm-8 mt-3">
-                <h3>나의 친구가 되어주세요.</h3>
-                <p class="mb-2 w-lg-75">
-                    세부 정보를 입력하여 주세요...
-                </p>
 
-                <div class="width-50x pt-1 bg-primary mb-3"></div>
 
-                <div class="position-relative">
-                    <div>
-                        <form class="needs-validation" novalidate>
-                            <div class="input-icon-group mb-3">
-                      <span class="input-icon">
-                        <i class="bx bx-user-pin"></i>
-                      </span>
-                                <input type="text" class="form-control" required id="uid" autofocus placeholder="아이디">
-                            </div>
+            <div class="signup" id="detailDiv" style="display: block;">
+                <form name="registerForm" novalidate method="post" th:object="${memberForm}" enctype="multipart/form-data"></form>
 
-                            <div class="input-icon-group mb-3">
-                      <span class="input-icon">
-                        <i class="bx bx-user"></i>
-                      </span>
-                                <input type="text" class="form-control" required id="uname" autofocus placeholder="이름">
-                            </div>
+                <div class="layer_cont">
+                    <div class="table_wrap" id="detail">
+                        <table class="add_table">
+                            <colgroup>
+                                <col class="t01">
+                                <col class="t02">
+                                <col class="t01">
+                                <col class="t02">
+                            </colgroup>
+                            <tbody>
+                            <h1>회원가입을 환영합니다!</h1>
+                            <tr>
+                                <th scope="row">아이디</th>
+                                <td class="al_left"><input type="text"></td>
+                            </tr>
 
-                            <div class="input-icon-group mb-3">
-                      <span class="input-icon">
-                        <i class="bx bx-envelope"></i>
-                      </span>
-                                </span>
-                                <input type="email" class="form-control" required id="email" placeholder="이메일">
-                            </div>
+                            <tr>
+                                <th scope="row">비밀번호</th>
+                                <td class="al_left"><input type="password"></td>
+                            </tr>
 
-                            <div class="input-icon-group mb-3">
-                      <span class="input-icon">
-                        <i class="bx bx-lock-open"></i>
-                      </span>
-                                </span>
-                                <input type="password" class="form-control" required id="passwd" placeholder="비밀번호">
-                            </div>
+                            <tr>
+                                <th scope="row">비밀번호 확인</th>
+                                <td class="al_left"><input type="password"></td>
+                            </tr>
 
-                            <div class="input-icon-group mb-3">
-                      <span class="input-icon">
-                        <i class="bx bx-lock-open"></i>
-                      </span>
-                                </span>
-                                <input type="password" class="form-control" required id="re-passwd"
-                                       placeholder="비밀번호 확인">
-                            </div>
+                            <tr>
+                                <th scope="row">이메일</th>
+                                <td class="al_left"><input type="email"></td>
+                            </tr>
 
-                            <div class="d-grid">
-                                <button class="btn btn-primary" type="submit">가입하기</button>
-                            </div>
-                        </form>
+                            <tr>
+                                <th scope="row">연락처</th>
+                                <td class="al_left"><input type="text" placeholder="번호만 입력 해 주세요"></td >
+                            </tr>
 
-                        <p class="pt-3 small text-body-tertiary">
-                            이미 계정이 있습니까? <a href="/member/login.html" class="ms-2 fw-semibold link-underline">로그인</a>
-                        </p>
+                            <tr>
+                                <th scope="row">프로필 사진</th>
+                                <td id="filebox">
+                                    <input class="upload_name" value="No Image" readonly>
+                                    <label for="file">파일찾기</label>
+                                    <input type="file" id="file">
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="btn_wrap">
+                            <button type="submit" class="detail_join_btn">신청하기!</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </th:block>
 
 </html>

@@ -1,30 +1,4 @@
-/* 회원가입 모달 시작 */
-#signup_modal {
-    display: none;
-    width: 1100px;
-    height: 700px;
-    padding: 20px 60px;
-    background-color: rgba(0, 0, 0, 0.85);
-    border: 1px solid #ccc;
-  }
-  
-  /* 우측상단 창닫기 버튼 */
-  #signup_modal .modal_close_btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-  
-  #signup_modal .modal_close_btn:after {
-    /* X 모양 만들기 */
-    content: "\00d7";
-    font-size: 50pt;
-    line-height: 35px;
-  }
-  
-  /* 모달 끝 */
-
-  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 
 
@@ -52,7 +26,6 @@
   text-align: center;
   border-bottom: 10px;
   background-color: rgba(0, 0, 0, 0.85);
-  border: 1px solid #ccc;
 }
 
 /* 테이블 */
@@ -102,11 +75,13 @@
 }
 
 #detailDiv .detail_join_btn {
-  margin-right: 5px;
-}
-
-#detailDiv .detail_close_btn {
-  margin-left: 5px;
+  width: 120px;
+  font-size: 30px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border: none;
+  margin-bottom: 7px
 }
 
 /* 본문 끝 */

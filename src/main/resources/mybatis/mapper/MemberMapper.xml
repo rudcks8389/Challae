@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.ezen.springmvc.domain.member.mapper.MemberMapper">
-	<!-- 회원 전체 조회 -->
-	<select id="findByAll" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD') regdate
-		FROM member
-		ORDER BY regdate DESC
-	</select>
+
+	<!-- 회원 등록 -->
+	<insert id="create" parameterType="MemberDto" >
+		INSERT INTO member(member_id, password, name, email, original_profile, stored_profile)
+		VALUES(#{id}, #{passwd}, #{name}, #{email}, #{originalProfile}, #{storedProfile})
+
+		<!-- INSERT 후 등록일자 SELECT -->
+		<selectKey keyProperty="regdate" resultType="string" order="AFTER">
+			SELECT TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY')
+			FROM member WHERE member_id = #{id}
+		</selectKey>
+	</insert>
 
 	<!-- 아이디로 회원 상세 조회 -->
 	<select id="findById" parameterType="string" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') regdate, original_profile, stored_profile
 		FROM member
 		WHERE member_id = #{value}
 	</select>
 
+	<!-- 회원 정보 수정 -->
+	<update id="update" parameterType="MemberDto">
+		UPDATE member
+		SET email = #{email}, password = #{passwd}
+		WHERE member_id = #{id}
+	</update>
+
+	<!-- 회원 전체 조회 -->
+	<select id="findByAll" resultType="MemberDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY') regdate
+		FROM member
+		ORDER BY regdate DESC
+	</select>
+
 	<!-- 회원 인증 -->
 	<select id="findByIdAndPasswd" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') regdate
 		FROM member
 		WHERE member_id = #{id} AND password = #{passwd}
 	</select>
@@ -29,18 +49,6 @@
 		WHERE name LIKE '%' || #{value} || '%'
 	</select>
 
-	<!-- 회원 등록 -->
-	<insert id="create" parameterType="MemberDto">
-		INSERT INTO member(member_id, password, name, email)
-		VALUES(#{id}, #{passwd}, #{name}, #{email})
-	</insert>
-
-	<!-- 회원 정보 수정 -->
-	<update id="update" parameterType="MemberDto">
-		UPDATE member
-		SET password = #{passwd}, email = #{email}
-		WHERE member_id = #{id}
-	</update>
 
 	<!-- 검색 타입별 회원 검색 -->
 	<select id="findBySearchType" parameterType="string" resultType="MemberDto">
