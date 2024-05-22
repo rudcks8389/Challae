@@ -20,20 +20,20 @@
     <div class="container">
         <h1>Login</h1>
 
-        <form>
+        <form method="post" th:object="${loginForm}">
             <div class="form-control">
-                <input type="text" required />
+                <input type="text" autofocus th:field="*{loginId}" />
                 <label id="id">아이디</label>
             </div>
 
             <div class="form-control">
-                <input type="password" required />
+                <input type="password" th:field="*{loginPasswd}" />
                 <label id="passwd">패스워드</label>
             </div>
 
-            <input type="checkbox"><label id="saveId">아이디 기억하기</label>
+            <input type="checkbox" id="flexCheckDefault"  th:field="*{rememberLoginId}"><label>아이디 기억하기</label>
 
-            <button class="login_btn">로그인</button>
+            <button class="login_btn" type="submit">로그인</button>
 
             <p class="text">아이디를 잊으셨나요? <a href="#">아이디찾기</a></p>
         </form>

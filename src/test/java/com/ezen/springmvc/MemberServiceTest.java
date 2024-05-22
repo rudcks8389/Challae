@@ -28,9 +28,8 @@ public class MemberServiceTest {
 	
 	@Test
 	@DisplayName("회원 인증 테스트")
-	@Disabled
 	void isMemberTest() {
-		String id = "bangry", passwd = "1111";
+		String id = "aa", passwd = "1111";
 		MemberDto isMember = memberService.isMember(id, passwd);
 		log.info("인증 사용자 정보 : {}", isMember);
 	}

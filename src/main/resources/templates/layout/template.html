@@ -86,31 +86,61 @@
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasRightLabel"
                         style="margin-top: 40px; padding-left: 10px; font-size: 25px;"><i class="fa-solid fa-user"></i> 내 정보</h5>
-                    <div id="member-photo">
-                        <img src="/img/cat-sun2.jpeg"
-                             style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;"> <!-- 회원 사진 -->
-                    </div>
+
+
+                    <th:block th:if="${session.loginMember == null}">
+                        <img src="/img/teamlogo.jpg" style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
+                    </th:block>
+
+                    <th:block th:if="${session.loginMember != null}">
+                        <img th:src="@{/image/{profileFileName}(profileFileName=${session.loginMember.storedProfile})}"
+                             style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
+                    </th:block>
+
+
+
+
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body" style="text-align: left;">
-                    <hr>
-                    <!-- 내 정보 상단 -->
-                    <div class="toggle-top" style="margin-bottom: 50px;">
-                        <span> 이름 : </span><br>
-                        <span> H.P : </span><br>
-                        <span> 소속 클럽 : </span>
+                    <th:block th:if="${session.loginMember == null}">
+                        <hr>
+                        <!-- 내 정보 상단 -->
+                        <div class="toggle-top" style="margin-bottom: 50px;">
+                            <span>이름</span ><br>
+                            <span>이메일</span ><br>
+                            <span>소속 클럽</span ><br>
 
-                    </div>
-                    <hr>
-                    <!-- 내 정보 하단 -->
-                    <div class="toggle-bottom" style="font-size: 25px;"> <!-- 감독일 경우 회원 가입 승인 구역 -->
-                        [ 감독일 경우 회원가입 승인 구역 ]
-                    </div>
+                        </div>
+                        <hr>
+
+                    </th:block>
+                    <th:block th:if="${session.loginMember != null}">
+                        <hr>
+                        <!-- 내 정보 상단 -->
+                        <div class="toggle-top" style="margin-bottom: 50px;">
+                            <span th:text="${session.loginMember != null ? session.loginMember.name : ''}"></span><br>
+                            <span th:text="${session.loginMember != null ? session.loginMember.email : ''}"></span><br>
+                            <span th:if="${session.loginMember.clubNum != null}" th:text="${session.loginMember.clubNum}"></span>
+                            <span th:unless="${session.loginMember.clubNum != null}">소속클럽이 없습니다</span>
+                       </span>
+                        </div>
+                        <hr>
+                    </th:block>
+
 
                 </div>
             </div>
-            <span><a href="/member/signin">로그인</a></span>
-            <span><a href="/member/signup">회원가입</a></span>
+            <th:block th:if="${session.loginMember == null}">
+                <span><a href="/member/signin">로그인</a></span>
+                <span><a href="/member/signup">회원가입</a></span>
+            </th:block>
+            <th:block th:if="${session.loginMember != null}">
+                <span><a href="/" th:text="${session.loginMember != null ? session.loginMember.id + '님 환영합니다!' : ''}"></a></span>
+                <span><a href="/member/signout">로그아웃</a></span>
+            </th:block>
+
+
         </div>
     </nav>
     <!-- 광고 배너 구역-->

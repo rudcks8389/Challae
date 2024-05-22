@@ -11,9 +11,12 @@ import java.util.List;
 @Mapper
 public interface MemberMapper {
     public void create(MemberDto member);
+
     public MemberDto findById(String id);
     public void update(MemberDto member);
+
     public List<MemberDto> findByAll();
+
     public MemberDto findByIdAndPasswd(@Param("id") String id, @Param("passwd") String passwd);
     public List<MemberDto> findByAgeRange(@Param("begin") int begin, @Param("end") int end);
     public List<MemberDto> findByNameLike(String name);

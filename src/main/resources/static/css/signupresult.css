@@ -67,7 +67,7 @@
   margin-bottom: 7px
 }
 
-/* 신청하기, 닫기 */
+/* 버튼*/
 #detailDiv .btn_wrap {
   display: inline-block;
   text-align: center;
@@ -75,7 +75,7 @@
 }
 
 #detailDiv .detail_join_btn {
-  width: 120px;
+  width: 150px;
   font-size: 30px;
   text-align: center;
   background-color: black;
@@ -119,4 +119,9 @@
   padding: 0;
   overflow: hidden;
   border: 0;
+}
+
+img{
+  width: 250px;
+  height: 150px;
 }

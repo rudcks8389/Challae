@@ -10,11 +10,16 @@ import org.springframework.web.multipart.MultipartFile;
 @ToString
 @Builder
 public class MemberDto {
+    private String memberNum;
     private String id;
     private String name;
     private String email;
-    private MultipartFile profileImage;
+    private String profileImage;
+    private String storedProfile;
+    private String dir;
+    private String backNumber;
+    private String clubNum;
     private String passwd;
-    private String rePasswd;
+    private String phone;
     private String regdate;
 }

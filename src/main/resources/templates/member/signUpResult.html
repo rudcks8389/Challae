@@ -6,23 +6,21 @@
 
 <body>
 <th:block th:fragment="css">
-    <link href="/css/signup.css" rel="stylesheet">
+    <link href="/css/signupresult.css" rel="stylesheet">
 </th:block>
 
 <th:block th:fragment="fontawesome">
 
 </th:block>
 <th:block th:fragment="script">
-    <script src="/js/filepath.js" defer></script>
 </th:block>
 
 <th:block th:fragment="content">
 
             <div class="signup" id="detailDiv" style="display: block;">
-                <form name="registerForm" novalidate method="post" th:object="${memberForm}" enctype="multipart/form-data">
-
                 <div class="layer_cont">
-                    <h1>회원가입을 환영합니다!</h1>
+                    <h1>회원이 되신걸 축하합니다</h1>
+                    <h2>가입 정보 입니다</h2>
                     <div class="table_wrap" id="detail">
                         <table class="add_table">
                             <colgroup>
@@ -36,53 +34,46 @@
                             <tr>
                                 <th scope="row">이름</th>
                                 <td class="al_left">
-                                    <input type="text" th:field="*{name}">
+                                    <input type="text" readonly th:value="${memberDto.name}">
                                 </td>
                             </tr>
 
                             <tr>
                                 <th scope="row">아이디</th>
                                 <td class="al_left">
-                                    <input type="text" th:field="*{id}">
+                                    <input type="text" readonly th:value="${memberDto.id}">
                                 </td>
                             </tr>
 
                             <tr>
-                                <th scope="row">비밀번호</th>
-                                <td class="al_left"><input type="password" th:field="*{passwd}"></td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">비밀번호 확인</th>
-                                <td class="al_left"><input type="password" th:field="*{rePasswd}"></td>
-                            </tr>
-
-                            <tr>
                                 <th scope="row">이메일</th>
-                                <td class="al_left"><input type="email" th:field="*{email}"></td>
+                                <td class="al_left">
+                                    <input type="text"  readonly th:value="${memberDto.email}">
+                                </td>
                             </tr>
 
                             <tr>
                                 <th scope="row">연락처</th>
-                                <td class="al_left"><input type="text" placeholder="번호만 입력 해 주세요" th:field="*{phone}"></td >
+                                <td class="al_left">
+                                    <input type="text" readonly th:value="${memberDto.phone}">
+                                </td>
                             </tr>
 
                             <tr>
                                 <th scope="row">프로필 사진</th>
                                 <td id="filebox">
-                                    <input class="upload_name" value="No Image" readonly>
-                                    <label for="file">파일찾기</label>
-                                    <input type="file" id="file" th:field="*{profileImage}">
+                                    <img src="/img/teamlogo.jpg" th:src="@{/member/image/{fileName}(fileName=${memberDto.storedProfile})}">
+
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                         <div class="btn_wrap">
-                            <button type="submit" class="detail_join_btn">신청하기!</button>
+                            <button type="submit" class="detail_join_btn"><a href="/club/list">팀 목록 보기!</a></button>
+                            <button type="submit" class="detail_join_btn"><a href="/">홈으로</a></button>
                         </div>
                     </div>
                 </div>
-                </form>
             </div>
 
 

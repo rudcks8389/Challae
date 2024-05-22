@@ -1,7 +1,9 @@
 package com.ezen.springmvc.domain.common.service;
 
 import com.ezen.springmvc.domain.common.dto.UploadFile;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-//@Service
+@Service
 @Slf4j
 public class FileServiceImpl implements FileService {
 
@@ -66,11 +68,11 @@ public class FileServiceImpl implements FileService {
     }
 
     // 업로드된 파일이 중복되지 않게 저장될 파일명 생성
-	private String createStoreFileName(String uploadFileName) {
+    private String createStoreFileName(String uploadFileName) {
         int position = uploadFileName.lastIndexOf(".");
         String prefix =uploadFileName.substring(0, position);
         String suffix = uploadFileName.substring(position + 1);
-		String uuid = UUID.randomUUID().toString();
-		return prefix + "-" + uuid + "." + suffix;
-	}
+        String uuid = UUID.randomUUID().toString();
+        return prefix + "-" + uuid + "." + suffix;
+    }
 }

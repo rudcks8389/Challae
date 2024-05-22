@@ -19,6 +19,5 @@ public class MemberForm {
     private MultipartFile profileImage;
     private String passwd;
     private String rePasswd;
-    private String regdate;
 }
 

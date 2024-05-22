@@ -46,17 +46,16 @@ class MemberMapperTest {
 
     @Test
     @DisplayName("회원 인증 테스트")
-    @Disabled
     public void findByIdAndPasswdTest() {
         // given
-        String id = "bangry";
+        String id = "aa";
         String passwd = "1111";
         // when
         MemberDto memberDto = memberMapper.findByIdAndPasswd(id, passwd);
         // then
         assertThat(memberDto)
                 .isNotNull();
-        log.info("로드인 회원정보 : {}", memberDto.toString());
+        log.info("로그인 회원정보 : {}", memberDto.toString());
     }
 
     @Test

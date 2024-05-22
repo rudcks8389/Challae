@@ -4,17 +4,19 @@
 
 	<!-- 회원 등록 -->
 	<insert id="create" parameterType="MemberDto" >
-		INSERT INTO member(member_id, password, name, email, original_profile, stored_profile)
-		VALUES(#{id}, #{passwd}, #{name}, #{email}, #{originalProfile}, #{storedProfile})
-
-		<!-- INSERT 후 등록일자 SELECT -->
-		<selectKey keyProperty="regdate" resultType="string" order="AFTER">
-			SELECT TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY')
-			FROM member WHERE member_id = #{id}
-		</selectKey>
+		INSERT INTO MEMBER (MEMBER_NUM,MEMBER_ID,MEMBER_PASSWD,MEMBER_NAME,MEMBER_PHONE,MEMBER_EMAIL,MEMBER_PHOTO,MEMBER_STOREDPHOTO)
+		            VALUES (MEMBER_SEQ.NEXTVAL,#{id},#{passwd},#{name},#{phone},#{email},#{profileImage},#{storedProfile})
 	</insert>
 
+
+	<!--		&lt;!&ndash; INSERT 후 등록일자 SELECT &ndash;&gt;-->
+	<!--		<selectKey keyProperty="regdate" resultType="string" order="AFTER">-->
+	<!--			SELECT TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY')-->
+	<!--			FROM member WHERE member_id = #{id}-->
+	<!--		</selectKey>-->
 	<!-- 아이디로 회원 상세 조회 -->
+
+
 	<select id="findById" parameterType="string" resultType="MemberDto">
 		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') regdate, original_profile, stored_profile
 		FROM member
@@ -35,11 +37,11 @@
 		ORDER BY regdate DESC
 	</select>
 
-	<!-- 회원 인증 -->
+	<!-- 회원 로그인 -->
 	<select id="findByIdAndPasswd" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') regdate
+		SELECT MEMBER_ID "id", MEMBER_NAME "name",MEMBER_PHOTO "profileImage" ,MEMBER_STOREDPHOTO "storedProfile",MEMBER_EMAIL "email",CLUB_NUM "clubNum"
 		FROM member
-		WHERE member_id = #{id} AND password = #{passwd}
+		WHERE member_id = #{id} AND MEMBER_PASSWD = #{passwd}
 	</select>
 
 	<!-- 회원 이름으로 Like 검색 -->
