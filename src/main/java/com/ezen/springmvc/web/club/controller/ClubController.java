@@ -1,5 +1,7 @@
 package com.ezen.springmvc.web.club.controller;
 
+import com.ezen.springmvc.domain.club.dto.ClubDto;
+import com.ezen.springmvc.domain.club.service.ClubServiceImpl;
 import com.ezen.springmvc.domain.match.dto.FieldDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +21,14 @@ public class ClubController {
     @Autowired
     private CreateService createService;
 
+    @Autowired
+    private ClubServiceImpl clubService;
+
     // 전체 클럽 목록
     @GetMapping("/list")
-    public String clubList() {
+    public String clubList(Model model) {
+        List<ClubDto> clubs = clubService.clubList();
+        model.addAttribute("clubs", clubs);
         return "/club/clublist";
     }
 

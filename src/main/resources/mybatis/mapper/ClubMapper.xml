@@ -3,10 +3,10 @@
 <mapper	namespace="com.ezen.springmvc.domain.club.mapper.ClubMapper">
 
 <!--     전체 클럽 조회 -->
-<!--    <select id="clubList" resultType="ClubDto">-->
-<!--        SELECT clubName, clubPresident, clubLocation, clubLevel-->
-<!--        FROM CLUB-->
-<!--    </select>-->
+    <select id="clubList" resultType="ClubDto">
+        SELECT CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
+        FROM CLUB
+    </select>
 
 
 

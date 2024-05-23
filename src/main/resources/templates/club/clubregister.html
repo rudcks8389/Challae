@@ -17,8 +17,8 @@
 
 <th:block th:fragment="script">
   <script src="/js/weather.js" defer></script>
-  <script src="/js/filepath.js" defer></script>
   <script src="/js/level_select.js" defer></script>
+  <script src="/js/img_preview.js" defer></script>
 </th:block>
 
 <th:block th:fragment="content">
@@ -34,6 +34,14 @@
 
       <div class="layer_cont">
         <div class="table_wrap" id="detail">
+
+          <div class="preview_div">
+            <button class="preview_btn">
+              <input type="file" style="display:none;">
+              사진을 첨부해주세요
+            </button>
+          </div>
+
           <table class="add_table">
             <colgroup>
               <col class="t01">
@@ -70,15 +78,6 @@
             <tr>
               <th scope="row">연락처</th>
               <td class="al_left"><input type="text"></td>
-            </tr>
-
-            <tr>
-              <th scope="row">클럽로고</th>
-              <td class="al_left" id="filebox">
-                <input class="upload_name" value="No Image" readonly>
-                <label for="file">파일찾기</label>
-                <input type="file" id="file">
-              </td>
             </tr>
 
             <tr>

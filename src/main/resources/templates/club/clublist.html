@@ -1,143 +1,115 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 </head>
 
 
 <body>
 <th:block th:fragment="css">
-  <link href="/css/clubList.css" rel="stylesheet" />
+    <link href="/css/clubList.css" rel="stylesheet"/>
 </th:block>
 
 <th:block th:fragment="script">
-  <script src="/js/weather.js" defer></script>
+    <script src="/js/weather.js" defer></script>
 
 </th:block>
 
 <th:block th:fragment="fontawesome">
-  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </th:block>
 
 <th:block th:fragment="content">
 
 
-  <!-- 팀목록 텍스트 -->
-  <div class="team_list_text">
-    <span id="text1">클럽 목록</span><span id="text2">Club list</span>
-  </div>
-
-  <!-- 상세정보안내, 생성하기버튼 div flex -->
-  <div id="info_add">
-    <!-- 팀 상세정보 안내 -->
-    <span id="team_detail_info"></span>
-    <!-- 팀 생성하기 -->
-    <div class="team_add_div">
-      <button id="team_add_btn"><a href="/club/register" id="team_add_a"><span>클럽 생성</span><i
-              class="fa-solid fa-pen-to-square"></i></a></button>
-    </div>
-  </div>
-
-  <!-- 팀목록 테이블 -->
-  <div class="table_wrap list">
-    <table>
-      <thead>
-      <tr>
-        <th scope="col">클럽</th>
-        <th scope="col">감독</th>
-        <th scope="col" class="tb">지역</th>
-        <th scope="col">수준</th>
-        <th scope="col">상세보기</th>
-      </tr>
-      </thead>
-
-      <!-- 더미데이터 -->
-      <tbody>
-      <tr id="team_detail">
-        <td>오화수</td>
-        <td>신연재</td>
-        <td class="tb">중랑구 중화동</td>
-        <td>상</td>
-        <td><a href="/club/detail">상세보기</a></td>
-      </tr>
-
-      <tr>
-        <td>AMG</td>
-        <td>민경찬</td>
-        <td class="tb">노원구 공릉동</td>
-        <td>하</td>
-        <td><a href="/club/detail">상세보기</a></td>
-      </tr>
-
-      <tr>
-        <td>산타클로즈</td>
-        <td>윤인록</td>
-        <td class="tb">노원구 상계동</td>
-        <td>중</td>
-        <td><a href="/club/detail">상세보기</a></td>
-      </tr>
-
-      <tr>
-        <td>SOL</td>
-        <td>박솔</td>
-        <td class="tb">중랑구 상봉동</td>
-        <td>중</td>
-        <td><a href="/club/detail">상세보기</a></td>
-      </tr>
-
-      <tr>
-        <td>DUCK</td>
-        <td>이덕재</td>
-        <td class="tb">노원구 하계동</td>
-        <td>상</td>
-        <td><a href="/club/detail">상세보기</a></td>
-      </tr>
-      </tbody>
-
-    </table>
-  </div>
-
-  <!-- 검색 + 페이지 -->
-  <div class="pager_wrap">
-
-    <!-- 검색 -->
-    <form method="post" action="?" name="srchForm">
-      <div class="search">
-        <label for="search_select"></label>
-        <select id="search_select" name="sMatchType">
-          <option value="">검색유형</option>
-
-          <option value="team_search">클럽</option>
-
-          <option value="area_search">지역</option>
-
-          <option value="level_search">수준</option>
-
-        </select>
-
-        <input type="text" id="search_input" name="sword" placeholder="검색어를 입력하세요." />
-
-        <button type="button" id="search_button" onCLick="document.srchForm.submit();"><span
-                class="hide">검색</span></button>
-      </div>
-    </form>
-
-    <!-- 페이지내이션 -->
-    <div class="pagination">
-      <a href="#">❮❮</a>
-      <a href="#">❮</a>
-      <a href="#" class="active">1</a>
-      <a href="#">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">❯</a>
-      <a href="#">❯❯</a>
+    <!-- 팀목록 텍스트 -->
+    <div class="team_list_text">
+        <span id="text1">클럽 목록</span><span id="text2">Club list</span>
     </div>
 
-  </div>
+    <!-- 상세정보안내, 생성하기버튼 div flex -->
+    <div id="info_add">
+        <!-- 팀 상세정보 안내 -->
+        <span id="team_detail_info"></span>
+        <!-- 팀 생성하기 -->
+        <div class="team_add_div">
+            <button id="team_add_btn"><a href="/club/register" id="team_add_a"><span>클럽 생성</span><i
+                    class="fa-solid fa-pen-to-square"></i></a></button>
+        </div>
+    </div>
+
+    <!-- 팀목록 테이블 -->
+    <div class="table_wrap list">
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">클럽</th>
+                <th scope="col">감독</th>
+                <th scope="col" class="tb">지역</th>
+                <th scope="col">수준</th>
+                <th scope="col">인원수</th>
+                <th scope="col">상세보기</th>
+            </tr>
+            </thead>
+
+            <!-- 데이터 -->
+            <tbody>
+            <tr th:each="clubList : ${clubs}">
+                <td th:text="${clubList.clubName}"></td>
+                <td th:text="${clubList.clubPresident}"></td>
+                <td th:text="${clubList.clubLocation}"></td>
+                <td th:text="${clubList.clubLevel}"></td>
+                <td th:text="${clubList.clubMemberCount}"></td>
+                <td><a href="/club/detail">상세보기</a></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- 검색 + 페이지 -->
+    <div class="pager_wrap">
+
+        <!-- 검색 -->
+        <form method="post" action="?" name="srchForm">
+            <div class="search">
+                <label for="search_select"></label>
+                <select id="search_select" name="sMatchType">
+                    <option value="">검색유형</option>
+
+                    <option value="team_search">클럽</option>
+
+                    <option value="area_search">지역</option>
+
+                    <option value="level_search">수준</option>
+
+                </select>
+
+                <input type="text" id="search_input" name="sword" placeholder="검색어를 입력하세요."/>
+
+                <button type="button" id="search_button" onCLick="document.srchForm.submit();"><span
+                        class="hide">검색</span></button>
+            </div>
+        </form>
+
+        <!-- 페이지내이션 -->
+        <div class="pagination">
+            <a href="#">❮❮</a>
+            <a href="#">❮</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">❯</a>
+            <a href="#">❯❯</a>
+        </div>
+
+    </div>
 
 </th:block>
 </body>
