@@ -101,8 +101,25 @@ public class MemberController {
 
     // 회원 로그인 화면 요청 처리
     @GetMapping("/signin")
-    public String signInForm(@ModelAttribute LoginForm loginForm) {
-        return "/member/signInForm";
+    public String signInForm(@ModelAttribute LoginForm loginForm, HttpServletRequest request) {
+        // 쿠키에서 saveId 값 읽기
+        String rememberedLoginId = null;
+        boolean rememberMeChecked = false;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("saveId".equals(cookie.getName())) {
+                    rememberedLoginId = cookie.getValue();
+                    rememberMeChecked = true;
+                    break;
+                }
+            }
+        }
+        // 로그인 폼 객체에 쿠키에서 읽은 아이디와 rememberMe 설정
+        loginForm.setLoginId(rememberedLoginId);
+        loginForm.setRememberLoginId(rememberMeChecked);
+
+        return "/member/signInForm"; // 로그인 페이지 템플릿
     }
 
     // 회원 로그인 요청 처리
@@ -147,6 +164,14 @@ public class MemberController {
         if(session != null) {
             session.invalidate();
         }
+        return "redirect:/";
+    }
+
+
+    //회원 정보 수정
+    @PostMapping("/update")
+    public String updateMemberInfo(@RequestBody MemberDto memberDto) {
+        memberService.editMember(memberDto);
         return "redirect:/";
     }
 

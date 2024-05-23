@@ -47,6 +47,10 @@
     <!-- 일반 js -->
     <th:block th:replace="${script}"></th:block>
     <script src="/js/rolling-list.js" defer></script>
+    <script src="/js/edit-member.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+
+
     <!-- 일반 js -->
 
 </head>
@@ -130,9 +134,48 @@
                             <span th:text="${session.loginMember != null ? session.loginMember.email : ''}"></span><br>
                             <span th:if="${session.loginMember.clubNum != null}" th:text="${session.loginMember.clubNum}"></span>
                             <span th:unless="${session.loginMember.clubNum != null}">소속클럽이 없습니다</span>
+                            <button id="editButton"><span>회원정보 수정하기</span></button>
                        </span>
+
                         </div>
                         <hr>
+                        <div>#감독일 경우 여기에 승인 칸#</div>
+
+
+
+                        <!-- 숨겨진 편집 폼 -->
+                        <form id="editForm" action="/member/update" method="post" style="display: none;">
+                            <i class="fa-solid fa-user"></i>  <span th:text="${session.loginMember != null ? session.loginMember.id + '님의 정보입니다' : ''}"></span>
+
+                            <div class="form-group">
+                                <label for="currentEmail">현재 이메일</label>
+                                <br>
+                                <span type="email" id="currentEmail"th:text="${session.loginMember.email}"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newEmail">새 이메일</label>
+                                <br>
+                                <input type="email" id="newEmail" name="newEmail">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">변경할 비밀번호</label>
+                                <br>
+                                <input type="password" id="password" name="password">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="repasswd">비밀번호 재입력</label>
+                                <br>
+                                <input type="password" id="repasswd" name="repasswd">
+                            </div>
+
+                            <button type="button" class="btn btn-primary" id="updatePasswordButton">수정하기</button>
+                            <br>
+                            <span>※회원정보 수정 시 다시 로그인 해주세요!</span>
+                        </form>
+
                     </th:block>
 
 
@@ -182,105 +225,9 @@
         </section>
 
         <!-- main 하단 부분  -->
-
-
             <th:block th:replace="${content}"></th:block>
 
     </main>
-
-<!--    &lt;!&ndash; 로그인 모달 시작 &ndash;&gt;-->
-<!--    <div id="login_modal">-->
-
-<!--        &lt;!&ndash; 창 닫기 버튼 &ndash;&gt;-->
-<!--        <a class="modal_close_btn"></a>-->
-
-<!--        <div class="container">-->
-<!--            <h1>Login</h1>-->
-<!--            <form>-->
-<!--                <div class="form-control">-->
-<!--                    <input type="text" required />-->
-<!--                    <label id="id">아이디</label>-->
-<!--                </div>-->
-
-<!--                <div class="form-control">-->
-<!--                    <input type="password" required />-->
-<!--                    <label id="passwd">패스워드</label>-->
-<!--                </div>-->
-
-<!--                <input type="checkbox"><label id="saveId">아이디 기억하기</label>-->
-
-<!--                <button class="login_btn">로그인</button>-->
-
-<!--                <p class="text">아이디를 잊으셨나요? <a href="#">아이디찾기</a></p>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; 로그인 모달 끝 &ndash;&gt;-->
-
-<!--    &lt;!&ndash; 회원가입 모달 시작 &ndash;&gt;-->
-<!--    <div id="signup_modal">-->
-<!--        &lt;!&ndash; 창 닫기 버튼 &ndash;&gt;-->
-<!--        <a class="modal_close_btn"></a>-->
-<!--        <div class="signup" id="detailDiv" style="display: block;">-->
-
-<!--            <div class="layer_cont">-->
-<!--                <div class="table_wrap" id="detail">-->
-<!--                    <table class="add_table">-->
-<!--                        <colgroup>-->
-<!--                            <col class="t01">-->
-<!--                            <col class="t02">-->
-<!--                            <col class="t01">-->
-<!--                            <col class="t02">-->
-<!--                        </colgroup>-->
-<!--                        <tbody>-->
-<!--                        <h1>회원가입을 환영합니다!</h1>-->
-<!--                        <tr>-->
-<!--                            <th scope="row">아이디</th>-->
-<!--                            <td class="al_left"><input type="text"></td>-->
-<!--                        </tr>-->
-
-<!--                        <tr>-->
-<!--                            <th scope="row">비밀번호</th>-->
-<!--                            <td class="al_left"><input type="password"></td>-->
-<!--                        </tr>-->
-
-<!--                        <tr>-->
-<!--                            <th scope="row">비밀번호 확인</th>-->
-<!--                            <td class="al_left"><input type="password"></td>-->
-<!--                        </tr>-->
-
-<!--                        <tr>-->
-<!--                            <th scope="row">이메일</th>-->
-<!--                            <td class="al_left"><input type="email"></td>-->
-<!--                        </tr>-->
-
-<!--                        <tr>-->
-<!--                            <th scope="row">연락처</th>-->
-<!--                            <td class="al_left"><input type="text" placeholder="번호만 입력 해 주세요"></td >-->
-<!--                        </tr>-->
-
-<!--                        <tr>-->
-<!--                            <th scope="row">프로필 사진</th>-->
-<!--                            <td id="filebox">-->
-<!--                                <input class="upload_name" value="No Image" readonly>-->
-<!--                                <label for="file">파일찾기</label>-->
-<!--                                <input type="file" id="file">-->
-<!--                            </td>-->
-<!--                        </tr>-->
-
-<!--                        </tbody>-->
-<!--                    </table>-->
-<!--                    <div class="btn_wrap">-->
-<!--                        <a href="javascript:;" onclick="" class="detail_join_btn">신청하기</a>-->
-
-<!--                        <a href="javascript:;" onclick="" class="detail_close_btn">닫기</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--    </div>-->
-<!--    &lt;!&ndash; 회원가입 모달 끝 &ndash;&gt;-->
 
     <!-- 풋터 구역 -->
     <footer id="footer">
@@ -300,5 +247,20 @@
     <!-- //Footer -->
 </div>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const editButton = document.getElementById('editButton');
+        const editForm = document.getElementById('editForm');
+
+        editButton.addEventListener('click', function() {
+            if (editForm.style.display === 'none' || editForm.style.display === '') {
+                editForm.style.display = 'block';
+            } else {
+                editForm.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 </html>

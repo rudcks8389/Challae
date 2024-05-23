@@ -372,3 +372,13 @@ section .rolling-wrap .rolling-list.clone {
   font-weight: bold;
   line-height: 20px;
 }
+
+#editButton{
+  background-color: transparent;
+  border: none;
+}
+
+.form-group input{
+  font-size: 18px;
+  border: none;
+}

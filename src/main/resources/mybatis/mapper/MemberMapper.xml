@@ -14,9 +14,9 @@
 	<!--			SELECT TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY')-->
 	<!--			FROM member WHERE member_id = #{id}-->
 	<!--		</selectKey>-->
+
+
 	<!-- 아이디로 회원 상세 조회 -->
-
-
 	<select id="findById" parameterType="string" resultType="MemberDto">
 		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') regdate, original_profile, stored_profile
 		FROM member
@@ -24,10 +24,11 @@
 	</select>
 
 	<!-- 회원 정보 수정 -->
-	<update id="update" parameterType="MemberDto">
+	<update id="update" parameterType="com.ezen.springmvc.domain.member.dto.MemberDto">
 		UPDATE member
-		SET email = #{email}, password = #{passwd}
-		WHERE member_id = #{id}
+		SET MEMBER_EMAIL = #{email,jdbcType=VARCHAR},
+			MEMBER_PASSWD = #{passwd,jdbcType=VARCHAR}
+		WHERE MEMBER_ID = #{id,jdbcType=VARCHAR}
 	</update>
 
 	<!-- 회원 전체 조회 -->
@@ -39,7 +40,7 @@
 
 	<!-- 회원 로그인 -->
 	<select id="findByIdAndPasswd" resultType="MemberDto">
-		SELECT MEMBER_ID "id", MEMBER_NAME "name",MEMBER_PHOTO "profileImage" ,MEMBER_STOREDPHOTO "storedProfile",MEMBER_EMAIL "email",CLUB_NUM "clubNum"
+		SELECT MEMBER_ID "id", MEMBER_NAME "name",MEMBER_PHOTO "profileImage" ,MEMBER_STOREDPHOTO "storedProfile",MEMBER_EMAIL "email",CLUB_NUM "clubNum",MEMBER_PASSWD "passwd"
 		FROM member
 		WHERE member_id = #{id} AND MEMBER_PASSWD = #{passwd}
 	</select>

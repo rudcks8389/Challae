@@ -13,7 +13,7 @@ public interface MemberMapper {
     public void create(MemberDto member);
 
     public MemberDto findById(String id);
-    public void update(MemberDto member);
+    public void update(MemberDto memberDto);
 
     public List<MemberDto> findByAll();
 
