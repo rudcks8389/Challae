@@ -2,83 +2,83 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 </head>
 
 <body>
 
-  <th:block th:fragment="css">
-      <link href="/css/playall.css" rel="stylesheet" />
-  </th:block>
+<th:block th:fragment="css">
+    <link href="/css/playall.css" rel="stylesheet" />
+</th:block>
 
-  <th:block th:fragment="script">
-      <script src="/js/weather.js" defer></script>
-  </th:block>
+<th:block th:fragment="script">
+    <script src="/js/weather.js" defer></script>
+</th:block>
 
-  <th:block th:fragment="fontawesome">
-      <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
-  </th:block>
-
-
-  <th:block th:fragment="content">
+<th:block th:fragment="fontawesome">
+    <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+</th:block>
 
 
-      <div id="list">
-          <!-- <div class="title"><h1>구장목록</h1></div>  -->
-          <div class="maintit">구장목록</div>
-
-          <!-- list에 출력되어야할 구장리스트 시작 -->
-          <div class="bodywrapper">
-              <div class="leftwrap">
-                  <img src="/img/footsal.jpg" class="image"/>
-              </div>
-              <div class="rightwrap">
-                  <h2 class="tit">주경기장(천연잔디구장)</h2>
-                  <p class="addinfo"><i class="fa-solid fa-location-dot" style="border: 1px solid white; padding: 5px 8px;" ></i> <span>인천광역시 미추홀구 소성로 6 22201</span></p>
-                  <p class="numinfo"><i class="fa-solid fa-phone-volume" style="border: 1px solid white; padding: 5px;"></i> <span>010-1111-1111 / 010-2222-2222 (14:00 ~ 18:00)</span></p>
-                  <div class="btnwrap">
-                      <a href="/field/reservation"><button class="abtn">예약하기</button></a>
-                      <a href="/field/view"><button class="bbtn">지점소개</button></a>
-                  </div>
-              </div>
-          </div>
+<th:block th:fragment="content">
 
 
-          <div class="bodywrapper">
-              <div class="leftwrap">
-                  <img src="/img/footsal.jpg" class="image"/>
-              </div>
-              <div class="rightwrap">
-                  <h2 class="tit">주경기장(천연잔디구장)</h2>
-                  <p class="addinfo"><i class="fa-solid fa-location-dot" style="border: 1px solid white; padding: 5px 8px;" ></i> <span>인천광역시 미추홀구 소성로 6 22201</span></p>
-                  <p class="numinfo"><i class="fa-solid fa-phone-volume" style="border: 1px solid white; padding: 5px;"></i> <span>010-1111-1111 / 010-2222-2222 (14:00 ~ 18:00)</span></p>
-                  <div class="btnwrap">
-                      <a href="/field/reservation"><button class="abtn">예약하기</button></a>
-                      <a href="/field/view"><button class="bbtn">지점소개</button></a>
-                  </div>
-              </div>
-          </div>
+    <div id="list">
+        <!-- <div class="title"><h1>구장목록</h1></div>  -->
+        <div class="maintit">구장목록</div>
+
+        <!-- list에 출력되어야할 구장리스트 시작 -->
+        <div class="bodywrapper">
+            <div class="leftwrap">
+                <img src="/img/footsal.jpg" class="image"/>
+            </div>
+            <div class="rightwrap">
+                <h2 class="tit">주경기장(천연잔디구장)</h2>
+                <p class="addinfo"><i class="fa-solid fa-location-dot" style="border: 1px solid white; padding: 5px 8px;" ></i> <span>인천광역시 미추홀구 소성로 6 22201</span></p>
+                <p class="numinfo"><i class="fa-solid fa-phone-volume" style="border: 1px solid white; padding: 5px;"></i> <span>010-1111-1111 / 010-2222-2222 (14:00 ~ 18:00)</span></p>
+                <div class="btnwrap">
+                    <a href="/field/reservation"><button class="abtn">예약하기</button></a>
+                    <a href="/field/view"><button class="bbtn">지점소개</button></a>
+                </div>
+            </div>
+        </div>
 
 
-          <div class="bodywrapper">
-              <div class="leftwrap">
-                  <img src="/img/footsal.jpg" class="image"/>
-              </div>
-              <div class="rightwrap">
-                  <h2 class="tit">주경기장(천연잔디구장)</h2>
-                  <p><i class="fa-solid fa-location-dot" style="border: 1px solid white; padding: 5px 8px;" ></i> <span>인천광역시 미추홀구 소성로 6 22201</span></p>
-                  <p><i class="fa-solid fa-phone-volume" style="border: 1px solid white; padding: 5px;"></i> <span>010-1111-1111 / 010-2222-2222 (14:00 ~ 18:00)</span></p>
-                  <div class="btnwrap">
-                      <a href="/field/reservation"><button class="abtn">예약하기</button></a>
-                      <a href="/field/view"><button class="bbtn">지점소개</button></a>
-                  </div>
-              </div>
-          </div>
-          <!-- list에 출력되어야할 구장리스트 끝 -->
+        <div class="bodywrapper">
+            <div class="leftwrap">
+                <img src="/img/footsal.jpg" class="image"/>
+            </div>
+            <div class="rightwrap">
+                <h2 class="tit">주경기장(천연잔디구장)</h2>
+                <p class="addinfo"><i class="fa-solid fa-location-dot" style="border: 1px solid white; padding: 5px 8px;" ></i> <span>인천광역시 미추홀구 소성로 6 22201</span></p>
+                <p class="numinfo"><i class="fa-solid fa-phone-volume" style="border: 1px solid white; padding: 5px;"></i> <span>010-1111-1111 / 010-2222-2222 (14:00 ~ 18:00)</span></p>
+                <div class="btnwrap">
+                    <a href="/field/reservation"><button class="abtn">예약하기</button></a>
+                    <a href="/field/view"><button class="bbtn">지점소개</button></a>
+                </div>
+            </div>
+        </div>
 
-      </div>
-  </th:block>
+
+        <div class="bodywrapper">
+            <div class="leftwrap">
+                <img src="/img/footsal.jpg" class="image"/>
+            </div>
+            <div class="rightwrap">
+                <h2 class="tit">주경기장(천연잔디구장)</h2>
+                <p><i class="fa-solid fa-location-dot" style="border: 1px solid white; padding: 5px 8px;" ></i> <span>인천광역시 미추홀구 소성로 6 22201</span></p>
+                <p><i class="fa-solid fa-phone-volume" style="border: 1px solid white; padding: 5px;"></i> <span>010-1111-1111 / 010-2222-2222 (14:00 ~ 18:00)</span></p>
+                <div class="btnwrap">
+                    <a href="/field/reservation"><button class="abtn">예약하기</button></a>
+                    <a href="/field/view"><button class="bbtn">지점소개</button></a>
+                </div>
+            </div>
+        </div>
+        <!-- list에 출력되어야할 구장리스트 끝 -->
+
+    </div>
+</th:block>
 
 
 </body>

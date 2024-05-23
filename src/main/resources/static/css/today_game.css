@@ -23,23 +23,30 @@ body {
 }
 
 
-
 th, td {
-    background-color:rgb(124, 190, 255);
+
     color: black;
     border-radius: 10px;
-    /* border: 1px solid white; */
+    border: 3px solid black;
     padding: 15px 10px;
     margin: auto;
     font-size: 20pt;
 }
+td{
+    background-color:aliceblue;
+    text-align: center;
+    width: 60%;
+}
+
 th {
+    background-color:rgb(124, 190, 255);
+    width: 20%;
     /* text-align: right; */
 }
 
 #info-table{
     margin: 30px auto;
-   
+
 }
 
 #tactic-board {
@@ -59,10 +66,7 @@ th {
     flex-direction: row;
 }
 
-#map-today{
 
-    margin: auto;
-}
 h2 {
     text-align: center;
     border: 1px solid rgb(124, 190, 255);
@@ -79,15 +83,13 @@ h2 {
     font-size: 24pt;
 }
 
-img {
-    width: 500px;
-    padding: 50px ;
+#map-today {
+    width: 50%;
+    text-align: center;
+    margin-right: 0px;
 }
 
-#map-today {
-    width: 40%;
-    text-align: center;
-}
+
 #map-img{
     margin: auto;
     height: 600px;

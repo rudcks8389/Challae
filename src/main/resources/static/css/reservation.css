@@ -2,7 +2,7 @@
   margin: 0px auto;
 }
 #reservation {
-  width: 80%;
+  width: 100%;
 }
 .title {
   width: 100%;
@@ -11,8 +11,11 @@
   padding:10px;
 }
 .bodywrapper {
-  width: 100%;
+  width: 80%;
   display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  /*text-align: center;*/
 }
 .left {
   width: 50%;
@@ -42,33 +45,45 @@
   float: right;
   padding:20px;
 }
+#calendar {
+  width: 100%;
+  text-align: center;
+  background-color: rgb(166, 184, 196);
+  color: black;
+}
 .right .calendararea {
   width: 100%;
   text-align: center;
 }
+
 .inner {
   width: 90%;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 .inner .sub {
-  padding: 20px 0;
+  padding: 10px 0;
   border-bottom: 1px solid lightgray;
 }
 .inner .sub span{
   font-size: 25px;
 }
-
-.inner .table {
+.tablewrap {
+  width: 100%;
+  margin-top: 40px;
+}
+.tablewrap .reservationtable {
   width: 100%;
   padding: 10px;
-  border-bottom: 1px solid white;
+  background: black;
 }
-.inner .table .tabletit{
+.reservationtable .tabletit{
   font-size: 25px;
 }
 .payment {
   text-align: center;
   width: 60%;
+  margin: 0 auto;
+  margin-top: 40px;
 }
 .payment button {
   width: 100%;

@@ -49,7 +49,11 @@ li {
   padding-right: 20px;
 }
 
-#club_member{
+#club_member {
+  text-align: center;
+}
+
+#game_score {
   text-align: center;
 }
 
@@ -67,22 +71,26 @@ main .main-wrapper .team-info {
   display: flex;
   justify-content: space-evenly;
   padding: 10px;
-  opacity: 60%;
 
   font-family: "Gothic A1", sans-serif;
   font-weight: 400;
   font-style: normal;
+
+  position: relative;
 }
 
 /* 팀 사진 구역 */
 main .main-wrapper .team-info .team-info-img {
   width: 30%;
+  height: 30%;
   text-align: right;
+  margin-top: 10px;
 }
 
 main .main-wrapper .team-info .team-info-left {
   width: 30%;
   text-align: center;
+  margin-top: 25px;
 }
 
 main .main-wrapper .team-info .team-info-left .team-info-left-detail {
@@ -94,18 +102,33 @@ main .main-wrapper .team-info .team-info-left .team-info-left-detail #club-creat
   margin-left: 20px;
   padding-left: 20px;
   border-left: 2px solid #fff;
+  margin-top: 20px;
 }
 
 
 main .main-wrapper .team-info .team-info-right {
   width: 30%;
   text-align: center;
-
+  margin-top: 5px;
 }
 
 main .main-wrapper .team-info .team-info-right .team-info-right-membercount {
   margin: 10px 10px;
   font-size: 30px;
+}
+
+.team_join_div {
+  margin-right: 300px;
+}
+
+.team_join_btn {
+  position: absolute;
+  text-align: center;
+  font-size: 50px;
+  top: 30%;
+  background-color: #0c1f3d;
+  color: white;
+  border: none;
 }
 
 /*  */
@@ -155,7 +178,6 @@ table tbody td {
 main .main-wrapper .team-content table tbody tr:hover {
   background-color: #d3d3d3;
   color: #000;
-  opacity: 0.9;
   cursor: auto;
 }
 

@@ -1,14 +1,23 @@
 package com.ezen.springmvc.web.club.controller;
 
+import com.ezen.springmvc.domain.match.dto.FieldDto;
+import com.ezen.springmvc.domain.match.service.CreateService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/club")
 @Slf4j
 public class ClubController {
+
+    @Autowired
+    private CreateService createService;
 
     // 전체 클럽 목록
     @GetMapping("/list")
@@ -30,7 +39,12 @@ public class ClubController {
 
     // 새로운 경기 생성하기
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+
+        /* 구장 리스트 가져오기 */
+        List<FieldDto> fields = createService.getFields();
+        model.addAttribute("fields", fields);
+
         return "/club/createMatch";
     }
 
@@ -51,9 +65,6 @@ public class ClubController {
     public String clubJoin() {
         return "/club/clubjoin";
     }
-
-
-
 
 
 }

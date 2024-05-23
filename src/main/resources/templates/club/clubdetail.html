@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
 
 <head>
   <meta charset="UTF-8">
@@ -7,12 +8,11 @@
 </head>
 
 
-
 <body>
 
 
 <th:block th:fragment="css">
-  <link href="/css/clubdetail.css" rel="stylesheet" />
+  <link href="/css/clubdetail.css" rel="stylesheet"/>
 </th:block>
 
 <th:block th:fragment="script">
@@ -40,24 +40,24 @@
 
       <!-- team-info-img : 팀 사진 -->
       <div class="team-info-img">
-        <img src="/img/cat-sun2.jpeg" alt="" style="width: 50%;">
+        <img src="/img/team_logo.jpeg" alt="" style="width: 50%;">
       </div>
 
       <!-- team-info-left : 팀 소개 왼쪽 구역 -->
       <div class="team-info-left">
         <div>
-          <h1 id="team-name"> 치즈 고양이들 </h1> <!-- 클럽 이름 -->
+          <h1 id="team-name"> 토토넘 핫스팟 </h1> <!-- 클럽 이름 -->
         </div>
         <div class="team-info-left-detail">
-          <span id="club-master"> 클럽장 : 고등어 고양이 </span> <!-- club-master : 클럽장에 대한 구역 -->
-          <span id="club-creation-date"> 클럽 생성일 : 00000000 </span> <!-- club-creation-date : 클럽 생성일에 대한 구역 -->
+          <span id="club-master"> 클럽장 : 손흥만 </span> <!-- club-master : 클럽장에 대한 구역 -->
+          <span id="club-creation-date"> 클럽 생성일 : 2023.01.26 </span> <!-- club-creation-date : 클럽 생성일에 대한 구역 -->
         </div>
         <div class="team-info-left-detail">
-          <h5> 고양이 축구 클럽입니다. 고양이들의 축구클럽입니다.</h5> <!-- 클럽 소개 보여주는 곳 -->
+          <h5>리그 1위까지 열심히 달리실 분 연락주세요.</h5> <!-- 클럽 소개 보여주는 곳 -->
         </div>
       </div>
 
-      <!-- team-info-right : 팀 소개 오른쪽 구역 -->
+      <!-- team-info-right : 팀 소개 중간 구역 -->
       <div class="team-info-right">
         <span>멤버수</span><br>
         <div class="team-info-right-membercount">
@@ -65,14 +65,19 @@
                 <h2>25명</h2>
               </span>
         </div>
-      </div>
 
-      <div class="team-info-right">
         <span>활동지역</span><br>
         <div class="team-info-right-membercount">
-              <span id="member-count"> <!-- 총 팀원 숫자 보여주는 곳 -->
+              <span id="play-area"> <!-- 활동 지역 보여주는 곳 -->
                 <h2>노원구</h2>
               </span>
+        </div>
+      </div>
+
+      <!-- team-info-right : 팀 소개 오른쪽 구역 -->
+      <div class="team-info-right">
+        <div class="team_join_div">
+          <button class="team_join_btn"><a href="/club/join">가입신청</a></button>
         </div>
       </div>
 
@@ -129,7 +134,7 @@
       </div>
 
       <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
-        <h3 id="club_member">5게임 최근전적</h3>
+        <h3 id="game_score">최근 활동</h3>
         <table style="text-align: center;">
           <!-- <caption>팀원 목록</caption> -->
           <thead>
@@ -172,9 +177,7 @@
       </div>
 
 
-
     </div>
-
 
 
   </div>

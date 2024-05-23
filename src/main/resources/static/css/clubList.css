@@ -107,35 +107,35 @@ table tbody td {
 
 /* 검색 시작 */
 .search {
+  display: flex;
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 30px;
-  display: flex;
   height: 40px;
   width: 500px;
   border: 3px solid rgb(124, 190, 255);
 }
 
 #search_select {
-  height: 40px;
+  height: 100%;
   width: 80px;
   font-size: 15px;
-  border: 0px;
+  border: none;
   outline: none;
   text-align: center;
 }
 
 #search_input {
-  height: 40px;
+  height: 100%;
   width: 340px;
   font-size: 15px;
-  border: 0px;
+  border: none;
   outline: none;
   padding-left: 20px;
 }
 
 #search_button {
-  height: 40px;
+  height: 100%;
   width: 80px;
   font-size: 15px;
   border: 0px;

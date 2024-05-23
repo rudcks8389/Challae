@@ -63,7 +63,7 @@ li {
   text-align: center;
   margin-top: 5%;
   margin-bottom: 3%;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 50px;
 }
 
@@ -80,7 +80,6 @@ input {
   outline: none;
 }
 
-
 /* 팀 수준 */
 #levelbox {
   margin-top: 10px;
@@ -90,7 +89,7 @@ input {
   vertical-align: middle;
 }
 
-#levelbox .level_input{
+#levelbox .level_input {
   color: #c8c8c8;
   font-size: 21px;
   padding-top: 10px;
