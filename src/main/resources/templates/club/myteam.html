@@ -386,7 +386,7 @@
         <h2 class="chat-title">소통공간</h2>
 
         <div class="chat-board">
-          <table class="chat-content">
+          <table class="chat-content" >
             <thead>
             <tr>
               <th>작성내용</th>
@@ -394,7 +394,12 @@
               <th>작성날짜</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody th:each="community:${community}">
+            <tr th:value="${community.commNum}">
+              <td th:text="${community.commContent}"></td>
+              <td th:text="${community.commDate}"></td>
+              <td></td>
+            </tr>
 
             </tbody>
             <tfoot></tfoot>

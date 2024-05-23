@@ -97,7 +97,7 @@ table tbody tr {
 
 }
 
-table tbody td {
+.main-wrapper .team-content .team-table table tbody td {
   text-align: center;
   padding: 10px;
   vertical-align: top;
@@ -243,8 +243,13 @@ main .main-wrapper .chat-board {
   border-radius: 10px;
 }
 .chat-content {
-  margin: 10px auto;
+  text-align: center;
+  margin: 15px auto;
   width: 600px;
+}
+.chat-content th td {
+  border: 1px solid white;
+
 }
 /*input chat*/
 #chat {

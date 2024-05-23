@@ -1,5 +1,7 @@
 package com.ezen.springmvc.web.club.controller;
 
+import com.ezen.springmvc.domain.community.dto.CommunityDto;
+import com.ezen.springmvc.domain.community.service.CommunityService;
 import com.ezen.springmvc.domain.match.dto.FieldDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,8 @@ public class ClubController {
 
     @Autowired
     private CreateService createService;
+    @Autowired
+    private CommunityService communityService;
 
     // 전체 클럽 목록
     @GetMapping("/list")
@@ -27,7 +31,11 @@ public class ClubController {
 
     // 내 클럽 정보 보기
     @GetMapping("/myteam")
-    public String myteam() {
+    public String myteam(Model model) {
+
+        List<CommunityDto> community = communityService.getContents();
+        model.addAttribute("community", community);
+
         return "/club/myteam";
     }
 
