@@ -168,10 +168,26 @@ public class MemberController {
     }
 
 
+
     //회원 정보 수정
     @PostMapping("/update")
-    public String updateMemberInfo(@RequestBody MemberDto memberDto) {
-        memberService.editMember(memberDto);
+    public String updateMemberInfo(
+            @RequestParam(value = "newEmail", required = false) String newEmail,
+            @RequestParam(value = "password", required = false) String password,
+            HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        if (newEmail != null && !newEmail.isEmpty()) {
+            loginMember.setEmail(newEmail);
+        }
+
+        if (password != null && !password.isEmpty()) {
+            loginMember.setPasswd(password);
+        }
+        memberService.editMember(loginMember);
+
+        // 수정이 완료된 후에는 인덱스 페이지로 리다이렉트
         return "redirect:/";
     }
 

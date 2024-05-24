@@ -4,9 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
     <title>CHAL-LAE !</title>
 
     <!-- 부트스트랩 -->
@@ -49,10 +46,7 @@
     <script src="/js/rolling-list.js" defer></script>
     <script src="/js/edit-member.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-
-
     <!-- 일반 js -->
-
 </head>
 
 <body>
@@ -107,9 +101,6 @@
 
                     </th:block>
 
-
-
-
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body" style="text-align: left;">
@@ -120,10 +111,8 @@
                             <span>이름</span ><br>
                             <span>이메일</span ><br>
                             <span>소속 클럽</span ><br>
-
                         </div>
                         <hr>
-
                     </th:block>
                     <th:block th:if="${session.loginMember != null}">
                         <hr>
@@ -136,13 +125,9 @@
                             <span th:unless="${session.loginMember.clubNum != null}">소속클럽이 없습니다</span>
                             <button id="editButton"><span>회원정보 수정하기</span></button>
                        </span>
-
                         </div>
                         <hr>
                         <div>#감독일 경우 여기에 승인 칸#</div>
-
-
-
                         <!-- 숨겨진 편집 폼 -->
                         <form id="editForm" action="/member/update" method="post" style="display: none;">
                             <i class="fa-solid fa-user"></i>  <span th:text="${session.loginMember != null ? session.loginMember.id + '님의 정보입니다' : ''}"></span>
@@ -171,14 +156,11 @@
                                 <input type="password" id="repasswd" name="repasswd">
                             </div>
 
-                            <button type="button" class="btn btn-primary" id="updatePasswordButton">수정하기</button>
+                            <button type="button" id="submit-editButton" onclick="updateMemberInfo()">정보 수정</button>
                             <br>
-                            <span>※회원정보 수정 시 다시 로그인 해주세요!</span>
+                            <span id="updateMessage">#정보 수정시 재로그인 해야 반영 됩니다</span>
                         </form>
-
                     </th:block>
-
-
                 </div>
             </div>
             <th:block th:if="${session.loginMember == null}">
@@ -240,7 +222,7 @@
                     <li><a href="/member/emailcollection.asp">이메일 무단수집거부</a></li>
                 </ul>
             </div>
-            <p class="info">서울시 노원구 큰 다이소 있는 건물 7층 709호<span>TEL : 02-111-2222</span><span>FAX : 02-1234-6789</span></p>
+            <p class="info">서울시 노원구 123-567 7층 709호<span>TEL : 02-111-2222</span><span>FAX : 02-1234-6789</span></p>
             <p class="copy">COPYRIGHT ⓒCHALLAE. ALLRIGHT RESERVED</p>
         </div>
     </footer>
@@ -248,19 +230,5 @@
 </div>
 </body>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const editButton = document.getElementById('editButton');
-        const editForm = document.getElementById('editForm');
-
-        editButton.addEventListener('click', function() {
-            if (editForm.style.display === 'none' || editForm.style.display === '') {
-                editForm.style.display = 'block';
-            } else {
-                editForm.style.display = 'none';
-            }
-        });
-    });
-</script>
 
 </html>

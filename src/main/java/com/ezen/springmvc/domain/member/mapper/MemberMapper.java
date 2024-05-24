@@ -4,6 +4,7 @@ import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.domain.member.dto.MemberSearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ public interface MemberMapper {
     public void create(MemberDto member);
 
     public MemberDto findById(String id);
-    public void update(MemberDto memberDto);
+
+    void update(MemberDto memberDto);
 
     public List<MemberDto> findByAll();
 

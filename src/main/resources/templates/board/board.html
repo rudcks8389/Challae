@@ -17,6 +17,7 @@
 <th:block th:fragment="script">
   <script src="/js/weather.js" defer></script>
   <script src="/js/filepath.js" defer></script>
+  <script src="/js/notice_popup.js" defer></script>
 </th:block>
 
 
@@ -24,7 +25,7 @@
   <!-- main 하단 부분  -->
   <div class="main-content">
 
-    <!-- 날씨 정보 -->
+    <!-- 게시판 -->
     <div class="main-left">
       <h1>Q&A 게시판</h1>
       <!-- 팀목록 테이블 -->
@@ -102,13 +103,76 @@
     </div>
 
     <!-- 공지 사항  -->
+
     <div class="main-right">
       <h1>공지사항</h1>
-      <h5>* 매너 게임 부탁드립니다.</h5>
-      <h5>* 매너 게임 부탁드립니다.</h5>
-      <h5>* 매너 게임 부탁드립니다.</h5>
-      <h5>* 매너 게임 부탁드립니다.</h5>
-      <h5>* 매너 게임 부탁드립니다.</h5>
+      <div class="notice-board">
+        <ul>
+          <li id="notice_1" class="notice_item">* [신규지점 OPEN 안내]  천안신방점 GRAND OPEN</li>
+          <li id="notice_2" class="notice_item">* [신규지점 OPEN 안내]  인하점 GRAND OPEN</li>
+          <li id="notice_3" class="notice_item">* [신규 이벤트 안내] 울산점 이벤트 안내 </li>
+          <li id="notice_4" class="notice_item">* [CHAL-LAE] 홈페이지 개편 안내</li>
+        </ul>
+      </div>
+
+      <!-- 모달 시작 -->
+      <div id="notice_modal_1" class="notice_modal">
+        <a class="modal_close_btn"></a>
+        <div class="container">
+          <h1>공지사항</h1>
+          <div>
+            <h2>[신규지점 OPEN 안내]</h2>
+            <h3>더피치 천안신방점 GRAND OPEN</h3>
+          </div>
+          <div>
+            <img id="sinbang" src="/img/notice/open-sinbang.png" alt="신방점 이미지">
+          </div>
+        </div>
+      </div>
+
+      <div id="notice_modal_2" class="notice_modal">
+        <a class="modal_close_btn"></a>
+        <div class="container">
+          <h1>공지사항</h1>
+          <div>
+            <h2>[신규지점 OPEN 안내]</h2>
+            <h3>더피치 인하점 GRAND OPEN</h3>
+          </div>
+          <div>
+            <img id="inha" src="/img/notice/open-inha.png" alt="인하점 이미지">
+          </div>
+        </div>
+      </div>
+
+      <div id="notice_modal_3" class="notice_modal">
+        <a class="modal_close_btn"></a>
+        <div class="container">
+          <h1>공지사항</h1>
+          <div>
+            <h2>[신규 이벤트 안내]</h2>
+            <h3>울산점 불금 풋살 이벤트</h3>
+          </div>
+          <div>
+            <img id="event" src="/img/notice/event.jpg" alt="이벤트 이미지">
+          </div>
+        </div>
+      </div>
+
+      <div id="notice_modal_4" class="notice_modal">
+        <a class="modal_close_btn"></a>
+        <div class="container">
+          <h1>공지사항</h1>
+          <div>
+            <h2>[CHAL-LAE]</h2>
+            <h3>홈페이지 개편 안내</h3>
+          </div>
+          <div>
+            <img id="chal-lae" src="/img/notice/open.png" alt="홈페이지 개편 이미지">
+          </div>
+        </div>
+      </div>
+      <!-- 모달 끝 -->
+
     </div>
   </div>
 
