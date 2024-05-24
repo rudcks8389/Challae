@@ -4,7 +4,7 @@
 
     <!--  커뮤니티 내용출력 -->
     <select id="findAllContent" resultType="CommunityDto">
-        select comm_num, comm_content, comm_date, club_num
+        select comm_num, comm_content, TO_CHAR(comm_date,'yyyy-MM-DD') comm_date, club_num
         FROM community
     </select>
 

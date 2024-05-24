@@ -4,6 +4,8 @@ import com.ezen.springmvc.domain.community.dto.CommunityDto;
 import com.ezen.springmvc.domain.community.service.CommunityService;
 import com.ezen.springmvc.domain.match.dto.FieldDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
+import com.ezen.springmvc.domain.member.dto.MemberDto;
+import com.ezen.springmvc.domain.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class ClubController {
     private CreateService createService;
     @Autowired
     private CommunityService communityService;
+    @Autowired
+    private MemberService memberService;
 
     // 전체 클럽 목록
     @GetMapping("/list")
@@ -33,6 +37,12 @@ public class ClubController {
     @GetMapping("/myteam")
     public String myteam(Model model) {
 
+        // 팀별 팀원목록 출력
+        List<MemberDto> teamMember = memberService.getTeamMember("102");
+        model.addAttribute("teamMember",teamMember);
+
+
+        // 커뮤니티 내용데이터 출력
         List<CommunityDto> community = communityService.getContents();
         model.addAttribute("community", community);
 

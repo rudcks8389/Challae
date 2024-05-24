@@ -13,4 +13,7 @@ public interface MemberService {
 	public List<MemberDto> getMembers();
 	public MemberDto getMember(String id);
 	public void editMember(MemberDto member);
+
+	// 내 팀보기
+	public List<MemberDto> getTeamMember(String clubNum);
 }

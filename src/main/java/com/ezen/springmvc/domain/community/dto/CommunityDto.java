@@ -1,6 +1,7 @@
 package com.ezen.springmvc.domain.community.dto;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @NoArgsConstructor
 @AllArgsConstructor
