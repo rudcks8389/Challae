@@ -137,9 +137,14 @@ CREATE TABLE COMMUNITY (
                            COMM_DATE	DATE	NULL,
                            CLUB_NUM	NUMBER(10)	NOT NULL
 );
+-- content에 들어가는 데이터를 위해 확장
+alter table community modify(comm_content VARCHAR2(60));
 
-INSERT INTO COMMUNITY (COMM_NUM, COMM_CONTENT, COMM_DATE, CLUB_NUM)
-VALUES (1, 'First community post', TO_DATE('2024-05-17', 'YYYY-MM-DD'), 1);
+commit;
+
+
+-- INSERT INTO COMMUNITY (COMM_NUM, COMM_CONTENT, COMM_DATE, CLUB_NUM)
+-- VALUES (1, 'First community post', TO_DATE('2024-05-17', 'YYYY-MM-DD'), 1);
 
 
 CREATE TABLE BOARD (
@@ -490,6 +495,11 @@ VALUES (CLUB_SEQ.nextval, '3클럽', '3번째 만든 풋살클럽', 20, '상', '
 -- INSERT INTO COMMUNITY (COMM_NUM, COMM_CONTENT, COMM_DATE, CLUB_NUM)
 -- VALUES (COMM_SEQ.nextval, '첫 커뮤니티 게시글', TO_DATE('2024-05-18', 'YYYY-MM-DD'), 100);
 
+
+
+INSERT INTO COMMUNITY (COMM_NUM, COMM_CONTENT, COMM_DATE, CLUB_NUM)
+VALUES (4, '101에서 보이는 첫번째 게시글', TO_DATE('2024-05-18', 'YYYY-MM-DD'), 101);
+
 -- 24일 더미 생성
 INSERT INTO COMMUNITY (COMM_NUM, COMM_CONTENT, COMM_DATE, CLUB_NUM)
 VALUES (COMM_SEQ.nextval, '101번 클럽 커뮤 게시글', TO_DATE('2024-05-22', 'YYYY-MM-DD'), 101);
@@ -506,8 +516,9 @@ UPDATE member
 SET club_num = '101'
 WHERE member_name = '김혜성';
 
+-- 감독생성
 UPDATE member
-SET member_dir = 'N'
+SET member_dir = 'Y'
 WHERE member_name = '김혜성' ;
 
 -- 3팀 멤버 더미 업데이트

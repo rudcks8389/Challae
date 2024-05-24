@@ -95,6 +95,11 @@
 		SELECT member_num, member_name "name", member_dir"dir", member_phone"phone"
 		FROM member
 		WHERE club_num = #{clubNum}
+		ORDER BY
+			CASE
+				WHEN member_dir = 'Y' THEN 0
+				ELSE 1
+				END
 	</select>
 
 </mapper>

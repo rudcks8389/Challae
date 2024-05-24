@@ -6,6 +6,8 @@ import com.ezen.springmvc.domain.match.dto.FieldDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.domain.member.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,18 +37,29 @@ public class ClubController {
 
     // 내 클럽 정보 보기
     @GetMapping("/myteam")
-    public String myteam(Model model) {
+    public String myteam(HttpServletRequest request, Model model) {
 
+        HttpSession session = request.getSession();
+        MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
+
+        if (loginMember != null){
+        String loginClubNumber = loginMember.getClubNum();
+        if (loginClubNumber == null){
+            return "redirect:/club/list";
+        }
         // 팀별 팀원목록 출력
-        List<MemberDto> teamMember = memberService.getTeamMember("102");
+        List<MemberDto> teamMember = memberService.getTeamMember(loginClubNumber);
         model.addAttribute("teamMember",teamMember);
 
-
-        // 커뮤니티 내용데이터 출력
+        // 커뮤니티 내용데이터 출력 (단순 DB출력만 되어있음)
         List<CommunityDto> community = communityService.getContents();
         model.addAttribute("community", community);
-
         return "/club/myteam";
+
+        }else {
+            return "redirect:/"; // 로그인을 하지 않았음에도
+        }
+
     }
 
     // 클럽 상세보기
