@@ -43,17 +43,21 @@
 
     <!-- 날짜 정보 -->
     <div class="match-left">
-      <form action="" method="post">
-        <select class="form-select" aria-label="Default select example" style="width: 50%; margin: 0 auto;">
+      <form action="" th:object="${createDto}" method="post" id="createForm" enctype="multipart/form-data">
+        <select id="fieldSelect" name="fieldNum" class="form-select" aria-label="Default select example" style="width: 50%; margin: 0 auto;">
           <option selected disabled>⚽️&nbsp; 구장 선택</option>
-          <option th:each="field : ${fields}"
+          <option  th:each="field : ${fields}"
                   th:value="${field.fieldNum}"
                   th:text="${field.fieldName}"> 테스트
           </option>
         </select>
-        <p style="margin-top: 20px; font-size: 19px;"><i class="fa-solid fa-check-double"></i> 전달 사항 ( 최대 100자 )
+        <p style="margin-top: 20px; font-size: 19px;"><i class="fa-solid fa-check-double"></i> 전달 사항 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="textCount" style="font-size: 16px; color: #0e6efd">0자</span>
+          <span class="textTotal" style="font-size: 16px; color: #0e6efd">/&nbsp;100자</span>
         </p>
-        <textarea id="match-notice" maxlength="100" placeholder="100자 내외 입력" style="resize: none"></textarea>
+
+
+        <textarea id="match-notice" th:field="*{matchInfo}" maxlength="100" placeholder="100자 내외 입력" style="resize: none"></textarea>
 
         <div class="row">
           <div class="col-md-6 mx-auto">
@@ -64,14 +68,14 @@
               <div class="datepicker date input-group p-0 shadow-sm">
                 <input type="text" placeholder="Choose a reservation date"
                        class="form-control py-4 px-4"
-                       id="reservationDate" readonly>
+                       id="reservationDate"  th:field="*{matchDate}" readonly>
                 <div class="input-group-append"><span class="input-group-text px-4"><i
                         class="fa fa-clock-o"></i></span></div>
 
               </div>
               <input type="text" placeholder="시간을 입력하세요" class="form-control py-4 px-4"
                      id="reservationTime"
-                     name="reservationTime" maxlength="7" style="border-radius: 2px; margin-top: -46px;">
+                     name="reservationTime" maxlength="7" style="border-radius: 2px; margin-top: -46px;" th:field="*{matchTime}">
 
             </div><!-- DEnd ate Picker Input -->
 
@@ -79,9 +83,10 @@
               <p class="font-italic text-white mb-2" style="font-style: italic;">선택한 날짜</p>
               <h4 id="pickedDate" name="pickDate" class="font-weight-bold text-primary mb-3">선택한 날짜가
                 없습니다</h4>
-              <input type="hidden" id="canvasData" name="canvasData"> <!-- 캔버스 이미지 저장 위한 필드 -->
-              <a href="javascript:;"
-                 class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm" onclick="captureCanvas()">등록하기</a>
+              <input type="hidden" id="clubNumTest" name="clubNumTest" th:field="*{clubNum}"> <!-- 캔버스 이미지 저장 위한 필드 -->
+              <input type="hidden" id="canvasData" name="canvasData" th:field="*{matchPhoto}"> <!-- 캔버스 이미지 저장 위한 필드 -->
+              <button type="submit"
+                 class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm">등록하기</button>
             </div>
           </div>
         </div>
@@ -118,7 +123,7 @@
         <tbody>
         <tr>
           <td>
-            <img src="/img/cat-sun2.jpeg" width="50px" height="100%" draggable="false">
+            <img src="/img/cat-sun2.jpeg" width="50%" height="30%" style="object-fit: cover" draggable="false">
           </td>
           <td class="draggable" draggable="true">
             <span>민경찬</span>

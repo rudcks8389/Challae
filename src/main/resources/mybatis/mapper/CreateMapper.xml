@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper	namespace="com.ezen.springmvc.domain.match.mapper.CreateMapper">
+<mapper namespace="com.ezen.springmvc.domain.match.mapper.CreateMapper">
 
     <!--  구장 정보 가져오기  -->
     <select id="findAllField" resultType="FieldDto">
         select field_num, field_name
         FROM field
     </select>
+    <!--  매치 생성-->
+    <insert id="createMatch" parameterType="CreateDto">
+        INSERT INTO MATCH(match_num, match_date, match_info, match_time, club_num, field_num, match_photo)
+        VALUES (MATCH_SEQ.NEXTVAL, #{matchDate}, #{matchInfo}, #{matchTime}, #{clubNum}, #{fieldNum}, #{matchPhoto})
+    </insert>
 
-
+    <!--     로그인한 상태에서 같은 클럽원 목록 가져오기-->
+    <select id="findByClubNum" parameterType="int" resultType="MemberDto">
+        select member_name, member_storedphoto, club_num
+        from member
+        where club_num = #{value}
+    </select>
 </mapper>
 

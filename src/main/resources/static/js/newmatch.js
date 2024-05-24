@@ -1,3 +1,7 @@
+/*
+ * 캔버스에 전략판 그리기
+ *
+ * */
 document.addEventListener('DOMContentLoaded', () => {
   const draggable = document.querySelectorAll('.draggable');
   const canvas = document.querySelector('#soccer-board');
@@ -45,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
 
     if (elements.length >= 6) {
-      alert('더 이상 요소를 추가할 수 없습니다. 최대 6개까지 추가할 수 있습니다.'); // 임시 alert
+      alert('최대 6개까지 추가할 수 있습니다'); // 임시 alert
       return;
     }
 
@@ -68,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       img.onload = drawImageWithText;
     }
 
-    console.log(`Drop position: (${x}, ${y})`);
+    console.log(`드랍 좌표 체크: (${x}, ${y})`);
   });
 
   canvas.addEventListener('dblclick', (event) => {
@@ -98,58 +102,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ------------------------------------- */
 
-// 등록 버튼 누를 때 캔버스 상태 저장
-function captureCanvas() {
-  let canvas = document.querySelector('#soccer-board');
-  let canvasData = canvas.toDataURL('image/jpeg',0.1); // 캔버스의 이미지 데이터를 Base64로 인코딩
-  document.querySelector('#canvasData').value = canvasData; // hidden 필드에 이미지 데이터 설정
+// // 등록 버튼 누를 때 캔버스 상태 저장
+// function captureCanvas() {
+//   let canvas = document.querySelector('#soccer-board');
+//   let canvasData = canvas.toDataURL('image/jpeg',0.1); // 캔버스의 이미지 데이터를 Base64로 인코딩
+//   document.querySelector('#canvasData').value = canvasData; // hidden 필드에 이미지 데이터 설정
+//
+//   console.log(canvasData);
+//
+// }
 
-  console.log(canvasData);
+/* ------------------------------------- */
+/*
+ * form 태그 안에 있는 등록 버튼을 누르면 캔버스 그림 상태를 서버에 전달해 저장
+ *
+ * */
+document.querySelector('#createForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  saveCanvas();
+});
 
+function saveCanvas() {
+  const canvas = document.querySelector('#soccer-board');
+  canvas.toBlob(function(blob) {
+    const formData = new FormData();
+
+    // 유니크한 파일 이름 생성
+    const uniqueFileName = 'canvas_' + new Date().getTime() + '.png';
+    formData.append('canvasImage', blob, uniqueFileName);
+
+    fetch('/club/uploadCanvas', {
+      method: 'POST',
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        response.json().then(data => {
+          document.querySelector('#canvasData').value = data.filePath;
+          alert('JS단 캔버스 저장 완료');
+          // 폼을 자동 제출
+          document.querySelector('#createForm').submit();
+        });
+      } else {
+        alert('JS단 캔버스 저장 실패');
+      }
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }, 'image/png');
 }
 
 /* ------------------------------------- */
-const canvas = document.getElementById('soccer-board');
-const ctx = canvas.getContext('2d');
-const savedStates = {};
+// textarea 글자 수 제한
+$('#match-notice').keyup(function (e) {
+  let content = $(this).val();
 
-// Save the canvas state
-function saveImage() {
-  const selectedOption = document.querySelector('input[name="option"]:checked');
-  if (selectedOption) {
-    const dataURL = canvas.toDataURL();
-    savedStates[selectedOption.value] = dataURL;
-    alert(`Canvas saved for option ${selectedOption.value}`);
+  // 글자수 세기
+  if (content.length == 0 || content == '') {
+    $('.textCount').text('0자');
   } else {
-    alert("Please select an option before saving.");
+    $('.textCount').text(content.length + '자');
   }
-}
 
-// Load the canvas state
-document.querySelectorAll('input[name="option"]').forEach((radio) => {
-  radio.addEventListener('change', function () {
-    if (savedStates[this.value]) {
-      const img = new Image();
-      img.src = savedStates[this.value];
-      img.onload = function () {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      };
-    }
-  });
+  // 글자수 제한
+  if (content.length > 100) {
+    // 100자 부터는 타이핑 되지 않도록
+    $(this).val($(this).val().substring(0, 100));
+    // 100자 넘으면 알림창 뜨도록
+    alert('글자수는 100자까지 입력 가능합니다.');
+  };
 });
-
-// Save button event listener
-document.getElementById('saveButton').addEventListener('click', saveImage);
-
-// Example drawing function (for demonstration purposes)
-function drawSomething() {
-  ctx.fillStyle = "red";
-  ctx.fillRect(50, 50, 100, 100);
-}
-
-// Call the draw function for demonstration
-drawSomething();
-
 
 
