@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface ClubMapper {
     public List<ClubDto> clubList();
+    public List<ClubDto> myClubInfo();
 }
