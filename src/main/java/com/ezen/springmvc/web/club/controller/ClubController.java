@@ -1,5 +1,7 @@
 package com.ezen.springmvc.web.club.controller;
 
+import com.ezen.springmvc.domain.club.dto.ClubDto;
+import com.ezen.springmvc.domain.club.service.ClubService;
 import com.ezen.springmvc.domain.community.dto.CommunityDto;
 import com.ezen.springmvc.domain.community.service.CommunityService;
 import com.ezen.springmvc.domain.match.dto.FieldDto;
@@ -25,6 +27,8 @@ public class ClubController {
     @Autowired
     private CreateService createService;
     @Autowired
+    private ClubService clubService;
+    @Autowired
     private CommunityService communityService;
     @Autowired
     private MemberService memberService;
@@ -43,16 +47,21 @@ public class ClubController {
         MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
 
         if (loginMember != null){
-        String loginClubNumber = loginMember.getClubNum();
+        String loginClubNumber = loginMember.getClubNum(); // 세션 객체에서 클럽번호 추출
+
         if (loginClubNumber == null){
             return "redirect:/club/list";
         }
-        // 팀별 팀원목록 출력
-        List<MemberDto> teamMember = memberService.getTeamMember(loginClubNumber);
-        model.addAttribute("teamMember",teamMember);
+        // 로그인한 멤버의 클럽정보 출력
+            List<ClubDto> clubData = clubService.clubDataService(loginClubNumber);
+            model.addAttribute("clubData", clubData);
+
+        // 로그인한 멤버의 팀원목록 출력
+        List<MemberDto> clubMember = memberService.getTeamMember(loginClubNumber);
+        model.addAttribute("clubMember",clubMember);
 
         // 커뮤니티 내용데이터 출력 (단순 DB출력만 되어있음)
-        List<CommunityDto> community = communityService.getContents();
+        List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
         model.addAttribute("community", community);
         return "/club/myteam";
 

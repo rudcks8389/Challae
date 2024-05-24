@@ -459,7 +459,7 @@ drop sequence COMMENT_SEQ;
 -- INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_INFO, CLUB_MEMBERCOUNT, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE)
 -- VALUES (CLUB_SEQ.nextval, '야구 클럽', '커뮤니티 야구 클럽', 30, '중', '부산', '010-8765-4321');
 
--- 5월24일 생성한 더미데이터
+-- 5월24일 생성한 CLUB 더미데이터
 INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_INFO, CLUB_MEMBERCOUNT, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE)
 VALUES (CLUB_SEQ.nextval, '2클럽', '2번째 만든 풋살클럽', 50, '중상', '중랑구 상봉동', '010-2222-2222');
 INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_INFO, CLUB_MEMBERCOUNT, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE)
@@ -497,10 +497,10 @@ VALUES (CLUB_SEQ.nextval, '3클럽', '3번째 만든 풋살클럽', 20, '상', '
 
 
 
+-- 24일 소통공간 더미 생성
 INSERT INTO COMMUNITY (COMM_NUM, COMM_CONTENT, COMM_DATE, CLUB_NUM)
 VALUES (4, '101에서 보이는 첫번째 게시글', TO_DATE('2024-05-18', 'YYYY-MM-DD'), 101);
 
--- 24일 더미 생성
 INSERT INTO COMMUNITY (COMM_NUM, COMM_CONTENT, COMM_DATE, CLUB_NUM)
 VALUES (COMM_SEQ.nextval, '101번 클럽 커뮤 게시글', TO_DATE('2024-05-22', 'YYYY-MM-DD'), 101);
 
@@ -510,16 +510,16 @@ VALUES (COMM_SEQ.nextval, '102번 클럽 커뮤 게시글', TO_DATE('2024-05-23'
 -- 2팀 멤버 더미 업데이트
 UPDATE member
 SET club_num = '101'
-WHERE member_name = '김휘집' AND club_num IS NULL;
+WHERE member_name = '김휘집' ;
 
 UPDATE member
 SET club_num = '101'
 WHERE member_name = '김혜성';
-
 -- 감독생성
 UPDATE member
 SET member_dir = 'Y'
 WHERE member_name = '김혜성' ;
+
 
 -- 3팀 멤버 더미 업데이트
 UPDATE member

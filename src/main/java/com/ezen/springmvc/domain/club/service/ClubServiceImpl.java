@@ -16,4 +16,10 @@ public class ClubServiceImpl implements ClubService {
     public List<ClubDto> clubList(){
         return clubMapper.clubList();
     }
+
+    // 내 팀보기 클럽데이터 출력
+    @Override
+    public List<ClubDto> clubDataService(String clubNum) {
+        return clubMapper.myClubData(clubNum);
+    }
 }

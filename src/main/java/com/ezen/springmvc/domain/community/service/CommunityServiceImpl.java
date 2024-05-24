@@ -14,8 +14,8 @@ public class CommunityServiceImpl implements CommunityService{
     private final CommunityMapper communityMapper;
 
     @Override
-    public List<CommunityDto> getContents() {
-        return communityMapper.findAllContent();
+    public List<CommunityDto> getCommunityContents(String clubNum) {
+        return communityMapper.getClubCommunity(clubNum);
     }
 
 }

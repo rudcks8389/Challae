@@ -22,7 +22,7 @@ public class CommunityServiceTest {
     @DisplayName("회원 전체 조회 테스트")
 //	@Disabled
     void getCommTest(){
-        List<CommunityDto> comm =  communityService.getContents();
+        List<CommunityDto> comm =  communityService.getCommunityContents("101");
         log.info("comm Content : {}", comm);
     }
 }

@@ -8,5 +8,7 @@ import java.util.List;
 @Mapper
 public interface ClubMapper {
     public List<ClubDto> clubList();
-    public List<ClubDto> myClubInfo();
+
+    // 내 팀보기 클럽데이터 출력용
+    public List<ClubDto> myClubData(String clubNum);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface CommunityMapper {
     //내용 출력
-    public List<CommunityDto> findAllContent();
+    public List<CommunityDto> getClubCommunity(String clubNum);
 }
 
 

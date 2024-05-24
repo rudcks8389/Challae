@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ClubService {
     public List<ClubDto> clubList();
+    public List<ClubDto> clubDataService(String clubNum);
 }

@@ -1,258 +1,264 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <!-- 부트스트랩 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- 부트스트랩 -->
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 부트스트랩 -->
 
-  <!--jQuery-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!--jQuery-->
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--jQuery-->
 
 </head>
 
 <body>
 <th:block th:fragment="css">
-  <link href="/css/style.css" rel="stylesheet" />
-  <link href="/css/myteam.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="/css/myteam.css" rel="stylesheet"/>
 </th:block>
 
 <th:block th:fragment="googlefont">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=IBM+Plex+Sans+KR&family=Jua&display=swap"
-        rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Poor+Story&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=IBM+Plex+Sans+KR&family=Jua&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Poor+Story&display=swap" rel="stylesheet">
 </th:block>
 
 <th:block th:fragment="fontawesome">
-  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </th:block>
 
 <th:block th:fragment="script">
-  <script src="/js/weather.js" defer></script>
-  <script src="/js/myteam-schedule.js" defer></script>
-<!--  <script src="/js/teamSetModal.js" defer></script>-->
+    <script src="/js/weather.js" defer></script>
+    <script src="/js/myteam-schedule.js" defer></script>
+    <!--  <script src="/js/teamSetModal.js" defer></script>-->
 </th:block>
 
 
 <th:block th:fragment="content">
-  <!-- 롤링 리스트를 제외한 main 태그를 감싸는 구역 -->
-  <div class="main-wrapper">
+    <!-- 롤링 리스트를 제외한 main 태그를 감싸는 구역 -->
+    <div class="main-wrapper">
 
 
-    <!-- team-info : 팀에 대한 소개 구역 -->
-    <div class="team-info">
+        <!-- team-info : 팀에 대한 소개 구역 -->
+        <div class="team-info" th:each="clubData : ${clubData}">
 
-      <!-- team-info-img : 팀 사진 -->
-      <div class="team-info-img">
-        <img src="/img/cat-sun2.jpeg" alt="" style="width: 50%;">
-      </div>
+            <!-- team-info-img : 팀 사진 -->
+            <div class="team-info-img">
+                <img src="/img/cat-sun2.jpeg" alt="" style="width: 50%;">
+            </div>
 
-      <!-- team-info-left : 팀 소개 왼쪽 구역 -->
-      <div class="team-info-left">
-        <div>
-          <h1 id="team-name"> 치즈 고양이들 </h1> <!-- 클럽 이름 -->
-        </div>
-        <div class="team-info-left-detail">
-          <span id="club-master"> 클럽장 : 고등어 고양이 </span> <!-- club-master : 클럽장에 대한 구역 -->
-          <span id="club-creation-date"> 클럽 생성일 : 00000000 </span> <!-- club-creation-date : 클럽 생성일에 대한 구역 -->
-        </div>
-        <div class="team-info-left-detail">
-          <h5> 고양이 축구 클럽입니다. 고양이들의 축구클럽입니다.</h5> <!-- 클럽 소개 보여주는 곳 -->
-        </div>
-      </div>
+            <!-- team-info-left : 팀 소개 왼쪽 구역 -->
+            <div class="team-info-left">
+                <div>
+                    <h1 id="team-name" th:text="${clubData.clubName}"></h1> <!-- 클럽 이름 -->
+                </div>
+                <div class="team-info-left-detail">
+                    <span id="club-master" th:text="${clubData.clubPresident}"> </span> <!-- club-master : 클럽장 -->
+                    <span id="club-creation-date" th:text="${clubData.clubRegdate}"> </span>
+                    <!-- club-creation-date : 클럽 생성일 -->
+                </div>
+                <div class="team-info-left-detail">
+                    <h5 th:text="${clubData.clubInfo}"></h5> <!-- 클럽 소개 -->
+                </div>
+            </div>
 
-      <!-- team-info-right : 팀 소개 오른쪽 구역 -->
-      <div class="team-info-right">
-        <span>멤버 수</span><br>
-        <div class="team-info-right-membercount">
+            <!-- team-info-right : 팀 소개 오른쪽 구역 -->
+            <div class="team-info-right">
+                <span>멤버 수</span><br>
+                <div class="team-info-right-membercount">
               <span id="member-count"> <!-- 총 팀원 숫자 보여주는 곳 -->
-                <h2>25 명</h2>
+                <h2 th:text="${clubData.clubMemberCount}">25 명</h2>
               </span>
+                    <h4 class="team-all-record-fc">3승 2패 (정적데이터)</h4>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- team-content: 팀원 소개구역을 제외한 나머지 main 구역, (팀원 목록과 소통공간이 있는 구역) -->
+        <div class="team-content">
+            <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
+                <table style="text-align: center;">
+                    <!-- <caption>팀원 목록</caption> -->
+                    <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>직책</th>
+                        <th>전화번호</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="clubMember : ${clubMember}">
+                    <tr>
+                        <th scope="row" th:text="${clubMember.name}"></th>
+                        <!-- 감독 팀원 출력을 위한 조건삼항 -->
+                        <td th:text="${clubMember.dir} == 'N' ? '팀원' : '감독'"></td>
+                        <td th:text="${clubMember.phone}"></td>
+                        <!-- 감독 제외 팀원에게만 뜨는 추방 -->
+                        <td th:text="${clubMember.dir}== 'N' ? '추방' : null"></td>
+                    </tr>
+
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+                <div class="pagination"> <!-- 테이블 밑에 숫자(페이징 처리)-->
+                    <a href="#">❮❮</a>
+                    <a href="#">❮</a>
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">❯</a>
+                    <a href="#">❯❯</a>
+                </div>
+                <!--        <button class="team-set-btn">팀원관리</button>-->
+            </div>
+
+            <!--      &lt;!&ndash; 팀원관리 모달 팝업 &ndash;&gt;-->
+            <!--      <div class="team-set-background hidden">-->
+
+            <!--        <div class="team-set-board">-->
+            <!--          <h2 class="team-set-title">팀원 관리</h2>-->
+            <!--          <table class="team-set-table" style="text-align: center; height: 500px">-->
+            <!--            <thead class="table-header">-->
+            <!--            <tr>-->
+            <!--              <th>이름</th>-->
+            <!--              <th>직책</th>-->
+            <!--              <th>전화번호</th>-->
+            <!--              <th>관리</th>-->
+            <!--              <th>권한</th>-->
+            <!--            </tr>-->
+            <!--            </thead>-->
+
+            <!--            <tbody class="table-body" >-->
+            <!--            <tr>-->
+            <!--              <th scope="row">신연재</th>-->
+            <!--              <td>감독</td>-->
+            <!--              <td>01099999999</td>-->
+            <!--              <td class="team-delete-btn">추방</td>-->
+            <!--              <td class="make-master">위임</td>-->
+            <!--            </tr>-->
+            <!--            <tr>-->
+            <!--              <th scope="row">민경찬</th>-->
+            <!--              <td>선수</td>-->
+            <!--              <td>01099999999</td>-->
+            <!--              <td class="team-delete-btn">추방</td>-->
+            <!--              <td class="make-master">위임</td>-->
+            <!--            </tr>-->
+            <!--            <tr>-->
+            <!--              <th scope="row"> 박 솔</th>-->
+            <!--              <td>선수</td>-->
+            <!--              <td>01099999999</td>-->
+            <!--              <td class="team-delete-btn">추방</td>-->
+            <!--              <td class="make-master">위임</td>-->
+            <!--            </tr>-->
+            <!--            <tr>-->
+            <!--              <th scope="row">윤인록</th>-->
+            <!--              <td>선수</td>-->
+            <!--              <td>01099999999</td>-->
+            <!--              <td class="team-delete-btn">추방</td>-->
+            <!--              <td class="make-master">위임</td>-->
+            <!--            </tr>-->
+            <!--            <tr>-->
+            <!--              <th scope="row">이덕재</th>-->
+            <!--              <td>선수</td>-->
+            <!--              <td>01099999999</td>-->
+            <!--              <td class="team-delete-btn">추방</td>-->
+            <!--              <td class="make-master">위임</td>-->
+            <!--            </tr>-->
+            <!--            -->
+            <!--            </tbody>-->
+
+            <!--            <tfoot>-->
+            <!--            </tfoot>-->
+            <!--          </table>-->
+            <!--          <button class="team-set-close-btn">닫기</button>-->
+
+
+            <!--        </div>-->
+
+            <!--      </div>-->
+            <!--      &lt;!&ndash; 팀원관리 모달 팝업 &ndash;&gt;-->
+
+            <!-- 팀 소통 공간 -->
+            <div class="team-chat">
+                <h2 class="chat-title">소통공간</h2>
+                <!-- 추후 리스트 형식으로 변경 테이블 헤더 제거-->
+                <div class="chat-board">
+                    <table class="chat-content">
+                        <thead>
+                        <tr>
+                            <th>작성내용</th>
+                            <th>작성자</th>
+                            <th>작성날짜</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="community:${community}">
+                        <tr th:value="${community.commNum}">
+                            <td th:text="${community.commContent}"></td>
+                            <td th:text="${community.memberName}"></td>
+                            <td th:text="${community.commDate}"></td>
+                        </tr>
+
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+
+                <div class="chat-input">
+                    <input type="text" name="chat" id="chat">
+                    <button class="send-btn">등록</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 경기 일정 전체 구역 -->
+        <div class="team-match-schedule">
+
+            <!-- 년월 선택 -->
+            <div class="ctr-box clearfix">
+                <button type="button" title="prev" class="btn-cal prev" onclick="prevMonth()"></button>
+                <span class="cal-year-month" onclick="goToday()"></span>
+                <button type="button" title="next" class="btn-cal next" onclick="nextMonth()"></button>
+            </div>
+            <p> ▲ 년월 변경 참고 사이트 : https://im-developer.tistory.com/115 </p> <!-- 추후 삭제 -->
+
+            <!-- 새 경기 등록 버튼 있는 구역 -->
+            <div class="new-match-add">
+                <a href="/club/create" class="btn-new-match-add">새 경기 등록</a>
+            </div>
+
+            <!-- 각각의 경기들을 보여주는 구역 -->
+            <div class="team-match-schedule-detail">
+                <div class="match-info"><a href="/match/view">
+                    <ul>
+                        <li>요일</li>
+                        <li>경기일자</li>
+                        <li>구장이름</li>
+                    </ul>
+                </a></div>
+                <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
+                <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
+                <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
+            </div>
+        </div>
+
+
     </div>
-
-    <!-- team-content: 팀원 소개구역을 제외한 나머지 main 구역, (팀원 목록과 소통공간이 있는 구역) -->
-    <div class="team-content">
-      <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
-        <table style="text-align: center;">
-          <!-- <caption>팀원 목록</caption> -->
-          <thead>
-          <tr>
-            <th>이름</th>
-            <th>직책</th>
-            <th>전화번호</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody th:each="teamMember : ${teamMember}">
-          <tr>
-            <th scope="row" th:text="${teamMember.name}"></th>
-            <td th:text="${teamMember.dir} == 'N' ? '팀원' : '감독'"></td>
-            <td th:text="${teamMember.phone}"></td>
-            <td >추방</td>
-          </tr>
-
-          </tbody>
-          <tfoot>
-          </tfoot>
-        </table>
-        <div class="pagination"> <!-- 테이블 밑에 숫자(페이징 처리)-->
-          <a href="#">❮❮</a>
-          <a href="#">❮</a>
-          <a href="#" class="active">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">❯</a>
-          <a href="#">❯❯</a>
-        </div>
-<!--        <button class="team-set-btn">팀원관리</button>-->
-      </div>
-
-<!--      &lt;!&ndash; 팀원관리 모달 팝업 &ndash;&gt;-->
-<!--      <div class="team-set-background hidden">-->
-
-<!--        <div class="team-set-board">-->
-<!--          <h2 class="team-set-title">팀원 관리</h2>-->
-<!--          <table class="team-set-table" style="text-align: center; height: 500px">-->
-<!--            <thead class="table-header">-->
-<!--            <tr>-->
-<!--              <th>이름</th>-->
-<!--              <th>직책</th>-->
-<!--              <th>전화번호</th>-->
-<!--              <th>관리</th>-->
-<!--              <th>권한</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-
-<!--            <tbody class="table-body" >-->
-<!--            <tr>-->
-<!--              <th scope="row">신연재</th>-->
-<!--              <td>감독</td>-->
-<!--              <td>01099999999</td>-->
-<!--              <td class="team-delete-btn">추방</td>-->
-<!--              <td class="make-master">위임</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--              <th scope="row">민경찬</th>-->
-<!--              <td>선수</td>-->
-<!--              <td>01099999999</td>-->
-<!--              <td class="team-delete-btn">추방</td>-->
-<!--              <td class="make-master">위임</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--              <th scope="row"> 박 솔</th>-->
-<!--              <td>선수</td>-->
-<!--              <td>01099999999</td>-->
-<!--              <td class="team-delete-btn">추방</td>-->
-<!--              <td class="make-master">위임</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--              <th scope="row">윤인록</th>-->
-<!--              <td>선수</td>-->
-<!--              <td>01099999999</td>-->
-<!--              <td class="team-delete-btn">추방</td>-->
-<!--              <td class="make-master">위임</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--              <th scope="row">이덕재</th>-->
-<!--              <td>선수</td>-->
-<!--              <td>01099999999</td>-->
-<!--              <td class="team-delete-btn">추방</td>-->
-<!--              <td class="make-master">위임</td>-->
-<!--            </tr>-->
-<!--            -->
-<!--            </tbody>-->
-
-<!--            <tfoot>-->
-<!--            </tfoot>-->
-<!--          </table>-->
-<!--          <button class="team-set-close-btn">닫기</button>-->
-
-
-<!--        </div>-->
-
-<!--      </div>-->
-<!--      &lt;!&ndash; 팀원관리 모달 팝업 &ndash;&gt;-->
-
-      <!-- 팀 소통 공간 -->
-      <div class="team-chat">
-        <h2 class="chat-title">소통공간</h2>
-
-        <div class="chat-board">
-          <table class="chat-content" >
-            <thead>
-            <tr>
-              <th>작성내용</th>
-              <th>작성자</th>
-              <th>작성날짜</th>
-            </tr>
-            </thead>
-            <tbody th:each="community:${community}">
-            <tr th:value="${community.commNum}">
-              <td th:text="${community.commContent}"></td>
-              <td th:text="${community.commDate}"></td>
-              <td></td>
-            </tr>
-
-            </tbody>
-            <tfoot></tfoot>
-          </table>
-        </div>
-
-        <div class="chat-input">
-          <input type="text" name="chat" id="chat"> <button class="send-btn">등록</button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 경기 일정 전체 구역 -->
-    <div class="team-match-schedule">
-
-      <!-- 년월 선택 -->
-      <div class="ctr-box clearfix">
-        <button type="button" title="prev" class="btn-cal prev" onclick="prevMonth()"></button>
-        <span class="cal-year-month" onclick="goToday()"></span>
-        <button type="button" title="next" class="btn-cal next" onclick="nextMonth()"></button>
-      </div>
-      <p> ▲ 년월 변경 참고 사이트 : https://im-developer.tistory.com/115 </p> <!-- 추후 삭제 -->
-
-      <!-- 새 경기 등록 버튼 있는 구역 -->
-      <div class="new-match-add">
-        <a href="/club/create" class="btn-new-match-add">새 경기 등록</a>
-      </div>
-
-      <!-- 각각의 경기들을 보여주는 구역 -->
-      <div class="team-match-schedule-detail">
-        <div class="match-info"><a href="/match/view">
-          <ul>
-            <li>요일</li>
-            <li>경기일자</li>
-            <li>구장이름</li>
-          </ul>
-        </a></div>
-        <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
-        <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
-        <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
-      </div>
-    </div>
-
-
-
-  </div>
 </th:block>
-
 
 
 </body>
