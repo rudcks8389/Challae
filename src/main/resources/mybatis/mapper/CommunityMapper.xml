@@ -4,10 +4,15 @@
 
     <!--  출력 [커뮤니티 식별을 위한 클럽번호 / 출력 내용, 이름, 날짜]  -->
     <select id="getClubCommunity" parameterType="String" resultType="CommunityDto">
-        select community.comm_num, community.comm_content, TO_CHAR(community.comm_date,'yyyy-MM-DD') comm_date, community.club_num, member.member_name
+        select community.comm_num, community.comm_content, TO_CHAR(community.comm_date,'yyyy-MM-DD') comm_date, community.club_num, community.member_num, member.member_name
         FROM community
-        inner join member on community.club_num = member.club_num
+--         inner join member on community.club_num = member.club_num
+        inner join member on community.member_num = member.member_num
         WHERE member.club_num = #{clubNum}
+    </select>
+
+    <select id="create" resultType="CommunityDto">
+        insert into community(comm_num,comm_content,comm_date,club_num,)
     </select>
 
 

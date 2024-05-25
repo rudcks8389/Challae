@@ -19,7 +19,7 @@ public class CommunityServiceTest {
     CommunityService communityService;
 
     @Test
-    @DisplayName("회원 전체 조회 테스트")
+    @DisplayName("커뮤니티 출력 테스트")
 //	@Disabled
     void getCommTest(){
         List<CommunityDto> comm =  communityService.getCommunityContents("101");
