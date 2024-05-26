@@ -11,8 +11,9 @@
         WHERE member.club_num = #{clubNum}
     </select>
 
-    <select id="create" resultType="CommunityDto">
-        insert into community(comm_num,comm_content,comm_date,club_num,)
+    <select id="communityCreate" resultType="CommunityDto">
+        insert into community(comm_num,comm_content,club_num,member_num)
+                    VALUES (comm_seq.nextval,#{commContent},#{clubNum},#{memberNum})
     </select>
 
 

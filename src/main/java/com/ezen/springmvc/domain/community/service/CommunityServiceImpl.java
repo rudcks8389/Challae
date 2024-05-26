@@ -18,4 +18,9 @@ public class CommunityServiceImpl implements CommunityService{
         return communityMapper.getClubCommunity(clubNum);
     }
 
+    @Override
+    public void inputCommunity(CommunityDto communityDto) {
+        communityMapper.communityCreate(communityDto);
+    }
+
 }

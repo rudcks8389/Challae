@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class ClubController {
 
     // 내 클럽 정보 보기
     @GetMapping("/myteam")
-    public String myteam(HttpServletRequest request, Model model) {
+    public String myteam(@ModelAttribute CommunityDto communityDto, HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession();
         MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
@@ -63,6 +64,14 @@ public class ClubController {
         // 커뮤니티 내용데이터 출력 (단순 DB출력만 되어있음)
         List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
         model.addAttribute("community", community);
+
+        // 커뮤니티 입력시 저장
+          communityDto.setClubNum(loginClubNumber);
+          communityDto.setMemberNum();
+
+
+
+
         return "/club/myteam";
 
         }else {

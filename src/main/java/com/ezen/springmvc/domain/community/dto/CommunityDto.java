@@ -14,5 +14,6 @@ public class CommunityDto {
     private String commContent;
     private String commDate;
     private String clubNum;
+    private String memberNum;
     private String memberName;
 }
