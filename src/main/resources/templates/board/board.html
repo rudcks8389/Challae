@@ -15,7 +15,6 @@
 </th:block>
 
 <th:block th:fragment="script">
-  <script src="/js/weather.js" defer></script>
   <script src="/js/filepath.js" defer></script>
   <script src="/js/notice_popup.js" defer></script>
 </th:block>
@@ -25,83 +24,44 @@
   <!-- main 하단 부분  -->
   <div class="main-content">
 
-    <!-- 게시판 -->
+    <!-- Q&A 게시판 -->
     <div class="main-left">
       <h1>Q&A 게시판</h1>
-      <!-- 팀목록 테이블 -->
+
       <div class="table_wrap list">
         <table>
           <thead>
           <tr>
             <th scope="col">아이디</th>
-            <th scope="col">이름</th>
+            <th scope="col">작성자</th>
             <th scope="col" class="tb">제목</th>
             <th scope="col">날짜</th>
           </tr>
           </thead>
-
-          <!-- 더미데이터 -->
           <tbody>
           <tr id="team_detail">
             <td>min</td>
             <td>민경찬</td>
-            <td class="tb">안녕하세요</td>
+            <td class="tb"><a href="/board/view">안녕하세요</a></td>
             <td>5/9</td>
           </tr>
-
-          <tr id="team_detail">
-            <td>min</td>
-            <td>민경찬</td>
-            <td class="tb">안녕하세요</td>
-            <td>5/9</td>
-          </tr>
-
-          <tr id="team_detail">
-            <td>min</td>
-            <td>민경찬</td>
-            <td class="tb">안녕하세요</td>
-            <td>5/9</td>
-          </tr>
-
-          <tr id="team_detail">
-            <td>min</td>
-            <td>민경찬</td>
-            <td class="tb">안녕하세요</td>
-            <td>5/9</td>
-          </tr>
-
-          <tr id="team_detail">
-            <td>min</td>
-            <td>민경찬</td>
-            <td class="tb">안녕하세요</td>
-            <td>5/9</td>
-          </tr>
+          <!-- 다른 데이터들 -->
           </tbody>
-
         </table>
+        <a id="gowrite" href="/board/write">게시글 작성하기</a>
       </div>
-
-      <!-- 검색 + 페이지 -->
-      <div class="pager_wrap">
-
-
-
-        <!-- 페이지내이션 -->
-        <div class="pagination">
-          <a href="#">❮❮</a>
-          <a href="#">❮</a>
-          <a href="#" class="active">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">❯</a>
-          <a href="#">❯❯</a>
-        </div>
-
+      <div class="pagination">
+        <a href="#">❮❮</a>
+        <a href="#">❮</a>
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">❯</a>
+        <a href="#">❯❯</a>
       </div>
     </div>
-
     <!-- 공지 사항  -->
 
     <div class="main-right">
@@ -117,7 +77,7 @@
 
       <!-- 모달 시작 -->
       <div id="notice_modal_1" class="notice_modal">
-        <a class="modal_close_btn"></a>
+        <button class="modal_close_btn">&times;</button> <!-- 닫기 버튼에 X 표시 추가 -->
         <div class="container">
           <h1>공지사항</h1>
           <div>
@@ -131,7 +91,7 @@
       </div>
 
       <div id="notice_modal_2" class="notice_modal">
-        <a class="modal_close_btn"></a>
+        <button class="modal_close_btn">&times;</button>
         <div class="container">
           <h1>공지사항</h1>
           <div>
@@ -145,7 +105,7 @@
       </div>
 
       <div id="notice_modal_3" class="notice_modal">
-        <a class="modal_close_btn"></a>
+        <button class="modal_close_btn">&times;</button>
         <div class="container">
           <h1>공지사항</h1>
           <div>
@@ -159,7 +119,7 @@
       </div>
 
       <div id="notice_modal_4" class="notice_modal">
-        <a class="modal_close_btn"></a>
+        <button class="modal_close_btn">&times;</button>
         <div class="container">
           <h1>공지사항</h1>
           <div>

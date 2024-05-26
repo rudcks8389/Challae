@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.ezen.springmvc.domain.article.mapper.ArticleMapper">
+
+	<!-- 게시글 등록 -->
+	<insert id="create" parameterType="ArticleDto" >
+		INSERT INTO MEMBER (MEMBER_NUM,MEMBER_ID,MEMBER_PASSWD,MEMBER_NAME,MEMBER_PHONE,MEMBER_EMAIL,MEMBER_PHOTO,MEMBER_STOREDPHOTO)
+		            VALUES (MEMBER_SEQ.NEXTVAL,#{id},#{passwd},#{name},#{phone},#{email},#{profileImage},#{storedProfile})
+	</insert>
+
+
+	<!-- 게시글 정보 수정 -->
+	<update id="update" parameterType="ArticleDto">
+		UPDATE member
+		SET MEMBER_EMAIL = #{email}, MEMBER_PASSWD = #{passwd}
+		WHERE MEMBER_ID = #{id}
+	</update>
+
+	<!-- 게시글 전체 조회 -->
+	<select id="findByAll" resultType="ArticleDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY') regdate
+		FROM member
+		ORDER BY regdate DESC
+	</select>
+
+	<!-- 게시글 상세 조회 -->
+	<select id="articleView" resultType="ArticleDto">
+		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY') regdate
+		FROM member
+		ORDER BY regdate DESC
+	</select>
+
+
+</mapper>
+
