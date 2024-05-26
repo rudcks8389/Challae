@@ -121,29 +121,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>
-            <img src="/img/cat-sun2.jpeg" width="50%" height="30%" style="object-fit: cover" draggable="false">
+        <tr th:each="clubMember : ${clubMembers}">
+<!--          <td style="background: url(/img/cat-sun2.jpeg); background-repeat: round">-->
+          <td th:text="*{clubMember.storedProfile}">
+<!--            <img src="/img/cat-sun2.jpeg" width="50%" height="30%" style="object-fit: cover" draggable="false">-->
           </td>
           <td class="draggable" draggable="true">
-            <span>민경찬</span>
+            <span th:text="*{clubMember.name}"></span>
           </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="draggable" draggable="true">윤인록</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="draggable" draggable="true">이덕재</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="draggable" draggable="true">신연재</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td class="draggable" draggable="true">박 솔</td>
         </tr>
         </tbody>
       </table>

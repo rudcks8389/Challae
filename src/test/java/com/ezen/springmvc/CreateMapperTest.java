@@ -4,6 +4,7 @@ package com.ezen.springmvc;
 import com.ezen.springmvc.domain.match.dto.CreateDto;
 import com.ezen.springmvc.domain.match.dto.FieldDto;
 import com.ezen.springmvc.domain.match.mapper.CreateMapper;
+import com.ezen.springmvc.domain.member.dto.MemberDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -35,6 +36,15 @@ class CreateMapperTest {
         CreateDto createDto = CreateDto.builder().matchDate("2024-02-12").matchInfo("하이").matchTime("11시").clubNum(1).fieldNum(1).matchPhoto("xx.jpeg").build();
         createMapper.createMatch(createDto);
         log.info("매치 등록 완료 : {}", createDto);
+    }
+
+    @Test
+    @DisplayName("동일 클럽원 가져오기 테스트")
+    void findByClubNumTest() {
+        List<MemberDto> list = createMapper.findByClubNum(101);
+        for (MemberDto memberDto : list) {
+            log.info("동일 클럽원 목록 : {}", memberDto);
+        }
     }
 }
 
