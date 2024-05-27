@@ -12,4 +12,7 @@ public interface CreateService {
     public void createMatch(CreateDto createDto);
 
     public List<MemberDto> findByClubNum(int clubNum);
+
+    //myteam 경기일정 출력
+    public  List<CreateDto> getMatch(String clubNum);
 }

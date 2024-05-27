@@ -19,6 +19,14 @@
         from member
         where club_num = #{value}
     </select>
+<!--    myteam 경기일정 출력 / 이동을 위한 매치번호 , 출력을 위한 날짜, 시간, 구장번호, 구장이름-->
+    <select id="findClubMatch"  resultType="CreateDto">
+        select match.match_num, match.match_date, match.match_time,match.club_num, match.field_num
+        from match
+        where match.club_num = ${clubNum}
+
+    </select>
+
 
 </mapper>
 

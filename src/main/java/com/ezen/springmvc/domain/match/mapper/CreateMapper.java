@@ -15,4 +15,7 @@ public interface CreateMapper {
     public List<FieldDto> findAllField();
 
     public void createMatch(CreateDto createDto);
+
+    // myteam 경기일정 불러오기
+    public List<CreateDto> findClubMatch(String clubNum);
 }

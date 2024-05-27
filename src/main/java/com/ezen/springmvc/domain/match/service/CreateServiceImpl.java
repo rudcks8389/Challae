@@ -29,4 +29,9 @@ public class CreateServiceImpl implements CreateService {
     public List<MemberDto> findByClubNum(int clubNum) {
         return createMapper.findByClubNum(clubNum);
     }
+
+    @Override
+    public List<CreateDto> getMatch(String clubNum) {
+        return createMapper.findClubMatch(clubNum);
+    }
 }
