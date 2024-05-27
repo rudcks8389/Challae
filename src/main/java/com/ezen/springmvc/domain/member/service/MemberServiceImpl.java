@@ -41,4 +41,5 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.update(memberDto);
 	}
 
+
 }
