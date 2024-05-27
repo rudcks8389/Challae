@@ -12,8 +12,16 @@ import java.util.List;
 public class ClubServiceImpl implements ClubService {
     private final ClubMapper clubMapper;
 
+    // 클럽 전체 목록 불러오기
     @Override
     public List<ClubDto> clubList(){
         return clubMapper.clubList();
     }
+
+    // 클럽 생성하기
+    @Override
+    public void clubRegister(ClubDto clubDto) {
+        clubMapper.clubRegister(clubDto);
+    }
+
 }

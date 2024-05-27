@@ -8,6 +8,11 @@
         FROM CLUB
     </select>
 
+    <!-- 회원 등록 -->
+    <insert id="clubRegister" parameterType="ClubDto" >
+        INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_PRESIDENT, CLUB_INFO, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE, CLUB_PHOTO, CLUB_STOREDPHOTO)
+        VALUES (CLUB_SEQ.NEXTVAL, #{clubName}, #{clubPresident}, #{clubInfo}, #{clubLevel}, #{clubLocation}, #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto})
+    </insert>
 
 
 

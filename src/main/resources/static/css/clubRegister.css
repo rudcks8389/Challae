@@ -1,151 +1,188 @@
 * {
-  margin: 0px;
-  padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 body {
-  background-color: black;
-  color: white;
+    background-color: black;
+    color: white;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 li {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 /* 헤드 제목 시작 */
 .team_add_text {
-  margin-top: 30px;
-  text-align: center;
+    margin-top: 30px;
+    text-align: center;
 }
 
 .team_add_text:after {
-  content: "";
-  display: block;
-  width: 150px;
-  border-bottom: 1px solid white;
-  margin: 20px auto;
+    content: "";
+    display: block;
+    width: 150px;
+    border-bottom: 1px solid white;
+    margin: 20px auto;
 }
 
 #text1 {
-  font-size: 50px;
-  padding-left: 20px;
-  padding-right: 20px;
+    font-size: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #text2 {
-  font-size: 35px;
-  padding-right: 20px;
+    font-size: 35px;
+    padding-right: 20px;
 }
 
 /* 헤드 제목 끝 */
 
 /* 본문 시작 */
 #detailDiv {
-  margin: 0 auto;
-  width: 800px;
-  height: 800px;
-  padding: 20px 60px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  border-bottom: 10px;
-  background-color: rgba(0, 0, 0, 0.85);
-  border: 1px solid #ccc;
+    margin: 0 auto;
+    width: 800px;
+    height: 800px;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 1px solid #ccc;
 }
 
 /* 로고 사진 미리보기 */
-.preview_div{
-  display: inline-block;
-  width: 150px;
-  height: 150px;
+.preview_div {
+    display: inline-block;
+    position: relative;
 }
 
-.preview_btn{
-  width: 100%;
-  height: 100%;
+.preview_btn {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+.preview_btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.preview_btn span {
+    position: absolute;
+    color: #000;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    display: none;
 }
 
 /* 테이블 */
 #detailDiv .add_table {
-  margin: 0 auto;
-  text-align: center;
-  margin-bottom: 3%;
-  font-size: 20px;
-  line-height: 50px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 3%;
+    font-size: 20px;
+    line-height: 50px;
 }
 
 /* 테이블 input */
 input {
-  display: inline-block;
-  background-color: black;
-  color: white;
-  border: none;
-  width: 90%;
-  height: 35px;
-  font-size: 30px;
-  text-align: center;
-  outline: none;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    border: none;
+    width: 90%;
+    height: 35px;
+    font-size: 30px;
+    text-align: center;
+    outline: none;
 }
 
 /* 팀 수준 */
 #levelbox {
-  margin-top: 10px;
-  padding: 0 10px;
-  display: flex;
-  justify-content: flex-end;
-  vertical-align: middle;
+    margin-top: 10px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: flex-end;
+    vertical-align: middle;
 }
 
 #levelbox .level_input {
-  color: #c8c8c8;
-  font-size: 21px;
-  padding-top: 10px;
+    color: #c8c8c8;
+    font-size: 21px;
+    padding-top: 10px;
 }
 
 #levelbox .level_select {
-  width: 120px;
-  font-size: 25px;
-  text-align: center;
-  background-color: black;
-  color: white;
-  border: 1px solid white;
-  margin-bottom: 8px;
-  height: 52px;
+    width: 120px;
+    font-size: 25px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    margin-bottom: 8px;
+    height: 52px;
+}
+
+/* 활동지역 */
+#address_td {
+    display: flex;
+    justify-content: center;
+}
+
+#address_td select {
+    background-color: black;
+    color: white;
+    min-width: 33%;
+    min-height: 80%;
 }
 
 /* 소개 textarea */
 #detailDiv #team_memo {
-  display: inline-block;
-  background-color: black;
-  color: white;
-  resize: none;
-  border-radius: 3px;
-  text-align: center;
-  padding: 10px;
-  margin-top: 10px;
-  width: 450px;
-  height: 200px;
-  font-size: 20px;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    resize: none;
+    border-radius: 3px;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    width: 450px;
+    height: 200px;
+    font-size: 20px;
 }
 
 /* 신청하기, 닫기 */
 #detailDiv .btn_wrap {
-  display: inline-block;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 35px;
+    display: inline-block;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 35px;
 }
 
-#detailDiv .detail_join_btn {
-  margin-right: 5px;
+#detailDiv .btn_wrap button {
+    background-color: black;
+    color: white;
+    border: none;
 }
 
-#detailDiv .detail_close_btn {
-  margin-left: 5px;
-}
 
 /* 본문 끝 */

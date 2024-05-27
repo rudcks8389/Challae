@@ -1,111 +1,122 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 </head>
 <body>
 <th:block th:fragment="css">
-  <link href="/css/clubRegister.css" rel="stylesheet" />
-  <link href="/css/clubList.css" rel="stylesheet" />
+    <link href="/css/clubRegister.css" rel="stylesheet"/>
+    <link href="/css/clubList.css" rel="stylesheet"/>
 </th:block>
 
 <th:block th:fragment="fontawesome">
-  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </th:block>
 
 <th:block th:fragment="script">
-  <script src="/js/weather.js" defer></script>
-  <script src="/js/level_select.js" defer></script>
-  <script src="/js/img_preview.js" defer></script>
+    <script src="/js/weather.js" defer></script>
+    <script src="/js/level_select.js" defer></script>
+    <script src="/js/img_preview.js" defer></script>
+    <script src="/js/address_select.js" defer></script>
+
 </th:block>
 
 <th:block th:fragment="content">
 
-  <!-- 팀 생성 페이지 시작 -->
-  <div class="team_add">
-    <!-- 팀 텍스트 -->
-    <div class="team_add_text">
-      <span id="text1">클럽 생성</span><span id="text2">Club register</span>
-    </div>
-
-    <div class="layer_popup class" id="detailDiv" style="display: block;">
-
-      <div class="layer_cont">
-        <div class="table_wrap" id="detail">
-
-          <div class="preview_div">
-            <button class="preview_btn">
-              <input type="file" style="display:none;">
-              사진을 첨부해주세요
-            </button>
-          </div>
-
-          <table class="add_table">
-            <colgroup>
-              <col class="t01">
-              <col class="t02">
-              <col class="t01">
-              <col class="t02">
-            </colgroup>
-            <tbody>
-            <tr>
-              <th scope="row">클럽명</th>
-              <td class="al_left"><input type="text"></td>
-            </tr>
-
-            <tr>
-              <th scope="row">수준</th>
-              <td class="al_left" id="levelbox">
-                <input type="text" class="level_input" value="클럽 수준을 선택해주세요" readonly>
-                <select class="level_select">
-                  <option value>수준선택</option>
-                  <option value="상">상</option>
-                  <option value="중상">중상</option>
-                  <option value="중">중</option>
-                  <option value="중하">중하</option>
-                  <option value="하">하</option>
-                </select>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">활동지역</th>
-              <td class="al_left"><input type="text" placeholder="OO구 OO동"></td>
-            </tr>
-
-            <tr>
-              <th scope="row">연락처</th>
-              <td class="al_left"><input type="text"></td>
-            </tr>
-
-            <tr>
-              <th scope="row" style="padding-bottom: 200px;">소개</th>
-              <td class="al_left" colspan="3" style="border-bottom: none;">
-                <div class="match_meno">
-                  <textarea name="" id="team_memo"></textarea>
-                </div>
-              </td>
-            </tr>
-
-            </tbody>
-          </table>
-
-
-          <div class="btn_wrap">
-            <a href="javascript:;" onclick="" class="detail_join_btn">생성하기</a>
-
-            <a href="javascript:;" onclick="" class="detail_close_btn">뒤로가기</a>
-
-          </div>
+    <!-- 팀 생성 페이지 시작 -->
+    <div class="team_add">
+        <!-- 팀 텍스트 -->
+        <div class="team_add_text">
+            <span id="text1">클럽 생성</span><span id="text2">Club register</span>
         </div>
 
-      </div>
-    </div>
+        <div class="layer_popup class" id="detailDiv" style="display: block;">
 
-  </div>
-  <!-- 팀 생성 페이지 끝 -->
+            <div class="layer_cont">
+
+<!--                <form name="clubRegisterForm" novalidate method="post" th:object="${clubRegisterForm}" enctype="multipart/form-data">-->
+
+                    <div class="table_wrap" id="detail">
+
+                        <div class="preview_div">
+                            <button class="preview_btn" id="uploadBtn">
+                                <span>로고를 선택해주세요</span>
+<!--                                <input type="file" id="fileInput" th:field="*{clubPhoto}">-->
+                            </button>
+                        </div>
+
+                        <table class="add_table">
+                            <colgroup>
+                                <col class="t01">
+                                <col class="t02">
+                                <col class="t01">
+                                <col class="t02">
+                            </colgroup>
+                            <tbody>
+
+                            <tr>
+                                <th scope="row">클럽명</th>
+<!--                                <td class="al_left"><input type="text" th:field="*{clubName}"></td>-->
+                            </tr>
+
+                            <tr>
+                                <th scope="row">수준</th>
+                                <td class="al_left" id="levelbox">
+<!--                                    <input type="text" class="level_input" value="클럽 수준을 선택해주세요" readonly th:field="*{clubLevel}">-->
+                                    <select class="level_select">
+                                        <option value>수준선택</option>
+                                        <option value="상">상</option>
+                                        <option value="중상">중상</option>
+                                        <option value="중">중</option>
+                                        <option value="중하">중하</option>
+                                        <option value="하">하</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row" style="width: 100%">활동지역</th>
+                                <td class="al_left" id="address_td">
+                                    <input type="text">
+                                    <select name="addressRegion" id="addressRegion1"></select>
+                                    <select name="addressDo" id="addressDo1"></select>
+                                    <select name="addressSiGunGu" id="addressSiGunGu1"></select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">연락처</th>
+<!--                                <td class="al_left"><input type="text" th:field="*{clubPhone}"></td>-->
+                            </tr>
+
+                            <tr>
+                                <th scope="row" style="padding-bottom: 200px;">소개</th>
+                                <td class="al_left" colspan="3" style="border-bottom: none;">
+                                    <div class="match_meno">
+<!--                                        <textarea name="" id="team_memo" th:field="*{clubInfo}"></textarea>-->
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                        <div class="btn_wrap">
+                            <button type="submit">생성하기</button>
+                        </div>
+                    </div>
+
+<!--                </form>-->
+
+            </div>
+        </div>
+
+    </div>
+    <!-- 팀 생성 페이지 끝 -->
 </th:block>
 
 </body>
