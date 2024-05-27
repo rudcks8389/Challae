@@ -1,24 +1,19 @@
 package com.ezen.springmvc.web.club.controller;
 
-<<<<<<< HEAD
+
 import com.ezen.springmvc.domain.club.dto.ClubDto;
 import com.ezen.springmvc.domain.club.service.ClubServiceImpl;
 import com.ezen.springmvc.domain.common.dto.UploadFile;
 import com.ezen.springmvc.domain.common.service.FileService;
-import com.ezen.springmvc.domain.match.dto.FieldDto;
+
 import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.web.club.form.ClubRegisterForm;
-import com.ezen.springmvc.web.member.form.MemberForm;
-=======
 
-import com.ezen.springmvc.domain.club.dto.ClubDto;
 import com.ezen.springmvc.domain.club.service.ClubService;
 import com.ezen.springmvc.domain.community.dto.CommunityDto;
 import com.ezen.springmvc.domain.community.service.CommunityService;
 
-import com.ezen.springmvc.domain.match.service.CreateService;
-import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.domain.member.service.MemberService;
 import com.ezen.springmvc.web.club.form.CommunityForm;
 import com.ezen.springmvc.web.member.form.MemberForm;
@@ -30,21 +25,21 @@ import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 
 import jakarta.servlet.http.HttpSession;
->>>>>>> main
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-=======
+
 import org.springframework.web.bind.annotation.*;
->>>>>>> main
+
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -74,8 +69,6 @@ public class ClubController {
     @Autowired
     private MemberService memberService;
 
-    @Autowired
-    private ClubServiceImpl clubService;
 
     @Autowired
     private FileService fileService;
@@ -174,9 +167,9 @@ public class ClubController {
         return "/club/createMatch";
     }
 
-<<<<<<< HEAD
+
     // 클럽 생성 화면
-=======
+
     @PostMapping("/create")
 //    @ResponseBody
     public String createMatch(@ModelAttribute CreateDto createDto, HttpSession session) {
@@ -216,7 +209,7 @@ public class ClubController {
     }
 
     // 새로운 클럽 생성하기
->>>>>>> main
+
     @GetMapping("/register")
     public String clubRegister(Model model) {
         ClubRegisterForm clubRegisterForm = ClubRegisterForm.builder().build();

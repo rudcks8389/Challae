@@ -18,18 +18,17 @@ public class ClubServiceImpl implements ClubService {
         return clubMapper.clubList();
     }
 
-<<<<<<< HEAD
+
     // 클럽 생성하기
     @Override
     public void clubRegister(ClubDto clubDto) {
         clubMapper.clubRegister(clubDto);
     }
 
-=======
     // 내 팀보기 클럽데이터 출력
     @Override
     public List<ClubDto> clubDataService(String clubNum) {
         return clubMapper.myClubData(clubNum);
     }
->>>>>>> main
+
 }
