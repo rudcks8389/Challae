@@ -56,14 +56,14 @@ public class MemberController {
         return "/member/signUpForm";
     }
 
-    // 회원 가입 요청 처리 (BindingResult 활용한 데이터 유효성 검증 처리)
+    // 회원 가입 요청 처리
     @PostMapping("/signup")
     public String signUpAction(@ModelAttribute MemberForm memberForm, RedirectAttributes redirectAttributes, Model model) {
         log.info("회원 정보 : {}", memberForm.toString());
 
         // 업로드 프로필 사진 저장
         UploadFile uploadFile = fileService.storeFile(memberForm.getProfileImage(), profileFileUploadPath);
-        // Form Bean -> Dto 변환
+        // Form  -> Dto 변환
         MemberDto memberDto = MemberDto.builder()
                 .id(memberForm.getId())
                 .name(memberForm.getName())

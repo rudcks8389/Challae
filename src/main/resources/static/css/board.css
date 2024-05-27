@@ -171,3 +171,11 @@ li {
 #gowrite{
   font-size: 30px;
 }
+
+#gologin{
+  font-size: 30px;
+}
+
+.clickable-row {
+  cursor: pointer;
+}

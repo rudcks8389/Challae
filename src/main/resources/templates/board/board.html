@@ -17,6 +17,7 @@
 <th:block th:fragment="script">
   <script src="/js/filepath.js" defer></script>
   <script src="/js/notice_popup.js" defer></script>
+  <script src="/js/board.js" defer></script>
 </th:block>
 
 
@@ -32,23 +33,34 @@
         <table>
           <thead>
           <tr>
-            <th scope="col">아이디</th>
+            <th scope="col">글 번호</th>
             <th scope="col">작성자</th>
             <th scope="col" class="tb">제목</th>
             <th scope="col">날짜</th>
           </tr>
           </thead>
           <tbody>
-          <tr id="team_detail">
-            <td>min</td>
-            <td>민경찬</td>
-            <td class="tb"><a href="/board/view">안녕하세요</a></td>
-            <td>5/9</td>
+          <tr id="team_detail" class="clickable-row" data-href="/board/view" th:each="article : ${articleList}">
+            <td th:text="${article.getArticleNum()}"></td>
+            <td th:text="${article.getArticleAuthor()}"></td>
+            <td class="tb" th:text="${article.getArticleTitle()}"></td>
+            <td th:text="${article.getArticleDate()}"></td>
           </tr>
           <!-- 다른 데이터들 -->
           </tbody>
         </table>
-        <a id="gowrite" href="/board/write">게시글 작성하기</a>
+
+        <th:block th:if="${session.loginMember == null}">
+          <a id="gologin" href="/member/signin">게시글 작성하기</a>
+        </th:block>
+
+        <th:block th:if="${session.loginMember != null}">
+          <a id="gowrite" href="/board/write">게시글 작성하기</a>
+        </th:block>
+
+
+
+
       </div>
       <div class="pagination">
         <a href="#">❮❮</a>
