@@ -46,9 +46,9 @@
                     <i class="fa-solid fa-phone-volume" style="border: 1px solid white; padding: 5px;"></i>
                     <span th:text="${field.fieldPhone}"></span>
                 </p>
-                <div class="btnwrap">
+                <div class="btnwrap" >
                     <a href="/field/reservation"><button class="abtn">예약하기</button></a>
-                    <a href="/field/view"><button class="bbtn">지점소개</button></a>
+                    <a  th:href="@{/field/view(fieldNum=${field.fieldNum})}"><button class="bbtn">지점소개</button></a>
                 </div>
             </div>
         </div>

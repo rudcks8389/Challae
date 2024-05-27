@@ -8,8 +8,8 @@ import java.util.List;
 @Mapper
 public interface FieldMapper {
     public List<FieldDto> findByAll();
-    public List<FieldDto> findByDetail();
-    public FieldDto showFieldDetail(int fieldNum);
+
+    public FieldDto findByFieldNum(int fieldNum);
 
 
 }

@@ -6,7 +6,6 @@ import java.util.List;
 public interface FieldService {
     public List<FieldDto> findByAll();
 
-    public List<FieldDto> findByDetail();
+    public FieldDto findByFieldNum(int fieldNum);
 
-    public FieldDto showFieldDetail(int fieldNum);
 }

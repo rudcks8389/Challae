@@ -17,11 +17,7 @@ public class FieldServiceImpl implements FieldService{
     }
 
     @Override
-    public List<FieldDto> findByDetail(){
-        return fieldMapper.findByDetail();
-    }
-    @Override
-    public FieldDto showFieldDetail(int fieldNum){
-        return fieldMapper.showFieldDetail(fieldNum);
+    public FieldDto findByFieldNum(int fieldNum){
+        return fieldMapper.findByFieldNum(fieldNum);
     }
 }

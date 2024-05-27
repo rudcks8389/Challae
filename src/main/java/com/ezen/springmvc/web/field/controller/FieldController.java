@@ -30,18 +30,12 @@ public class FieldController {
 
     // 구장 상세보기 화면
     @GetMapping("/view")
-    public String fieldView(Model model) {
-        List<FieldDto> fieldDetails = fieldService.findByDetail();
-        model.addAttribute("fieldDetails", fieldDetails);
+    public String fieldView(@RequestParam("fieldNum") int fieldNum, Model model) {
+        FieldDto fieldDetail = fieldService.findByFieldNum(fieldNum);
+        model.addAttribute("fieldDetail", fieldDetail);
         return "/field/fieldView";
     }
 
-    @GetMapping("/detail")
-    public String showFieldDetail(@RequestParam("fieldNum") int fieldNum, Model model) {
-        FieldDto fieldDto = fieldService.showFieldDetail(fieldNum);
-        model.addAttribute("field", fieldDto);
-        return "field_detail"; // 상세보기 페이지의 Thymeleaf 템플릿 이름을 반환합니다.
-    }
 
     // 구장 예약 화면
     @GetMapping("/reservation")
