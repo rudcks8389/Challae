@@ -1,6 +1,5 @@
 package com.ezen.springmvc.web.club.controller;
 
-import com.ezen.springmvc.domain.match.dto.FieldDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,16 +36,7 @@ public class ClubController {
         return "/club/clubdetail";
     }
 
-    // 새로운 경기 생성하기
-    @GetMapping("/create")
-    public String create(Model model) {
 
-        /* 구장 리스트 가져오기 */
-        List<FieldDto> fields = createService.getFields();
-        model.addAttribute("fields", fields);
-
-        return "/club/createMatch";
-    }
 
     // 새로운 클럽 생성하기
     @GetMapping("/register")
