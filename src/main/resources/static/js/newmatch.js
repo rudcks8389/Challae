@@ -2,102 +2,283 @@
  * 캔버스에 전략판 그리기
  *
  * */
+// document.addEventListener('DOMContentLoaded', () => {
+//   const draggable = document.querySelectorAll('.draggable');
+//   const canvas = document.querySelector('#soccer-board');
+//   const ctx = canvas.getContext('2d');
+//
+//   const img = new Image();
+//   img.src = '../img/jersey.png';
+//
+//   const backgroundImg = new Image();
+//   backgroundImg.src = '../img/soccer_board.png';
+//
+//   canvas.width = 670;
+//   canvas.height = 550;
+//
+//   const elements = [];
+//
+//   backgroundImg.onload = () => {
+//     // 배경 이미지를 캔버스에 그리기
+//     ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+//   };
+//
+//   draggable.forEach(draggable => {
+//     draggable.addEventListener('dragstart', (event) => {
+//       const text = event.target.innerText;
+//       event.dataTransfer.setData('text/plain', text);
+//
+//       const dragCanvas = document.createElement('canvas');
+//       const dragCtx = dragCanvas.getContext('2d');
+//       dragCanvas.width = 100;
+//       dragCanvas.height = 50;
+//       dragCtx.fillStyle = 'black';
+//       dragCtx.fillRect(0, 0, dragCanvas.width, dragCanvas.height);
+//       dragCtx.drawImage(img, 0, 0, 20, 20);
+//       dragCtx.fillStyle = 'blue';
+//       dragCtx.fillText(text, 30, 30);
+//       event.dataTransfer.setDragImage(dragCanvas, 50, 25);
+//     });
+//   });
+//
+//   canvas.addEventListener('dragover', (event) => {
+//     event.preventDefault();
+//   });
+//
+//   canvas.addEventListener('drop', (event) => {
+//     event.preventDefault();
+//
+//     if (elements.length >= 6) {
+//       alert('최대 6개까지 추가할 수 있습니다'); // 임시 alert
+//       return;
+//     }
+//
+//     const rect = canvas.getBoundingClientRect();
+//     const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+//     const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+//     const text = event.dataTransfer.getData('text/plain');
+//
+//     const drawImageWithText = () => {
+//       ctx.drawImage(img, x - 50, y - 50, 100, 100); // 100x100 크기로 그리기
+//       ctx.fillStyle = 'black';
+//       ctx.font = 'bold 16px Arial';
+//       ctx.fillText(text, x - 20, y + 60); // 이미지 아래에 텍스트 그리기
+//       elements.push({x: x - 50, y: y - 50, width: 100, height: 100, img, text});
+//     };
+//
+//     if (img.complete) {
+//       drawImageWithText();
+//     } else {
+//       img.onload = drawImageWithText;
+//     }
+//
+//     console.log(`드랍 좌표 체크: (${x}, ${y})`);
+//   });
+//
+//   canvas.addEventListener('dblclick', (event) => {
+//     const rect = canvas.getBoundingClientRect();
+//     const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+//     const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+//
+//     for (let i = elements.length - 1; i >= 0; i--) {
+//       const element = elements[i];
+//       if (x >= element.x && x <= element.x + element.width && y >= element.y && y <= element.y + element.height) {
+//         elements.splice(i, 1);
+//         redrawCanvas();
+//         break;
+//       }
+//     }
+//   });
+//
+//   function redrawCanvas() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height); // 배경 이미지 다시 그리기
+//     elements.forEach(element => {
+//       ctx.drawImage(element.img, element.x, element.y, 100, 100);
+//       ctx.fillText(element.text, element.x + 30, element.y + 110); // 이미지 아래에 텍스트 다시 그리기
+//     });
+//   }
+// });
+
 document.addEventListener('DOMContentLoaded', () => {
-  const draggable = document.querySelectorAll('.draggable');
-  const canvas = document.querySelector('#soccer-board');
-  const ctx = canvas.getContext('2d');
+    const draggable = document.querySelectorAll('.draggable');
+    const canvas = document.querySelector('#soccer-board');
+    const ctx = canvas.getContext('2d');
 
-  const img = new Image();
-  img.src = '../img/jersey.png';
+    const img = new Image();
+    img.src = '../img/jersey.png';
 
-  const backgroundImg = new Image();
-  backgroundImg.src = '../img/soccer_board.png';
+    const backgroundImg = new Image();
+    backgroundImg.src = '../img/soccer_board.png';
 
-  canvas.width = 670;
-  canvas.height = 550;
+    canvas.width = 670;
+    canvas.height = 550;
 
-  const elements = [];
+    const elements = [];
+    const curves = [];
+    let isDrawing = false;
+    let currentCurve = [];
 
-  backgroundImg.onload = () => {
-    // 배경 이미지를 캔버스에 그리기
-    ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
-  };
+    // 캔버스에서 우클릭 메뉴창 금지
+    canvas.addEventListener("contextmenu", e => e.preventDefault());
 
-  draggable.forEach(draggable => {
-    draggable.addEventListener('dragstart', (event) => {
-      const text = event.target.innerText;
-      event.dataTransfer.setData('text/plain', text);
-
-      const dragCanvas = document.createElement('canvas');
-      const dragCtx = dragCanvas.getContext('2d');
-      dragCanvas.width = 100;
-      dragCanvas.height = 50;
-      dragCtx.fillStyle = 'black';
-      dragCtx.fillRect(0, 0, dragCanvas.width, dragCanvas.height);
-      dragCtx.drawImage(img, 0, 0, 20, 20);
-      dragCtx.fillStyle = 'blue';
-      dragCtx.fillText(text, 30, 30);
-      event.dataTransfer.setDragImage(dragCanvas, 50, 25);
-    });
-  });
-
-  canvas.addEventListener('dragover', (event) => {
-    event.preventDefault();
-  });
-
-  canvas.addEventListener('drop', (event) => {
-    event.preventDefault();
-
-    if (elements.length >= 6) {
-      alert('최대 6개까지 추가할 수 있습니다'); // 임시 alert
-      return;
-    }
-
-    const rect = canvas.getBoundingClientRect();
-    const x = (event.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (event.clientY - rect.top) * (canvas.height / rect.height);
-    const text = event.dataTransfer.getData('text/plain');
-
-    const drawImageWithText = () => {
-      ctx.drawImage(img, x - 50, y - 50, 100, 100); // 100x100 크기로 그리기
-      ctx.fillStyle = 'black';
-      ctx.font = 'bold 16px Arial';
-      ctx.fillText(text, x - 20, y + 60); // 이미지 아래에 텍스트 그리기
-      elements.push({x: x - 50, y: y - 50, width: 100, height: 100, img, text});
+    backgroundImg.onload = () => {
+        ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
     };
 
-    if (img.complete) {
-      drawImageWithText();
-    } else {
-      img.onload = drawImageWithText;
-    }
+    draggable.forEach(draggable => {
+        draggable.addEventListener('dragstart', (event) => {
+            const text = event.target.innerText;
+            event.dataTransfer.setData('text/plain', text);
 
-    console.log(`드랍 좌표 체크: (${x}, ${y})`);
-  });
-
-  canvas.addEventListener('dblclick', (event) => {
-    const rect = canvas.getBoundingClientRect();
-    const x = (event.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (event.clientY - rect.top) * (canvas.height / rect.height);
-
-    for (let i = elements.length - 1; i >= 0; i--) {
-      const element = elements[i];
-      if (x >= element.x && x <= element.x + element.width && y >= element.y && y <= element.y + element.height) {
-        elements.splice(i, 1);
-        redrawCanvas();
-        break;
-      }
-    }
-  });
-
-  function redrawCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height); // 배경 이미지 다시 그리기
-    elements.forEach(element => {
-      ctx.drawImage(element.img, element.x, element.y, 100, 100);
-      ctx.fillText(element.text, element.x + 30, element.y + 110); // 이미지 아래에 텍스트 다시 그리기
+            const dragCanvas = document.createElement('canvas');
+            const dragCtx = dragCanvas.getContext('2d');
+            dragCanvas.width = 100;
+            dragCanvas.height = 50;
+            dragCtx.fillStyle = 'black';
+            dragCtx.fillRect(0, 0, dragCanvas.width, dragCanvas.height);
+            dragCtx.drawImage(img, 0, 0, 20, 20);
+            dragCtx.fillStyle = 'blue';
+            dragCtx.fillText(text, 30, 30);
+            event.dataTransfer.setDragImage(dragCanvas, 50, 25);
+        });
     });
-  }
+
+    canvas.addEventListener('dragover', (event) => {
+        event.preventDefault();
+    });
+
+    canvas.addEventListener('drop', (event) => {
+        event.preventDefault();
+
+        if (elements.length >= 6) {
+            alert('최대 6개까지 추가할 수 있습니다');
+            return;
+        }
+
+        const rect = canvas.getBoundingClientRect();
+        const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+        const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+        const text = event.dataTransfer.getData('text/plain');
+
+        const drawImageWithText = () => {
+            ctx.drawImage(img, x - 50, y - 50, 100, 100);
+            ctx.fillStyle = 'black';
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText(text, x - 20, y + 60);
+            elements.push({x: x - 50, y: y - 50, width: 100, height: 100, img, text});
+        };
+
+        if (img.complete) {
+            drawImageWithText();
+        } else {
+            img.onload = drawImageWithText();
+        }
+
+        console.log(`드랍 좌표 체크: (${x}, ${y})`);
+    });
+
+    canvas.addEventListener('mousedown', (event) => {
+        isDrawing = true;
+        currentCurve = [];
+        const rect = canvas.getBoundingClientRect();
+        const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+        const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+        currentCurve.push({x, y});
+    });
+
+    canvas.addEventListener('mousemove', (event) => {
+        if (!isDrawing) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+        const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+        currentCurve.push({x, y});
+        redrawCanvas();
+    });
+
+    canvas.addEventListener('mouseup', () => {
+        if (!isDrawing) return;
+        isDrawing = false;
+        curves.push([...currentCurve]);
+        currentCurve = [];
+        redrawCanvas(); // 마지막 곡선을 추가한 후 다시 그리기
+    });
+
+    canvas.addEventListener('dblclick', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+        const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+
+        // 요소 삭제
+        for (let i = elements.length - 1; i >= 0; i--) {
+            const element = elements[i];
+            if (x >= element.x && x <= element.x + element.width && y >= element.y && y <= element.y + element.height) {
+                elements.splice(i, 1);
+                redrawCanvas();
+                return;
+            }
+        }
+
+        // 선 삭제
+        for (let i = curves.length - 1; i >= 0; i--) {
+            const curve = curves[i];
+            for (let j = 1; j < curve.length; j++) {
+                const p1 = curve[j - 1];
+                const p2 = curve[j];
+                const distance = Math.sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2);
+                if (distance < 10 && Math.abs((p2.y - p1.y) * x - (p2.x - p1.x) * y + p2.x * p1.y - p2.y * p1.x) / distance < 5) {
+                    curves.splice(i, 1);
+                    redrawCanvas();
+                    return;
+                }
+            }
+        }
+    });
+
+
+    function drawArrowhead(ctx, x0, y0, x1, y1, size) {
+        const angle = Math.atan2(y1 - y0, x1 - x0);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x1 - size * Math.cos(angle - Math.PI / 6), y1 - size * Math.sin(angle - Math.PI / 6));
+        ctx.lineTo(x1 - size * Math.cos(angle + Math.PI / 6), y1 - size * Math.sin(angle + Math.PI / 6));
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function redrawCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+
+        elements.forEach(element => {
+            ctx.drawImage(element.img, element.x, element.y, 100, 100);
+            ctx.fillText(element.text, element.x + 30, element.y + 110);
+        });
+
+        curves.forEach(curve => {
+            if (curve.length < 2) return; // 길이가 2 미만인 곡선은 무시
+            ctx.beginPath();
+            ctx.moveTo(curve[0].x, curve[0].y);
+            for (let i = 1; i < curve.length; i++) {
+                ctx.lineTo(curve[i].x, curve[i].y);
+            }
+            ctx.stroke();
+            drawArrowhead(ctx, curve[curve.length - 2].x, curve[curve.length - 2].y, curve[curve.length - 1].x, curve[curve.length - 1].y, 10);
+        });
+
+        if (isDrawing && currentCurve.length >= 2) {
+            ctx.strokeStyle = '#FF0000';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(currentCurve[0].x, currentCurve[0].y);
+            for (let i = 1; i < currentCurve.length; i++) {
+                ctx.lineTo(currentCurve[i].x, currentCurve[i].y);
+            }
+            ctx.stroke();
+            drawArrowhead(ctx, currentCurve[currentCurve.length - 2].x, currentCurve[currentCurve.length - 2].y, currentCurve[currentCurve.length - 1].x, currentCurve[currentCurve.length - 1].y, 10);
+        }
+    }
 });
 
 /* ------------------------------------- */
@@ -117,59 +298,61 @@ document.addEventListener('DOMContentLoaded', () => {
  * form 태그 안에 있는 등록 버튼을 누르면 캔버스 그림 상태를 서버에 전달해 저장
  *
  * */
-document.querySelector('#createForm').addEventListener('submit', function(event) {
-  event.preventDefault();
-  saveCanvas();
+document.querySelector('#createForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    saveCanvas();
 });
 
+// CSR
 function saveCanvas() {
-  const canvas = document.querySelector('#soccer-board');
-  canvas.toBlob(function(blob) {
-    const formData = new FormData();
+    const canvas = document.querySelector('#soccer-board');
+    canvas.toBlob(function (blob) {
+        const formData = new FormData();
 
-    // 유니크한 파일 이름 생성
-    const uniqueFileName = 'canvas_' + new Date().getTime() + '.png';
-    formData.append('canvasImage', blob, uniqueFileName);
+        // 유니크한 파일 이름 생성
+        const uniqueFileName = 'canvas_' + new Date().getTime() + '.png';
+        formData.append('canvasImage', blob, uniqueFileName);
 
-    fetch('/club/uploadCanvas', {
-      method: 'POST',
-      body: formData
-    }).then(response => {
-      if (response.ok) {
-        response.json().then(data => {
-          document.querySelector('#canvasData').value = data.filePath;
-          alert('JS단 캔버스 저장 완료');
-          // 폼을 자동 제출
-          document.querySelector('#createForm').submit();
+        fetch('/club/uploadCanvas', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    document.querySelector('#canvasData').value = data.filePath;
+                    alert('JS단 캔버스 저장 완료');
+                    // 폼을 자동 제출
+                    document.querySelector('#createForm').submit();
+                });
+            } else {
+                alert('JS단 캔버스 저장 실패');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
         });
-      } else {
-        alert('JS단 캔버스 저장 실패');
-      }
-    }).catch(error => {
-      console.error('Error:', error);
-    });
-  }, 'image/png');
+    }, 'image/png');
 }
 
 /* ------------------------------------- */
 // textarea 글자 수 제한
 $('#match-notice').keyup(function (e) {
-  let content = $(this).val();
+    let content = $(this).val();
 
-  // 글자수 세기
-  if (content.length == 0 || content == '') {
-    $('.textCount').text('0자');
-  } else {
-    $('.textCount').text(content.length + '자');
-  }
+    // 글자수 세기
+    if (content.length == 0 || content == '') {
+        $('.textCount').text('0자');
+    } else {
+        $('.textCount').text(content.length + '자');
+    }
 
-  // 글자수 제한
-  if (content.length > 100) {
-    // 100자 부터는 타이핑 되지 않도록
-    $(this).val($(this).val().substring(0, 100));
-    // 100자 넘으면 알림창 뜨도록
-    alert('글자수는 100자까지 입력 가능합니다.');
-  };
+    // 글자수 제한
+    if (content.length > 100) {
+        // 100자 부터는 타이핑 되지 않도록
+        $(this).val($(this).val().substring(0, 100));
+        // 100자 넘으면 알림창 뜨도록
+        alert('글자수는 100자까지 입력 가능합니다.');
+    }
+    ;
 });
 
 

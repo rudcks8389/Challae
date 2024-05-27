@@ -75,7 +75,7 @@
               </div>
               <input type="text" placeholder="시간을 입력하세요" class="form-control py-4 px-4"
                      id="reservationTime"
-                     name="reservationTime" maxlength="7" style="border-radius: 2px; margin-top: -46px;" th:field="*{matchTime}">
+                     name="reservationTime" maxlength="10" style="border-radius: 2px; margin-top: -46px;" th:field="*{matchTime}">
 
             </div><!-- DEnd ate Picker Input -->
 
@@ -86,7 +86,7 @@
               <input type="hidden" id="clubNumTest" name="clubNumTest" th:field="*{clubNum}"> <!-- 캔버스 이미지 저장 위한 필드 -->
               <input type="hidden" id="canvasData" name="canvasData" th:field="*{matchPhoto}"> <!-- 캔버스 이미지 저장 위한 필드 -->
               <button type="submit"
-                 class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm">등록하기</button>
+                 class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm">일정 등록하기</button>
             </div>
           </div>
         </div>
@@ -105,8 +105,7 @@
           <button type="button" id="saveButton" > 저 장</button>
         </form>
       </div>
-
-      <!-- <canvas id="soccer-board" style="width: 670px; height: 550px; background: url('/img/soccer_board.png'); background-repeat: round;"> -->
+      <p style="color: #0e6efd; margin-bottom: -2rem; margin-top: 15px"> ✔︎ 더블 클릭 시 요소를 삭제할 수 있습니다. &nbsp;✔︎ 마우스 드래그를 통해 선수들의 움직임을 선으로 표현할 수 있습니다. </p>
       <canvas id="soccer-board"
               style="width: 670px; height: 550px; background-image: url('/img/soccer_board.png'); background-repeat: round;">
       </canvas>
