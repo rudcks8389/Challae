@@ -1,6 +1,5 @@
 package com.ezen.springmvc.domain.match.service;
 
-import com.ezen.springmvc.domain.match.dto.FieldDto;
 import com.ezen.springmvc.domain.match.mapper.CreateMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,4 @@ public class CreateServiceImpl implements CreateService {
 
     private final CreateMapper createMapper;
 
-    @Override
-    public List<FieldDto> getFields() {
-        return createMapper.findAllField();
-    }
 }

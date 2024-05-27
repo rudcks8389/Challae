@@ -41,9 +41,11 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.update(memberDto);
 	}
 
+
 	@Override
 	public List<MemberDto> getTeamMember(String clubNum) {
 		return memberMapper.myTeamList(clubNum);
 	}
+
 
 }

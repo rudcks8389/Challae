@@ -143,10 +143,6 @@ main .main-content .main-left {
 main .main-content .main-right {
   text-align: center;
   width: 55%;
-  height: 90%;
-  /* background-image: url('/img/challae.png');
-  background-repeat: round;
-  opacity: 40%; */
 }
 
 video {
@@ -371,4 +367,28 @@ section .rolling-wrap .rolling-list.clone {
   font-family: 'Arial';
   font-weight: bold;
   line-height: 20px;
+}
+
+#editButton{
+  background-color: transparent;
+  border: none;
+}
+
+.form-group input{
+  font-size: 18px;
+  border: none;
+}
+
+#editForm {
+  display: none;
+  margin-top: 20px;
+}
+
+#updateMessage {
+  color: blue;
+}
+
+#submit-editButton{
+  background-color: transparent;
+  border: none;
 }
