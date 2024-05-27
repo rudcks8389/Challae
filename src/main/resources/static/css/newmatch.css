@@ -70,7 +70,7 @@ main .main-content .match-right::-webkit-scrollbar-button {
 
 main .main-content .match-right table {
   width: 98%;
-  height: 60%;
+  height: 50%;
 }
 
 main .main-content .match-right table thead {
@@ -79,7 +79,7 @@ main .main-content .match-right table thead {
   font-style: italic;
 }
 
-main .main-content .match-right table tr td:hover{
+main .main-content .match-right table tr .draggable:hover{
   cursor: pointer;
   background: #d3d3d3;
   color: #000;
@@ -87,13 +87,12 @@ main .main-content .match-right table tr td:hover{
 
 table tbody tr {
   border-bottom: 1px solid #ccc;
-
 }
 
 table tbody td {
   text-align: center;
   /* padding: 10px; */
-  vertical-align: top;
+  /*vertical-align: top;*/
   border-bottom: 1px solid #ccc;
 }
 
