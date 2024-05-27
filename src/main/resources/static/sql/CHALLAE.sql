@@ -499,6 +499,17 @@ VALUES (CLUB_SEQ.nextval, '3클럽', '3번째 만든 풋살클럽', 20, '상', '
 -- INSERT INTO MATCH (MATCH_NUM, MATCH_DATE, MATCH_INFO, MATCH_TIME, CLUB_NUM, FIELD_NUM)
 -- VALUES (MATCH_SEQ.nextval, '2024-06-02', '클럽 간의 토너먼트 경기', '16:00', 100, FIELD_SEQ.currval);
 
+-- 5월 27일 구현을 위한 더미데이터 작성
+INSERT INTO MATCH (MATCH_NUM, MATCH_DATE, MATCH_INFO, MATCH_TIME, CLUB_NUM, FIELD_NUM)
+VALUES (MATCH_SEQ.nextval, '2024-06-02', '2클럽과 경기예정 햇빛이 강하답니다 선크립 바르고 오세요', '16:00', 101, 1);
+INSERT INTO MATCH (MATCH_NUM, MATCH_DATE, MATCH_INFO, MATCH_TIME, CLUB_NUM, FIELD_NUM)
+VALUES (MATCH_SEQ.nextval, '2024-04-24', '2클럽과 경기예정 비올 수 있어요 우산 챙겨오세요', '12:00', 101, 1);
+INSERT INTO MATCH (MATCH_NUM, MATCH_DATE, MATCH_INFO, MATCH_TIME, CLUB_NUM, FIELD_NUM)
+VALUES (MATCH_SEQ.nextval, '2024-07-1', '??클럽과 경기예정 참여 못하는 사람은 미리 감독한테 말해주세요', '13:00', 101, 3);
+
+commit;
+
+
 -- MATCHBOARD 테이블에 더미 데이터 삽입
 -- INSERT INTO MATCHBOARD (MB_NUM, MB_NAME, MB_FILE, CLUB_NUM)
 -- VALUES (MB_SEQ.nextval, '경기 일정', 'schedule.pdf', 100);

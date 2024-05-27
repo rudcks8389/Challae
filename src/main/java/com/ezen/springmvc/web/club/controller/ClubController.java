@@ -8,15 +8,15 @@ import com.ezen.springmvc.domain.match.dto.FieldDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.domain.member.service.MemberService;
+import com.ezen.springmvc.web.club.form.CommunityForm;
+import com.ezen.springmvc.web.member.form.MemberForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,10 +42,11 @@ public class ClubController {
 
     // 내 클럽 정보 보기
     @GetMapping("/myteam")
-    public String myteam(@ModelAttribute CommunityDto communityDto, HttpServletRequest request, Model model) {
+    public String myteam(CommunityDto communityDto, HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession();
         MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
+        log.info("로그인한 객체");
 
         if (loginMember != null){
         String loginClubNumber = loginMember.getClubNum(); // 세션 객체에서 클럽번호 추출
@@ -65,10 +66,9 @@ public class ClubController {
         List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
         model.addAttribute("community", community);
 
-        // 커뮤니티 입력시 저장
-          communityDto.setClubNum(loginClubNumber);
-          communityDto.setMemberNum();
-
+            // CommunityForm 객체를 모델에 추가
+            CommunityForm communityForm = CommunityForm.builder().build();
+             model.addAttribute("communityForm", communityForm);
 
 
 
@@ -77,8 +77,27 @@ public class ClubController {
         }else {
             return "redirect:/"; // 로그인을 하지 않았음에도
         }
+    }
+    @PostMapping("/myteam")
+    public String inputCommDate(@ModelAttribute CommunityForm communityForm, HttpServletRequest request,Model model){
+        HttpSession session = request.getSession();
+        MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
+        String clubNum = loginMember.getClubNum();
+        String memberNum = loginMember.getMemberNum();
+
+        // 커뮤니티 입력시 저장
+       CommunityDto inputData = CommunityDto.builder()
+                .commContent(communityForm.getContent())
+                .clubNum(clubNum)
+                .memberNum(memberNum)
+                .build();
+
+        communityService.inputCommunity(inputData);
+
+        return "redirect:/club/myteam";
 
     }
+
 
     // 클럽 상세보기
     @GetMapping("/detail")

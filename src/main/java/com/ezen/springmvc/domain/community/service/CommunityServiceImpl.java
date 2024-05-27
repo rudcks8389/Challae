@@ -12,12 +12,13 @@ import java.util.List;
 public class CommunityServiceImpl implements CommunityService{
 
     private final CommunityMapper communityMapper;
-
+    // 출력
     @Override
     public List<CommunityDto> getCommunityContents(String clubNum) {
         return communityMapper.getClubCommunity(clubNum);
     }
 
+    // 입력
     @Override
     public void inputCommunity(CommunityDto communityDto) {
         communityMapper.communityCreate(communityDto);

@@ -217,10 +217,10 @@
                     </table>
                 </div>
 
-                <div class="chat-input">
-                    <input type="text" name="chat" id="chat">
-                    <button class="send-btn">등록</button>
-                </div>
+                <form th:object="${communityForm}" method="post" class="chat-input">
+                    <input th:field="*{content}" type="text" id="chat">
+                    <button type="submit" class="send-btn">등록</button>
+                </form>
 
             </div>
         </div>

@@ -10,11 +10,11 @@
         inner join member on community.member_num = member.member_num
         WHERE member.club_num = #{clubNum}
     </select>
-
-    <select id="communityCreate" resultType="CommunityDto">
+<!--    입력기능 (데이터 저장)-->
+    <insert id="communityCreate" parameterType="CommunityDto">
         insert into community(comm_num,comm_content,club_num,member_num)
                     VALUES (comm_seq.nextval,#{commContent},#{clubNum},#{memberNum})
-    </select>
+    </insert>
 
 
 </mapper>
