@@ -42,4 +42,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public List<MemberDto> getTeamMember(String clubNum) {
+		return memberMapper.myTeamList(clubNum);
+	}
+
+
 }

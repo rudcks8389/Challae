@@ -83,5 +83,18 @@
 	</select>
 
 
+	<!-- 내 팀보기) 팀별 회원목록 출력 [이름 , 직책, 번호]	-->
+	<select id="myTeamList" parameterType="String" resultType="MemberDto">
+		SELECT member_num, member_name "name", member_dir"dir", member_phone"phone"
+		FROM member
+		WHERE club_num = #{clubNum}
+		ORDER BY
+			CASE
+				WHEN member_dir = 'Y' THEN 0
+				ELSE 1
+				END
+	</select>
+
+
 </mapper>
 

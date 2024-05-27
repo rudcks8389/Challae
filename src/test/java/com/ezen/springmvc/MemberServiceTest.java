@@ -33,6 +33,13 @@ public class MemberServiceTest {
 		MemberDto isMember = memberService.isMember(id, passwd);
 		log.info("인증 사용자 정보 : {}", isMember);
 	}
+
+	@Test
+	@DisplayName("팀 회원 출력 테스트")
+	void teamMemberPrintService (){
+		List<MemberDto> teamMember = memberService.getTeamMember("101");
+		log.info("나의 팀 : {}",teamMember);
+	}
 }
 
 
