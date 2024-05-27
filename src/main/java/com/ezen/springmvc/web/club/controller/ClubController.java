@@ -1,7 +1,7 @@
 package com.ezen.springmvc.web.club.controller;
 
+import com.ezen.springmvc.domain.field.dto.FieldDto;
 import com.ezen.springmvc.domain.match.dto.CreateDto;
-
 import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import jakarta.servlet.http.HttpSession;
@@ -50,6 +50,23 @@ public class ClubController {
         return "/club/clubdetail";
     }
 
+    // 새로운 경기 생성하기
+    @GetMapping("/create")
+    public String create(Model model) {
+
+        /* 구장 리스트 가져오기 */
+        List<FieldDto> fields = createService.getFields();
+        model.addAttribute("fields", fields);
+        model.addAttribute("createDto", new CreateDto());
+
+        /* 로그인 상태일 시 클럽 번호로 클럽원 목록 보여주기( 예정 ) */
+        List<MemberDto> members = createService.findByClubNum(101);  // 클럽 넘버 받아와야 함
+        model.addAttribute("clubMembers", members);
+
+        log.info("101번 클럽 멤버들 : {}", members);
+
+        return "/club/createMatch";
+    }
 
     @PostMapping("/create")
 //    @ResponseBody
@@ -108,12 +125,3 @@ public class ClubController {
     }
 
 }
-
-
-
-
-
-
-
-
-
