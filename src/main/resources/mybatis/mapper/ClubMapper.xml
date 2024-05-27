@@ -8,11 +8,20 @@
         FROM CLUB
     </select>
 
+
     <!-- 회원 등록 -->
     <insert id="clubRegister" parameterType="ClubDto" >
         INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_PRESIDENT, CLUB_INFO, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE, CLUB_PHOTO, CLUB_STOREDPHOTO)
         VALUES (CLUB_SEQ.NEXTVAL, #{clubName}, #{clubPresident}, #{clubInfo}, #{clubLevel}, #{clubLocation}, #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto})
     </insert>
+
+<!--내팀보기에서 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진, -->
+    <select id="myClubData" parameterType="String" resultType="ClubDto">
+    SELECT club_num, club_name, club_info, club_president, TO_CHAR(club_regdate,'yyyy-MM-DD') club_regdate, club_membercount, club_photo
+    FROM club
+    WHERE club_num = #{clubNum}
+    </select>
+
 
 
 

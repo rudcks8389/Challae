@@ -97,7 +97,7 @@ table tbody tr {
 
 }
 
-table tbody td {
+.main-wrapper .team-content .team-table table tbody td {
   text-align: center;
   padding: 10px;
   vertical-align: top;
@@ -136,85 +136,85 @@ main .main-wrapper .team-content .team-table table tbody tr:hover {
   border-radius: 5px;
 }
 
-/* 팀원관리 버튼 */
-.team-set-btn {
-  background-color: black;
-  border: 1px solid rgb(124, 190, 255);
-  color: rgb(124, 190, 255);
-  border-radius: 5px;
-  margin-left: 700px;
-  width: 80px;
-}
+/*!* 팀원관리 버튼 *!*/
+/*.team-set-btn {*/
+/*  background-color: black;*/
+/*  border: 1px solid rgb(124, 190, 255);*/
+/*  color: rgb(124, 190, 255);*/
+/*  border-radius: 5px;*/
+/*  margin-left: 700px;*/
+/*  width: 80px;*/
+/*}*/
 
-.team-set-btn:hover {
-  color: #ccc;
-  border: 1px solid #ccc;
-}
+/*.team-set-btn:hover {*/
+/*  color: #ccc;*/
+/*  border: 1px solid #ccc;*/
+/*}*/
 
 
-/* .team-set 팀원 관리를 위한 모달창 구현 */
-.team-set-background {
-  position: absolute;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(9, 9, 9, 50%);
-}
-.team-set-title{
-  text-align: center;
-  margin: 20px auto;
-  border: 1px solid rgb(124, 190, 255);
-  background: rgb(124, 190, 255);
-  color: black;
-  border-radius: 25px;
-  width: 300px;
-}
-.team-set-board {
-  display: flow;
-  flex-direction: row;
-  position: absolute;
-  top: 50%;
-  width: 900px;
-  height: 700px;
-  text-align: center;
-  background-color: black;
-  border-radius: 10px;
-  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-  transform: translate(60%,0%);
-}
-.team-set-table{
-  width: 650px;
-  margin: auto;
-}
-.team-set-table tr{
-  display: table;
-  width: 100%;
-}
+/*!* .team-set 팀원 관리를 위한 모달창 구현 *!*/
+/*.team-set-background {*/
+/*  position: absolute;*/
+/*  justify-content: center;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  height: 100vh;*/
+/*  background-color: rgba(9, 9, 9, 50%);*/
+/*}*/
+/*.team-set-title{*/
+/*  text-align: center;*/
+/*  margin: 20px auto;*/
+/*  border: 1px solid rgb(124, 190, 255);*/
+/*  background: rgb(124, 190, 255);*/
+/*  color: black;*/
+/*  border-radius: 25px;*/
+/*  width: 300px;*/
+/*}*/
+/*.team-set-board {*/
+/*  display: flow;*/
+/*  flex-direction: row;*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  width: 900px;*/
+/*  height: 700px;*/
+/*  text-align: center;*/
+/*  background-color: black;*/
+/*  border-radius: 10px;*/
+/*  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);*/
+/*  transform: translate(60%,0%);*/
+/*}*/
+/*.team-set-table{*/
+/*  width: 650px;*/
+/*  margin: auto;*/
+/*}*/
+/*.team-set-table tr{*/
+/*  display: table;*/
+/*  width: 100%;*/
+/*}*/
 
-.table-body {
-  display: block;
-  max-height: 500px;
-  overflow-y: scroll;
-}
-.team-set-close-btn{
-  font-size: 16pt;
-  width: 80px;
-  height: 30px;
-  border: 1px solid rgb(124, 190, 255) ;
-  border-radius: 10px;
-  background: rgb(124, 190, 255);
-  color: black;
-}
+/*.table-body {*/
+/*  display: block;*/
+/*  max-height: 500px;*/
+/*  overflow-y: scroll;*/
+/*}*/
+/*.team-set-close-btn{*/
+/*  font-size: 16pt;*/
+/*  width: 80px;*/
+/*  height: 30px;*/
+/*  border: 1px solid rgb(124, 190, 255) ;*/
+/*  border-radius: 10px;*/
+/*  background: rgb(124, 190, 255);*/
+/*  color: black;*/
+/*}*/
 
-.visible {
-  visibility: visible;
-}
+/*.visible {*/
+/*  visibility: visible;*/
+/*}*/
 
-.hidden {
-  display: none;
-}
+/*.hidden {*/
+/*  display: none;*/
+/*}*/
 
 
 /* team-chat : 팀 소통공간 구역 */
@@ -243,8 +243,13 @@ main .main-wrapper .chat-board {
   border-radius: 10px;
 }
 .chat-content {
-  margin: 10px auto;
+  text-align: center;
+  margin: 15px auto;
   width: 600px;
+}
+.chat-content th td {
+  border: 1px solid white;
+
 }
 /*input chat*/
 #chat {

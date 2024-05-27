@@ -56,14 +56,14 @@ public class MemberController {
         return "/member/signUpForm";
     }
 
-    // 회원 가입 요청 처리 (BindingResult 활용한 데이터 유효성 검증 처리)
+    // 회원 가입 요청 처리
     @PostMapping("/signup")
     public String signUpAction(@ModelAttribute MemberForm memberForm, RedirectAttributes redirectAttributes, Model model) {
         log.info("회원 정보 : {}", memberForm.toString());
 
         // 업로드 프로필 사진 저장
         UploadFile uploadFile = fileService.storeFile(memberForm.getProfileImage(), profileFileUploadPath);
-        // Form Bean -> Dto 변환
+        // Form  -> Dto 변환
         MemberDto memberDto = MemberDto.builder()
                 .id(memberForm.getId())
                 .name(memberForm.getName())
@@ -101,8 +101,25 @@ public class MemberController {
 
     // 회원 로그인 화면 요청 처리
     @GetMapping("/signin")
-    public String signInForm(@ModelAttribute LoginForm loginForm) {
-        return "/member/signInForm";
+    public String signInForm(@ModelAttribute LoginForm loginForm, HttpServletRequest request) {
+        // 쿠키에서 saveId 값 읽기
+        String rememberedLoginId = null;
+        boolean rememberMeChecked = false;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("saveId".equals(cookie.getName())) {
+                    rememberedLoginId = cookie.getValue();
+                    rememberMeChecked = true;
+                    break;
+                }
+            }
+        }
+        // 로그인 폼 객체에 쿠키에서 읽은 아이디와 rememberMe 설정
+        loginForm.setLoginId(rememberedLoginId);
+        loginForm.setRememberLoginId(rememberMeChecked);
+
+        return "/member/signInForm"; // 로그인 페이지 템플릿
     }
 
     // 회원 로그인 요청 처리
@@ -147,6 +164,30 @@ public class MemberController {
         if(session != null) {
             session.invalidate();
         }
+        return "redirect:/";
+    }
+
+
+
+    //회원 정보 수정
+    @PostMapping("/update")
+    public String updateMemberInfo(
+            @RequestParam(value = "newEmail", required = false) String newEmail,
+            @RequestParam(value = "password", required = false) String password,
+            HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        if (newEmail != null && !newEmail.isEmpty()) {
+            loginMember.setEmail(newEmail);
+        }
+
+        if (password != null && !password.isEmpty()) {
+            loginMember.setPasswd(password);
+        }
+        memberService.editMember(loginMember);
+
+        // 수정이 완료된 후에는 인덱스 페이지로 리다이렉트
         return "redirect:/";
     }
 
