@@ -15,4 +15,7 @@ public interface CreateMapper {
     public List<FieldDto> findAllField();
 
     public void createMatch(CreateDto createDto);
+
+    // 매치 데이터를 가져 오기 위함
+    public List<CreateDto> getClubNumMatch(String clubNum);
 }

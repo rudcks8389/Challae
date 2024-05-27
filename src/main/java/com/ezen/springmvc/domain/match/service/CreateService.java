@@ -12,4 +12,6 @@ public interface CreateService {
     public void createMatch(CreateDto createDto);
 
     public List<MemberDto> findByClubNum(int clubNum);
+
+    public List<CreateDto> getClubMatch(String clubNum);
 }

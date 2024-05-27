@@ -126,7 +126,7 @@
                 <!--        <button class="team-set-btn">팀원관리</button>-->
             </div>
 
-            <!--      &lt;!&ndash; 팀원관리 모달 팝업 &ndash;&gt;-->
+            <!q-      &lt;!&ndash; 팀원관리 모달 팝업 &ndash;&gt;-->
             <!--      <div class="team-set-background hidden">-->
 
             <!--        <div class="team-set-board">-->
@@ -243,11 +243,11 @@
 
             <!-- 각각의 경기들을 보여주는 구역 -->
             <div class="team-match-schedule-detail">
-                <div class="match-info"><a href="/match/view">
+                <div th:each="match: ${match}" class="match-info">
                     <ul>
-                        <li>요일</li>
-                        <li>경기일자</li>
-                        <li>구장이름</li>
+                        <li th:text="${match.matchDate}">경기일자</li>
+                        <li th:text="${match.field}">구장이름</li>
+                        <li href="/match/view">경기정보</li>
                     </ul>
                 </a></div>
                 <div class="match-info"><a href="/match/view"> 경기 정보</a></div>

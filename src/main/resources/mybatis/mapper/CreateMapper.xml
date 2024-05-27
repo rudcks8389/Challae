@@ -1,6 +1,10 @@
+
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.springmvc.domain.match.mapper.CreateMapper">
+
+<!--매치 매퍼-->
+
     <!--  구장 정보 가져오기  -->
     <select id="findAllField" resultType="FieldDto">
         select field_num, field_name
@@ -18,6 +22,16 @@
         select member_name "name", member_storedphoto "storedProfile", club_num "clubNum"
         from member
         where club_num = #{value}
+    </select>
+
+
+<!-- 클럽번호에 따라 myteam에 출력되는 매치 데이터 -->
+    <select id="getClubNumMatch" resultType="CreateDto">
+        select match.match_num, TO_CHAR(match.match_date,'yyyy-MM-DD'), match.match_info, match.match_time, match.match_photo, match.club_num, match.field_num, field.field_name
+        from match
+        inner join field on match.field_num = field.field_num
+        where match.club_num = #{clubNum}
+
     </select>
 
 </mapper>
