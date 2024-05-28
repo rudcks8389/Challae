@@ -110,6 +110,10 @@ public class ClubController {
         List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
         model.addAttribute("community", community);
 
+        // 클럽일정 출력
+            List<CreateDto> match = createService.getMatch(loginClubNumber);
+            model.addAttribute("match",match);
+
             // CommunityForm 객체를 모델에 추가
             CommunityForm communityForm = CommunityForm.builder().build();
              model.addAttribute("communityForm", communityForm);

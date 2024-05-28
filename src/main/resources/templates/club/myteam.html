@@ -242,17 +242,14 @@
             </div>
 
             <!-- 각각의 경기들을 보여주는 구역 -->
-            <div class="team-match-schedule-detail">
+            <div class="team-match-schedule-detail" th:each="match:${match}">
                 <div class="match-info"><a href="/match/view">
-                    <ul>
-                        <li>요일</li>
-                        <li>경기일자</li>
-                        <li>구장이름</li>
+                    <ul th:value="${match.matchNum}">
+                        <li th:text="${match.matchDate}"></li>
+                        <li th:text="${match.matchTime}"></li>
+                        <li th:text="${match.fieldName}"></li>
                     </ul>
                 </a></div>
-                <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
-                <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
-                <div class="match-info"><a href="/match/view"> 경기 정보</a></div>
             </div>
         </div>
 
