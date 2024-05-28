@@ -26,14 +26,19 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public ArticleDto articleView(String id) {
-		return articleMapper.articleView(id);
+	public ArticleDto articleView(int articleNum) {
+		return articleMapper.articleView(articleNum);
 	}
 
 	@Override
 	@Transactional
 	public void editArticle(ArticleDto memberDto) {
 		articleMapper.update(memberDto);
+	}
+
+	@Override
+	public void deleteArticle(int articleNum,int memberNum) {
+		articleMapper.deleteArticle(articleNum,memberNum);
 	}
 
 

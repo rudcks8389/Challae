@@ -37,50 +37,43 @@
 	</select>
 
 	<!-- 회원 이름으로 Like 검색 -->
-	<select id="findByNameLike" parameterType="string" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
-		FROM member
-		WHERE name LIKE '%' || #{value} || '%'
-	</select>
+<!--	<select id="findByNameLike" parameterType="string" resultType="MemberDto">-->
+<!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
+<!--		FROM member-->
+<!--		WHERE name LIKE '%' || #{value} || '%'-->
+<!--	</select>-->
 
 
-	<!-- 검색 타입별 회원 검색 -->
-	<select id="findBySearchType" parameterType="string" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
-		FROM member
-		<where>
-			<if test="type != null and type == 'id'">
-				and member_id = #{value}
-			</if>
-			<if test="type != null and type == 'name'">
-				and name LIKE '%' || #{value} || '%'
-			</if>
-		</where>
+	<!-- 회원 아이디 찾기 검색 -->
+	<select id="findId" parameterType="string" resultType="MemberDto">
+		SELECT MEMBER_ID "id"
+		FROM MEMBER
+		WHERE MEMBER_NAME = #{name} AND MEMBER_EMAIL = #{email}
 	</select>
 
 	<!-- 회원 아이디 또는 이름 회원 통합 검색 -->
-	<select id="findBySearchAll" parameterType="string"	resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
-		FROM member
-		WHERE member_id = #{value} OR name LIKE '%' || #{value} || '%'
-	</select>
+<!--	<select id="findBySearchAll" parameterType="string"	resultType="MemberDto">-->
+<!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
+<!--		FROM member-->
+<!--		WHERE member_id = #{value} OR name LIKE '%' || #{value} || '%'-->
+<!--	</select>-->
 
 	<!-- 옵션 선택별 회원 통합 검색 -->
-	<select id="findBySearchAllOption" parameterType="MemberSearchCondition" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
-		FROM member
-		<where>
-			<if test="memberId != null and memberId != ''">
-				or member_id = #{memberId}
-			</if>
-			<if test="name != null and name != ''">
-				or name LIKE '%' || #{name} || '%'
-			</if>
-			<if test="email != null and email != ''">
-				or email = #{email}
-			</if>
-		</where>
-	</select>
+<!--	<select id="findBySearchAllOption" parameterType="MemberSearchCondition" resultType="MemberDto">-->
+<!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
+<!--		FROM member-->
+<!--		<where>-->
+<!--			<if test="memberId != null and memberId != ''">-->
+<!--				or member_id = #{memberId}-->
+<!--			</if>-->
+<!--			<if test="name != null and name != ''">-->
+<!--				or name LIKE '%' || #{name} || '%'-->
+<!--			</if>-->
+<!--			<if test="email != null and email != ''">-->
+<!--				or email = #{email}-->
+<!--			</if>-->
+<!--		</where>-->
+<!--	</select>-->
 
 
 	<!-- 내 팀보기) 팀별 회원목록 출력 [이름 , 직책, 번호]	-->

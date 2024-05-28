@@ -1,6 +1,7 @@
 package com.ezen.springmvc.domain.member.service;
 
 import com.ezen.springmvc.domain.member.dto.MemberDto;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,10 +10,17 @@ import java.util.List;
  */
 public interface MemberService {
 	public void register(MemberDto memberDto);
+
 	public MemberDto isMember(String id, String passwd);
+
 	public List<MemberDto> getMembers();
+
 	public MemberDto getMember(String id);
+
 	public void editMember(MemberDto member);
+
+	public MemberDto findId(String name , String email);
+
 
 	// 내 팀보기
 	public List<MemberDto> getTeamMember(String clubNum);

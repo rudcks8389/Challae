@@ -15,7 +15,9 @@ public interface ArticleMapper {
 
     public List<ArticleDto> findByAll();
 
-    public ArticleDto articleView(@Param("id") String id);
+    public ArticleDto articleView(int articleNum);
+
+    public void deleteArticle(int articleNum,int memberNum);
 
 }
 

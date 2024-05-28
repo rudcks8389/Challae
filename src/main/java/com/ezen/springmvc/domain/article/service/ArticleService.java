@@ -10,6 +10,7 @@ import java.util.List;
 public interface ArticleService {
 	public void register(ArticleDto articleDto);
 	public List<ArticleDto> getarticles();
-	public ArticleDto articleView(String id);
+	public ArticleDto articleView(int articleNum);
 	public void editArticle(ArticleDto article);
+	public void deleteArticle(int articleNum,int memberNum);
 }

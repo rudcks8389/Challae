@@ -99,15 +99,15 @@ class MemberMapperTest {
         log.info("회원 수정 완료 : {}", updateMember);
     }
 
-    @Test
-    @DisplayName("검색 타입에 따른 회원 검색 테스트")
-    @Disabled
-    void findBySearchTypeTest() {
-		List<MemberDto> list = memberMapper.findBySearchType("id", "bangry");
-        log.info("검색 회원 : {}", list);
-//        List<Member> list = memberMapper.findBySearchType("name", "김");
-//        log.info("검색 타입별 검색 회원 전체목록 : {}", list);
-    }
+//    @Test
+//    @DisplayName("검색 타입에 따른 회원 검색 테스트")
+//    @Disabled
+//    void findBySearchTypeTest() {
+//		List<MemberDto> list = memberMapper.findBySearchType("id", "bangry");
+//        log.info("검색 회원 : {}", list);
+////        List<Member> list = memberMapper.findBySearchType("name", "김");
+////        log.info("검색 타입별 검색 회원 전체목록 : {}", list);
+//    }
 
     @Test
     @DisplayName("아이디 또는 성으로 회원 통합 검색 테스트")

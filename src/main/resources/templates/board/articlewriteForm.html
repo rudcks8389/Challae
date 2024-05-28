@@ -33,6 +33,7 @@
   <div class="main-content">
     <h1>게시글 작성하기</h1>
     <form id="postForm" action="/board/write" method="post">
+
       <div class="form-group">
         <label for="author">작성자</label>
         <input type="text" id="author" name="author" th:value="${session.loginMember.id}" readonly>
@@ -54,6 +55,7 @@
         <button type="submit" class="btn">작성하기</button>
       </div>
     </form>
+
   </div>
 </th:block>
 

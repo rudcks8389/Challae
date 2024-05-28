@@ -41,6 +41,11 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.update(memberDto);
 	}
 
+	@Override
+	public MemberDto findId(String name , String email) {
+		return memberMapper.findId(name,email);
+	}
+
 
 	@Override
 	public List<MemberDto> getTeamMember(String clubNum) {

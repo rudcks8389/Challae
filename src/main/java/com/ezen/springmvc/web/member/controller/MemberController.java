@@ -4,6 +4,8 @@ import com.ezen.springmvc.domain.common.dto.UploadFile;
 import com.ezen.springmvc.domain.common.service.FileService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.domain.member.service.MemberService;
+import com.ezen.springmvc.web.article.form.ArticleForm;
+import com.ezen.springmvc.web.member.form.FindIdForm;
 import com.ezen.springmvc.web.member.form.LoginForm;
 import com.ezen.springmvc.web.member.form.MemberForm;
 import jakarta.servlet.http.Cookie;
@@ -32,6 +34,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
@@ -167,8 +170,6 @@ public class MemberController {
         return "redirect:/";
     }
 
-
-
     //회원 정보 수정
     @PostMapping("/update")
     public String updateMemberInfo(
@@ -190,6 +191,37 @@ public class MemberController {
         // 수정이 완료된 후에는 인덱스 페이지로 리다이렉트
         return "redirect:/";
     }
+
+    // 회원정보로 아이디 찾기
+    @GetMapping("/find")
+    public String findIdForm(Model model) {
+        FindIdForm findIdForm = FindIdForm.builder().build();
+        model.addAttribute("findIdForm",findIdForm);
+
+        return "/member/findIdForm";
+    }
+
+    @PostMapping("/find")
+    public String findIdFormAction(@ModelAttribute FindIdForm findIdForm, RedirectAttributes redirectAttributes) {
+        MemberDto foundMember = memberService.findId(findIdForm.getName(), findIdForm.getEmail());
+        log.info("@@찾은 아이디 : {}", foundMember);
+        if (foundMember == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "해당 정보로 등록된 아이디를 찾을 수 없습니다.");
+        } else {
+            redirectAttributes.addFlashAttribute("foundMember", foundMember);
+        }
+        return "redirect:/member/find/result";
+    }
+
+    @GetMapping("/find/result")
+    public String findIdResult(Model model) {
+        MemberDto foundMember = (MemberDto) model.asMap().get("foundMember");
+        model.addAttribute("foundMember", foundMember);
+        return "/member/findIdResult";
+    }
+
+
+
 
 }
 

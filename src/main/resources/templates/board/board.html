@@ -40,13 +40,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr id="team_detail" class="clickable-row" data-href="/board/view" th:each="article : ${articleList}">
+          <tr id="team_detail" class="clickable-row" th:attr="data-href=@{/board/view(articleNum=${article.getArticleNum()})}" th:each="article : ${articleList}">
             <td th:text="${article.getArticleNum()}"></td>
             <td th:text="${article.getArticleAuthor()}"></td>
-            <td class="tb" th:text="${article.getArticleTitle()}"></td>
+            <td class="tb" th:text="${article.getArticleTitle()} + ' (' + ${commentCounts[__${article.getArticleNum()}__]} + ')'"></td>
             <td th:text="${article.getArticleDate()}"></td>
           </tr>
-          <!-- 다른 데이터들 -->
           </tbody>
         </table>
 
