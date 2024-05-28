@@ -40,7 +40,7 @@
 
 <th:block th:fragment="script">
     <script src="/js/weather.js" defer></script>
-    <script src="/js/myteam-schedule.js" defer></script>
+    <script src="/js/myteam-schedule-monthRender.js" defer></script>
 </th:block>
 
 
@@ -161,28 +161,61 @@
         <!-- 경기 일정 전체 구역 -->
         <div class="team-match-schedule">
 
+            <h2 class="match-title">경기 일정</h2>
             <!-- 년월 선택 -->
             <div class="ctr-box clearfix">
                 <button type="button" title="prev" class="btn-cal prev" onclick="prevMonth()"></button>
                 <span class="cal-year-month" onclick="goToday()"></span>
                 <button type="button" title="next" class="btn-cal next" onclick="nextMonth()"></button>
             </div>
-            <p> ▲ 년월 변경 참고 사이트 : https://im-developer.tistory.com/115 </p> <!-- 추후 삭제 -->
 
             <!-- 새 경기 등록 버튼 있는 구역 -->
             <div class="new-match-add">
                 <a href="/club/create" class="btn-new-match-add">새 경기 등록</a>
             </div>
 
-            <!-- 각각의 경기들을 보여주는 구역 -->
-            <div class="team-match-schedule-detail" th:each="match:${match}">
-                <div class="match-info"><a href="/match/view">
-                    <ul th:value="${match.matchNum}">
-                        <li th:text="${match.matchDate}"></li>
-                        <li th:text="${match.matchTime}"></li>
-                        <li th:text="${match.fieldName}"></li>
+            <!-- 각각의 경기들을 보여주는 구역 클라이언트 사이드 랜더링 이용-->
+            <div class="team-match-schedule-detail" >
+
+                <div class="match-info">
+                    <ul>
+                        <li class="match-date">5월 25일</li>
+                        <li class="match-time">14:00</li>
+                        <li class="match-field">하라풋살장</li>
+                        <li class="match-detail-link"><a href="/match/view">정보보기</a></li>
+
                     </ul>
-                </a></div>
+                </div>
+
+                <div class="match-info">
+                    <ul>
+                        <li class="match-date">5월 25일</li>
+                        <li class="match-time">14:00</li>
+                        <li class="match-field">하라풋살장</li>
+                        <li class="match-detail-link"><a href="/match/view">정보보기</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="match-info">
+                    <ul>
+                        <li class="match-date">5월 25일</li>
+                        <li class="match-time">14:00</li>
+                        <li class="match-field">하라풋살장</li>
+                        <li class="match-detail-link"><a href="/match/view">정보보기</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="match-info">
+                    <ul>
+                        <li class="match-date">5월 25일</li>
+                        <li class="match-time">14:00</li>
+                        <li class="match-field">하라풋살장</li>
+                        <li class="match-detail-link"><a href="/match/view">정보보기</a></li>
+
+                    </ul>
+                </div>
             </div>
         </div>
 
