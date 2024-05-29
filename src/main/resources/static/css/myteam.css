@@ -246,9 +246,20 @@ main .main-wrapper .chat-board {
   text-align: center;
   margin: 15px auto;
   width: 600px;
+  height: 380px;
+  display: block;
+  max-height: 350px;
+  overflow-y:scroll;
 }
+
+/*.team-set-table tr{*/
+/*  display: table;*/
+/*  width: 100%;*/
+/*}*/
 .chat-content th td {
   border: 1px solid white;
+  display: table;
+    width: 100%;
 
 }
 /*input chat*/
@@ -361,22 +372,37 @@ main .main-wrapper .team-match-schedule .new-match-add #btn-new-match-add:hover 
 main .main-wrapper .team-match-schedule .team-match-schedule-detail {
   width: 80%;
   height: 60%;
-  margin: 70px auto;
+  margin: 30px auto;
   display: flex;
   justify-content: space-around;
 }
 
 /* match-info : 경기 일정들에 대해 보여주는 구역에 위치하는 각각의 경기정보에 대한 CSS */
-main .main-wrapper .team-match-schedule .team-match-schedule-detail .match-info {
+main .main-wrapper .team-match-schedule .team-match-schedule-detail div {
   color: #000;
-  background-color: #dcdcdc;
+  background-color: white;
   width: 20%;
   height: 100%;
-
+  margin: auto;
   border-radius: 10px;
-  border-bottom: 10px solid #282828;
+  border: 10px solid rgb(124, 190, 255);
 
 }
-.match-info li {
+.team-match-schedule-detail li {
   list-style: none;
+  text-align: center;
+  margin: 10px auto;
+}
+.team-match-schedule-detail ul{
+  padding: 0px 0px;
+  margin-top: 20px;
+}
+.team-match-schedule-detail .date-li{
+  font-size: 18pt;
+}
+.team-match-schedule-detail .field-li{
+  font-size: 24pt;
+}
+.team-match-schedule-detail .time-li{
+  font-size: 28pt;
 }
