@@ -1,6 +1,7 @@
 package com.ezen.springmvc.domain.article.mapper;
 
 import com.ezen.springmvc.domain.article.dto.ArticleDto;
+import com.ezen.springmvc.domain.common.dto.SearchDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,11 +14,16 @@ public interface ArticleMapper {
 
     void update(ArticleDto articleDto);
 
-    public List<ArticleDto> findByAll();
+    public List<ArticleDto> findByAll(SearchDto searchDto);
 
     public ArticleDto articleView(int articleNum);
 
     public void deleteArticle(int articleNum,int memberNum);
+
+    /**
+     * 특정 게시판의 검색 조건에 따른 게시글 전체 갯수 반환
+     */
+    public int countBySearchCondition(@Param("searchDto") SearchDto searchDto);
 
 }
 

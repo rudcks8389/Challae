@@ -38,7 +38,7 @@ li {
   font-size: 20px;
 }
 
-/* 공지사항 및 Q&A 섹션 스타일 */
+/* Q&A 섹션 스타일 */
 .main-content {
   display: flex;
   justify-content: space-between;
@@ -76,12 +76,12 @@ li {
 .table_wrap td {
   color: #bbb;
 }
-
 /* 페이지네이션 스타일 */
 .pagination {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  flex-wrap: wrap; /* 페이지네이션이 화면에 맞게 줄 바꿈 되도록 */
 }
 
 .pagination a {
@@ -100,6 +100,12 @@ li {
 
 .pagination a:hover:not(.active) {
   background-color: #555;
+}
+
+/* 테이블 래퍼 설정 */
+.table_wrap {
+  overflow-x: auto;
+  padding-bottom: 20px; /* 페이지네이션과의 간격 조정 */
 }
 
 /* 공지사항 스타일 */

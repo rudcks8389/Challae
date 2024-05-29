@@ -10,9 +10,9 @@
 
 	<!-- 아이디로 회원 상세 조회 -->
 	<select id="findById" parameterType="string" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') regdate, original_profile, stored_profile
+		SELECT member_id "id"
 		FROM member
-		WHERE member_id = #{value}
+		WHERE member_id = #{id}
 	</select>
 
 	<!-- 회원 정보 수정 -->

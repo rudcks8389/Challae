@@ -2,6 +2,7 @@ package com.ezen.springmvc.domain.article.service;
 
 import com.ezen.springmvc.domain.article.dto.ArticleDto;
 import com.ezen.springmvc.domain.article.mapper.ArticleMapper;
+import com.ezen.springmvc.domain.common.dto.SearchDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +22,8 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<ArticleDto> getarticles() {
-		return articleMapper.findByAll();
+	public List<ArticleDto> getarticles(SearchDto searchDto) {
+		return articleMapper.findByAll(searchDto);
 	}
 
 	@Override
@@ -39,6 +40,11 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public void deleteArticle(int articleNum,int memberNum) {
 		articleMapper.deleteArticle(articleNum,memberNum);
+	}
+
+	@Override
+	public int countBySearchCondition(SearchDto searchDto) {
+		return articleMapper.countBySearchCondition(searchDto);
 	}
 
 

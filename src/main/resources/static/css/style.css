@@ -40,6 +40,10 @@ nav {
 
 .nav-logo img {}
 
+#backprofile{
+  background-color: white;
+}
+
 .nav-logo span {
   padding-left: 10px;
   font-size: 25px;

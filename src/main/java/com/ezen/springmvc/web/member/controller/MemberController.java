@@ -34,7 +34,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/member")
@@ -64,8 +66,9 @@ public class MemberController {
     public String signUpAction(@ModelAttribute MemberForm memberForm, RedirectAttributes redirectAttributes, Model model) {
         log.info("회원 정보 : {}", memberForm.toString());
 
-        // 업로드 프로필 사진 저장
+            // 업로드 프로필 사진 저장
         UploadFile uploadFile = fileService.storeFile(memberForm.getProfileImage(), profileFileUploadPath);
+
         // Form  -> Dto 변환
         MemberDto memberDto = MemberDto.builder()
                 .id(memberForm.getId())
@@ -92,12 +95,20 @@ public class MemberController {
     @GetMapping("/image/{profileFileName}")
     @ResponseBody
     public ResponseEntity<Resource> showImage(@PathVariable("profileFileName") String profileFileName) throws IOException {
-        Path path = Paths.get(profileFileUploadPath + "/" + profileFileName);
-        String contentType = Files.probeContentType(path);
-        Resource resource = new FileSystemResource(path);
+        Path imagePath = Paths.get(profileFileUploadPath, profileFileName);
+        if (!Files.exists(imagePath) || profileFileName == null || profileFileName.isEmpty()) {
+            imagePath = Paths.get("src/main/resources/static/img/challae.png");
+        }
+
+        String contentType = Files.probeContentType(imagePath);
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        Resource resource = new FileSystemResource(imagePath);
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, contentType);
-        return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
     }
 
 
@@ -128,8 +139,8 @@ public class MemberController {
     // 회원 로그인 요청 처리
     @PostMapping("/signin")
     public String signInAction(@ModelAttribute LoginForm loginForm, HttpServletRequest request, HttpServletResponse response) {
-        log.info("로그인 정보 : {}", loginForm.toString());
         MemberDto loginMember = memberService.isMember(loginForm.getLoginId(), loginForm.getLoginPasswd());
+
         // 회원 아닌 경우
         if (loginMember == null) {
             return "/member/signInForm";
@@ -218,6 +229,24 @@ public class MemberController {
         MemberDto foundMember = (MemberDto) model.asMap().get("foundMember");
         model.addAttribute("foundMember", foundMember);
         return "/member/findIdResult";
+    }
+
+
+    // 아이디 중복 여부 요청 처리
+    @GetMapping("/idcheck/{id}")
+    public @ResponseBody Map<String, Object> idDupCheckAction(@PathVariable("id") String inputId) {
+        log.info("요청 아이디 : {}", inputId);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("result", true);
+        map.put("message", "사용 가능한 아이디입니다.");
+
+        MemberDto memberDto = memberService.getMember(inputId);
+        if (memberDto != null) {
+            map.put("result", false);
+            map.put("message", "이미 사용중인 아이디입니다.");
+        }
+        return map;
     }
 
 

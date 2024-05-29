@@ -4,11 +4,14 @@ import com.ezen.springmvc.domain.article.dto.ArticleDto;
 import com.ezen.springmvc.domain.article.service.ArticleService;
 import com.ezen.springmvc.domain.comment.dto.CommentDto;
 import com.ezen.springmvc.domain.comment.service.CommentService;
+import com.ezen.springmvc.domain.common.dto.SearchDto;
 import com.ezen.springmvc.domain.common.dto.UploadFile;
 import com.ezen.springmvc.domain.field.dto.FieldDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.web.article.form.ArticleForm;
 import com.ezen.springmvc.web.article.form.CommentForm;
+import com.ezen.springmvc.web.common.page.Pagination;
+import com.ezen.springmvc.web.common.page.ParameterForm;
 import com.ezen.springmvc.web.member.form.MemberForm;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -37,16 +40,31 @@ public class ArticleController {
 
     // 게시글 목록
     @GetMapping("/list")
-    public String articleList(Model model) {
-        List<ArticleDto> articleList = articleService.getarticles();
+    public String articleList(@ModelAttribute ParameterForm parameterForm, Model model) {
+        SearchDto searchDto = SearchDto.builder()
+                .limit(parameterForm.getElementSize())
+                .page(parameterForm.getRequestPage())
+                .searchValue(parameterForm.getSearchValue())
+                .build();
+
+        List<ArticleDto> articleList = articleService.getarticles(searchDto);
+
         Map<Integer, Integer> commentCounts = new HashMap<>();
         for (ArticleDto article : articleList) {
             int articleNum = Integer.parseInt(article.getArticleNum());
             int commentCount = commentService.count(articleNum);
             commentCounts.put(articleNum, commentCount);
         }
+
+        int totalArticles = articleService.countBySearchCondition(searchDto);
+        parameterForm.setRowCount(totalArticles);
+
+        Pagination pagination = new Pagination(parameterForm);
+
         model.addAttribute("articleList", articleList);
         model.addAttribute("commentCounts", commentCounts);
+        model.addAttribute("parameterForm", parameterForm);
+        model.addAttribute("pagination", pagination);
         return "/board/board";
     }
 
