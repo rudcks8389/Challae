@@ -5,6 +5,7 @@ import com.ezen.springmvc.domain.match.dto.CreateDto;
 import com.ezen.springmvc.domain.match.dto.MemberListDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface CreateMapper {
     public void createMatch(CreateDto createDto);
 
     // myteam 경기일정 불러오기
-    public List<CreateDto> findClubMatch(String clubNum);
+    public List<CreateDto> findClubMatch(@Param("clubNum") int clubNum, @Param("month") String month);
 }

@@ -23,8 +23,9 @@
     <select id="findClubMatch"  resultType="CreateDto">
         SELECT match.match_num, match.match_date, match.match_time, match.club_num, match.field_num, field.field_name
         FROM match
-        JOIN field ON match.field_num = field.field_num
+                 JOIN field ON match.field_num = field.field_num
         WHERE match.club_num = #{clubNum}
+          AND SUBSTR(match.match_date, 3, 5) = #{month}
     </select>
 
 

@@ -19,9 +19,9 @@ main .main-wrapper .team-info {
   padding: 10px;
   opacity: 60%;
 
-  font-family: "Gothic A1", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  /*font-family: "Gothic A1", sans-serif;*/
+  /*font-weight: 400;*/
+  /*font-style: normal;*/
 }
 
 /* 팀 사진 구역 */
@@ -66,13 +66,23 @@ main .main-wrapper .team-content {
 }
 
 /* team-table : 팀원 목록 보여주는 테이블이 있는 구역 */
+.club-member-header{
+  width: 180px;
+  background-color: rgb(124, 190, 255);
+  border-radius: 25px;
+  border: 5px solid #51789e;
+  margin: auto;
+  color: black;
+  font-size: 24pt;
+  text-align: center;
+}
 main .main-wrapper .team-table {
   margin-top: 50px;
   margin-left: 20px;
   width: 50%;
-  font-family: "Gothic A1", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  /*font-family: "Gothic A1", sans-serif;*/
+  font-weight: 100;
+  /*font-style: normal;*/
 }
 
 main .main-wrapper .team-content .team-table table {
@@ -136,87 +146,6 @@ main .main-wrapper .team-content .team-table table tbody tr:hover {
   border-radius: 5px;
 }
 
-/*!* 팀원관리 버튼 *!*/
-/*.team-set-btn {*/
-/*  background-color: black;*/
-/*  border: 1px solid rgb(124, 190, 255);*/
-/*  color: rgb(124, 190, 255);*/
-/*  border-radius: 5px;*/
-/*  margin-left: 700px;*/
-/*  width: 80px;*/
-/*}*/
-
-/*.team-set-btn:hover {*/
-/*  color: #ccc;*/
-/*  border: 1px solid #ccc;*/
-/*}*/
-
-
-/*!* .team-set 팀원 관리를 위한 모달창 구현 *!*/
-/*.team-set-background {*/
-/*  position: absolute;*/
-/*  justify-content: center;*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  width: 100%;*/
-/*  height: 100vh;*/
-/*  background-color: rgba(9, 9, 9, 50%);*/
-/*}*/
-/*.team-set-title{*/
-/*  text-align: center;*/
-/*  margin: 20px auto;*/
-/*  border: 1px solid rgb(124, 190, 255);*/
-/*  background: rgb(124, 190, 255);*/
-/*  color: black;*/
-/*  border-radius: 25px;*/
-/*  width: 300px;*/
-/*}*/
-/*.team-set-board {*/
-/*  display: flow;*/
-/*  flex-direction: row;*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  width: 900px;*/
-/*  height: 700px;*/
-/*  text-align: center;*/
-/*  background-color: black;*/
-/*  border-radius: 10px;*/
-/*  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);*/
-/*  transform: translate(60%,0%);*/
-/*}*/
-/*.team-set-table{*/
-/*  width: 650px;*/
-/*  margin: auto;*/
-/*}*/
-/*.team-set-table tr{*/
-/*  display: table;*/
-/*  width: 100%;*/
-/*}*/
-
-/*.table-body {*/
-/*  display: block;*/
-/*  max-height: 500px;*/
-/*  overflow-y: scroll;*/
-/*}*/
-/*.team-set-close-btn{*/
-/*  font-size: 16pt;*/
-/*  width: 80px;*/
-/*  height: 30px;*/
-/*  border: 1px solid rgb(124, 190, 255) ;*/
-/*  border-radius: 10px;*/
-/*  background: rgb(124, 190, 255);*/
-/*  color: black;*/
-/*}*/
-
-/*.visible {*/
-/*  visibility: visible;*/
-/*}*/
-
-/*.hidden {*/
-/*  display: none;*/
-/*}*/
-
-
 /* team-chat : 팀 소통공간 구역 */
 main .main-wrapper .team-chat {
   margin-top: 40px;
@@ -226,17 +155,16 @@ main .main-wrapper .team-chat {
 
 .chat-title {
   text-align: center;
-  margin: auto;
-  border: 1px solid rgb(124, 190, 255);
+  width: 180px;
   background-color: rgb(124, 190, 255);
+  border-radius: 25px;
+  border: 5px solid #51789e;
+  margin: auto;
   color: black;
-  width: 200px;
-  border-radius: 20px;
 }
 
 main .main-wrapper .chat-board {
   margin-top: 20px;
-  /*margin-left: 30px;*/
   width: 700px;
   height: 400px;
   border: 2px solid rgb(124, 190, 255);
@@ -244,24 +172,48 @@ main .main-wrapper .chat-board {
 }
 .chat-content {
   text-align: center;
-  margin: 15px auto;
-  width: 600px;
+  margin: 15px;
+  width: 670px;
   height: 380px;
+}
+.chat-content tbody{
+  width: 100%;
   display: block;
-  max-height: 350px;
+  max-height:350px;
   overflow-y:scroll;
 }
 
-/*.team-set-table tr{*/
-/*  display: table;*/
-/*  width: 100%;*/
-/*}*/
-.chat-content th td {
-  border: 1px solid white;
-  display: table;
-    width: 100%;
-
+.chat-content td {
+  padding: 0px 5px;
+  /*display: table;*/
+  font-size: 16pt;
 }
+.chat-content .comm-content{
+  border-bottom: 1px solid rgb(124, 190, 255) ; /* 밑줄 */
+  /*background: linear-gradient(to top, rgba(124, 190, 255,40%) 50%, transparent 50%); 형광펜 칠한 느낌*/
+}
+.chat-content .member-name {
+  vertical-align: bottom;
+  font-size: 12pt;
+  margin: 0px 3px;
+  /*border-radius: 5px;*/
+}
+.chat-content .comm-date {
+  vertical-align: bottom;
+  font-size: 10pt;
+  font-weight: lighter;
+  margin: 0px 3px;
+  /*padding: 0px 3px ;*/
+}
+.chat-content tr {
+  display: table;
+  /*margin: 5px auto;*/
+  border-bottom: none;
+}
+.chat-content th {
+display: none;
+}
+
 /*input chat*/
 #chat {
   width: 570px;
@@ -299,6 +251,14 @@ main .main-wrapper .team-match-schedule {
   text-align: center;
   /* border: 2px solid rgb(124, 190, 255); */
   border-radius: 10px;
+}
+.match-title{
+  width: 180px;
+  background-color: rgb(124, 190, 255);
+  border-radius: 25px;
+  border: 5px solid #51789e;
+  margin: auto;
+  color: black;
 }
 
 /* 경기 일정 구역 중 년월을 보여주는 요소들에 관한 CSS */
@@ -380,12 +340,12 @@ main .main-wrapper .team-match-schedule .team-match-schedule-detail {
 /* match-info : 경기 일정들에 대해 보여주는 구역에 위치하는 각각의 경기정보에 대한 CSS */
 main .main-wrapper .team-match-schedule .team-match-schedule-detail div {
   color: #000;
-  background-color: white;
+  background-color: rgb(219, 236, 255);
   width: 20%;
   height: 100%;
   margin: auto;
   border-radius: 10px;
-  border: 10px solid rgb(124, 190, 255);
+  border: 10px solid #50779d;
 
 }
 .team-match-schedule-detail li {

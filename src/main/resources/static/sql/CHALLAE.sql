@@ -859,7 +859,7 @@ CREATE TABLE COMMUNITY (
                            CLUB_NUM	NUMBER(10)	NOT NULL
 );
 -- content에 들어가는 데이터를 위해 확장
-ALTER TABLE community modify(comm_content VARCHAR2(60));
+ALTER TABLE community modify(comm_content VARCHAR2(300));
 
 -- 속성추가 (멤버번호)
 ALTER TABLE COMMUNITY 
@@ -910,8 +910,12 @@ CREATE TABLE COMMENTS (
 
 
 
-
-
+--mapper 전 join문 확인용
+SELECT match.match_num, match.match_date, match.match_time, match.club_num, match.field_num, field.field_name
+FROM match
+JOIN field ON match.field_num = field.field_num
+WHERE match.club_num = '101'
+AND SUBSTR(match.match_date, 3, 5) = '24-05';
 
 
 

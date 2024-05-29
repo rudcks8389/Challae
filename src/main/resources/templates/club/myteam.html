@@ -87,6 +87,7 @@
         <!-- team-content: 팀원 소개구역을 제외한 나머지 main 구역, (팀원 목록과 소통공간이 있는 구역) -->
         <div class="team-content">
             <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
+                <h2 class="club-member-header">멤버 목록</h2>
                 <table style="text-align: center;">
                     <!-- <caption>팀원 목록</caption> -->
                     <thead>
@@ -138,11 +139,11 @@
                             <th>작성날짜</th>
                         </tr>
                         </thead>
-                        <tbody th:each="community:${community}">
-                        <tr th:value="${community.commNum}">
-                            <td th:text="${community.commContent}"></td>
-                            <td th:text="${community.memberName}"></td>
-                            <td th:text="${community.commDate}"></td>
+                        <tbody >
+                        <tr th:each="community:${community}" th:value="${community.commNum}">
+                            <td class="member-name" th:text="${community.memberName} +' :'"></td>
+                            <td class="comm-content" th:text="${community.commContent}"></td>
+                            <td class="comm-date" th:text="${community.commDate}"></td>
                         </tr>
 
                         </tbody>
