@@ -14,5 +14,5 @@ public interface CreateService {
     public List<MemberDto> findByClubNum(int clubNum);
 
     //myteam 경기일정 출력
-    public  List<CreateDto> getMatch(int clubNum, String month);
+    public  List<CreateDto> getMatch(int clubNum);
 }

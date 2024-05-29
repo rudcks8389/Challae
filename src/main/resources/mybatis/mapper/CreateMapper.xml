@@ -25,7 +25,7 @@
         FROM match
                  JOIN field ON match.field_num = field.field_num
         WHERE match.club_num = #{clubNum}
-          AND SUBSTR(match.match_date, 3, 5) = #{month}
+--           AND SUBSTR(match.match_date, 3, 5) = #{month}  DB를 가져올때는 달에 상관없이 클럽에 따른 일정을 다 가져와야하는게 아닌가...
     </select>
 
 

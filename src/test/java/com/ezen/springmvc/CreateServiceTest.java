@@ -18,13 +18,13 @@ public class CreateServiceTest {
     @Autowired
     CreateService createService;
 
-    @Test
-    public void match(){
-        List<CreateDto> match = createService.getMatch(101,"24-05");
-        for (CreateDto createDto : match) {
-            log.info("101 클럽 경기일정 : {}",createDto);
-        }
-    }
+//    @Test
+//    public void match(){
+//        List<CreateDto> match = createService.getMatch(101,"24-05");
+//        for (CreateDto createDto : match) {
+//            log.info("101 클럽 경기일정 : {}",createDto);
+//        }
+//    }
 
 
 

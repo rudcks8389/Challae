@@ -29,6 +29,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -83,7 +84,14 @@ public class ClubController {
         model.addAttribute("clubs", clubs);
         return "/club/clublist";
     }
-
+    @GetMapping("/api/schedules/{scheduleKey}")
+    public ResponseEntity<List<CreateDto>> getSchedules(@PathVariable String scheduleKey, HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
+        int loginMemberClubNum = Integer.parseInt(loginMember.getClubNum());
+        List<CreateDto> match = createService.getMatch(loginMemberClubNum);
+        return ResponseEntity.ok(match);
+    }
     // 내 클럽 정보 보기
     @GetMapping("/myteam")
     public String myteam(CommunityDto communityDto, HttpServletRequest request, Model model) {
@@ -110,9 +118,7 @@ public class ClubController {
         List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
         model.addAttribute("community", community);
 
-        // 클럽일정 출력
-//            List<CreateDto> match = createService.getMatch(loginClubNumber);
-//            model.addAttribute("match",match);
+
 
             // CommunityForm 객체를 모델에 추가
             CommunityForm communityForm = CommunityForm.builder().build();
@@ -126,6 +132,8 @@ public class ClubController {
             return "redirect:/"; // 로그인을 하지 않았음에도
         }
     }
+
+
     @PostMapping("/myteam")
     public String inputCommDate(@ModelAttribute CommunityForm communityForm, HttpServletRequest request,Model model){
         HttpSession session = request.getSession();

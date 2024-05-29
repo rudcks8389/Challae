@@ -50,7 +50,7 @@ class CreateMapperTest {
     @Test
     @DisplayName("클럽 일정 가져오기 테스트")
     void findClubMatchTest(){
-        List<CreateDto> match = createMapper.findClubMatch(101,"24-05");
+        List<CreateDto> match = createMapper.findClubMatch(101);
         for (CreateDto createDto : match) {
             log.info("클럽일정 : {}",createDto);
         }

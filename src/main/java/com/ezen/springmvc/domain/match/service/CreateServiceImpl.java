@@ -31,7 +31,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    public List<CreateDto> getMatch(int clubNum,String month) {
-        return createMapper.findClubMatch(clubNum,month);
+    public List<CreateDto> getMatch(int clubNum) {
+        return createMapper.findClubMatch(clubNum);
     }
 }

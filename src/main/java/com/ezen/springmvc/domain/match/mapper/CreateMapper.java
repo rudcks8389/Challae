@@ -18,5 +18,5 @@ public interface CreateMapper {
     public void createMatch(CreateDto createDto);
 
     // myteam 경기일정 불러오기
-    public List<CreateDto> findClubMatch(@Param("clubNum") int clubNum, @Param("month") String month);
+    public List<CreateDto> findClubMatch(int clubNum);
 }
