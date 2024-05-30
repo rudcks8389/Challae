@@ -355,7 +355,7 @@ main .main-wrapper .team-match-schedule .team-match-schedule-detail div {
 }
 .team-match-schedule-detail ul{
   padding: 0px 0px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .team-match-schedule-detail .date-li{
   font-size: 18pt;
@@ -366,3 +366,4 @@ main .main-wrapper .team-match-schedule .team-match-schedule-detail div {
 .team-match-schedule-detail .time-li{
   font-size: 28pt;
 }
+.team-match-schedule-detail .info-li

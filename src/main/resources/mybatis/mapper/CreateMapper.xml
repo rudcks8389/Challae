@@ -14,19 +14,19 @@
     </insert>
 
     <!--     로그인한 상태에서 같은 클럽원 목록(이름, 저장된 사진, 클럽 번호) 가져오기-->
-    <select id="findByClubNum" parameterType="int" resultType="MemberDto">
+    <select id=" clubMatchByClubNum" parameterType="int" resultType="MemberDto">
         select member_name "name", member_storedphoto "storedProfile", club_num "clubNum"
         from member
         where club_num = #{value}
     </select>
 <!--    myteam 경기일정 출력 / 이동을 위한 매치번호 , 출력을 위한 날짜, 시간, 구장번호, 구장이름-->
-    <select id="findClubMatch"  resultType="CreateDto">
+    <select id="clubMatchByClubNum"  resultType="ClubMatchDto">
         SELECT match.match_num, match.match_date, match.match_time, match.club_num, match.field_num, field.field_name
         FROM match
                  JOIN field ON match.field_num = field.field_num
         WHERE match.club_num = #{clubNum}
---           AND SUBSTR(match.match_date, 3, 5) = #{month}  DB를 가져올때는 달에 상관없이 클럽에 따른 일정을 다 가져와야하는게 아닌가...
     </select>
+<!--    매치 상세정보-->
 
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.ezen.springmvc.domain.match.mapper;
 
 import com.ezen.springmvc.domain.field.dto.FieldDto;
+import com.ezen.springmvc.domain.match.dto.ClubMatchDto;
 import com.ezen.springmvc.domain.match.dto.CreateDto;
 import com.ezen.springmvc.domain.match.dto.MemberListDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
@@ -18,5 +19,5 @@ public interface CreateMapper {
     public void createMatch(CreateDto createDto);
 
     // myteam 경기일정 불러오기
-    public List<CreateDto> findClubMatch(int clubNum);
+    public List<ClubMatchDto> clubMatchByClubNum(String clubNum);
 }

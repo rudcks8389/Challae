@@ -1,36 +1,5 @@
 const date = new Date();
-
-// 임의의 경기 일정 데이터
-// const schedules = {
-//     '2024-05': [
-//         {date: '2024-05-03', time: '17:00', fieldName: '하리구장', clubNum:'101'},
-//         {date: '2024-05-15', time: '14:00', fieldName: '공릉구장', clubNum:'101'},
-//         {date: '2024-05-27', time: '11:00', fieldName: '상봉구장', clubNum:'101'},
-//     ],
-//     '2024-06': [
-//         {date: '2024-06-03', time: '17:00', fieldName: '하리구장', clubNum:'101'},
-//         {date: '2024-06-15', time: '14:00', fieldName: '공릉구장', clubNum:'102'},
-//         {date: '2024-06-27', time: '11:00', fieldName: '상봉구장', clubNum:'101'},
-//     ],
-//     '2024-07': [
-//         {date: '2024-07-03', time: '17:00', fieldName: '하리구장', clubNum:'101'},
-//         {date: '2024-07-15', time: '14:00', fieldName: '공릉구장', clubNum:'101'},
-//         {date: '2024-07-27', time: '11:00', fieldName: '상봉구장', clubNum:'101'},
-//     ],
-//     '2023-05': [
-//         {date: '2023-05-03', time: '17:00', fieldName: '하리구장', clubNum:'101'},
-//         {date: '2023-05-15', time: '14:00', fieldName: '공릉구장', clubNum:'101'},
-//         {date: '2023-05-27', time: '11:00', fieldName: '상봉구장', clubNum:'102'},
-//     ],
-//     '2025-05': [
-//         {date: '2025-05-03', time: '17:00', fieldName: '하리구장', clubNum:'101'},
-//         {date: '2025-05-15', time: '14:00', fieldName: '공릉구장', clubNum:'101'},
-//         {date: '2025-05-27', time: '11:00', fieldName: '상봉구장', clubNum:'101'},
-//     ],
-//
-//
-//     // 여기에 더 많은 데이터 추가 가능
-// };
+const  clubNum  = "101";
 
 const renderMonth = async () => {
 
@@ -42,25 +11,32 @@ const renderMonth = async () => {
 
     document.querySelector(".cal-year-month").textContent = `${nowYear}년 ${nowMonth}월`;
 
+    // const scheduleKey = `${nowYear}-${String(nowMonth).padStart(2, '0')}`;
+
+
     // 경기 일정 렌더링
-    const scheduleKey = `${nowYear}-${String(nowMonth).padStart(2, '0')}`;
-
-
-    let monthSchedules = [];
+    let schedules = [];
     try{
         // fetch 요청을 사용하여 서버로부터 데이터 가져오기
-        const response = await fetch(`/api/schedules/${scheduleKey}`);
+        const response = await fetch(`/api/schedules/${clubNum}`);
         if(response.ok){
-            monthSchedules = await response.json(); // 서버로부터 받은 JSON 데이터를 파싱
+            schedules = await response.json(); // 서버로부터 받은 JSON 데이터를 파싱
         } else {
             // 서버로부터 정상적인 응답을 받지 못했을 경우
             console.error("서버로부터 데이터를 가져오는 데 실패했습니다.");
+            console.error(`http 상태코드 : ${response.status}`);
         }
     } catch (error) {
         // 요청 과정에서 에러 발생
         console.error("데이터를 가져오는 과정에서 에러가 발생했습니다:", error);
     }
 
+    // 현재 선택한 달에 해당하는 경기 일정만 필터링
+    const scheduleKey = `${nowYear}-${String(nowMonth).padStart(2, '0')}`;
+    const monthSchedules = schedules.filter(schedule => {
+        const scheduleDate = new Date(schedule.matchDate);
+        return scheduleDate.getFullYear() === nowYear && (scheduleDate.getMonth() + 1) === nowMonth;
+    });
 
 
 
@@ -75,10 +51,11 @@ const renderMonth = async () => {
         const ulInfo = document.createElement("ul");
         matchInfo.appendChild(ulInfo)
 
-        // 경기일자
-
+        // 경기일자에서 일(day) 부분만 추출하여 표시
+        const dateParts = schedule.matchDate.split('-'); // "2024-05-24" -> ["2024", "05", "24"]
+        const dayOnly = dateParts[2]; // 일 부분만 추출
         const dateLi = document.createElement("li");
-        dateLi.textContent = schedule.date;
+        dateLi.textContent = "< "+dayOnly+"일 >"; // 수정된 부분: 전체 날짜 대신 일(day) 부분만 렌더링
         dateLi.classList.add("date-li"); //클래스 지정함
         ulInfo.appendChild(dateLi);
 
@@ -90,9 +67,17 @@ const renderMonth = async () => {
 
         //경기시간
         const timeLi = document.createElement("li");
-        timeLi.textContent = schedule.time;
+        timeLi.textContent = schedule.matchTime;
         timeLi.classList.add("time-li");
         ulInfo.appendChild(timeLi);
+
+        const infoLi = document.createElement("li");
+        infoLi.classList.add("info-li");
+        ulInfo.appendChild(infoLi);
+
+        const goInfoA = document.createElement("a");
+        goInfoA.textContent = "상세정보";
+        infoLi.appendChild(goInfoA);
 
 
         schedulesContainer.appendChild(matchInfo);
@@ -112,7 +97,7 @@ const nextMonth = () => {
 };
 
 const goTodayMonth = () => {
-    const oriMonth = date.setMonth(new Date().getMonth());
+   date.setMonth(new Date().getMonth());
     renderMonth();
 };
 

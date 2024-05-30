@@ -1,6 +1,7 @@
 package com.ezen.springmvc.domain.match.service;
 
 import com.ezen.springmvc.domain.field.dto.FieldDto;
+import com.ezen.springmvc.domain.match.dto.ClubMatchDto;
 import com.ezen.springmvc.domain.match.dto.CreateDto;
 import com.ezen.springmvc.domain.match.mapper.CreateMapper;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
@@ -31,7 +32,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    public List<CreateDto> getMatch(int clubNum) {
-        return createMapper.findClubMatch(clubNum);
+    public List<ClubMatchDto> getMatch(String clubNum) {
+        return createMapper.clubMatchByClubNum(clubNum);
     }
 }

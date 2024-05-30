@@ -6,6 +6,7 @@ import com.ezen.springmvc.domain.club.service.ClubServiceImpl;
 import com.ezen.springmvc.domain.common.dto.UploadFile;
 import com.ezen.springmvc.domain.common.service.FileService;
 
+import com.ezen.springmvc.domain.match.dto.ClubMatchDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.web.club.form.ClubRegisterForm;
@@ -84,14 +85,7 @@ public class ClubController {
         model.addAttribute("clubs", clubs);
         return "/club/clublist";
     }
-    @GetMapping("/api/schedules/{scheduleKey}")
-    public ResponseEntity<List<CreateDto>> getSchedules(@PathVariable String scheduleKey, HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
-        int loginMemberClubNum = Integer.parseInt(loginMember.getClubNum());
-        List<CreateDto> match = createService.getMatch(loginMemberClubNum);
-        return ResponseEntity.ok(match);
-    }
+
     // 내 클럽 정보 보기
     @GetMapping("/myteam")
     public String myteam(CommunityDto communityDto, HttpServletRequest request, Model model) {

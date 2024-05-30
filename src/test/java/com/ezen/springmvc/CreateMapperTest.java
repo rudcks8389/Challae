@@ -2,6 +2,7 @@ package com.ezen.springmvc;
 
 
 import com.ezen.springmvc.domain.field.dto.FieldDto;
+import com.ezen.springmvc.domain.match.dto.ClubMatchDto;
 import com.ezen.springmvc.domain.match.dto.CreateDto;
 import com.ezen.springmvc.domain.match.mapper.CreateMapper;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
@@ -50,8 +51,8 @@ class CreateMapperTest {
     @Test
     @DisplayName("클럽 일정 가져오기 테스트")
     void findClubMatchTest(){
-        List<CreateDto> match = createMapper.findClubMatch(101);
-        for (CreateDto createDto : match) {
+        List<ClubMatchDto> match = createMapper.clubMatchByClubNum("101");
+        for (ClubMatchDto createDto : match) {
             log.info("클럽일정 : {}",createDto);
         }
     }
