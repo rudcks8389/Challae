@@ -8,6 +8,8 @@ import com.ezen.springmvc.domain.common.service.FileService;
 
 import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
+import com.ezen.springmvc.domain.record_fc.dto.RecordFcDto;
+import com.ezen.springmvc.domain.record_fc.service.RecordFcService;
 import com.ezen.springmvc.web.club.form.ClubRegisterForm;
 
 import com.ezen.springmvc.domain.club.service.ClubService;
@@ -68,6 +70,8 @@ public class ClubController {
     private CommunityService communityService;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private RecordFcService recordFcService;
 
 
     @Autowired
@@ -145,7 +149,24 @@ public class ClubController {
 
     // 클럽 상세보기
     @GetMapping("/detail")
-    public String clubDetail() {
+    public String clubDetail(@RequestParam("clubNum") String clubNum, Model model) {
+
+        // 클럽 정보
+        ClubDto clubDetail = clubService.findByClubNum(clubNum);
+        model.addAttribute("clubDetail", clubDetail);
+
+        // 멤버 정보
+        List<MemberDto> clubMembers = memberService.clubMemberList(clubNum);
+        model.addAttribute("clubMembers", clubMembers);
+
+        // 전적 정보
+        List<RecordFcDto> clubRecs = recordFcService.clubRecList(clubNum);
+        model.addAttribute("clubRecs", clubRecs);
+
+        log.info("선택된 클럽번호: {}", clubDetail.getClubNum());
+        log.info("멤버목록: {}", clubMembers.toString());
+        log.info("전적목록: {}", clubRecs.toString());
+
         return "/club/clubdetail";
     }
 
@@ -166,9 +187,6 @@ public class ClubController {
 
         return "/club/createMatch";
     }
-
-
-    // 클럽 생성 화면
 
     @PostMapping("/create")
 //    @ResponseBody
@@ -208,8 +226,7 @@ public class ClubController {
         return Collections.singletonMap("filePath", fileName);
     }
 
-    // 새로운 클럽 생성하기
-
+    // 클럽 생성 화면
     @GetMapping("/register")
     public String clubRegister(Model model) {
         ClubRegisterForm clubRegisterForm = ClubRegisterForm.builder().build();
@@ -219,7 +236,13 @@ public class ClubController {
 
     // 클럽 생성 요청 처리
     @PostMapping("/register")
-    public String clubRegisterAction(@ModelAttribute ClubRegisterForm clubRegisterForm, RedirectAttributes redirectAttributes, Model model) {
+    public String clubRegisterAction(@ModelAttribute ClubRegisterForm clubRegisterForm, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
+        // 로그인한 사용자 정보에서 이름 가져오기 => 클럽장
+        MemberDto memberDto = (MemberDto) session.getAttribute("loginMember");
+        String clubPresident = memberDto.getName(); // memberDto의 회원명 = name
+
+        log.info("가져온 이름: {}", clubPresident);
+
         log.info("클럽 생성 정보 : {}", clubRegisterForm.toString());
 
         // 업로드 프로필 사진 저장
@@ -234,10 +257,13 @@ public class ClubController {
                 .clubInfo(clubRegisterForm.getClubInfo())
                 .clubPhoto(uploadFile.getUploadFileName())
                 .clubStoredPhoto(uploadFile.getStoreFileName())
+                .clubPresident(clubPresident)
                 .build();
 
         clubService.clubRegister(clubDto);
         redirectAttributes.addFlashAttribute("clubDto", clubDto);
+
+//        관리자한테 Dto 전체 넘겨주고 관리자 처리 시, 클럽소속 시켜주고 member_dir 'Y'로 변경
         return "redirect:/club/list";
     }
 

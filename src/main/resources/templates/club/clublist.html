@@ -14,6 +14,7 @@
 
 <th:block th:fragment="script">
     <script src="/js/weather.js" defer></script>
+    <script src="/js/board.js" defer></script>
 
 </th:block>
 
@@ -51,19 +52,20 @@
                 <th scope="col" class="tb">지역</th>
                 <th scope="col">수준</th>
                 <th scope="col">인원수</th>
-                <th scope="col">상세보기</th>
+<!--                <th scope="col">상세보기</th>-->
             </tr>
             </thead>
 
             <!-- 데이터 -->
             <tbody>
-            <tr th:each="clubList : ${clubs}">
+            <tr class="clickable-row" th:each="clubList : ${clubs}" th:attr="data-href=@{/club/detail(clubNum=${clubList.clubNum})}">
+<!--            <tr th:each="clubList : ${clubs}">-->
                 <td th:text="${clubList.clubName}"></td>
                 <td th:text="${clubList.clubPresident}"></td>
                 <td th:text="${clubList.clubLocation}"></td>
                 <td th:text="${clubList.clubLevel}"></td>
                 <td th:text="${clubList.clubMemberCount}"></td>
-                <td><a href="/club/detail">상세보기</a></td>
+<!--                <td><a th:href="@{/club/detail(clubNum=${clubList.clubNum})}">상세보기</a></td>-->
             </tr>
 
             </tbody>

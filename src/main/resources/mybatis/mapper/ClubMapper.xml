@@ -4,8 +4,9 @@
 
 <!--     전체 클럽 조회 -->
     <select id="clubList" resultType="ClubDto">
-        SELECT CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
+        SELECT CLUB_NUM, CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
         FROM CLUB
+        ORDER BY CLUB_NUM DESC
     </select>
 
 
@@ -14,6 +15,15 @@
         INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_PRESIDENT, CLUB_INFO, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE, CLUB_PHOTO, CLUB_STOREDPHOTO)
         VALUES (CLUB_SEQ.NEXTVAL, #{clubName}, #{clubPresident}, #{clubInfo}, #{clubLevel}, #{clubLocation}, #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto})
     </insert>
+
+<!--    클럽번호 찾기 후 상세정보 페이지 출력 -->
+    <select id="findByClubNum" resultType="ClubDto">
+        SELECT CLUB_NUM, CLUB_STOREDPHOTO, CLUB_NAME, CLUB_PRESIDENT, TO_CHAR(CLUB_REGDATE,'YYYY-MM-DD') CLUB_REGDATE, CLUB_MEMBERCOUNT, CLUB_LEVEL, CLUB_LOCATION, CLUB_INFO
+        FROM CLUB
+        WHERE CLUB_NUM = #{clubNum}
+    </select>
+
+
 
 <!--내팀보기에서 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진, -->
     <select id="myClubData" parameterType="String" resultType="ClubDto">

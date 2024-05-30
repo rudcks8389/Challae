@@ -95,6 +95,14 @@
 				END
 	</select>
 
+	<!--    클럽상세페이지 멤버목록 -->
+	<select id="clubMemberList" resultType="MemberDto">
+		SELECT CLUB_NUM, MEMBER_NUM, MEMBER_STOREDPHOTO "storedProfile", MEMBER_NAME "name",
+			   (CASE WHEN MEMBER_DIR = 'Y' THEN '클럽장' ELSE '클럽원' END) "dir"
+		FROM MEMBER
+		WHERE CLUB_NUM = #{clubNum}
+		ORDER BY MEMBER_DIR DESC
+	</select>
 
 </mapper>
 

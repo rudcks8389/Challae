@@ -16,4 +16,7 @@ public interface MemberService {
 
 	// 내 팀보기
 	public List<MemberDto> getTeamMember(String clubNum);
+
+	// 클럽상세페이지 멤버목록
+	public List<MemberDto> clubMemberList(String clubNum);
 }

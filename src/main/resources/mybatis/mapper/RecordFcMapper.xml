@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.springmvc.domain.record_fc.mapper.RecordFcMapper">
+
+    <!--    클럽상세페이지 전적목록 -->
+    <select id="clubRecList" resultType="RecordFcDto">
+        SELECT CLUB_NUM, REC_NUM, TO_CHAR(REC_DATE, 'YYYY-MM-DD') REC_DATE, REC_FID, REC_SCO
+        FROM RECORD_FC
+        WHERE CLUB_NUM = #{clubNum}
+        ORDER BY REC_DATE DESC
+    </select>
+
+</mapper>

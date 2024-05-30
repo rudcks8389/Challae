@@ -47,5 +47,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.myTeamList(clubNum);
 	}
 
+	// 클럽상세페이지 멤버목록
+	@Override
+	public List<MemberDto> clubMemberList(String clubNum) {
+		return memberMapper.clubMemberList(clubNum);
+	}
 
 }

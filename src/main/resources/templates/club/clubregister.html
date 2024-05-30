@@ -37,15 +37,15 @@
 
             <div class="layer_cont">
 
-<!--                <form name="clubRegisterForm" novalidate method="post" th:object="${clubRegisterForm}" enctype="multipart/form-data">-->
+                <form name="clubRegisterForm" novalidate method="post" th:object="${clubRegisterForm}" enctype="multipart/form-data">
 
                     <div class="table_wrap" id="detail">
 
                         <div class="preview_div">
-                            <button class="preview_btn" id="uploadBtn">
+                            <label class="preview_btn" id="uploadBtn" for="fileInput">
                                 <span>로고를 선택해주세요</span>
-<!--                                <input type="file" id="fileInput" th:field="*{clubPhoto}">-->
-                            </button>
+                            </label>
+                            <input type="file" id="fileInput" th:field="*{clubPhoto}">
                         </div>
 
                         <table class="add_table">
@@ -59,13 +59,13 @@
 
                             <tr>
                                 <th scope="row">클럽명</th>
-<!--                                <td class="al_left"><input type="text" th:field="*{clubName}"></td>-->
+                                <td class="al_left"><input type="text" th:field="*{clubName}"></td>
                             </tr>
 
                             <tr>
                                 <th scope="row">수준</th>
                                 <td class="al_left" id="levelbox">
-<!--                                    <input type="text" class="level_input" value="클럽 수준을 선택해주세요" readonly th:field="*{clubLevel}">-->
+                                    <input type="text" class="level_input" value="클럽 수준을 선택해주세요" readonly th:field="*{clubLevel}">
                                     <select class="level_select">
                                         <option value>수준선택</option>
                                         <option value="상">상</option>
@@ -80,23 +80,23 @@
                             <tr>
                                 <th scope="row" style="width: 100%">활동지역</th>
                                 <td class="al_left" id="address_td">
-                                    <input type="text">
-                                    <select name="addressRegion" id="addressRegion1"></select>
-                                    <select name="addressDo" id="addressDo1"></select>
-                                    <select name="addressSiGunGu" id="addressSiGunGu1"></select>
+                                    <input type="hidden" th:field="*{clubLocation}" id="clubLocation">
+                                    <select name="addressRegion" id="addressRegion1" onchange="updateClubLocation()"></select>
+                                    <select name="addressDo" id="addressDo1" onchange="updateClubLocation()"></select>
+                                    <select name="addressSiGunGu" id="addressSiGunGu1" onchange="updateClubLocation()"></select>
                                 </td>
                             </tr>
 
                             <tr>
                                 <th scope="row">연락처</th>
-<!--                                <td class="al_left"><input type="text" th:field="*{clubPhone}"></td>-->
+                                <td class="al_left"><input type="text" th:field="*{clubPhone}"></td>
                             </tr>
 
                             <tr>
                                 <th scope="row" style="padding-bottom: 200px;">소개</th>
                                 <td class="al_left" colspan="3" style="border-bottom: none;">
                                     <div class="match_meno">
-<!--                                        <textarea name="" id="team_memo" th:field="*{clubInfo}"></textarea>-->
+                                        <textarea name="" id="team_memo" th:field="*{clubInfo}"></textarea>
                                     </div>
                                 </td>
                             </tr>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
 
-<!--                </form>-->
+                </form>
 
             </div>
         </div>
