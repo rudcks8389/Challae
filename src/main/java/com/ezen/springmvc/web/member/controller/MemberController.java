@@ -138,11 +138,12 @@ public class MemberController {
 
     // 회원 로그인 요청 처리
     @PostMapping("/signin")
-    public String signInAction(@ModelAttribute LoginForm loginForm, HttpServletRequest request, HttpServletResponse response) {
+    public String signInAction(@ModelAttribute LoginForm loginForm, HttpServletRequest request, HttpServletResponse response,Model model) {
         MemberDto loginMember = memberService.isMember(loginForm.getLoginId(), loginForm.getLoginPasswd());
 
         // 회원 아닌 경우
         if (loginMember == null) {
+            model.addAttribute("loginError", "아이디 또는 비밀번호를 확인해주세요");
             return "/member/signInForm";
         }
         // 회원인 경우
@@ -166,7 +167,6 @@ public class MemberController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("loginMember", loginMember);
-        log.info("@@Session created with loginMember@@: {}", session.getAttribute("loginMember"));
         return "redirect:/";
 }
 

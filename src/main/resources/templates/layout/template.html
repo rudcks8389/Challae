@@ -122,8 +122,8 @@
                             <span th:text="${session.loginMember != null ? session.loginMember.name : ''}"></span><br>
                             <span th:text="${session.loginMember != null ? session.loginMember.id : ''}"></span><br>
                             <span th:text="${session.loginMember != null ? session.loginMember.email : ''}"></span><br>
-                            <span th:if="${session.loginMember.clubNum != null}" th:text="${session.loginMember.clubNum}"></span>
-                            <span th:unless="${session.loginMember.clubNum != null}">소속클럽이 없습니다</span>
+                            <span th:if="${session.loginMember.clubName != null}" th:text="${'소속팀 :'+ session.loginMember.clubName}"></span>
+                            <span th:unless="${session.loginMember.clubName != null}">소속클럽이 없습니다</span>
                             <button id="editButton"><span>회원정보 수정하기</span></button>
                        </span>
                         </div>

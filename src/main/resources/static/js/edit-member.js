@@ -20,6 +20,7 @@ function updateMemberInfo() {
     // 비밀번호와 비밀번호 재입력이 일치하는지 확인
     if (password !== repasswd) {
         document.getElementById('updateMessage').innerText = '비밀번호와 재입력이 일치하지 않습니다.';
+        form.reset();
         return;
     }
 

@@ -41,7 +41,6 @@
                                 <td class="al_left">
                                     <input type="text" th:field="*{name}">
                                     <p th:errors="*{name}" th:class="text-danger">이름 관련 입력 오류 메시지</p>
-
                                 </td>
                             </tr>
 
@@ -50,7 +49,8 @@
                                 <td class="al_left">
                                     <input type="text" th:field="*{id}">
                                     <p th:errors="*{id}" th:class="text-danger">아이디 관련 입력 오류 메시지</p>
-                                    <p id="checkedId"></p>
+                                    <br>
+                                    <span id="checkedId"></span>
                                 </td>
                             </tr>
 

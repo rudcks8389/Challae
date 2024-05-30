@@ -31,6 +31,9 @@
                 <label id="passwd">패스워드</label>
             </div>
 
+            <h5 th:text="${loginError}" th:style="'color: red;'"></h5>
+            <br>
+
             <input type="checkbox" th:field="*{rememberLoginId}" th:checked="*{rememberLoginId}" /><label>아이디 기억하기</label>
 
             <button class="login_btn" type="submit">로그인</button>

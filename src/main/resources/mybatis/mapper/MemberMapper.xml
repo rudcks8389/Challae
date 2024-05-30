@@ -31,9 +31,24 @@
 
 	<!-- 회원 로그인 -->
 	<select id="findByIdAndPasswd" resultType="MemberDto">
-		SELECT MEMBER_ID "id", MEMBER_NAME "name",MEMBER_PHOTO "profileImage" ,MEMBER_STOREDPHOTO "storedProfile",MEMBER_EMAIL "email",CLUB_NUM "clubNum",MEMBER_PASSWD "passwd", MEMBER_DIR "dir",MEMBER_NUM "memberNum"
-		FROM member
-		WHERE member_id = #{id} AND MEMBER_PASSWD = #{passwd}
+		SELECT
+			m.MEMBER_ID AS "id",
+			m.MEMBER_NAME AS "name",
+			m.MEMBER_PHOTO AS "profileImage",
+			m.MEMBER_STOREDPHOTO AS "storedProfile",
+			m.MEMBER_EMAIL AS "email",
+			m.CLUB_NUM AS "clubNum",
+			m.MEMBER_PASSWD AS "passwd",
+			m.MEMBER_DIR AS "dir",
+			m.MEMBER_NUM AS "memberNum",
+			c.CLUB_NAME AS "clubName"
+		FROM
+			member m
+				LEFT JOIN
+			club c ON m.CLUB_NUM = c.CLUB_NUM
+		WHERE
+			m.MEMBER_ID = #{id}
+		  AND m.MEMBER_PASSWD = #{passwd}
 	</select>
 
 	<!-- 회원 이름으로 Like 검색 -->
