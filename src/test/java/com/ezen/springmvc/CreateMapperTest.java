@@ -56,6 +56,13 @@ class CreateMapperTest {
             log.info("클럽일정 : {}",createDto);
         }
     }
+
+    @Test
+    @DisplayName("매치 상세정보")
+    void matchDetailTest(){
+        CreateDto matchDetail = createMapper.clubDetailByMatchNum("3");
+         log.info("매치 상세정보 : {}",matchDetail);
+    }
 }
 
 

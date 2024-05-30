@@ -20,4 +20,9 @@ public interface CreateMapper {
 
     // myteam 경기일정 불러오기
     public List<ClubMatchDto> clubMatchByClubNum(String clubNum);
+
+    // 경기 상세 일정
+    public CreateDto clubDetailByMatchNum(String MatchNum);
+
+
 }

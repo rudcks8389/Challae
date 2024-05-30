@@ -77,6 +77,7 @@ const renderMonth = async () => {
 
         const goInfoA = document.createElement("a");
         goInfoA.textContent = "상세정보";
+        goInfoA.href=`matchView?matchNum=${schedule.matchNum}`;
         infoLi.appendChild(goInfoA);
 
 

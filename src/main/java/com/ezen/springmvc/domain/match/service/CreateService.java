@@ -16,4 +16,7 @@ public interface CreateService {
 
     //myteam 경기일정 출력
     public  List<ClubMatchDto> getMatch(String clubNum);
+
+    // 경기일정 상세청보
+    public CreateDto getMachDetail (String matchNum);
 }
