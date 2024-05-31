@@ -1,5 +1,6 @@
 package com.ezen.springmvc.domain.member.mapper;
 
+import com.ezen.springmvc.domain.club.dto.SearchDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.domain.member.dto.MemberSearchCondition;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,8 +32,17 @@ public interface MemberMapper {
     // 통합 검색
     public List<MemberDto> findBySearchAllOption(MemberSearchCondition searchCondition);
 
+
+    /**
+     * myTeam을 위한 memberMapper
+     * @param clubNum
+     * @return
+     */
     // 내 팀보기에서 쓸 멤버 클럽번호에 따른 팀원목록 출력
-     public List<MemberDto> myTeamList(String clubNum); // xml로 인자 두개 이상을 받아올 때 @param으로 지정
+     public List<MemberDto> myTeamList(@Param("clubNum") String clubNum, @Param("searchDto")SearchDto searchDto); // xml로 인자 두개 이상을 받아올 때 @param으로 지정
+
+    /** 팀원 목록 카운팅 (for pagination)**/
+    public int countMyTeamList(@Param("clubNum") String clubNum,@Param("searchDto") SearchDto searchDto);
 
     // 팀원 목록에서 감독이 팀원 삭제하는 기능
     public void ClubMemberDelete (MemberDto memberDto);

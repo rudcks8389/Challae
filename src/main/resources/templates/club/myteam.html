@@ -102,7 +102,7 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody th:each="clubMember : ${clubMember}">
+                    <tbody th:each="clubMember : ${clubMember}" >
                     <tr>
                         <th scope="row" th:text="${clubMember.name}"></th>
                         <!-- 감독 팀원 출력을 위한 조건삼항 -->
@@ -122,17 +122,18 @@
                     <tfoot>
                     </tfoot>
                 </table>
-                <div class="pagination"> <!-- 테이블 밑에 숫자(페이징 처리)-->
-                    <a href="#">❮❮</a>
-                    <a href="#">❮</a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">❯</a>
-                    <a href="#">❯❯</a>
-                </div>
+
+
+                    <!-- 페이지번호 반복 -->
+                    <th:block th:each="i : ${#numbers.sequence(pagination.getStartPage(), pagination.getEndPage())}">
+                        <li class="page-item active" th:if="${i == pagination.params.requestPage}" >
+                            <a class="page-link"th:text="${i}">1</a>
+                        </li>
+                        <li class="page-item" th:if="${i != pagination.params.requestPage}" >
+                            <a class="page-link" th:href="@{member(requestPage=${i}, searchValue=${parameterForm.searchValue})}" th:text="${i}">1</a>
+                        </li>
+                    </th:block>
+
             </div>
 
 
@@ -150,7 +151,7 @@
                         </tr>
                         </thead>
                         <tbody >
-                        <tr th:each="community:${community}" th:value="${community.commNum}">
+                        <tr th:each="community,${community}" th:value="${community.commNum}">
                             <td class="member-name" th:text="${community.memberName} +' :'"></td>
                             <td class="comm-content" th:text="${community.commContent}"></td>
                             <td class="comm-date" th:text="${community.commDate}"></td>

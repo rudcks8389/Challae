@@ -1,5 +1,6 @@
 package com.ezen.springmvc;
 
+import com.ezen.springmvc.domain.club.dto.SearchDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.domain.member.dto.MemberSearchCondition;
 import com.ezen.springmvc.domain.member.mapper.MemberMapper;
@@ -134,12 +135,44 @@ class MemberMapperTest {
         log.info("검색 수 : {}", list.size());
     }
 
+
     @Test
-    @DisplayName("내 팀 팀원 출력 테스트")
-    void myTeamMemberTest(){
-        List<MemberDto> member = memberMapper.myTeamList("101");
-        log.info("내 팀원 : {}",member);
+    @DisplayName("특정 클럽원 이름 검색시 목록 출력")
+//    @Disabled
+    public void findByAllTest() {
+        String clubNum = "101";
+        SearchDto searchDto = SearchDto.builder()
+                .limit(5)
+                .page(1)
+                .searchValue("김")
+                .build();
+        List<MemberDto> allList = memberMapper.myTeamList(clubNum, searchDto);
+        log.info("===== 전체 클럽원 목록 =====");
+        allList.forEach(memberDto-> log.info("클럽원: {}", memberDto));
     }
+
+    @Test
+    @DisplayName("클럽원 카운팅")
+//    @Disabled
+    public void countByClubMember() {
+        String clubNum = "101";
+        SearchDto searchDto = SearchDto.builder()
+                .limit(10)
+                .page(1)
+                .searchValue("김")
+                .build();
+        int count = memberMapper.countMyTeamList(clubNum, searchDto);
+        log.info("===== 전체 클럽원 목록 =====");
+        log.info("검색 클럽원 수 : {}", count);
+    }
+
+
+//    @Test
+//    @DisplayName("내 팀 팀원 출력 테스트")
+//    void myTeamMemberTest(){
+//        List<MemberDto> member = memberMapper.myTeamList("101");
+//        log.info("내 팀원 : {}",member);
+//    }
 
 //    @Test
 //    @DisplayName("팀원 강퇴 기능 테스트")

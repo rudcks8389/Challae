@@ -1,5 +1,6 @@
 package com.ezen.springmvc.domain.member.service;
 
+import com.ezen.springmvc.domain.club.dto.SearchDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,11 +43,26 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+
+	/**
+	 * myTeam 페이지를 위한 Service 구현
+	 * @param clubNum
+	 * @param searchDto
+	 * @return
+	 */
+
+	// 팀원 목록 출력
 	@Override
-	public List<MemberDto> getTeamMember(String clubNum) {
-		return memberMapper.myTeamList(clubNum);
+	public List<MemberDto> getTeamMember(String clubNum, SearchDto searchDto) {
+		return memberMapper.myTeamList(clubNum,searchDto);
 	}
 
+	// 팀원 목록 카운팅
+	@Override
+	public int getTeamMemberCount(String clubNum, SearchDto searchDto) {
+		return memberMapper.countMyTeamList(clubNum,searchDto);
+	}
+	// 강퇴 기능
 	@Override
 	public void outClubMember(MemberDto memberDto) {
 		memberMapper.ClubMemberDelete(memberDto);

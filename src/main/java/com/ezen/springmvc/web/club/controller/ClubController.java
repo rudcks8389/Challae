@@ -2,6 +2,7 @@ package com.ezen.springmvc.web.club.controller;
 
 
 import com.ezen.springmvc.domain.club.dto.ClubDto;
+import com.ezen.springmvc.domain.club.dto.SearchDto;
 import com.ezen.springmvc.domain.club.service.ClubServiceImpl;
 import com.ezen.springmvc.domain.common.dto.UploadFile;
 import com.ezen.springmvc.domain.common.service.FileService;
@@ -17,6 +18,8 @@ import com.ezen.springmvc.domain.community.service.CommunityService;
 
 import com.ezen.springmvc.domain.member.service.MemberService;
 import com.ezen.springmvc.web.club.form.CommunityForm;
+import com.ezen.springmvc.web.common.page.Pagination;
+import com.ezen.springmvc.web.common.page.ParameterForm;
 import com.ezen.springmvc.web.member.form.MemberForm;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -88,55 +91,68 @@ public class ClubController {
 
     // 내 클럽 정보 보기
     @GetMapping("/myteam")
-    public String myteam(CommunityDto communityDto, HttpServletRequest request, Model model) {
+    public String myteam(@ModelAttribute ParameterForm parameterForm, HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession();
-        MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
         log.info("로그인한 객체");
 
-        if (loginMember != null){
-        String loginClubNumber = loginMember.getClubNum(); // 세션 객체에서 클럽번호 추출
+        if (loginMember != null) {
+            String loginClubNumber = loginMember.getClubNum(); // 세션 객체에서 클럽번호 추출
 
-        if (loginClubNumber == null){
-            return "redirect:/club/list";
-        }
-        // 로그인한 멤버의 클럽정보 출력
+            if (loginClubNumber == null) {
+                return "redirect:/club/list";
+            }
+            // 로그인한 멤버의 클럽정보 출력
             List<ClubDto> clubData = clubService.clubDataService(loginClubNumber);
             model.addAttribute("clubData", clubData);
 
-        // 로그인한 멤버의 클럽원목록 출력
-        List<MemberDto> clubMember = memberService.getTeamMember(loginClubNumber);
-        model.addAttribute("clubMember",clubMember);
+//        // 로그인한 멤버의 클럽원목록 출력
 
-        // 클러 커뮤니티 내용데이터 출력 (단순 DB 데이터 출력)
-        List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
-        model.addAttribute("community", community);
+            SearchDto searchDto = SearchDto.builder()
+                    .limit(parameterForm.getElementSize())
+                    .page(parameterForm.getRequestPage())
+                    .searchValue(parameterForm.getSearchValue())
+                    .build();
+            List<MemberDto> clubMember = memberService.getTeamMember(loginClubNumber, searchDto);
 
+            // 멤버 목록 행 갯수
+            int memberListCount = memberService.getTeamMemberCount(loginClubNumber, searchDto);
+            parameterForm.setRowCount(memberListCount);
+
+            Pagination pagination = new Pagination(parameterForm);
+
+            model.addAttribute("clubMember", clubMember);
+            model.addAttribute("parameterForm", parameterForm);
+            model.addAttribute("pagination", pagination);
+
+            // 클럽 커뮤니티 내용데이터 출력 (단순 DB 데이터 출력)
+            List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
+            model.addAttribute("community", community);
 
 
             // CommunityForm 객체를 모델에 추가
             CommunityForm communityForm = CommunityForm.builder().build();
-             model.addAttribute("communityForm", communityForm);
+            model.addAttribute("communityForm", communityForm);
 
 
+            return "/club/myteam";
 
-        return "/club/myteam";
-
-        }else {
+        } else {
             return "redirect:/"; // 로그인을 하지 않았음에도
         }
     }
 
     // 소통공간의 입력한 내용을 DB에 저장
     @PostMapping("/myteam")
-    public String inputCommDate(@ModelAttribute CommunityForm communityForm, HttpServletRequest request){
+    public String inputCommDate(@ModelAttribute CommunityForm communityForm, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
         String clubNum = loginMember.getClubNum();
         String memberNum = loginMember.getMemberNum();
 
         // 커뮤니티 입력시 저장
-       CommunityDto inputData = CommunityDto.builder()
+        CommunityDto inputData = CommunityDto.builder()
                 .commContent(communityForm.getContent())
                 .clubNum(clubNum)
                 .memberNum(memberNum)

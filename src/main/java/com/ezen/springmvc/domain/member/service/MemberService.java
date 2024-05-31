@@ -1,5 +1,6 @@
 package com.ezen.springmvc.domain.member.service;
 
+import com.ezen.springmvc.domain.club.dto.SearchDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 
 import java.lang.reflect.Member;
@@ -16,6 +17,11 @@ public interface MemberService {
 	public void editMember(MemberDto member);
 
 	// 내 팀보기
-	public List<MemberDto> getTeamMember(String clubNum);
+	public List<MemberDto> getTeamMember(String clubNum, SearchDto searchDto);
+
+	// 내 팀 카운트
+	public  int getTeamMemberCount (String clubNum, SearchDto searchDto);
+
+	// 팀 강퇴
 	public void outClubMember (MemberDto memberDto);
 }

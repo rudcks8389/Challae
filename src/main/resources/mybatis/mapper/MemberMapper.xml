@@ -84,16 +84,53 @@
 
 
 	<!-- 내 팀보기) 팀별 회원목록 출력 [이름 , 직책, 번호]	-->
-	<select id="myTeamList" parameterType="String" resultType="MemberDto">
-		SELECT member_num, member_name "name", member_dir"dir", member_phone"phone"
+	<select id="myTeamList" resultType="MemberDto">
+		SELECT member_num, member_name "name", member_dir "dir", member_phone "phone", club_num
+		FROM (
+		SELECT CEIL(rownum / #{searchDto.limit}) page,
+		member_num,
+		member_name,
+		member_dir,
+		member_phone,
+		club_num
+		FROM (
+		SELECT member_num,
+		member_name,
+		member_dir,
+		member_phone,
+		club_num
 		FROM member
-		WHERE club_num = #{clubNum}
+		<where>
+			club_num = #{clubNum}
+			<if test="searchDto.searchValue != null">
+				AND member_name LIKE '%' || #{searchDto.searchValue} || '%'
+			</if>
+		</where>
+		)
 		ORDER BY
-			CASE
-				WHEN member_dir = 'Y' THEN 0
-				ELSE 1
-				END
+		CASE
+		WHEN member_dir = 'Y' THEN 0
+		ELSE 1
+		END,
+		member_name DESC
+		)
+		WHERE page = #{searchDto.page}
 	</select>
+	<!-- 클럽원 갯수 반환 -->
+	<select id="countMyTeamList" resultType="int">
+		SELECT
+		COUNT(member_id) "clubMembercount"
+		FROM
+		member
+		<where>
+			club_num = #{clubNum}
+			<if test="searchDto.searchValue != null">AND member_name LIKE '%' || #{searchDto.searchValue} || '%'</if>
+		</where>
+	</select>
+
+
+
+
 
 
 <!--	클럽원 강퇴 -->
