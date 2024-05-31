@@ -19,4 +19,5 @@ public class ClubDto {
     private String clubPhone;
     private String clubName;
     private String clubPresident;
+    private String clubStoredPhoto;
 }

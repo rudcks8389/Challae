@@ -1,21 +1,55 @@
 package com.ezen.springmvc.web.club.controller;
 
-import com.ezen.springmvc.domain.match.dto.CreateDto;
-import com.ezen.springmvc.domain.match.dto.FieldDto;
+import com.ezen.springmvc.domain.club.dto.ClubDto;
+import com.ezen.springmvc.domain.club.service.ClubServiceImpl;
+import com.ezen.springmvc.domain.common.dto.UploadFile;
+import com.ezen.springmvc.domain.common.service.FileService;
+
+import com.ezen.springmvc.domain.match.dto.MatchBoardDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
+import com.ezen.springmvc.web.club.form.ClubRegisterForm;
+
+import com.ezen.springmvc.domain.club.service.ClubService;
+import com.ezen.springmvc.domain.community.dto.CommunityDto;
+import com.ezen.springmvc.domain.community.service.CommunityService;
+
+import com.ezen.springmvc.domain.member.service.MemberService;
+import com.ezen.springmvc.web.club.form.CommunityForm;
+import com.ezen.springmvc.web.member.form.MemberForm;
+import jakarta.servlet.http.HttpServletRequest;
+
+import com.ezen.springmvc.domain.field.dto.FieldDto;
+import com.ezen.springmvc.domain.match.dto.CreateDto;
+import com.ezen.springmvc.domain.match.service.CreateService;
+import com.ezen.springmvc.domain.member.dto.MemberDto;
+
 import jakarta.servlet.http.HttpSession;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import org.springframework.web.bind.annotation.*;
+
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Member;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,20 +62,90 @@ public class ClubController {
     @Value("${upload.soccerboard.path}")
     private String soccerBoardUploadPath;
 
+    @Value("${upload.presetboard.path}")
+    private String soccerPresetBoardUploadPath;
+
 
     @Autowired
     private CreateService createService;
+    @Autowired
+    private ClubService clubService;
+    @Autowired
+    private CommunityService communityService;
+    @Autowired
+    private MemberService memberService;
+
+
+    @Autowired
+    private FileService fileService;
+
+    @Value("${upload.clublogo.path}")
+    private String clublogoUploadPath;
 
     // 전체 클럽 목록
     @GetMapping("/list")
-    public String clubList() {
+    public String clubList(Model model) {
+        List<ClubDto> clubs = clubService.clubList();
+        model.addAttribute("clubs", clubs);
         return "/club/clublist";
     }
 
     // 내 클럽 정보 보기
     @GetMapping("/myteam")
-    public String myteam() {
-        return "/club/myteam";
+    public String myteam(CommunityDto communityDto, HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession();
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        log.info("로그인한 객체");
+
+        if (loginMember != null) {
+            String loginClubNumber = loginMember.getClubNum(); // 세션 객체에서 클럽번호 추출
+
+            if (loginClubNumber == null) {
+                return "redirect:/club/list";
+            }
+            // 로그인한 멤버의 클럽정보 출력
+            List<ClubDto> clubData = clubService.clubDataService(loginClubNumber);
+            model.addAttribute("clubData", clubData);
+
+            // 로그인한 멤버의 팀원목록 출력
+            List<MemberDto> clubMember = memberService.getTeamMember(loginClubNumber);
+            model.addAttribute("clubMember", clubMember);
+
+            // 커뮤니티 내용데이터 출력 (단순 DB출력만 되어있음)
+            List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
+            model.addAttribute("community", community);
+
+            // CommunityForm 객체를 모델에 추가
+            CommunityForm communityForm = CommunityForm.builder().build();
+            model.addAttribute("communityForm", communityForm);
+
+
+            return "/club/myteam";
+
+        } else {
+            return "redirect:/"; // 로그인을 하지 않았음에도
+        }
+    }
+
+    @PostMapping("/myteam")
+    public String inputCommDate(@ModelAttribute CommunityForm communityForm, HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        String clubNum = loginMember.getClubNum();
+        String memberNum = loginMember.getMemberNum();
+
+        // 커뮤니티 입력시 저장
+        CommunityDto inputData = CommunityDto.builder()
+                .commContent(communityForm.getContent())
+                .clubNum(clubNum)
+                .memberNum(memberNum)
+                .build();
+
+        communityService.inputCommunity(inputData);
+
+        return "redirect:/club/myteam";
+
     }
 
     // 클럽 상세보기
@@ -52,7 +156,10 @@ public class ClubController {
 
     // 새로운 경기 생성하기
     @GetMapping("/create")
-    public String create(Model model) {
+    public String create(Model model, HttpServletRequest request) {
+        // 세션에서 클럽번호 가져오기
+        HttpSession session = request.getSession();
+        MemberDto member = (MemberDto) session.getAttribute("loginMember");
 
         /* 구장 리스트 가져오기 */
         List<FieldDto> fields = createService.getFields();
@@ -60,27 +167,27 @@ public class ClubController {
         model.addAttribute("createDto", new CreateDto());
 
         /* 로그인 상태일 시 클럽 번호로 클럽원 목록 보여주기( 예정 ) */
-        List<MemberDto> members = createService.findByClubNum(101);  // 클럽 넘버 받아와야 함
+        List<MemberDto> members = createService.findByClubNum(Integer.parseInt(member.getClubNum()));  // 세션에서 받은 클럽 넘버
         model.addAttribute("clubMembers", members);
-
-        log.info("101번 클럽 멤버들 : {}", members);
 
         return "/club/createMatch";
     }
 
+    // 단순 경기일정 생성
     @PostMapping("/create")
 //    @ResponseBody
-    public String createMatch(@ModelAttribute CreateDto createDto, HttpSession session) {
+    public String createMatch(@ModelAttribute CreateDto createDto, HttpServletRequest request) {
         // 세션에서 클럽번호 가져오기
-        Integer clubNum = (Integer) session.getAttribute("clubnum");
+        HttpSession session = request.getSession();
+        MemberDto member = (MemberDto) session.getAttribute("loginMember");
 
-        if (clubNum != null) {
-            createDto.setClubNum(clubNum);
+        log.info("세션에서 가져온 클럽 번호: {}", member.getClubNum());
+        if (member.getClubNum() != null) {
+            createDto.setClubNum(Integer.parseInt(member.getClubNum()));
         } else {
             log.warn("클럽 번호가 세션에 존재하지 않습니다.");
             // 클럽 번호가 없을 경우의 로직
         }
-
 
         log.info("dto: {}", createDto); // Dto 데이터 여부 체크
         /* 경기 일정 생성하기 */
@@ -88,6 +195,7 @@ public class ClubController {
         return "redirect:/club/create";
     }
 
+    // 단순 경기일정 생성 시 캔버스 그림 업로드
     @PostMapping("/uploadCanvas")
     @ResponseBody
     public Map<String, String> uploadCanvas(@RequestPart("canvasImage") MultipartFile canvasImage) {
@@ -106,10 +214,97 @@ public class ClubController {
         return Collections.singletonMap("filePath", fileName);
     }
 
+    // 프리셋 저장
+    @PostMapping("/createMatchBoard")
+    public ResponseEntity<String> createMatchBoard(
+            @RequestParam("presetName") String presetName,
+            @RequestParam("option") String option,
+            @RequestPart("canvasImage") MultipartFile canvasImage,
+            HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        MemberDto member = (MemberDto) session.getAttribute("loginMember");
+
+        // 파일 저장 경로 설정
+        String fileName = canvasImage.getOriginalFilename();
+        String filePath = soccerPresetBoardUploadPath + fileName;
+
+        try {
+            canvasImage.transferTo(new File(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("파일 저장 실패");
+        }
+
+        // DTO 생성 및 데이터 설정
+        MatchBoardDto matchBoardDto = MatchBoardDto.builder()
+                .mbName(presetName)
+                .mbFile(fileName)
+                .clubNum(Integer.parseInt(member.getClubNum()))
+                .mbType(option)
+                .build();
+
+        log.info("등록된 프리셋 : {}", matchBoardDto);
+
+        // DB에 동일 클럽번호의 동일 프리셋 타입이 있으면 기존에 있던 프리셋 지우기
+        createService.deleteMatchBoard(Integer.parseInt(member.getClubNum()), option);
+        // 서비스 호출
+        createService.createMatchBoard(matchBoardDto);
+
+        return ResponseEntity.ok("데이터 저장 성공");
+    }
+
+    // 프리셋 캔버스 불러오기
+    @GetMapping("/loadCanvas")
+    public ResponseEntity<?> loadCanvas(@RequestParam String type, HttpSession session) {
+        MemberDto member = (MemberDto) session.getAttribute("loginMember");
+        int clubNum = Integer.parseInt(member.getClubNum());
+
+        MatchBoardDto matchBoard = createService.loadMatchBoard(clubNum, type);
+        if (matchBoard == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("error", "해당 타입의 매치보드를 찾을 수 없습니다."));
+        }
+
+        Map<String, String> response = new HashMap<>();
+        response.put("presetName", matchBoard.getMbName());
+
+//        String imageUrl = soccerPresetBoardUploadPath + matchBoard.getMbFile();
+        String imageUrl = matchBoard.getMbFile();
+        response.put("filePath", imageUrl);
+
+        return ResponseEntity.ok(response);
+    }
+
     // 새로운 클럽 생성하기
     @GetMapping("/register")
-    public String clubRegister() {
+    public String clubRegister(Model model) {
+        ClubRegisterForm clubRegisterForm = ClubRegisterForm.builder().build();
+        model.addAttribute("clubRegisterForm", clubRegisterForm);
         return "/club/clubregister";
+    }
+
+    // 클럽 생성 요청 처리
+    @PostMapping("/register")
+    public String clubRegisterAction(@ModelAttribute ClubRegisterForm clubRegisterForm, RedirectAttributes redirectAttributes, Model model) {
+        log.info("클럽 생성 정보 : {}", clubRegisterForm.toString());
+
+        // 업로드 프로필 사진 저장
+        UploadFile uploadFile = fileService.storeFile(clubRegisterForm.getClubPhoto(), clublogoUploadPath);
+
+        // Form Bean -> Dto 변환
+        ClubDto clubDto = ClubDto.builder()
+                .clubName(clubRegisterForm.getClubName())
+                .clubLevel(clubRegisterForm.getClubLevel())
+                .clubLocation(clubRegisterForm.getClubLocation())
+                .clubPhone(clubRegisterForm.getClubPhone())
+                .clubInfo(clubRegisterForm.getClubInfo())
+                .clubPhoto(uploadFile.getUploadFileName())
+                .clubStoredPhoto(uploadFile.getStoreFileName())
+                .build();
+
+        clubService.clubRegister(clubDto);
+        redirectAttributes.addFlashAttribute("clubDto", clubDto);
+        return "redirect:/club/list";
     }
 
     // 클럽생성 완료 페이지
@@ -125,12 +320,3 @@ public class ClubController {
     }
 
 }
-
-
-
-
-
-
-
-
-

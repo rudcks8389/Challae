@@ -10,8 +10,11 @@ $(function () {
 
   dpDate.datepicker('setDate', new Date())
 
+  // let pickedDate = $('#reservationDate').val();
+  // $('#pickedDate').html(pickedDate);
+
   $('#reservationDate').on('change', function () {
-    let pickedDate = $('input').val();
+    let pickedDate = $('#reservationDate').val();
     $('#pickedDate').html(pickedDate);
     console.log('선택한 날짜 : ' + pickedDate);
   });

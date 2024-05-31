@@ -1,6 +1,7 @@
 package com.ezen.springmvc.web.club.form;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +14,6 @@ public class ClubRegisterForm {
     private String clubLevel;
     private String clubLocation;
     private String clubPhone;
-    private String clubPhoto;
+    private MultipartFile clubPhoto;
     private String clubInfo;
 }

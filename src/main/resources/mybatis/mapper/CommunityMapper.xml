@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.ezen.springmvc.domain.community.mapper.CommunityMapper">
+
+    <!--  출력 [커뮤니티 식별을 위한 클럽번호 / 출력 내용, 이름, 날짜]  -->
+    <select id="getClubCommunity" parameterType="String" resultType="CommunityDto">
+        select community.comm_num, community.comm_content, TO_CHAR(community.comm_date,'yyyy-MM-DD') comm_date, community.club_num, community.member_num, member.member_name
+        FROM community
+--         inner join member on community.club_num = member.club_num
+        inner join member on community.member_num = member.member_num
+        WHERE member.club_num = #{clubNum}
+    </select>
+<!--    입력기능 (데이터 저장)-->
+    <insert id="communityCreate" parameterType="CommunityDto">
+        insert into community(comm_num,comm_content,club_num,member_num)
+                    VALUES (comm_seq.nextval,#{commContent},#{clubNum},#{memberNum})
+    </insert>
+
+
+</mapper>

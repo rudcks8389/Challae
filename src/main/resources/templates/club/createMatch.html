@@ -3,139 +3,153 @@
       th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-          defer></script>
-  <link rel="stylesheet" type="text/css"
-        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-          defer></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            defer></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+            defer></script>
 
 </head>
 <body>
 
 <th:block th:fragment="css">
-  <link href="/css/newmatch.css" rel="stylesheet"/>
+    <link href="/css/newmatch.css" rel="stylesheet"/>
 </th:block>
 
 <th:block th:fragment="fontawesome">
-  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </th:block>
 
 <th:block th:fragment="script">
-  <script src="/js/weather.js" defer></script>
-  <script src="/js/match-calander.js" defer></script>
-  <script src="/js/newmatch.js" defer></script>
+    <script src="/js/weather.js" defer></script>
+    <script src="/js/match-calander.js" defer></script>
+    <script src="/js/newmatch.js" defer></script>
 </th:block>
 
 
 <th:block th:fragment="content">
 
 
-  <p style="width: 100%; text-align: center; font-size: 35px; border-bottom: 2px solid darkgray;">경기 일정 등록</p>
-  <!-- main 하단 부분  -->
-  <div class="main-content">
+    <p style="width: 100%; text-align: center; font-size: 35px; border-bottom: 2px solid darkgray;">경기 일정 등록</p>
+    <!-- main 하단 부분  -->
+    <div class="main-content">
 
-    <!-- 날짜 정보 -->
-    <div class="match-left">
-      <form action="" th:object="${createDto}" method="post" id="createForm" enctype="multipart/form-data">
-        <select id="fieldSelect" name="fieldNum" class="form-select" aria-label="Default select example" style="width: 50%; margin: 0 auto;">
-          <option selected disabled>⚽️&nbsp; 구장 선택</option>
-          <option  th:each="field : ${fields}"
-                  th:value="${field.fieldNum}"
-                  th:text="${field.fieldName}"> 테스트
-          </option>
-        </select>
-        <p style="margin-top: 20px; font-size: 19px;"><i class="fa-solid fa-check-double"></i> 전달 사항 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span class="textCount" style="font-size: 16px; color: #0e6efd">0자</span>
-          <span class="textTotal" style="font-size: 16px; color: #0e6efd">/&nbsp;100자</span>
-        </p>
+        <!-- 날짜 정보 -->
+        <div class="match-left">
+            <form action="" th:object="${createDto}" method="post" id="createForm" enctype="multipart/form-data">
+                <select id="fieldSelect" name="fieldNum" class="form-select" aria-label="Default select example"
+                        style="width: 50%; margin: 0 auto;">
+                    <option selected disabled>⚽️&nbsp; 구장 선택</option>
+                    <option th:each="field : ${fields}"
+                            th:value="${field.fieldNum}"
+                            th:text="${field.fieldName}"> 테스트
+                    </option>
+                </select>
+                <p style="margin-top: 20px; font-size: 19px;"><i class="fa-solid fa-check-double"></i> 전달 사항 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="textCount" style="font-size: 16px; color: #0e6efd">0자</span>
+                    <span class="textTotal" style="font-size: 16px; color: #0e6efd">/&nbsp;100자</span>
+                </p>
 
 
-        <textarea id="match-notice" th:field="*{matchInfo}" maxlength="100" placeholder="100자 내외 입력" style="resize: none"></textarea>
+                <textarea id="match-notice" th:field="*{matchInfo}" maxlength="100" placeholder="100자 내외 입력"
+                          style="resize: none"></textarea>
 
-        <div class="row">
-          <div class="col-md-6 mx-auto">
-            <div class="py-4 text-center"><i class="fa fa-calendar fa-5x"></i></div>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="py-4 text-center"><i class="fa fa-calendar fa-5x"></i></div>
 
-            <!-- Date Picker Input -->
-            <div class="form-group mb-4">
-              <div class="datepicker date input-group p-0 shadow-sm">
-                <input type="text" placeholder="Choose a reservation date"
-                       class="form-control py-4 px-4"
-                       id="reservationDate"  th:field="*{matchDate}" readonly>
-                <div class="input-group-append"><span class="input-group-text px-4"><i
-                        class="fa fa-clock-o"></i></span></div>
+                        <!-- Date Picker Input -->
+                        <div class="form-group mb-4">
+                            <div class="datepicker date input-group p-0 shadow-sm">
+                                <input type="text" placeholder="Choose a reservation date"
+                                       class="form-control py-4 px-4"
+                                       id="reservationDate" th:field="*{matchDate}" readonly>
+                                <div class="input-group-append"><span class="input-group-text px-4"><i
+                                        class="fa fa-clock-o"></i></span></div>
 
-              </div>
-              <input type="text" placeholder="시간을 입력하세요" class="form-control py-4 px-4"
-                     id="reservationTime"
-                     name="reservationTime" maxlength="10" style="border-radius: 2px; margin-top: -46px;" th:field="*{matchTime}">
+                            </div>
+                            <input type="text" placeholder="시간을 입력하세요" class="form-control py-4 px-4"
+                                   id="reservationTime"
+                                   name="reservationTime" maxlength="10" style="border-radius: 2px; margin-top: -46px;"
+                                   th:field="*{matchTime}">
 
-            </div><!-- DEnd ate Picker Input -->
+                        </div><!-- DEnd ate Picker Input -->
 
-            <div class="text-center">
-              <p class="font-italic text-white mb-2" style="font-style: italic;">선택한 날짜</p>
-              <h4 id="pickedDate" name="pickDate" class="font-weight-bold text-primary mb-3">선택한 날짜가
-                없습니다</h4>
-              <input type="hidden" id="clubNumTest" name="clubNumTest" th:field="*{clubNum}"> <!-- 캔버스 이미지 저장 위한 필드 -->
-              <input type="hidden" id="canvasData" name="canvasData" th:field="*{matchPhoto}"> <!-- 캔버스 이미지 저장 위한 필드 -->
-              <button type="submit"
-                 class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm">일정 등록하기</button>
-            </div>
-          </div>
+                        <div class="text-center">
+                            <p class="font-italic text-white mb-2" style="font-style: italic;">선택한 날짜</p>
+                            <h4 id="pickedDate" name="pickDate" class="font-weight-bold text-primary mb-3">선택한 날짜가
+                                없습니다</h4>
+                            <input type="hidden" id="clubNumTest" name="clubNumTest" th:field="*{clubNum}">
+                            <!-- 캔버스 이미지 저장 위한 필드 -->
+                            <input type="hidden" id="canvasData" name="canvasData" th:field="*{matchPhoto}">
+                            <!-- 캔버스 이미지 저장 위한 필드 -->
+                            <button type="submit"
+                                    class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm">
+                                일정 등록하기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
         </div>
-      </form>
 
-    </div>
+        <!-- 전략판  -->
+        <div class="match-center">
+            <div class="board-preset">
+                <form id="presetForm" action="" method="">
+                    <input type="radio" id="option1" name="option" value="A"><label for="option1">A</label>
+                    <input type="radio" id="option2" name="option" value="B"><label for="option2">B</label>
+                    <input type="radio" id="option3" name="option" value="C"><label for="option3">C</label>
+                    <input type="text" id="presetName" name="presetName" maxlength="9" placeholder="10자 미만">
+                    <button type="button" id="saveButton" name="저장" onclick="submitPresetForm()"> 저 장</button>
+                    <button type="button" id="loadButton" name="불러오기"> 불러오기</button>
+                </form>
+            </div>
+            <p style="color: #0e6efd; margin-bottom: -2rem; margin-top: 15px; font-size: 19px"> ✔︎ 더블 클릭 시 요소를 삭제할 수
+                있습니다. &nbsp;✔︎ 마우스 드래그를 통해 선수들의 움직임을 선으로 표현할 수 있습니다. </p>
+            <canvas id="soccer-board"
+                    style="width: 670px; height: 550px; background-image: url('/img/soccer_board.png'); background-repeat: round;">
+            </canvas>
+        </div>
+        <button id="clear-button"
+                style="height: 60px; width: 50px; background: #000; color: #EB0000; border: 1px solid #fff; margin: 0 0 -100px 0">
+            모두<br> 지우기
+        </button>
 
-
-    <!-- 전략판  -->
-    <div class="match-center">
-      <div class="board-preset">
-        <form action="" method="get">
-          <input type="radio" id="option1" name="option" value="A"><label for="option1">A</label>
-          <input type="radio" id="option2" name="option" value="B"><label for="option2">B</label>
-          <input type="radio" id="option3" name="option" value="C"><label for="option3">C<label>
-          <button type="button" id="saveButton" > 저 장</button>
-        </form>
-      </div>
-      <p style="color: #0e6efd; margin-bottom: -2rem; margin-top: 15px"> ✔︎ 더블 클릭 시 요소를 삭제할 수 있습니다. &nbsp;✔︎ 마우스 드래그를 통해 선수들의 움직임을 선으로 표현할 수 있습니다. </p>
-      <canvas id="soccer-board"
-              style="width: 670px; height: 550px; background-image: url('/img/soccer_board.png'); background-repeat: round;">
-      </canvas>
+        <div class="match-right">
+            <p style="font-size: 20px;"><i class="fa-solid fa-list"></i> 클럽원 목록</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 30%;"></th>
+                    <th style="width: 70%;">이름</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="clubMember : ${clubMembers}">
+                    <!--          <td style="background: url(/img/cat-sun2.jpeg); background-repeat: round">-->
+                    <td draggable="false">
+                        <img draggable="false"
+                             th:src="@{/profile/{storedProfile}(storedProfile=${clubMember.storedProfile})}"
+                             style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
+                    </td>
+                    <td class="draggable" draggable="true">
+                        <span th:text="*{clubMember.name}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="match-right">
-      <p style="font-size: 20px;"><i class="fa-solid fa-list"></i> 클럽원 목록</p>
-      <table>
-        <thead>
-        <tr>
-          <th style="width: 30%;"></th>
-          <th style="width: 70%;">이름</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="clubMember : ${clubMembers}">
-<!--          <td style="background: url(/img/cat-sun2.jpeg); background-repeat: round">-->
-          <td th:text="*{clubMember.storedProfile}">
-<!--            <img src="/img/cat-sun2.jpeg" width="50%" height="30%" style="object-fit: cover" draggable="false">-->
-          </td>
-          <td class="draggable" draggable="true">
-            <span th:text="*{clubMember.name}"></span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 </th:block>
 
-
 </body>
-
 </html>

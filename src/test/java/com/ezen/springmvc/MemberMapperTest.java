@@ -112,7 +112,7 @@ class MemberMapperTest {
     @Test
     @DisplayName("아이디 또는 성으로 회원 통합 검색 테스트")
     @Disabled
-    void findBySearchAllTest() {
+     void findBySearchAllTest() {
 //		List<MemberDto> list = memberMapper.findBySearchAll("bangry");
         List<MemberDto> list = memberMapper.findBySearchAll("김");
         log.info("모든 검색 전체목록 : {}", list);
@@ -132,6 +132,13 @@ class MemberMapperTest {
         List<MemberDto> list = memberMapper.findBySearchAllOption(searchCondition);
         log.info("검색 옵션별 전체목록 : {}", list);
         log.info("검색 수 : {}", list.size());
+    }
+
+    @Test
+    @DisplayName("내 팀 팀원 출력 테스트")
+    void myTeamMemberTest(){
+        List<MemberDto> member = memberMapper.myTeamList("101");
+        log.info("내 팀원 : {}",member);
     }
 
 }

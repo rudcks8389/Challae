@@ -28,7 +28,6 @@ public class SpringMvcJspApplication {
 //            log.info("빈이름 : {}", beanName);
 //        });
 //        log.info("=================================================");
-
     }
 
 }

@@ -1,0 +1,82 @@
+/* 기존 스타일 유지... */
+
+/* 게시글 작성 페이지 스타일 */
+.main-content {
+    display: flex;
+    flex-direction: column; /* 세로 정렬로 변경 */
+    gap: 20px; /* 세로 간격 추가 */
+    padding: 20px;
+    max-width: 600px; /* 가로 최대 너비 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    background-color: #222; /* 배경 색상 */
+    border-radius: 5px; /* 둥근 모서리 */
+    color: white; /* 텍스트 색상 */
+    box-sizing: border-box; /* 패딩 포함 박스 사이징 */
+}
+
+#postForm {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    gap: 15px; /* 요소 간격 */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column; /* 세로 정렬로 변경 */
+    gap: 5px; /* 레이블과 입력 필드 간격 */
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #333; /* 입력 필드 배경 색상 */
+    color: white; /* 입력 필드 텍스트 색상 */
+}
+
+.form-group input[readonly] {
+    background-color: #444; /* 읽기 전용 필드 배경 색상 */
+}
+
+.form-group textarea {
+    resize: none; /* 크기 조정 불가 */
+    height: 150px; /* 내용 입력 필드 높이 조정 */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* 버튼 간격 추가 */
+}
+
+.button-group .btn {
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-group .btn:hover {
+    background-color: #004494;
+}
+
+/* 버튼 스타일 */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #004494;
+}

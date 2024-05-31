@@ -38,6 +38,9 @@ dependencies {
     implementation 'com.oracle.database.jdbc:ojdbc8:21.9.0.0'
     // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+    // 유효성 검사 @Bean Validator 사용하기
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {

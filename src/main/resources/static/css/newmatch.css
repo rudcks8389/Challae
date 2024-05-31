@@ -40,7 +40,15 @@ main .main-content .match-center form button {
   border-radius: 5px;
 }
 
-main .main-content .match-center form button:hover {
+main .main-content .match-center form #saveButton:hover {
+  /* color: rgb(124, 190, 255);
+  border: 1px solid rgb(124, 190, 255); */
+  color: #000;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+main .main-content .match-center form #loadButton:hover {
   /* color: rgb(124, 190, 255);
   border: 1px solid rgb(124, 190, 255); */
   color: #000;

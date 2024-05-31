@@ -129,6 +129,12 @@ main .main-wrapper .team-info .team-info-right .team-info-right-membercount {
   background-color: #0c1f3d;
   color: white;
   border: none;
+  border-radius: 5px;
+}
+
+.team_join_a:hover {
+  font-size: 51px;
+  color: #81ff9e;
 }
 
 /*  */

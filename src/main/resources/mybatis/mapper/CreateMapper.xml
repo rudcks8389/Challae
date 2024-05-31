@@ -20,5 +20,26 @@
         where club_num = #{value}
     </select>
 
+    <!-- 저장하기 버튼 눌렀을 때 매치보드 생성하기   -->
+    <insert id="createMatchBoard" parameterType="MatchBoardDto">
+        INSERT INTO MATCHBOARD(mb_num, mb_name, mb_file, club_num, mb_type)
+        VALUES (MB_SEQ.NEXTVAL, #{mbName}, #{mbFile}, #{clubNum}, #{mbType})
+    </insert>
+
+    <!-- 전략판 프리셋 저장할 때 동일한 프리셋 값이 이미 있으면 먼저 지우기   -->
+    <delete id="deleteMatchBoard" parameterType="map">
+        DELETE
+        FROM MATCHBOARD
+        WHERE club_num = #{clubNum}
+          AND mb_type = #{type}
+    </delete>
+
+    <!--  불러오기 눌렀을 때 해당 프리셋 가져오기  -->
+    <select id="loadMatchBoard" parameterType="map" resultType="MatchBoardDto">
+        SELECT mb_num, mb_name, mb_file, club_num, mb_type
+        FROM MATCHBOARD
+        WHERE club_num = #{clubNum}
+          AND mb_type = #{type}
+    </select>
 </mapper>
 

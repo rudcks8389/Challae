@@ -24,12 +24,15 @@
 
   <!-- main 하단 부분  -->
   <div id="detail">
-    <div class="maintit">동대문점</div>
+
+    <div class="big" th:href="@{/field/view(fieldNum=${fieldDetail.fieldNum})}">
+    <div class="maintit" th:text="${fieldDetail.fieldName}">구장이름</div>
     <div class="bodywrapper">
       <div class="left">
         <h2>구장사진</h2>
-        <img src="/img/football.jpg" class="img" />
-        <p><i class="fa-solid fa-phone-volume" style=" padding: 0px 5px; border-radius: 100%;"></i>  010-6252-1007 / 010-9505-6646</p>
+          <img th:src="@{'/img/play/' + ${fieldDetail.fieldPhoto}}" class="img"/>
+          <p><i class="fa-solid fa-phone-volume" style=" padding: 0px 5px; border-radius: 100%;"></i>
+            <span th:text="${fieldDetail.fieldPhone}">전화번호</span></p>
         <div class="btnwrap" >
           <a href="/field/reservation"><button class="abtn">예약하러가기</button></a>
         </div>
@@ -49,9 +52,12 @@
               </thead>
 
               <tbody>
-              <tr>
+              <tr th:if="${fieldDetail != null}">
                 <th>실외구장 </th>
-                <td>40x20</td>
+                <td th:text="${fieldDetail.fieldSize}">구장사이즈</td>
+              </tr>
+              <tr th:unless="${fieldDetail != null}">
+                <td colspan="2">구장 정보를 찾을 수 없습니다.</td>
               </tr>
 
               </tbody>
@@ -67,7 +73,7 @@
             <h3>유의사항</h3>
             <p> <i class="fa-solid fa-triangle-exclamation"></i> <span> 풋살장 내 음식물섭취 금지 </span>(물 / 음료 제외) <br>
               <i class="fa-solid fa-triangle-exclamation"></i> 이용시 발생하는 부상 및 상해 분실등 에 대한 책임은 이용자 본인에게 있습니다.</span><br>
-              <i class="fa-solid fa-triangle-exclamation"></i> 문의 전화 - 대관 담당자 : 010-1111-1111 / 010-2222-2222  문의가능시간 : 10:00~18:00<br>
+              <i class="fa-solid fa-triangle-exclamation"></i> 문의 전화 <span th:text="${fieldDetail.fieldPhone}">전화번호</span> 문의가능시간 : 10:00~18:00<br>
               <i class="fa-solid fa-triangle-exclamation"></i> 풋살화 외 축구화 착용금지 (금속스터드.일반 스터드 축구화 착용금지)<br>
               <i class="fa-solid fa-triangle-exclamation"></i> <span>풋살파크 전 구역은 금연 구역입니다. (흡연은 흡연구역을 이용해주세요.) </span> <br>
               <i class="fa-solid fa-triangle-exclamation"></i> 풋살장 다음달 예약은 매월 20일에 오픈 됩니다.(주말일 경우 전일 오픈)<br>
@@ -81,12 +87,12 @@
       </div>
 
       <div class="right">
-        <h2>찾아오시는 길</h2>
+        <h2>구장위치</h2>
 
         <div class="location">
           <div class="mapcontent">
             <div id="map"></div>
-            <p><i class="fa-solid fa-location-dot" style=" padding: 5px 8px; border-radius: 100%;" ></i> 동대문구 천호대로 133 홈플러스 동대문점 옥상층(7F) HM풋살파크</p>
+            <p><i class="fa-solid fa-location-dot" style=" padding: 5px 8px; border-radius: 100%;" ></i> <span th:text="${fieldDetail.fieldNewAddress}">구장주소</span></p>
             <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	94449e96205beb140bfba2b02da6e26e"></script>
             <script>
               var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -113,7 +119,10 @@
 
               // 지도에 마커를 생성하고 표시한다
               var marker = new kakao.maps.Marker({
-                position: new kakao.maps.LatLng(37.6555926, 127.0623312), // 마커의 좌표
+                position: new kakao.maps.LatLng(
+                        37.6555926,
+                        127.0623312
+                ), // 마커의 좌표
                 map: map // 마커를 표시할 지도 객체
               });
 
@@ -144,11 +153,11 @@
               <tbody>
               <tr>
                 <th>주간 (10:00 ~ 18:00) </th>
-                <td>110,000원 (2시간)</td>
+                <td><span th:text="${fieldDetail.fieldDayprice}">18시이전가격</span> 원 (2시간)</td>
               </tr>
               <tr>
                 <th>야간 (18:00 ~ 24:00) </th>
-                <td>120,000원 (2시간)</td>
+                <td><span th:text="${fieldDetail.fieldEndprice}">18시이후가격</span> 원 (2시간)</td>
               </tr>
               </tbody>
             </table>
@@ -167,30 +176,30 @@
       </div>
 
     </div>
-
+    </div>
   </div>
 </th:block>
 
 
 </body>
 </html>
-<script defer>
-  function getCalendar(v){
-    var stadium_code = document.form.stadium_code.value;
-    $.get("ajax_calendar.asp?stadium_code="+stadium_code+"&reqdate="+v , function(r){
-      $("#calendarDiv").html(r);
-    });
-  }
+<!--<script defer>-->
+<!--  function getCalendar(v){-->
+<!--    var stadium_code = document.form.stadium_code.value;-->
+<!--    $.get("ajax_calendar.asp?stadium_code="+stadium_code+"&reqdate="+v , function(r){-->
+<!--      $("#calendarDiv").html(r);-->
+<!--    });-->
+<!--  }-->
 
-  function getCalendarByStadium(e){
-    var stadium_code = e.value;
-    var v;
-    v = $("#regdate").text();
-    v = v.replace(".","-");
-    v = v.replace(".","-");
+<!--  function getCalendarByStadium(e){-->
+<!--    var stadium_code = e.value;-->
+<!--    var v;-->
+<!--    v = $("#regdate").text();-->
+<!--    v = v.replace(".","-");-->
+<!--    v = v.replace(".","-");-->
 
-    $.get("ajax_calendar.asp?stadium_code="+stadium_code+"&reqdate="+v , function(r){
-      $("#calendarDiv").html(r);
-    });
-  }
-</script>
+<!--    $.get("ajax_calendar.asp?stadium_code="+stadium_code+"&reqdate="+v , function(r){-->
+<!--      $("#calendarDiv").html(r);-->
+<!--    });-->
+<!--  }-->
+<!--</script>-->
