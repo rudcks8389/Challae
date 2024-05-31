@@ -17,6 +17,9 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--jQuery-->
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
 </head>
 
 <body>
@@ -41,6 +44,7 @@
 <th:block th:fragment="script">
     <script src="/js/weather.js" defer></script>
     <script src="/js/myteam-schedule-monthRender.js" defer></script>
+    <script src="/js/KickClubMember.js" defer></script>
 </th:block>
 
 
@@ -109,7 +113,7 @@
                         <td th:if="${clubMember.dir} == 'N'">
                             <form th:action="@{/club/kick}" method="post">
                                 <input type="hidden" name="memberNum" th:value="${clubMember.memberNum}" />
-                                <button type="submit">추방</button>
+                                <button type="button" onclick="confirmKick(this.form)">추방</button>
                             </form>
                         </td>
                     </tr>

@@ -147,8 +147,17 @@ public class ClubController {
         return "redirect:/club/myteam";
     }
 
+    // 감독의 클럽원 추방
     @PostMapping("/kick")
-    public String deleteMember(@RequestParam("memberNum") String memberNum) {
+    public String deleteMember(@RequestParam("memberNum") String memberNum, RedirectAttributes redirectAttributes) {
+        MemberDto memberDto = new MemberDto();
+        memberDto.setMemberNum(memberNum);
+        try {
+            memberService.outClubMember(memberDto);
+            redirectAttributes.addFlashAttribute("message", "회원이 성공적으로 추방되었습니다.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", "회원 추방에 실패했습니다.");
+        }
 
         return "redirect:/club/myteam";
     }

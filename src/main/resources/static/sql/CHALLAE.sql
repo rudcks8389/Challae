@@ -1286,18 +1286,23 @@
 
 -- COMMIT;
 
--- -- 2팀 멤버 더미 업데이트
--- UPDATE member
--- SET club_num = '101'
--- WHERE member_name = '김휘집' ;
+-- 2팀 멤버 더미 업데이트
+UPDATE member
+SET club_num = '101'
+WHERE member_name = '';
+commit;
 
--- UPDATE member
--- SET club_num = '101'
--- WHERE member_name = '김혜성';
+
 -- -- 감독생성
 -- UPDATE member
 -- SET member_dir = 'Y'
--- WHERE member_name = '김혜성' ;
+-- WHERE member_name = '홍원기' ;
+
+-- 	UPDATE member
+-- 		SET club_num = 101
+-- 		WHERE member_num = 1005 ;
+    
+--     COMMIT;
 
 
 -- -- 3팀 멤버 더미 업데이트

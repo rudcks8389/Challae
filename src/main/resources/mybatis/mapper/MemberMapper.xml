@@ -97,7 +97,7 @@
 
 
 <!--	클럽원 강퇴 -->
-	<update id="ClubMemberDelete">
+	<update id="ClubMemberDelete" parameterType="MemberDto">
 		UPDATE member
 		SET club_num= null
 		WHERE member_num = #{memberNum}
