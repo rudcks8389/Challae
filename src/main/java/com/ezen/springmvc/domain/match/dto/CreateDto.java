@@ -12,6 +12,7 @@ public class CreateDto {
 
     private String matchNum;
     private String matchDate;  // 매치날짜
+    private String matchDateForm; // 매치날짜 일자만 출력
     private String matchInfo; // 전달사항
     private String matchTime; // 매치시간
     private String matchPhoto; // 전략판 사진
@@ -19,6 +20,7 @@ public class CreateDto {
     private int fieldNum; // 구장번호
     private String fieldName; // 구장이름
     private String fieldNewaddress; // 구장 주소
+    private String fieldOldaddress;
     private String fieldX; // 구장 x좌표
     private String fieldY;// 구장 y좌표
 

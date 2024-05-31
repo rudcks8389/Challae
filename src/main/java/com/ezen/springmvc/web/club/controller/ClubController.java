@@ -104,11 +104,11 @@ public class ClubController {
             List<ClubDto> clubData = clubService.clubDataService(loginClubNumber);
             model.addAttribute("clubData", clubData);
 
-        // 로그인한 멤버의 팀원목록 출력
+        // 로그인한 멤버의 클럽원목록 출력
         List<MemberDto> clubMember = memberService.getTeamMember(loginClubNumber);
         model.addAttribute("clubMember",clubMember);
 
-        // 커뮤니티 내용데이터 출력 (단순 DB출력만 되어있음)
+        // 클러 커뮤니티 내용데이터 출력 (단순 DB 데이터 출력)
         List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
         model.addAttribute("community", community);
 
@@ -127,9 +127,9 @@ public class ClubController {
         }
     }
 
-
+    // 소통공간의 입력한 내용을 DB에 저장
     @PostMapping("/myteam")
-    public String inputCommDate(@ModelAttribute CommunityForm communityForm, HttpServletRequest request,Model model){
+    public String inputCommDate(@ModelAttribute CommunityForm communityForm, HttpServletRequest request){
         HttpSession session = request.getSession();
         MemberDto loginMember = (MemberDto)session.getAttribute("loginMember");
         String clubNum = loginMember.getClubNum();
@@ -145,7 +145,6 @@ public class ClubController {
         communityService.inputCommunity(inputData);
 
         return "redirect:/club/myteam";
-
     }
 
 

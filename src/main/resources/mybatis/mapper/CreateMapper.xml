@@ -28,7 +28,7 @@
     </select>
 <!--    매치 일정 상세정보 매치 번호 / 출력 매치날짜, 매치시간, 전달사항, 전략판사진, 구장번호, 구장이름, 구장주소, 구장 좌표 (x,y)-->
     <select id="clubDetailByMatchNum" resultType="CreateDto">
-        SELECT match.match_num, match.match_date, match.match_time, match.match_info,match.match_photo, match.field_num, field.field_name, field.field_x, field.field_y
+        SELECT match.match_num, match.match_date, match.match_time, match.match_info,match.match_photo, match.field_num, field.field_name, field.field_x, field.field_y, field.field_newaddress, field.field_oldaddress
         FROM match
                  JOIN field ON match.field_num = field.field_num
         WHERE match.match_num = #{MatchNum}

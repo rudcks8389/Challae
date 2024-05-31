@@ -60,7 +60,7 @@ class CreateMapperTest {
     @Test
     @DisplayName("매치 상세정보")
     void matchDetailTest(){
-        CreateDto matchDetail = createMapper.clubDetailByMatchNum("3");
+        CreateDto matchDetail = createMapper.clubDetailByMatchNum("1");
          log.info("매치 상세정보 : {}",matchDetail);
     }
 }
