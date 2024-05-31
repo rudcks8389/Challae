@@ -31,7 +31,7 @@
 
 	<!-- 회원 로그인 -->
 	<select id="findByIdAndPasswd" resultType="MemberDto">
-		SELECT MEMBER_ID "id", MEMBER_NAME "name",MEMBER_PHOTO "profileImage" ,MEMBER_STOREDPHOTO "storedProfile",MEMBER_EMAIL "email",CLUB_NUM "clubNum",MEMBER_PASSWD "passwd", MEMBER_DIR "dir",MEMBER_NUM "memberNum"
+		SELECT MEMBER_ID "id", MEMBER_NAME "name",MEMBER_PHOTO "profileImage" ,MEMBER_STOREDPHOTO "storedProfile",MEMBER_EMAIL "email",CLUB_NUM "clubNum",MEMBER_PASSWD "passwd", MEMBER_DIR "dir",MEMBER_NUM "memberNum",MEMBER_PHONE "phone"
 		FROM member
 		WHERE member_id = #{id} AND MEMBER_PASSWD = #{passwd}
 	</select>

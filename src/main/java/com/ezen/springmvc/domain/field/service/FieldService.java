@@ -8,4 +8,6 @@ public interface FieldService {
 
     public FieldDto findByFieldNum(int fieldNum);
 
+    public FieldDto findByFieldNum2(int fieldNum);
+
 }

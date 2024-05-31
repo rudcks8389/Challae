@@ -17,7 +17,7 @@
 
 <th:block th:fragment="script">
   <script src="/js/weather.js" defer></script>
-
+<!--  <script src="/js/calendar.js" defer></script>-->
 </th:block>
 
 
@@ -25,20 +25,21 @@
 
   <!-- main 하단 부분  -->
   <div id="reservation">
+    <div class="big" th:href="@{/field/view(fieldNum=${fieldDetail2.fieldNum})}">
     <div class="title">대관예약</div>
 
     <div class="bodywrapper">
       <div class="left">
         <div class="leftmain" >
-          <img src="/img/football.jpg" class="playimage"/>
-          <p>동대문점</p>
+          <img th:src="@{'/img/play/' + ${fieldDetail2.fieldPhoto}}" class="playimage"/>
+          <div  th:text="${fieldDetail2.fieldName}" >구장이름</div>
         </div>
 
         <div class="leftsub">
           <h2>유의사항</h2>
           <p> <i class="fa-solid fa-triangle-exclamation"></i> <span> 풋살장 내 음식물섭취 금지 </span>(물 / 음료 제외) <br>
             <i class="fa-solid fa-triangle-exclamation"></i> 이용시 발생하는 부상 및 상해 분실등 에 대한 책임은 이용자 본인에게 있습니다. </span><br>
-            <i class="fa-solid fa-triangle-exclamation"></i> 문의 전화 - 대관 담당자 : 010-1111-1111 / 010-2222-2222  문의가능시간 : 10:00~18:00<br>
+            <i class="fa-solid fa-triangle-exclamation"></i> 문의 전화 : <span th:text="${fieldDetail2.fieldPhone}">구장전화번호</span>  문의가능시간 : 10:00~18:00<br>
             <i class="fa-solid fa-triangle-exclamation"></i> 풋살화 외 축구화 착용금지 (금속스터드.일반 스터드 축구화 착용금지)<br>
             <i class="fa-solid fa-triangle-exclamation"></i> <span>풋살파크 전 구역은 금연 구역입니다. (흡연은 흡연구역을 이용해주세요.) </span> <br>
             <i class="fa-solid fa-triangle-exclamation"></i> 풋살장 다음달 예약은 매월 20일에 오픈 됩니다.(주말일 경우 전일 오픈)<br>
@@ -58,32 +59,33 @@
         </div>
       </div>
       <div class="right">
-        <div id="calendar">
-          <img src="/img/football.jpg" class="calendararea" />
-          <span class="subtit">날짜선택 : 2024.05.28 </span>
-          <!-- 달력에서 선택한 날짜가 동적으로 들어가는 자리 -->
+        <div id="rightinner">
+
+          <table id="calendar">
+            <tr>
+              <td align="center"><label onclick="prevCalendar()"> ◀ </label></td>
+              <td colspan="5" id="calendarTitle">yyyy년 m월</td>
+              <td align="center"><label onclick="nextCalendar()"> ▶ </label></td>
+            </tr>
+            <tr>
+              <td><span style="color: red">일</span></td>
+              <td>월</td>
+              <td>화</td>
+              <td>수</td>
+              <td>목</td>
+              <td>금</td>
+              <td><span style="color: blue">토</span></td>
+            </tr>
+            <script type="text/javascript">buildCalendar();</script>
+          </table>
           <!-- 예약 달력들어갈 자리 -->
+          <table id = "timeTable">	</table>
+          <span class="subtit">선택된 날짜 : <span id="selectedDate"></span> </span>
+
+          <!-- 달력에서 선택한 날짜가 동적으로 들어가는 자리 -->
+
         </div>
         <div class="inner">
-
-
-          <div class="sub">
-            <h3>시간 선택</h3>
-            <p>
-                <span>
-                    <select name="time" id="">
-                      <option value="">시간을 선택해주세요</option>
-                      <option value="70">10:00~12:00</option>
-                      <option value="71">12:00~14:00</option>
-                      <option value="72">14:00~16:00</option>
-                    </select>
-                  <!-- <button>10:00~12:00</button>
-                  <button>12:00~14:00</button>
-                  <button>14:00~16:00</button>
-                  <button>16:00~18:00</button>
-                  -->
-                  </span></p>
-          </div>
           <div class="tablewrap">
             <table class="reservationtable" >
               <h2>대관 예약자 정보</h2>
@@ -94,19 +96,16 @@
               <tbody>
               <tr>
                 <th scope="row">신청자</th>
-                <td>리덕재</td>
+                <td><span th:text="${session.loginMember.name}"></span></td>
               </tr>
               <tr>
                 <th scope="row">연락처</th>
-                <td>
-                  010-1111-1111
-                </td>
+                <td><span th:text="${session.loginMember.phone}"></span></td>
               </tr>
-
 
               <tr>
                 <th scope="row">예약일자</th>
-                <td id="dateBottom">2024.05.16</td>
+                <td id="dateBottom"><span id="selectedDate2">선택된날짜</span></td>
               </tr>
               <tr>
                 <th scope="row">예약시간</th>
@@ -136,29 +135,92 @@
 
       </div>
     </div>
+    </div>
+
   </div>
 </th:block>
-
 </body>
-
 </html>
-<script>
-  function getCalendar(v){
-    var stadium_code = document.form.stadium_code.value;
-    $.get("ajax_calendar.asp?stadium_code="+stadium_code+"&reqdate="+v , function(r){
-      $("#calendarDiv").html(r);
-    });
+<script type="text/javascript">
+  var today = new Date();
+  var currentMonth = today.getMonth();  // 현재 월
+  var currentYear = today.getFullYear();
+
+
+  function buildCalendar(){
+    var row = null;
+    var cnt = 0;
+    var calendarTable = document.getElementById("calendar");
+    var calendarTableTitle = document.getElementById("calendarTitle");
+    calendarTableTitle.innerHTML = today.getFullYear()+"년"+(today.getMonth()+1)+"월";
+
+    var firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    var lastDate = new Date(today.getFullYear(), today.getMonth()+1, 0);
+    while(calendarTable.rows.length > 2){
+      calendarTable.deleteRow(calendarTable.rows.length -1);
+    }
+
+    row = calendarTable.insertRow();
+
+    for(i = 0; i < firstDate.getDay(); i++){
+      cell = row.insertCell();
+      cnt += 1;
+    }
+
+    for (i = 1; i <= lastDate.getDate(); i++) {
+      if (cnt % 7 === 0) {
+        row = calendarTable.insertRow();
+      }
+
+      cell = row.insertCell();
+      cnt += 1;
+
+      cell.setAttribute('id', i);
+      cell.innerHTML = i;
+      cell.style.textAlign = "center";
+
+      cell.onclick = function(){
+        var clickedYear = today.getFullYear();
+        var clickedMonth = ( 1 + today.getMonth() );
+        var clickedDate = this.getAttribute('id');
+
+        clickedDate = clickedDate >= 10 ? clickedDate : '0' + clickedDate;
+        clickedMonth = clickedMonth >= 10 ? clickedMonth : '0' + clickedMonth;
+        var clickedYMD = clickedYear + "-" + clickedMonth + "-" + clickedDate;
+
+        document.getElementById("selectedDate").innerText = clickedYMD;
+        document.getElementById("selectedDate2").innerText = clickedYMD;
+      }
+
+      if (cnt % 7 == 1) {
+        cell.innerHTML = "<span style='color: red;'>" + i + "</span>";
+      }
+
+      if (cnt % 7 == 0){
+        cell.innerHTML = "<span style='color: blue;'>" + i + "</span>";
+        row = calendar.insertRow();
+      }
+    }
+
+    if(cnt % 7 != 0){
+      for(var i = 0; i < 7 - (cnt % 7); i++){
+        var cell = row.insertCell();
+      }
+    }
   }
 
-  function getCalendarByStadium(e){
-    var stadium_code = e.value;
-    var v;
-    v = $("#regdate").text();
-    v = v.replace(".","-");
-    v = v.replace(".","-");
-
-    $.get("ajax_calendar.asp?stadium_code="+stadium_code+"&reqdate="+v , function(r){
-      $("#calendarDiv").html(r);
-    });
+  function prevCalendar(){
+    if(today.getFullYear() > currentYear || (today.getFullYear() === currentYear && today.getMonth() > currentMonth)){
+      today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
+      buildCalendar();
+    }
   }
+
+  function nextCalendar(){
+    if(today.getFullYear() < currentYear || (today.getFullYear() === currentYear && today.getMonth() < currentMonth + 1)){
+      today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
+      buildCalendar();
+    }
+  }
+  buildCalendar();
 </script>

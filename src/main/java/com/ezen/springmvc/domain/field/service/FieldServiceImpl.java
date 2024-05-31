@@ -20,4 +20,9 @@ public class FieldServiceImpl implements FieldService{
     public FieldDto findByFieldNum(int fieldNum){
         return fieldMapper.findByFieldNum(fieldNum);
     }
+
+    @Override
+    public FieldDto findByFieldNum2(int fieldNum){
+        return fieldMapper.findByFieldNum2(fieldNum);
+    }
 }

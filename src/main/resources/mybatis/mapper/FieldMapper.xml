@@ -14,5 +14,11 @@
         WHERE FIELD_NUM = #{fieldNum}
     </select>
 
+    <select id="findByFieldNum2" resultType="fieldDto">
+        SELECT FIELD_NUM, FIELD_NAME, FIELD_NEWADDRESS, FIELD_OLDADDRESS, FIELD_PHONE, FIELD_PHOTO, FIELD_SIZE, FIELD_X, FIELD_Y
+        FROM FIELD
+        WHERE FIELD_NUM = #{fieldNum}
+    </select>
+
 
 </mapper>

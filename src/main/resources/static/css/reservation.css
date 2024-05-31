@@ -45,11 +45,14 @@
   float: right;
   padding:20px;
 }
-#calendar {
+#rightinner {
   width: 100%;
+  height: 40%;
   text-align: center;
   background-color: rgb(166, 184, 196);
+  border: 1px solid red;
   color: black;
+  overflow: hidden;
 }
 .right .calendararea {
   width: 100%;
@@ -57,15 +60,10 @@
 }
 
 .inner {
+  margin: 0 auto;
   width: 90%;
-  margin-top: 30px;
-}
-.inner .sub {
-  padding: 10px 0;
-  border-bottom: 1px solid lightgray;
-}
-.inner .sub span{
-  font-size: 25px;
+  margin-top: 20px;
+  border: 1px solid rgb(166, 184, 196);
 }
 .tablewrap {
   width: 100%;
@@ -75,6 +73,7 @@
   width: 100%;
   padding: 10px;
   background: black;
+  border: 1px solid blue;
 }
 .reservationtable .tabletit{
   font-size: 25px;

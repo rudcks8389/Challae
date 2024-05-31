@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.ezen.springmvc.domain.reservation.mapper.ReservationMapper">
+
+    <select id="findByReservationNum"  resultType="ReservationDto">
+        SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS') regdate, original_profile, stored_profile
+        FROM member
+        WHERE member_id = #{value}
+    </select>
+</mapper>
+
