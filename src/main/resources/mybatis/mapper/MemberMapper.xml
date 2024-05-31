@@ -96,5 +96,13 @@
 	</select>
 
 
+<!--	클럽원 강퇴 -->
+	<update id="ClubMemberDelete">
+		UPDATE member
+		SET club_num= null
+		WHERE member_num = #{memberNum}
+
+	</update>
+
 </mapper>
 

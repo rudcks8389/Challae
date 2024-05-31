@@ -5,7 +5,9 @@ import com.ezen.springmvc.domain.member.dto.MemberSearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 //@Repository
@@ -31,6 +33,9 @@ public interface MemberMapper {
 
     // 내 팀보기에서 쓸 멤버 클럽번호에 따른 팀원목록 출력
      public List<MemberDto> myTeamList(String clubNum); // xml로 인자 두개 이상을 받아올 때 @param으로 지정
+
+    // 팀원 목록에서 감독이 팀원 삭제하는 기능
+    public void ClubMemberDelete (MemberDto memberDto);
 }
 
 

@@ -92,6 +92,7 @@ main .main-wrapper .team-content .team-table table {
   height: 380px;
   margin: 1rem auto;
   background-color: #000;
+
 }
 
 main .main-wrapper .team-content .team-table table thead th {
@@ -102,7 +103,7 @@ main .main-wrapper .team-content .team-table table thead th {
   border-bottom: 4px solid rgb(124, 190, 255);
 }
 
-table tbody tr {
+main .main-wrapper .team-content .team-table tr {
   border-bottom: 1px solid #ccc;
 
 }
@@ -110,7 +111,8 @@ table tbody tr {
 .main-wrapper .team-content .team-table table tbody td {
   text-align: center;
   padding: 10px;
-  vertical-align: top;
+  /*vertical-align: top;*/
+  height: 50px;
   border-bottom: 1px solid #ccc;
 }
 
@@ -231,6 +233,7 @@ display: none;
   border: 1px solid rgb(124, 190, 255);
   color: rgb(124, 190, 255);
   border-radius: 5px;
+  margin-left: 10px;
   width: 70px;
   height: 40px;
 }

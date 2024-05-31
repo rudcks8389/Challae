@@ -47,5 +47,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.myTeamList(clubNum);
 	}
 
+	@Override
+	public void outClubMember(MemberDto memberDto) {
+		memberMapper.ClubMemberDelete(memberDto);
+	}
+
 
 }

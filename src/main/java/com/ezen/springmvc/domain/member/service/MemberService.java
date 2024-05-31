@@ -2,6 +2,7 @@ package com.ezen.springmvc.domain.member.service;
 
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 /**
@@ -16,4 +17,5 @@ public interface MemberService {
 
 	// 내 팀보기
 	public List<MemberDto> getTeamMember(String clubNum);
+	public void outClubMember (MemberDto memberDto);
 }

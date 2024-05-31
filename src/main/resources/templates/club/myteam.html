@@ -88,7 +88,7 @@
         <div class="team-content">
             <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
                 <h2 class="club-member-header">멤버 목록</h2>
-                <table style="text-align: center;">
+                <table class="" style="text-align: center;">
                     <!-- <caption>팀원 목록</caption> -->
                     <thead>
                     <tr>
@@ -105,7 +105,13 @@
                         <td th:text="${clubMember.dir} == 'N' ? '팀원' : '감독'"></td>
                         <td th:text="${clubMember.phone}"></td>
                         <!-- 감독 제외 팀원에게만 뜨는 추방 -->
-                        <td th:text="${clubMember.dir}== 'N' ? '추방' : null"></td>
+                        <td>
+                        <td th:if="${clubMember.dir} == 'N'">
+                            <form th:action="@{/club/kick}" method="post">
+                                <input type="hidden" name="memberNum" th:value="${clubMember.memberNum}" />
+                                <button type="submit">추방</button>
+                            </form>
+                        </td>
                     </tr>
 
                     </tbody>
@@ -152,7 +158,7 @@
                 </div>
 
                 <form th:object="${communityForm}" method="post" class="chat-input">
-                    <input th:field="*{content}" type="text" id="chat">
+                    <input th:field="*{content}" type="text" id="chat" placeholder="30자 이내로 작성해주세요." minlength="1" maxlength="36" required>
                     <button type="submit" class="send-btn">등록</button>
                 </form>
 

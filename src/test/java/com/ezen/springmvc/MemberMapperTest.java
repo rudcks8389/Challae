@@ -141,6 +141,17 @@ class MemberMapperTest {
         log.info("내 팀원 : {}",member);
     }
 
+//    @Test
+//    @DisplayName("팀원 강퇴 기능 테스트")
+//    void TeamOutTest(){
+//        String memberNum = "1005";
+//
+//        // 업데이트 수행
+//        memberMapper.ClubMemberDelete(memberNum);
+//        MemberDto member = memberMapper.findById("zip");
+//        log.info("수정되었나 : {}",member);
+//    }
+
 }
 
 

@@ -147,6 +147,11 @@ public class ClubController {
         return "redirect:/club/myteam";
     }
 
+    @PostMapping("/kick")
+    public String deleteMember(@RequestParam("memberNum") String memberNum) {
+
+        return "redirect:/club/myteam";
+    }
 
     // 클럽 상세보기
     @GetMapping("/detail")
