@@ -1,7 +1,185 @@
 /*
- * 캔버스에 전략판 그리기
+ * 캔버스에 전략판 그리기 관련 모든 코드
  *
  * */
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const draggable = document.querySelectorAll('.draggable');
+//     const canvas = document.querySelector('#soccer-board');
+//     const clearButton = document.querySelector('#clear-button');
+//     const ctx = canvas.getContext('2d');
+//
+//     const img = new Image();
+//     img.src = '../img/jersey.png';
+//
+//     const backgroundImg = new Image();
+//     backgroundImg.src = '../img/soccer_board.png';
+//
+//     canvas.width = 670;
+//     canvas.height = 550;
+//
+//     const elements = [];
+//     const curves = [];
+//     let isDrawing = false;
+//     let currentCurve = [];
+//
+//     // 캔버스에서 우클릭 메뉴창 금지
+//     canvas.addEventListener("contextmenu", e => e.preventDefault());
+//
+//     backgroundImg.onload = () => {
+//         ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+//     };
+//
+//     draggable.forEach(draggable => {
+//         draggable.addEventListener('dragstart', (event) => {
+//             const text = event.target.innerText;
+//             event.dataTransfer.setData('text/plain', text);
+//
+//             const dragCanvas = document.createElement('canvas');
+//             const dragCtx = dragCanvas.getContext('2d');
+//             dragCanvas.width = 100;
+//             dragCanvas.height = 50;
+//             dragCtx.fillStyle = 'black';
+//             dragCtx.fillRect(0, 0, dragCanvas.width, dragCanvas.height);
+//             dragCtx.drawImage(img, 0, 0, 20, 20);
+//             dragCtx.fillStyle = 'blue';
+//             dragCtx.fillText(text, 30, 30);
+//             event.dataTransfer.setDragImage(dragCanvas, 50, 25);
+//         });
+//     });
+//
+//     clearButton.addEventListener('click', () => {
+//         elements.length = 0;
+//         curves.length = 0;
+//         redrawCanvas();
+//     });
+//
+//     canvas.addEventListener('dragover', (event) => {
+//         event.preventDefault();
+//     });
+//
+//     canvas.addEventListener('drop', (event) => {
+//         event.preventDefault();
+//
+//         if (elements.length >= 6) {
+//             alert('최대 6개까지 추가할 수 있습니다');
+//             return;
+//         }
+//
+//         const rect = canvas.getBoundingClientRect();
+//         const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+//         const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+//         const text = event.dataTransfer.getData('text/plain');
+//
+//         const drawImageWithText = () => {
+//             ctx.drawImage(img, x - 50, y - 50, 100, 100);
+//             ctx.fillStyle = 'black';
+//             ctx.font = 'bold 16px Arial';
+//             ctx.fillText(text, x - 20, y + 60);
+//             elements.push({x: x - 50, y: y - 50, width: 100, height: 100, img, text});
+//         };
+//
+//         if (img.complete) {
+//             drawImageWithText();
+//         } else {
+//             img.onload = drawImageWithText();
+//         }
+//
+//         console.log(`드랍 좌표 체크: (${x}, ${y})`);
+//     });
+//
+//     canvas.addEventListener('mousedown', (event) => {
+//         isDrawing = true;
+//         currentCurve = [];
+//         const rect = canvas.getBoundingClientRect();
+//         const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+//         const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+//         currentCurve.push({x, y});
+//     });
+//
+//     canvas.addEventListener('mousemove', (event) => {
+//         if (!isDrawing) return;
+//
+//         const rect = canvas.getBoundingClientRect();
+//         const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+//         const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+//         currentCurve.push({x, y});
+//         redrawCanvas();
+//     });
+//
+//     canvas.addEventListener('mouseup', () => {
+//         if (!isDrawing) return;
+//         isDrawing = false;
+//         curves.push([...currentCurve]);
+//         currentCurve = [];
+//         redrawCanvas(); // 마지막 곡선을 추가한 후 다시 그리기
+//     });
+//
+//     canvas.addEventListener('dblclick', (event) => {
+//         const rect = canvas.getBoundingClientRect();
+//         const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+//         const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+//
+//         // 요소 삭제
+//         for (let i = elements.length - 1; i >= 0; i--) {
+//             const element = elements[i];
+//             if (x >= element.x && x <= element.x + element.width && y >= element.y && y <= element.y + element.height) {
+//                 elements.splice(i, 1);
+//                 redrawCanvas();
+//                 return;
+//             }
+//         }
+//
+//         // 선 삭제
+//         for (let i = curves.length - 1; i >= 0; i--) {
+//             const curve = curves[i];
+//             for (let j = 1; j < curve.length; j++) {
+//                 const p1 = curve[j - 1];
+//                 const p2 = curve[j];
+//                 const distance = Math.sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2);
+//                 if (distance < 10 && Math.abs((p2.y - p1.y) * x - (p2.x - p1.x) * y + p2.x * p1.y - p2.y * p1.x) / distance < 5) {
+//                     curves.splice(i, 1);
+//                     redrawCanvas();
+//                     return;
+//                 }
+//             }
+//         }
+//     });
+//
+//     function redrawCanvas() {
+//         ctx.clearRect(0, 0, canvas.width, canvas.height);
+//         ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+//
+//         elements.forEach(element => {
+//             ctx.drawImage(element.img, element.x, element.y, 100, 100);
+//             ctx.fillText(element.text, element.x + 30, element.y + 110);
+//         });
+//
+//         curves.forEach(curve => {
+//             if (curve.length < 2) return; // 길이가 2 미만인 곡선은 무시
+//             ctx.beginPath();
+//             ctx.moveTo(curve[0].x, curve[0].y);
+//             for (let i = 1; i < curve.length; i++) {
+//                 ctx.lineTo(curve[i].x, curve[i].y);
+//             }
+//             ctx.stroke();
+//         });
+//
+//         if (isDrawing && currentCurve.length >= 2) {
+//             ctx.strokeStyle = '#FF0000';
+//             ctx.lineWidth = 3;
+//             ctx.beginPath();
+//             ctx.moveTo(currentCurve[0].x, currentCurve[0].y);
+//             for (let i = 1; i < currentCurve.length; i++) {
+//                 ctx.lineTo(currentCurve[i].x, currentCurve[i].y);
+//             }
+//             ctx.stroke();
+//         }
+//     }
+// });
+
+/* ------------------------------------- */
+
 document.addEventListener('DOMContentLoaded', () => {
     const draggable = document.querySelectorAll('.draggable');
     const canvas = document.querySelector('#soccer-board');
@@ -21,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const curves = [];
     let isDrawing = false;
     let currentCurve = [];
+    let loadedImage = null; // 불러온 이미지를 저장할 변수
 
     // 캔버스에서 우클릭 메뉴창 금지
     canvas.addEventListener("contextmenu", e => e.preventDefault());
@@ -50,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearButton.addEventListener('click', () => {
         elements.length = 0;
         curves.length = 0;
+        loadedImage = null; // 초기화할 때 불러온 이미지도 제거
         redrawCanvas();
     });
 
@@ -75,13 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fillStyle = 'black';
             ctx.font = 'bold 16px Arial';
             ctx.fillText(text, x - 20, y + 60);
-            elements.push({x: x - 50, y: y - 50, width: 100, height: 100, img, text});
+            elements.push({ x: x - 50, y: y - 50, width: 100, height: 100, img, text });
         };
 
         if (img.complete) {
             drawImageWithText();
         } else {
-            img.onload = drawImageWithText();
+            img.onload = drawImageWithText;
         }
 
         console.log(`드랍 좌표 체크: (${x}, ${y})`);
@@ -93,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rect = canvas.getBoundingClientRect();
         const x = (event.clientX - rect.left) * (canvas.width / rect.width);
         const y = (event.clientY - rect.top) * (canvas.height / rect.height);
-        currentCurve.push({x, y});
+        currentCurve.push({ x, y });
     });
 
     canvas.addEventListener('mousemove', (event) => {
@@ -102,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rect = canvas.getBoundingClientRect();
         const x = (event.clientX - rect.left) * (canvas.width / rect.width);
         const y = (event.clientY - rect.top) * (canvas.height / rect.height);
-        currentCurve.push({x, y});
+        currentCurve.push({ x, y });
         redrawCanvas();
     });
 
@@ -147,7 +327,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function redrawCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+        if (loadedImage) {
+            ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
+        } else {
+            ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+        }
 
         elements.forEach(element => {
             ctx.drawImage(element.img, element.x, element.y, 100, 100);
@@ -175,7 +359,52 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.stroke();
         }
     }
+
+    document.querySelector('#loadButton').addEventListener('click', function () {
+        const selectedOption = document.querySelector('input[name="option"]:checked');
+        if (!selectedOption) {
+            alert("라디오 버튼을 선택해주세요.");
+            return;
+        }
+
+        const type = selectedOption.value;
+
+        fetch(`/club/loadCanvas?type=${type}`, {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                loadedImage = new Image();
+                loadedImage.onload = function () {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height); // 캔버스 초기화
+                    ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height); // 이미지 그리기
+
+                    // 기존 요소가 있을 때 요소 제거
+                    if (elements.length > 0) {
+                        elements.length = 0;
+                        curves.length = 0;
+                    }
+
+                    // 불러온 이미지의 요소들 elements 배열에 추가
+                    if (data.elements) {
+                        data.elements.forEach(e => {
+                            elements.push({ x: e.x, y: e.y, width: 100, height: 100, img: img, text: e.text });
+                        });
+                    }
+
+                    redrawCanvas();
+                    document.querySelector('#presetName').value = data.presetName;
+                };
+                loadedImage.src = `/upload/preset/${data.filePath}`;  // 이미지 파일 경로 설정
+            })
+            .catch(error => console.error('Error:', error));
+    });
 });
+
 
 /* ------------------------------------- */
 /*
@@ -219,7 +448,7 @@ function saveCanvas() {
 
 /* ------------------------------------- */
 /*
- * textArea 글자수 제한
+ * 전달사항 textArea 글자수 제한
  *
  * */
 $('#match-notice').keyup(function (e) {
@@ -243,8 +472,9 @@ $('#match-notice').keyup(function (e) {
 });
 
 /* ------------------------------------- */
+
 /*
- * 프리셋 관련 JS
+ * 프리셋 저장하기
  *
  * */
 function submitPresetForm() {
@@ -262,6 +492,12 @@ function submitPresetForm() {
     if (!presetName) {
         alert('프리셋 이름을 입력해주세요.');
         return;
+    }
+
+    // 확인 버튼을 눌렀을 시에만 실행
+    const userConfirmed = confirm("프리셋을 저장하시겠습니까?");
+    if (!userConfirmed) {
+        return; // 사용자가 확인을 누르지 않은 경우 함수 종료
     }
 
     const canvas = document.querySelector('#soccer-board');
@@ -287,38 +523,73 @@ function submitPresetForm() {
 
 /* ------------------------------------- */
 /*
- * 불러오기 버튼 눌렀을 때
+ * 프리셋 불러오기
  *
  * */
-document.querySelector('#loadButton').addEventListener('click', function () {
-    const selectedOption = document.querySelector('input[name="option"]:checked');
-    if (!selectedOption) {
-        alert("라디오 버튼을 선택해주세요.");
-        return;
-    }
+// document.querySelector('#loadButton').addEventListener('click', function () {
+//     const selectedOption = document.querySelector('input[name="option"]:checked');
+//     if (!selectedOption) {
+//         alert("라디오 버튼을 선택해주세요.");
+//         return;
+//     }
+//
+//     const type = selectedOption.value;
+//
+//     fetch(`/club/loadCanvas?type=${type}`, {
+//         method: 'GET'
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.error) {
+//                 alert(data.error);
+//                 return;
+//             }
+//             const img = new Image();
+//             img.onload = function() {
+//                 const canvas = document.querySelector('#soccer-board');
+//                 const ctx = canvas.getContext('2d');
+//                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+//                 ctx.drawImage(img, 0, 0);
+//             };
+//             img.src = `/upload/preset/${data.filePath}`;  // 이미지 파일 경로 설정
+//             document.querySelector('#presetName').value = data.presetName;
+//         })
+//         .catch(error => console.error('Error:', error));
+// });
 
-    const type = selectedOption.value;
-
-    fetch(`/club/loadCanvas?type=${type}`, {
-        method: 'GET'
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert(data.error);
-                return;
-            }
-            const img = new Image();
-            img.onload = function() {
-                const canvas = document.querySelector('#soccer-board');
-                const ctx = canvas.getContext('2d');
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = `/upload/preset/${data.filePath}`;  // 이미지 파일 경로 설정
-            // console.log(`${data.filePath}`);
-            document.querySelector('#presetName').value = data.presetName;
-        })
-        .catch(error => console.error('Error:', error));
-});
-
+/* ------------------------------------- */
+/*
+ *  프리셋 수정 테스트
+ *
+ * */
+// document.querySelector('#loadButton').addEventListener('click', function () {
+//     const selectedOption = document.querySelector('input[name="option"]:checked');
+//     if (!selectedOption) {
+//         alert("라디오 버튼을 선택해주세요.");
+//         return;
+//     }
+//
+//     const type = selectedOption.value;
+//
+//     fetch(`/club/loadCanvas?type=${type}`, {
+//         method: 'GET'
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.error) {
+//                 alert(data.error);
+//                 return;
+//             }
+//             const img = new Image();
+//             img.onload = function () {
+//                 const canvas = document.querySelector('#soccer-board');
+//                 const ctx = canvas.getContext('2d');
+//                 ctx.clearRect(0, 0, canvas.width, canvas.height); // 캔버스 초기화
+//                 ctx.drawImage(img, 0, 0); // 이미지 그리기
+//
+//                 document.querySelector('#presetName').value = data.presetName;
+//             };
+//             img.src = `/upload/preset/${data.filePath}`;  // 이미지 파일 경로 설정
+//         })
+//         .catch(error => console.error('Error:', error));
+// });
