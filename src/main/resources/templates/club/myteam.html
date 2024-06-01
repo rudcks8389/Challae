@@ -92,6 +92,16 @@
         <div class="team-content">
             <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
                 <h2 class="club-member-header">멤버 목록</h2>
+
+                <form id="searchForm" class="mb-1" th:object="${parameterForm}">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="이름으로 검색" th:field="*{searchValue}">
+                        <div class="input-group-append" id="button-addon4">
+                            <button class="btn btn-success btn-search" type="submit">검색</button>
+                        </div>
+                    </div>
+                </form>
+
                 <table class="" style="text-align: center;">
                     <!-- <caption>팀원 목록</caption> -->
                     <thead>
@@ -102,7 +112,7 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <tbody th:each="clubMember : ${clubMember}" >
+                    <tbody th:each="clubMember : ${clubMember}" th:object="${MemberDto}" >
                     <tr>
                         <th scope="row" th:text="${clubMember.name}"></th>
                         <!-- 감독 팀원 출력을 위한 조건삼항 -->
@@ -125,14 +135,27 @@
 
 
                     <!-- 페이지번호 반복 -->
+                <ul class="pagination h-100 justify-content-center align-items-center">
+                    <!-- 처음으로 출력 -->
+                    <li class="page-item" th:if="${pagination.showFirst}"><a class="page-link" th:href="@{myteam(requestPage=1, searchValue=${parameterForm.searchValue})}">처음으로</a></li>
+                    <!-- 이전목록 출력 -->
+                    <li class="page-item" th:if="${pagination.showPrevious}"><a class="page-link" th:href="@{myteam(requestPage=${pagination.previousStartPage}, searchValue=${parameterForm.searchValue})}">이전목록</a></li>
+
+                    <!-- 페이지번호 반복 -->
                     <th:block th:each="i : ${#numbers.sequence(pagination.getStartPage(), pagination.getEndPage())}">
                         <li class="page-item active" th:if="${i == pagination.params.requestPage}" >
                             <a class="page-link"th:text="${i}">1</a>
                         </li>
                         <li class="page-item" th:if="${i != pagination.params.requestPage}" >
-                            <a class="page-link" th:href="@{member(requestPage=${i}, searchValue=${parameterForm.searchValue})}" th:text="${i}">1</a>
+                            <a class="page-link" th:href="@{myteam(requestPage=${i}, searchValue=${parameterForm.searchValue})}" th:text="${i}">1</a>
                         </li>
                     </th:block>
+
+                    <!-- 다음목록 출력 -->
+                    <li class="page-item" th:if="${pagination.showNext}"><a class="page-link" th:href="@{myteam(requestPage=${pagination.nextStartPage}, searchValue=${parameterForm.searchValue})}">다음목록</a></li>
+                    <!-- 끝으로 출력 -->
+                    <li class="page-item" th:if="${pagination.showLast}"><a class="page-link" th:href="@{myteam(requestPage=${pagination.totalPages}, searchValue=${parameterForm.searchValue})}">끝으로</a></li>
+                </ul>
 
             </div>
 
@@ -151,7 +174,7 @@
                         </tr>
                         </thead>
                         <tbody >
-                        <tr th:each="community,${community}" th:value="${community.commNum}">
+                        <tr th:each="community:${community}" th:value="${community.commNum}">
                             <td class="member-name" th:text="${community.memberName} +' :'"></td>
                             <td class="comm-content" th:text="${community.commContent}"></td>
                             <td class="comm-date" th:text="${community.commDate}"></td>

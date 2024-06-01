@@ -160,7 +160,7 @@ public class ClubController {
 
         communityService.inputCommunity(inputData);
 
-        return "redirect:/club/myteam";
+        return "redirect:club/myteam";
     }
 
     // 감독의 클럽원 추방

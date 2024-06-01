@@ -112,7 +112,7 @@
 		WHEN member_dir = 'Y' THEN 0
 		ELSE 1
 		END,
-		member_name DESC
+		member_name ASC
 		)
 		WHERE page = #{searchDto.page}
 	</select>

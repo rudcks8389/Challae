@@ -11,7 +11,7 @@ import lombok.*;
 @ToString
 @Builder
 public class ParameterForm {
-	private int elementSize = 10;    /** 페이지에 보여지는 목록 갯수 */
+	private int elementSize = 5;    /** 페이지에 보여지는 목록 갯수 */
 	private int pageSize = 10;       /** 페이지에 보여지는 페이지 갯수 */
 	private int requestPage = 1;     /** 사용자 요청 페이지 */
 	private int rowCount;            /** 테이블 목록 갯수 */
