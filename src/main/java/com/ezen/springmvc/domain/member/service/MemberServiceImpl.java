@@ -46,6 +46,21 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.findId(name,email);
 	}
 
+	@Override
+	public int memberCount() {
+		return memberMapper.memberCount();
+	}
+
+	@Override
+	public List<MemberDto> viewAllMember() {
+		return memberMapper.viewAllMember();
+	}
+
+	@Override
+	public int deleteMember(int memberNum) {
+		return memberMapper.deleteMember(memberNum);
+	}
+
 
 	@Override
 	public List<MemberDto> getTeamMember(String clubNum) {

@@ -31,4 +31,9 @@ public interface ArticleService {
 	 * 게시글 전체 갯수 반환
 	 */
 	public int countBySearchCondition(@Param("searchDto") SearchDto searchDto);
+
+	/**
+	 * 관리자 모드에서 게시글 전체 갯수 반환
+	 */
+	public int articleCount();
 }

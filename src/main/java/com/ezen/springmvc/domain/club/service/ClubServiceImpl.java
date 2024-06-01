@@ -31,4 +31,24 @@ public class ClubServiceImpl implements ClubService {
         return clubMapper.myClubData(clubNum);
     }
 
+    @Override
+    public List<ClubDto> findPendingClubs() {
+        return clubMapper.findPendingClubs();
+    }
+
+    @Override
+    public void updateStatus(int clubNum, String status) {
+        clubMapper.updateStatus(clubNum, status);
+    }
+
+    @Override
+    public void deleteClub(int clubNum) {
+        clubMapper.deleteClub(clubNum);
+    }
+
+    @Override
+    public int clubCount() {
+        return clubMapper.clubCount();
+    }
+
 }

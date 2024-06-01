@@ -29,6 +29,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -46,6 +51,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +66,12 @@ public class ClubController {
     // 전략판(캔버스) 저장되는 경로를 변수로 지정
     @Value("${upload.soccerboard.path}")
     private String soccerBoardUploadPath;
+
+
+    // 클럽 로고
+    @Value("${upload.clublogo.path}")
+    private String clublogoUploadPath;
+
 
 
     @Autowired
@@ -73,8 +87,28 @@ public class ClubController {
     @Autowired
     private FileService fileService;
 
-    @Value("${upload.clublogo.path}")
-    private String clublogoUploadPath;
+
+
+    // 클럽 로고 사진 요청 처리
+    @GetMapping("/image/{clubLogoFileName}")
+    @ResponseBody
+    public ResponseEntity<Resource> showImage(@PathVariable("clubLogoFileName") String profileFileName) throws IOException {
+        Path path = Paths.get(clublogoUploadPath + "/" + profileFileName);
+
+        if (!Files.exists(path) || profileFileName == null || profileFileName.isEmpty()) {
+            path = Paths.get("src/main/resources/static/img/teamlogo.jpg");
+        }
+
+        String contentType = Files.probeContentType(path);
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        Resource resource = new FileSystemResource(path);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+    }
 
     // 전체 클럽 목록
     @GetMapping("/list")
@@ -167,9 +201,6 @@ public class ClubController {
         return "/club/createMatch";
     }
 
-
-    // 클럽 생성 화면
-
     @PostMapping("/create")
 //    @ResponseBody
     public String createMatch(@ModelAttribute CreateDto createDto, HttpSession session) {
@@ -208,21 +239,21 @@ public class ClubController {
         return Collections.singletonMap("filePath", fileName);
     }
 
-    // 새로운 클럽 생성하기
-
+    // 클럽 생성 화면
     @GetMapping("/register")
     public String clubRegister(Model model) {
         ClubRegisterForm clubRegisterForm = ClubRegisterForm.builder().build();
         model.addAttribute("clubRegisterForm", clubRegisterForm);
         return "/club/clubregister";
     }
-
     // 클럽 생성 요청 처리
     @PostMapping("/register")
-    public String clubRegisterAction(@ModelAttribute ClubRegisterForm clubRegisterForm, RedirectAttributes redirectAttributes, Model model) {
-        log.info("클럽 생성 정보 : {}", clubRegisterForm.toString());
+    public String clubRegisterAction(@ModelAttribute ClubRegisterForm clubRegisterForm, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
+        // 로그인한 사용자 정보에서 이름 가져오기 => 클럽장
+        MemberDto memberDto = (MemberDto) session.getAttribute("loginMember");
+        String clubPresident = memberDto.getName();
 
-        // 업로드 프로필 사진 저장
+        // 업로드 로고 사진 저장
         UploadFile uploadFile = fileService.storeFile(clubRegisterForm.getClubPhoto(), clublogoUploadPath);
 
         // Form Bean -> Dto 변환
@@ -234,12 +265,16 @@ public class ClubController {
                 .clubInfo(clubRegisterForm.getClubInfo())
                 .clubPhoto(uploadFile.getUploadFileName())
                 .clubStoredPhoto(uploadFile.getStoreFileName())
+                .clubPresident(clubPresident)
                 .build();
 
         clubService.clubRegister(clubDto);
         redirectAttributes.addFlashAttribute("clubDto", clubDto);
-        return "redirect:/club/list";
+
+//        관리자한테 Dto 전체 넘겨주고 관리자 처리 시, 클럽소속 시켜주고 member_dir 'Y'로 변경
+        return "redirect:/club/registersuccess";
     }
+
 
     // 클럽생성 완료 페이지
     @GetMapping("/registersuccess")

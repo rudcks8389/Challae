@@ -24,8 +24,20 @@ public interface MemberMapper {
     public List<MemberDto> findByNameLike(String name);
     // 검색 타입별 회원 검색
     public MemberDto findId(@Param("name") String name, @Param("email") String email);
-    // 통합 검색
-    public List<MemberDto> findBySearchAll(String value);
+    // 관리자모드에서 보는 회원 수 출력
+    public int memberCount();
+
+    /**
+     * 관리자 모드에서 모든 회원정보 출력
+     */
+    public List<MemberDto> viewAllMember();
+
+    /**
+     * 관리자 모드에서 회원 삭제
+     */
+    public int deleteMember(int memberNum);
+
+
     // 통합 검색
     public List<MemberDto> findBySearchAllOption(MemberSearchCondition searchCondition);
 

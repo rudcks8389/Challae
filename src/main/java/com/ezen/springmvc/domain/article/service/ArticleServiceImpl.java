@@ -47,5 +47,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.countBySearchCondition(searchDto);
 	}
 
+	@Override
+	public int articleCount() {
+		return articleMapper.articleCount();
+	}
+
 
 }

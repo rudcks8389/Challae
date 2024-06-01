@@ -2,8 +2,7 @@ package com.ezen.springmvc.web.common.config;
 
 import com.ezen.springmvc.web.common.intercepter.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
                     "/", "/css/**", "/img/**", "/js/**", "/*.ico", "/vendor/**","/video/**",
                     "/member/signup/**", "/member/idcheck/{inputId}", "/member/image/{profileFileName}",
                     "/member/signin", "/member/signout",
-                    "/board/list/**","/board/article","/field/list","/club/list","/member/find","/member/find/result","/error");
+                    "/board/list/**","/board/article","/field/list","/club/list","/member/find","/member/find/result","/error"
+                    ,"/api/**", "/admin/**");
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -27,6 +27,15 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns(loginNotEssential);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/upload/preset/**")  // upload/preset 으로 들어오는 요청들은 ↓ 밑의 주소로 ..
+                .addResourceLocations("file:/Applications/ezen-fullstack/workspace/Project-CHALLAE/src/main/upload/presetboard/");
+
+        registry.addResourceHandler("/upload/profile/**")
+                .addResourceLocations("file:c:/fullstack/workspace2/Project_CHALLAE/src/main/upload/profile/");
     }
 }
 

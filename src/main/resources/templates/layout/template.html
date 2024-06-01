@@ -95,7 +95,7 @@
                     </th:block>
 
                     <th:block th:if="${session.loginMember != null}">
-                        <img id="backprofile" th:src="@{/profile/{profileFileName}(profileFileName=${session.loginMember.storedProfile})}"
+                        <img id="backprofile" th:src="@{/upload/profile/{profileFileName}(profileFileName=${session.loginMember.storedProfile})}"
                              style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
                     </th:block>
 

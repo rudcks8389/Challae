@@ -21,6 +21,15 @@ public interface MemberService {
 
 	public MemberDto findId(String name , String email);
 
+	public int memberCount();
+
+	public List<MemberDto> viewAllMember();
+
+	/**
+	 * 관리자 모드에서 회원 삭제
+	 */
+	public int deleteMember(int memberNum);
+
 
 	// 내 팀보기
 	public List<MemberDto> getTeamMember(String clubNum);

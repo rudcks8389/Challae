@@ -1,108 +1,132 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper	namespace="com.ezen.springmvc.domain.member.mapper.MemberMapper">
+<mapper namespace="com.ezen.springmvc.domain.member.mapper.MemberMapper">
 
-	<!-- 회원 등록 -->
-	<insert id="create" parameterType="MemberDto" >
-		INSERT INTO MEMBER (MEMBER_NUM,MEMBER_ID,MEMBER_PASSWD,MEMBER_NAME,MEMBER_PHONE,MEMBER_EMAIL,MEMBER_PHOTO,MEMBER_STOREDPHOTO)
-		            VALUES (MEMBER_SEQ.NEXTVAL,#{id},#{passwd},#{name},#{phone},#{email},#{profileImage},#{storedProfile})
-	</insert>
+    <!-- 회원 등록 -->
+    <insert id="create" parameterType="MemberDto">
+        INSERT INTO MEMBER (MEMBER_NUM, MEMBER_ID, MEMBER_PASSWD, MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_PHOTO,
+                            MEMBER_STOREDPHOTO)
+        VALUES (MEMBER_SEQ.NEXTVAL, #{id}, #{passwd}, #{name}, #{phone}, #{email}, #{profileImage}, #{storedProfile})
+    </insert>
 
-	<!-- 아이디로 회원 상세 조회 -->
-	<select id="findById" parameterType="string" resultType="MemberDto">
-		SELECT member_id "id"
-		FROM member
-		WHERE member_id = #{id}
-	</select>
+    <!-- 아이디로 회원 상세 조회 -->
+    <select id="findById" parameterType="string" resultType="MemberDto">
+        SELECT member_id "id"
+        FROM member
+        WHERE member_id = #{id}
+    </select>
 
-	<!-- 회원 정보 수정 -->
-	<update id="update" parameterType="com.ezen.springmvc.domain.member.dto.MemberDto">
-		UPDATE member
-		SET MEMBER_EMAIL = #{email}, MEMBER_PASSWD = #{passwd}
-		WHERE MEMBER_ID = #{id}
-	</update>
+    <!-- 회원 정보 수정 -->
+    <update id="update" parameterType="com.ezen.springmvc.domain.member.dto.MemberDto">
+        UPDATE member
+        SET MEMBER_EMAIL  = #{email},
+            MEMBER_PASSWD = #{passwd}
+        WHERE MEMBER_ID = #{id}
+    </update>
 
-	<!-- 회원 전체 조회 -->
-	<select id="findByAll" resultType="MemberDto">
-		SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY') regdate
-		FROM member
-		ORDER BY regdate DESC
-	</select>
+    <!-- 회원 전체 조회 -->
+    <select id="findByAll" resultType="MemberDto">
+        SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY') regdate
+        FROM member
+        ORDER BY regdate DESC
+    </select>
 
-	<!-- 회원 로그인 -->
-	<select id="findByIdAndPasswd" resultType="MemberDto">
-		SELECT
-			m.MEMBER_ID AS "id",
-			m.MEMBER_NAME AS "name",
-			m.MEMBER_PHOTO AS "profileImage",
-			m.MEMBER_STOREDPHOTO AS "storedProfile",
-			m.MEMBER_EMAIL AS "email",
-			m.CLUB_NUM AS "clubNum",
-			m.MEMBER_PASSWD AS "passwd",
-			m.MEMBER_DIR AS "dir",
-			m.MEMBER_NUM AS "memberNum",
-			c.CLUB_NAME AS "clubName"
-		FROM
-			member m
-				LEFT JOIN
-			club c ON m.CLUB_NUM = c.CLUB_NUM
-		WHERE
-			m.MEMBER_ID = #{id}
-		  AND m.MEMBER_PASSWD = #{passwd}
-	</select>
+    <!-- 회원 로그인 -->
+    <select id="findByIdAndPasswd" resultType="MemberDto">
+        SELECT m.MEMBER_ID          AS "id",
+               m.MEMBER_NAME        AS "name",
+               m.MEMBER_PHOTO       AS "profileImage",
+               m.MEMBER_STOREDPHOTO AS "storedProfile",
+               m.MEMBER_EMAIL       AS "email",
+               m.CLUB_NUM           AS "clubNum",
+               m.MEMBER_PASSWD      AS "passwd",
+               m.MEMBER_DIR         AS "dir",
+               m.MEMBER_NUM         AS "memberNum",
+               c.CLUB_NAME          AS "clubName"
+        FROM member m
+                 LEFT JOIN
+             club c ON m.CLUB_NUM = c.CLUB_NUM
+        WHERE m.MEMBER_ID = #{id}
+          AND m.MEMBER_PASSWD = #{passwd}
+    </select>
 
-	<!-- 회원 이름으로 Like 검색 -->
-<!--	<select id="findByNameLike" parameterType="string" resultType="MemberDto">-->
-<!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
-<!--		FROM member-->
-<!--		WHERE name LIKE '%' || #{value} || '%'-->
-<!--	</select>-->
+    <!-- 회원 이름으로 Like 검색 -->
+    <!--	<select id="findByNameLike" parameterType="string" resultType="MemberDto">-->
+    <!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
+    <!--		FROM member-->
+    <!--		WHERE name LIKE '%' || #{value} || '%'-->
+    <!--	</select>-->
 
 
-	<!-- 회원 아이디 찾기 검색 -->
-	<select id="findId" parameterType="string" resultType="MemberDto">
-		SELECT MEMBER_ID "id"
+    <!-- 회원 아이디 찾기 검색 -->
+    <select id="findId" parameterType="string" resultType="MemberDto">
+        SELECT MEMBER_ID "id"
+        FROM MEMBER
+        WHERE MEMBER_NAME = #{name}
+          AND MEMBER_EMAIL = #{email}
+    </select>
+
+    <!-- 전체 회원 수 출력 -->
+    <select id="memberCount" resultType="int">
+        SELECT COUNT(*) AS count
+        FROM MEMBER
+    </select>
+
+    <!-- 전체 회원 목록 출력  -->
+    <select id="viewAllMember" resultType="MemberDto">
+		SELECT MEMBER_NUM,
+		       MEMBER_ID "id",
+		       MEMBER_DIR "dir",
+		       MEMBER_NAME "name",
+		       MEMBER_PHONE "phone",
+		       MEMBER_EMAIL "email",
+		       MEMBER_STOREDPHOTO "storedProfile",
+		       CLUB_NUM
 		FROM MEMBER
-		WHERE MEMBER_NAME = #{name} AND MEMBER_EMAIL = #{email}
-	</select>
-
-	<!-- 회원 아이디 또는 이름 회원 통합 검색 -->
-<!--	<select id="findBySearchAll" parameterType="string"	resultType="MemberDto">-->
-<!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
-<!--		FROM member-->
-<!--		WHERE member_id = #{value} OR name LIKE '%' || #{value} || '%'-->
-<!--	</select>-->
-
-	<!-- 옵션 선택별 회원 통합 검색 -->
-<!--	<select id="findBySearchAllOption" parameterType="MemberSearchCondition" resultType="MemberDto">-->
-<!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
-<!--		FROM member-->
-<!--		<where>-->
-<!--			<if test="memberId != null and memberId != ''">-->
-<!--				or member_id = #{memberId}-->
-<!--			</if>-->
-<!--			<if test="name != null and name != ''">-->
-<!--				or name LIKE '%' || #{name} || '%'-->
-<!--			</if>-->
-<!--			<if test="email != null and email != ''">-->
-<!--				or email = #{email}-->
-<!--			</if>-->
-<!--		</where>-->
-<!--	</select>-->
+    </select>
 
 
-	<!-- 내 팀보기) 팀별 회원목록 출력 [이름 , 직책, 번호]	-->
-	<select id="myTeamList" parameterType="String" resultType="MemberDto">
-		SELECT member_num, member_name "name", member_dir"dir", member_phone"phone"
-		FROM member
-		WHERE club_num = #{clubNum}
-		ORDER BY
-			CASE
-				WHEN member_dir = 'Y' THEN 0
-				ELSE 1
-				END
-	</select>
+    <!-- 회원 아이디 또는 이름 회원 통합 검색 -->
+    <!--	<select id="findBySearchAll" parameterType="string"	resultType="MemberDto">-->
+    <!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
+    <!--		FROM member-->
+    <!--		WHERE member_id = #{value} OR name LIKE '%' || #{value} || '%'-->
+    <!--	</select>-->
 
+    <!-- 옵션 선택별 회원 통합 검색 -->
+    <!--	<select id="findBySearchAllOption" parameterType="MemberSearchCondition" resultType="MemberDto">-->
+    <!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
+    <!--		FROM member-->
+    <!--		<where>-->
+    <!--			<if test="memberId != null and memberId != ''">-->
+    <!--				or member_id = #{memberId}-->
+    <!--			</if>-->
+    <!--			<if test="name != null and name != ''">-->
+    <!--				or name LIKE '%' || #{name} || '%'-->
+    <!--			</if>-->
+    <!--			<if test="email != null and email != ''">-->
+    <!--				or email = #{email}-->
+    <!--			</if>-->
+    <!--		</where>-->
+    <!--	</select>-->
+
+
+    <!-- 내 팀보기) 팀별 회원목록 출력 [이름 , 직책, 번호]	-->
+    <select id="myTeamList" parameterType="String" resultType="MemberDto">
+        SELECT member_num, member_name "name", member_dir "dir", member_phone "phone"
+        FROM member
+        WHERE club_num = #{clubNum}
+        ORDER BY CASE
+                     WHEN member_dir = 'Y' THEN 0
+                     ELSE 1
+                     END
+    </select>
+
+    <delete id="deleteMember" parameterType="int">
+        DELETE
+        FROM MEMBER
+        WHERE MEMBER_NUM = #{memberNum}
+    </delete>
 
 </mapper>
 

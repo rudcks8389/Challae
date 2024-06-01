@@ -16,4 +16,16 @@ public interface ClubMapper {
     // 내 팀보기 클럽데이터 출력용
     public List<ClubDto> myClubData(String clubNum);
 
+    // 승인대기 클럽 목록 불러오기
+    public List<ClubDto> findPendingClubs();
+
+    // 관리자모드에서 보는 클럽 수 출력
+    public int clubCount();
+
+    // 관리자모드에서 클럽 신청 승인
+    public void updateStatus(int clubNum, String status);
+
+    // 관리자모드에서 클럽 신청 거절
+    public void deleteClub(int clubNum);
+
 }

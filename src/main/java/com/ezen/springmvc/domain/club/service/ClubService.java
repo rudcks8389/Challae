@@ -14,4 +14,15 @@ public interface ClubService {
 
     public List<ClubDto> clubDataService(String clubNum);
 
+    // 승인대기 클럽 목록 불러오기
+    public List<ClubDto> findPendingClubs();
+
+    // 관리자모드에서 클럽 신청 처리
+    public void updateStatus(int clubNum, String status);
+
+    // 관리자모드에서 클럽 신청 거절
+    public void deleteClub(int clubNum);
+
+    public int clubCount();
+
 }
