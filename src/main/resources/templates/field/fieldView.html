@@ -27,7 +27,7 @@
           <p><i class="fa-solid fa-phone-volume" style=" padding: 0px 5px; border-radius: 100%;"></i><span th:text="${fieldDetail.fieldPhone}">전화번호</span></p>
         <div class="btnwrap" >
           <th:block th:if="${session.loginMember == null}"><a href="/member/signin"><button class="abtn">예약하기</button></a></th:block>
-          <th:block th:if="${session.loginMember != null}"><a href="/field/reservation"><button class="abtn">예약하기</button></a></th:block>
+          <th:block th:if="${session.loginMember != null}"><a  th:href="@{/field/reservation(fieldNum=${fieldDetail.fieldNum})}"><button class="abtn">예약하기</button></a></th:block>
         </div>
         <div class="wrapperleft">
           <div class="stadium">
@@ -137,11 +137,11 @@
               <tbody>
                 <tr>
                   <th>주간 (10:00 ~ 18:00) </th>
-                  <td><span th:text="${fieldDetail.fieldDayprice}">18시이전가격</span> 원 (2시간)</td>
+                  <td><span th:text="${fieldDetail.fieldDayprice}">18시이전가격</span>원 (1시간)</td>
                 </tr>
                 <tr>
                   <th>야간 (18:00 ~ 24:00) </th>
-                  <td><span th:text="${fieldDetail.fieldEndprice}">18시이후가격</span> 원 (2시간)</td>
+                  <td><span th:text="${fieldDetail.fieldEndprice}">18시이후가격</span>원 (1시간)</td>
                 </tr>
               </tbody>
             </table>
