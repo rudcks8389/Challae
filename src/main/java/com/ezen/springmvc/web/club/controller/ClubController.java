@@ -210,7 +210,7 @@ public class ClubController {
 //    @ResponseBody
     public String createMatch(@ModelAttribute CreateDto createDto, HttpSession session) {
         // 세션에서 클럽번호 가져오기
-        Integer clubNum = (Integer) session.getAttribute("clubnum");
+        Integer clubNum = (Integer) session.getAttribute("clubNum");
 
         if (clubNum != null) {
             createDto.setClubNum(clubNum);

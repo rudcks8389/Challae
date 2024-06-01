@@ -205,7 +205,7 @@
             </div>
 
             <!-- 새 경기 등록 버튼 있는 구역 -->
-            <div class="new-match-add">
+            <div class="new-match-add" th:if="${loginMember.dir == 'Y'}">
                 <a href="/club/create" class="btn-new-match-add">새 경기 등록</a>
             </div>
 
