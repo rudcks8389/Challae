@@ -87,18 +87,18 @@
 	<select id="myTeamList" resultType="MemberDto">
 		SELECT member_num, member_name "name", member_dir "dir", member_phone "phone", club_num
 		FROM (
-		SELECT CEIL(rownum / #{searchDto.limit}) page,
-		member_num,
-		member_name,
-		member_dir,
-		member_phone,
-		club_num
+			SELECT CEIL(rownum / #{searchDto.limit}) page,
+				member_num,
+				member_name,
+				member_dir,
+				member_phone,
+				club_num
 		FROM (
-		SELECT member_num,
-		member_name,
-		member_dir,
-		member_phone,
-		club_num
+			SELECT member_num,
+			member_name,
+			member_dir,
+			member_phone,
+			club_num
 		FROM member
 		<where>
 			club_num = #{clubNum}
@@ -106,14 +106,14 @@
 				AND member_name LIKE '%' || #{searchDto.searchValue} || '%'
 			</if>
 		</where>
-		)
 		ORDER BY
-		CASE
-		WHEN member_dir = 'Y' THEN 0
-		ELSE 1
-		END,
-		member_name ASC
+			CASE
+				WHEN member_dir = 'Y' THEN 0
+				ELSE 1
+			END,
+			member_name ASC
 		)
+	)
 		WHERE page = #{searchDto.page}
 	</select>
 	<!-- 클럽원 갯수 반환 -->

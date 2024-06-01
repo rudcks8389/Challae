@@ -120,7 +120,7 @@
                         <td th:text="${clubMember.phone}"></td>
                         <!-- 감독 제외 팀원에게만 뜨는 추방 -->
                         <td>
-                        <td th:if="${clubMember.dir} == 'N'">
+                        <td th:if="${clubMember.dir} == 'N' and ${loginMember.dir} == 'Y'">
                             <form th:action="@{/club/kick}" method="post">
                                 <input type="hidden" name="memberNum" th:value="${clubMember.memberNum}" />
                                 <button type="button" onclick="confirmKick(this.form)">추방</button>

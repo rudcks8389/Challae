@@ -122,6 +122,7 @@ public class ClubController {
 
             Pagination pagination = new Pagination(parameterForm);
 
+            model.addAttribute("loginMember",loginMember);
             model.addAttribute("clubMember", clubMember);
             model.addAttribute("parameterForm", parameterForm);
             model.addAttribute("pagination", pagination);
@@ -160,7 +161,7 @@ public class ClubController {
 
         communityService.inputCommunity(inputData);
 
-        return "redirect:club/myteam";
+        return "redirect:/club/myteam";
     }
 
     // 감독의 클럽원 추방
