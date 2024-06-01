@@ -15,6 +15,9 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
             defer></script>
 
+    <!--   alert 창 변경   -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 </head>
 <body>
 
@@ -75,7 +78,7 @@
                                         class="fa fa-clock-o"></i></span></div>
 
                             </div>
-                            <input type="text" placeholder="시간을 입력하세요" class="form-control py-4 px-4"
+                            <input type="text" placeholder="상세시간 입력(10자 내외)" class="form-control py-4 px-4"
                                    id="reservationTime"
                                    name="reservationTime" maxlength="10" style="border-radius: 2px; margin-top: -46px;"
                                    th:field="*{matchTime}">
@@ -108,7 +111,7 @@
                     <input type="radio" id="option1" name="option" value="A"><label for="option1">A</label>
                     <input type="radio" id="option2" name="option" value="B"><label for="option2">B</label>
                     <input type="radio" id="option3" name="option" value="C"><label for="option3">C</label>
-                    <input type="text" id="presetName" name="presetName" maxlength="9" placeholder="10자 미만">
+                    <input type="text" id="presetName" name="presetName" maxlength="9" placeholder="프리셋 이름[10자 미만]">
                     <button type="button" id="saveButton" name="저장" onclick="submitPresetForm()"> 저 장</button>
                     <button type="button" id="loadButton" name="불러오기"> 불러오기</button>
                 </form>

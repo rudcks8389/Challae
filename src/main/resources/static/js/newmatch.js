@@ -241,7 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         if (elements.length >= 6) {
-            alert('최대 6개까지 추가할 수 있습니다');
+            Swal.fire({
+                icon: 'error',
+                title: '더 이상 추가할 수 없습니다.︎',
+                text: '총 6개까지 추가 가능합니다.',
+            });
             return;
         }
 
@@ -363,7 +367,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#loadButton').addEventListener('click', function () {
         const selectedOption = document.querySelector('input[name="option"]:checked');
         if (!selectedOption) {
-            alert("라디오 버튼을 선택해주세요.");
+            Swal.fire({
+                icon: 'warning',
+                title: '✔︎',
+                text: '불러올 프리셋 조건을 선택해주세요',
+            });
             return;
         }
 
@@ -418,6 +426,41 @@ document.querySelector('#createForm').addEventListener('submit', function (event
 
 // 클라이언트 사이드 렌더링
 function saveCanvas() {
+    const selectBox = document.querySelector('#fieldSelect');
+    const reservationDate = document.querySelector('#reservationDate');
+    const reservationTime = document.querySelector('#reservationTime');
+
+    // select 박스가 선택되지 않은 경우 경고 메시지 표시
+    if (selectBox.selectedIndex === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: '경고',
+            text: '[필수] 구장을 선택해주세요.',
+        });
+        selectBox.focus();
+        return;
+    }
+    // 등록 날짜가 없거나 공백이면 경고
+    if (!reservationDate.value.trim()) {
+        Swal.fire({
+            icon: 'warning',
+            title: '경고',
+            text: '[필수] 날짜를 선택해주세요.',
+        });
+        reservationDate.focus();
+        return;
+    }
+    // 등록 시간가 없거나 공백이면 경고
+    if (!reservationTime.value.trim()) {
+        Swal.fire({
+            icon: 'warning',
+            title: '경고',
+            text: '[필수] 상세시간을 입력해주세요.',
+        });
+        reservationTime.focus();
+        return;
+    }
+
     const canvas = document.querySelector('#soccer-board');
     canvas.toBlob(function (blob) {
         const formData = new FormData();
@@ -433,12 +476,20 @@ function saveCanvas() {
             if (response.ok) {
                 response.json().then(data => {
                     document.querySelector('#canvasData').value = data.filePath;
-                    alert('JS단 캔버스 저장 완료');
+                    Swal.fire({
+                        icon: 'success',
+                        title: '등록 완료',
+                        text: '일정이 등록되었습니다.',
+                    });
                     // 폼을 자동 제출
                     document.querySelector('#createForm').submit();
                 });
             } else {
-                alert('JS단 캔버스 저장 실패');
+                Swal.fire({
+                    icon: 'warning',                         // Alert 타입
+                    title: '등록 실패',         // Alert 제목
+                    text: '저장에 실패했습니다. 다시 시도해주세요.',  // Alert 내용
+                });
             }
         }).catch(error => {
             console.error('Error:', error);
@@ -466,9 +517,12 @@ $('#match-notice').keyup(function (e) {
         // 100자 부터는 타이핑 되지 않도록
         $(this).val($(this).val().substring(0, 100));
         // 100자 넘으면 알림창 뜨도록
-        alert('글자수는 100자까지 입력 가능합니다.');
+        Swal.fire({
+            icon: 'warning',                         // Alert 타입
+            title: '경고',         // Alert 제목
+            text: '글자수는 100자까지 입력 가능합니다.',  // Alert 내용
+        });
     }
-    ;
 });
 
 /* ------------------------------------- */
@@ -485,41 +539,71 @@ function submitPresetForm() {
 
     // 라디오 버튼이 선택되지 않았거나 presetName 이 입력되지 않은 경우 경고 메시지 표시
     if (!selectedOption) {
-        alert('옵션을 선택해주세요.');
+        Swal.fire({
+            icon: 'warning',
+            title: '✔︎',
+            text: '프리셋 조건을 선택해주세요',
+        });
         return; // submitPresetForm 종료
     }
 
     if (!presetName) {
-        alert('프리셋 이름을 입력해주세요.');
+        Swal.fire({
+            icon: 'warning',
+            title: '✔︎',
+            text: '프리셋 이름을 입력해주세요',
+        });
         return;
     }
 
-    // 확인 버튼을 눌렀을 시에만 실행
-    const userConfirmed = confirm("프리셋을 저장하시겠습니까?");
-    if (!userConfirmed) {
-        return; // 사용자가 확인을 누르지 않은 경우 함수 종료
-    }
+    // SweetAlert 대화 상자를 통해 확인 버튼을 누르면 함수 실행
+    Swal.fire({
+        title: '프리셋을 저장하시겠습니까?',
+        text: "저장 시 기존의 프리셋은 사라집니다. 프리셋을 저장하시려면 확인을 누르세요.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '확인',
+        cancelButtonText: '취소'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const canvas = document.querySelector('#soccer-board');
+            canvas.toBlob(function (blob) {
+                // 유니크한 파일 이름 생성 (예: "canvas_1653079812345.png")
+                const uniqueFileName = 'preset_' + new Date().getTime() + '.png';
+                formData.append('canvasImage', blob, uniqueFileName);
 
-    const canvas = document.querySelector('#soccer-board');
-    canvas.toBlob(function (blob) {
-        // 유니크한 파일 이름 생성 (예: "canvas_1653079812345.png")
-        const uniqueFileName = 'preset_' + new Date().getTime() + '.png';
-        formData.append('canvasImage', blob, uniqueFileName);
-
-        fetch('/club/createMatchBoard', {
-            method: 'POST',
-            body: formData
-        }).then(response => {
-            if (response.ok) {
-                alert('프리셋 저장 완료');
-            } else {
-                alert('프리셋 저장 실패');
-            }
-        }).catch(error => {
-            console.error('Error:', error);
-        });
-    }, 'image/png');
+                fetch('/club/createMatchBoard', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    if (response.ok) {
+                        Swal.fire(
+                            '프리셋 저장 완료',
+                            '저장완료',
+                            'success'
+                        );
+                    } else {
+                        Swal.fire(
+                            '프리셋 저장 실패',
+                            '저장실패',
+                            'error'
+                        );
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire(
+                        '오류 발생',
+                        '프리셋 저장 중 오류가 발생했습니다.',
+                        'error'
+                    );
+                });
+            }, 'image/png');
+        }
+    });
 }
+
 
 /* ------------------------------------- */
 /*
@@ -593,3 +677,45 @@ function submitPresetForm() {
 //         })
 //         .catch(error => console.error('Error:', error));
 // });
+
+/* ------------------------------------- */
+/**
+ * sweet alert 적용하기 전의 submitPreset
+ */
+// function submitPresetForm() {
+//     const form = document.querySelector('#presetForm');
+//     const formData = new FormData(form);
+//     const selectedOption = formData.get('option');
+//     const presetName = formData.get('presetName');
+//
+//     // 라디오 버튼이 선택되지 않았거나 presetName 이 입력되지 않은 경우 경고 메시지 표시
+//     if (!selectedOption) {
+//         alert('옵션을 선택해주세요.');
+//         return; // submitPresetForm 종료
+//     }
+//
+//     if (!presetName) {
+//         alert('프리셋 이름을 입력해주세요.');
+//         return;
+//     }
+//
+//     const canvas = document.querySelector('#soccer-board');
+//     canvas.toBlob(function (blob) {
+//         // 유니크한 파일 이름 생성 (예: "canvas_1653079812345.png")
+//         const uniqueFileName = 'preset_' + new Date().getTime() + '.png';
+//         formData.append('canvasImage', blob, uniqueFileName);
+//
+//         fetch('/club/createMatchBoard', {
+//             method: 'POST',
+//             body: formData
+//         }).then(response => {
+//             if (response.ok) {
+//                 alert('프리셋 저장 완료');
+//             } else {
+//                 alert('프리셋 저장 실패');
+//             }
+//         }).catch(error => {
+//             console.error('Error:', error);
+//         });
+//     }, 'image/png');
+// }
