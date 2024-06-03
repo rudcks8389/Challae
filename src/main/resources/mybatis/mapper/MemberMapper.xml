@@ -4,9 +4,22 @@
 
     <!-- 회원 등록 -->
     <insert id="create" parameterType="MemberDto">
-        INSERT INTO MEMBER (MEMBER_NUM, MEMBER_ID, MEMBER_PASSWD, MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_PHOTO,
+        INSERT INTO MEMBER (MEMBER_NUM,
+                            MEMBER_ID,
+                            MEMBER_PASSWD,
+                            MEMBER_NAME,
+                            MEMBER_PHONE,
+                            MEMBER_EMAIL,
+                            MEMBER_PHOTO,
                             MEMBER_STOREDPHOTO)
-        VALUES (MEMBER_SEQ.NEXTVAL, #{id}, #{passwd}, #{name}, #{phone}, #{email}, #{profileImage}, #{storedProfile})
+        VALUES (MEMBER_SEQ.NEXTVAL,
+                #{id},
+                #{passwd},
+                #{name},
+                #{phone},
+                #{email},
+                #{profileImage},
+                #{storedProfile})
     </insert>
 
     <!-- 아이디로 회원 상세 조회 -->
@@ -26,7 +39,10 @@
 
     <!-- 회원 전체 조회 -->
     <select id="findByAll" resultType="MemberDto">
-        SELECT member_id "id", name, email, TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY') regdate
+        SELECT member_id "id",
+               MEMBER_NAME "name",
+               MEMBER_EMAIL "email",
+               TO_CHAR(regdate, 'YYYY-MM-DD HH24:MI:SS DAY') regdate
         FROM member
         ORDER BY regdate DESC
     </select>
@@ -50,14 +66,6 @@
           AND m.MEMBER_PASSWD = #{passwd}
     </select>
 
-    <!-- 회원 이름으로 Like 검색 -->
-    <!--	<select id="findByNameLike" parameterType="string" resultType="MemberDto">-->
-    <!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
-    <!--		FROM member-->
-    <!--		WHERE name LIKE '%' || #{value} || '%'-->
-    <!--	</select>-->
-
-
     <!-- 회원 아이디 찾기 검색 -->
     <select id="findId" parameterType="string" resultType="MemberDto">
         SELECT MEMBER_ID "id"
@@ -65,6 +73,22 @@
         WHERE MEMBER_NAME = #{name}
           AND MEMBER_EMAIL = #{email}
     </select>
+
+    <!-- 회원 비밀번호 찾기  -->
+    <select id="findMemberByIdNameEmail" parameterType="map" resultType="MemberDto">
+        SELECT MEMBER_ID "id", MEMBER_NAME "name", MEMBER_EMAIL "email"
+        FROM MEMBER
+        WHERE member_id = #{id}
+          AND MEMBER_NAME = #{name}
+          AND MEMBER_EMAIL = #{email}
+    </select>
+
+    <!-- 임시 비밀번호 지정 -->
+    <update id="updatePassword" parameterType="map">
+        UPDATE MEMBER
+        SET MEMBER_PASSWD = #{password}
+        WHERE MEMBER_ID = #{id}
+    </update>
 
     <!-- 전체 회원 수 출력 -->
     <select id="memberCount" resultType="int">
@@ -74,46 +98,31 @@
 
     <!-- 전체 회원 목록 출력  -->
     <select id="viewAllMember" resultType="MemberDto">
-		SELECT MEMBER_NUM,
-		       MEMBER_ID "id",
-		       MEMBER_DIR "dir",
-		       MEMBER_NAME "name",
-		       MEMBER_PHONE "phone",
-		       MEMBER_EMAIL "email",
-		       MEMBER_STOREDPHOTO "storedProfile",
-		       CLUB_NUM
-		FROM MEMBER
+        SELECT MEMBER_NUM,
+               MEMBER_ID          "id",
+               MEMBER_DIR         "dir",
+               MEMBER_NAME        "name",
+               MEMBER_PHONE       "phone",
+               MEMBER_EMAIL       "email",
+               MEMBER_STOREDPHOTO "storedProfile",
+               CLUB_NUM
+        FROM MEMBER
     </select>
 
-
-    <!-- 회원 아이디 또는 이름 회원 통합 검색 -->
-    <!--	<select id="findBySearchAll" parameterType="string"	resultType="MemberDto">-->
-    <!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
-    <!--		FROM member-->
-    <!--		WHERE member_id = #{value} OR name LIKE '%' || #{value} || '%'-->
-    <!--	</select>-->
-
-    <!-- 옵션 선택별 회원 통합 검색 -->
-    <!--	<select id="findBySearchAllOption" parameterType="MemberSearchCondition" resultType="MemberDto">-->
-    <!--		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate-->
-    <!--		FROM member-->
-    <!--		<where>-->
-    <!--			<if test="memberId != null and memberId != ''">-->
-    <!--				or member_id = #{memberId}-->
-    <!--			</if>-->
-    <!--			<if test="name != null and name != ''">-->
-    <!--				or name LIKE '%' || #{name} || '%'-->
-    <!--			</if>-->
-    <!--			<if test="email != null and email != ''">-->
-    <!--				or email = #{email}-->
-    <!--			</if>-->
-    <!--		</where>-->
-    <!--	</select>-->
+    <!-- 회원 강제 탈퇴  -->
+    <delete id="deleteMember" parameterType="int">
+        DELETE
+        FROM MEMBER
+        WHERE MEMBER_NUM = #{memberNum}
+    </delete>
 
 
     <!-- 내 팀보기) 팀별 회원목록 출력 [이름 , 직책, 번호]	-->
     <select id="myTeamList" parameterType="String" resultType="MemberDto">
-        SELECT member_num, member_name "name", member_dir "dir", member_phone "phone"
+        SELECT member_num,
+               member_name "name",
+               member_dir "dir",
+               member_phone "phone"
         FROM member
         WHERE club_num = #{clubNum}
         ORDER BY CASE
@@ -122,11 +131,6 @@
                      END
     </select>
 
-    <delete id="deleteMember" parameterType="int">
-        DELETE
-        FROM MEMBER
-        WHERE MEMBER_NUM = #{memberNum}
-    </delete>
 
 </mapper>
 

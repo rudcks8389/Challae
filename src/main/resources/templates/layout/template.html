@@ -72,6 +72,12 @@
                 <li>
                     <a href="/board/list"><span>고객센터</span></a>
                 </li>
+                <!-- 관리자가 로그인한 경우에만 회원 관리 메뉴를 보여줍니다. -->
+                <th:block th:if="${session.loginMember != null && session.loginMember.id == 'admin'}">
+                    <li>
+                        <a href="http://localhost:3000"><span>회원 관리</span></a>
+                    </li>
+                </th:block>
             </ul>
 
         </div>
@@ -174,6 +180,7 @@
             </th:block>
 
 
+
         </div>
     </nav>
     <!-- 광고 배너 구역-->
@@ -215,15 +222,7 @@
     <!-- 풋터 구역 -->
     <footer id="footer">
         <div class="footer_wrap">
-            <span class="logo"></span>
-            <div class="foot_util">
-                <ul>
-                    <li><a href="/member/privacy.asp">개인정보처리방침</a></li>
-                    <li><a href="/member/tos.asp">이용약관</a></li>
-                    <li><a href="/member/emailcollection.asp">이메일 무단수집거부</a></li>
-                </ul>
-            </div>
-            <p class="info">서울시 노원구 123-567 7층 709호<span>TEL : 02-111-2222</span><span>FAX : 02-1234-6789</span></p>
+            <p class="info">서울시 노원구 125-567 7층 709호<span>TEL : 02-111-2222</span><span>FAX : 02-1234-6789</span></p>
             <p class="copy">COPYRIGHT ⓒCHALLAE. ALLRIGHT RESERVED</p>
         </div>
     </footer>

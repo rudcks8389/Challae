@@ -11,9 +11,9 @@
     <!-- 클럽 등록 -->
     <insert id="clubRegister" parameterType="ClubDto">
         INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_PRESIDENT, CLUB_INFO, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE,
-                          CLUB_PHOTO, CLUB_STOREDPHOTO,STATUS)
+                          CLUB_PHOTO, CLUB_STOREDPHOTO, STATUS)
         VALUES (CLUB_SEQ.NEXTVAL, #{clubName}, #{clubPresident}, #{clubInfo}, #{clubLevel}, #{clubLocation},
-                #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto},'보류')
+                #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto}, '보류')
     </insert>
 
     <!--내팀보기에서 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진, -->
@@ -56,7 +56,19 @@
         WHERE club_num = #{clubNum}
     </delete>
 
-
+    <!--    클럽번호로 정보 가져오기 -->
+    <select id="findClubById" parameterType="int">
+        SELECT
+            m.MEMBER_EMAIL
+        FROM
+            CLUB c
+                JOIN
+            MEMBER m
+            ON
+                c.CLUB_PRESIDENT = m.MEMBER_NAME
+        WHERE
+            c.CLUB_NUM = #{clubNum}
+    </select>
 
 
 </mapper>

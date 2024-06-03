@@ -6,18 +6,29 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-//@Repository
+/**
+ * article 테이블 관련 Mapper
+ */
 @Mapper
 public interface ArticleMapper {
+    /**
+     * 새로운 게시판 생성하기
+     */
     public void create(ArticleDto article);
 
-    void update(ArticleDto articleDto);
-
+    /**
+     * 게시판의 모든 글 목록 반환
+     */
     public List<ArticleDto> findByAll(SearchDto searchDto);
 
+    /**
+     * 특정 게시판의 내용 반환 (자세히 보기)
+     */
     public ArticleDto articleView(int articleNum);
 
+    /**
+     * 본인이 작성한 게시글에 대한 삭제
+     */
     public void deleteArticle(int articleNum,int memberNum);
 
     /**

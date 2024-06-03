@@ -38,7 +38,7 @@ public class ArticleController {
     @Autowired
     private final CommentService commentService;
 
-    // 게시글 목록
+    /** 전체 게시판 목록 반환 API **/
     @GetMapping("/list")
     public String articleList(@ModelAttribute ParameterForm parameterForm, Model model) {
         SearchDto searchDto = SearchDto.builder()
@@ -68,7 +68,7 @@ public class ArticleController {
         return "/board/board";
     }
 
-    // 특정 게시판의 게시글 상세
+    /** 게시판 상세보기 API **/
     @GetMapping("/view")
     public String articleView(@RequestParam("articleNum") int articleNum, Model model) {
         ArticleDto articledetail = articleService.articleView(articleNum);
@@ -78,7 +78,7 @@ public class ArticleController {
         return "/board/articleview";
     }
 
-    // 본인 게시글 삭제 하기
+    /** 본인이 작성한 게시판 삭제 API **/
     @PostMapping("/deleteArticle")
     public String deleteArticle(HttpSession session, @RequestParam("articleNum") int articleNum) {
         // 로그인한 사용자 정보에서 작성자 ID 가져오기
@@ -92,15 +92,13 @@ public class ArticleController {
         return "redirect:/board/list";
     }
 
-    // 신규 댓글 쓰기 처리
+    /** 댓글을 작성하는 API **/
     @PostMapping("/comment")
     public String registerCommentAction(@ModelAttribute CommentForm commentForm, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         // 로그인한 사용자 정보에서 작성자 ID 가져오기
         MemberDto member = (MemberDto) session.getAttribute("loginMember");
         String author = member.getId();
         String memberNum = member.getMemberNum();
-
-        log.info("가져온 아이디 : {}" , author );
 
         // Form -> Dto 변환
         CommentDto commentDto = CommentDto.builder()
@@ -116,7 +114,7 @@ public class ArticleController {
     }
 
 
-    // 댓글 삭제 요청 처리
+    /** 본인이 작성한 댓글 삭제 API **/
     @PostMapping("/delete")
     public String deleteComment(HttpSession session, @RequestParam("commentNum") int commentNum) {
         // 로그인한 사용자 정보에서 작성자 ID 가져오기
@@ -127,9 +125,7 @@ public class ArticleController {
         return "redirect:/board/list";
     }
 
-
-
-    // 신규 게시글 쓰기 화면
+    /** 새로운 게시판 작성 API **/
     @GetMapping("/write")
     public String articleWriteForm(Model model) {
         ArticleForm articleForm = ArticleForm.builder().build();
@@ -137,15 +133,13 @@ public class ArticleController {
         return "/board/articlewriteForm";
     }
 
-    // 신규 게시글 쓰기 처리
+    /** 새로운 게시판 작성 API **/
     @PostMapping("/write")
     public String signUpAction(@ModelAttribute ArticleForm articleForm, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         // 로그인한 사용자 정보에서 작성자 ID 가져오기
         MemberDto member = (MemberDto) session.getAttribute("loginMember");
         String author = member.getId();
         String memberNum = member.getMemberNum();
-
-        log.info("가져온 아이디 : {}" , author );
 
         // Form -> Dto 변환
         ArticleDto articleDto = ArticleDto.builder()

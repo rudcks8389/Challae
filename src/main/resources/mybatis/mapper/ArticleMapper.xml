@@ -1,90 +1,98 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper	namespace="com.ezen.springmvc.domain.article.mapper.ArticleMapper">
+<mapper namespace="com.ezen.springmvc.domain.article.mapper.ArticleMapper">
 
-	<!-- 게시글 등록 -->
-	<insert id="create" parameterType="ArticleDto" >
-		INSERT INTO ARTICLE (ARTICLE_NUM, ARTICLE_AUTHOR, ARTICLE_TITLE, ARTICLE_CONTENT, ARTICLE_DATE,MEMBER_NUM)
-		VALUES (ARTICLE_SEQ.NEXTVAL,#{articleAuthor}, #{articleTitle},#{articleContent} ,SYSDATE,#{memberNum})
-	</insert>
+    <!-- 게시글 등록 -->
+    <insert id="create" parameterType="ArticleDto">
+        INSERT INTO ARTICLE (ARTICLE_NUM,
+                             ARTICLE_AUTHOR,
+                             ARTICLE_TITLE,
+                             ARTICLE_CONTENT,
+                             ARTICLE_DATE,
+                             MEMBER_NUM)
+        VALUES (ARTICLE_SEQ.NEXTVAL,
+                #{articleAuthor},
+                #{articleTitle},
+                #{articleContent},
+                SYSDATE,
+                #{memberNum})
+    </insert>
+
+    <!-- 게시글 전체 조회 -->
+    <select id="findByAll" parameterType="com.ezen.springmvc.domain.common.dto.SearchDto"
+            resultType="com.ezen.springmvc.domain.article.dto.ArticleDto">
+        SELECT
+        ARTICLE_NUM,
+        ARTICLE_TITLE,
+        ARTICLE_AUTHOR,
+        TO_CHAR(ARTICLE_DATE, 'YYYY-MM-DD HH24:MI') ARTICLE_DATE
+        FROM (
+        SELECT
+        CEIL(ROWNUM / #{limit}) AS page,
+        ARTICLE_NUM,
+        ARTICLE_TITLE,
+        ARTICLE_AUTHOR,
+        ARTICLE_DATE
+        FROM (
+        SELECT
+        ARTICLE_NUM,
+        ARTICLE_TITLE,
+        ARTICLE_AUTHOR,
+        ARTICLE_DATE
+        FROM article
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                AND (
+                ARTICLE_AUTHOR = #{searchValue}
+                OR ARTICLE_TITLE LIKE '%' || #{searchValue} || '%'
+                OR ARTICLE_CONTENT LIKE '%' || #{searchValue} || '%'
+                )
+            </if>
+        </where>
+        ORDER BY article_date DESC
+        )
+        )
+        WHERE page = #{page}
+    </select>
+
+    <!-- 게시글 상세 조회 -->
+    <select id="articleView" resultType="ArticleDto">
+        SELECT ARTICLE_AUTHOR,
+               ARTICLE_TITLE,
+               ARTICLE_CONTENT,
+               TO_CHAR(ARTICLE_DATE, 'YY-MM-DD HH24:MI') ARTICLE_DATE,
+               ARTICLE_NUM,
+               MEMBER_NUM
+        FROM ARTICLE
+        WHERE ARTICLE_NUM = #{articleNum}
+    </select>
 
 
+    <delete id="deleteArticle" parameterType="map">
+        DELETE
+        FROM ARTICLE
+        WHERE ARTICLE_NUM = #{articleNum}
+          AND MEMBER_NUM = #{memberNum}
+    </delete>
 
-<!--	&lt;!&ndash; 게시글 정보 수정 &ndash;&gt;-->
-<!--	<update id="update" parameterType="ArticleDto">-->
-<!--		UPDATE ARTICLE-->
-<!--		SET MEMBER_EMAIL = #{email}, MEMBER_PASSWD = #{passwd}-->
-<!--		WHERE MEMBER_ID = #{id}-->
-<!--	</update>-->
+    <!-- 특정 게시판의 검색 조건에 따른 게시글 전체 갯수 반환 -->
+    <select id="countBySearchCondition" resultType="int">
+        SELECT
+        COUNT(ARTICLE_NUM) "cnt"
+        FROM
+        article
+        <where>
+            <if test="searchDto.searchValue != null">AND ARTICLE_AUTHOR = #{searchDto.searchValue}</if>
+            <if test="searchDto.searchValue != null">OR ARTICLE_TITLE LIKE '%' || #{searchDto.searchValue} || '%'</if>
+            <if test="searchDto.searchValue != null">OR ARTICLE_CONTENT LIKE '%' || #{searchDto.searchValue} || '%'</if>
+        </where>
+    </select>
 
-	<!-- 게시글 전체 조회 -->
-	<select id="findByAll" parameterType="com.ezen.springmvc.domain.common.dto.SearchDto" resultType="com.ezen.springmvc.domain.article.dto.ArticleDto">
-		SELECT
-		ARTICLE_NUM,
-		ARTICLE_TITLE,
-		ARTICLE_AUTHOR,
-		TO_CHAR(ARTICLE_DATE, 'YYYY-MM-DD HH24:MI') ARTICLE_DATE
-		FROM (
-		SELECT
-		CEIL(ROWNUM / #{limit}) AS page,
-		ARTICLE_NUM,
-		ARTICLE_TITLE,
-		ARTICLE_AUTHOR,
-		ARTICLE_DATE
-		FROM (
-		SELECT
-		ARTICLE_NUM,
-		ARTICLE_TITLE,
-		ARTICLE_AUTHOR,
-		ARTICLE_DATE
-		FROM article
-		<where>
-			<if test="searchValue != null and searchValue != ''">
-				AND (
-				ARTICLE_AUTHOR = #{searchValue}
-				OR ARTICLE_TITLE LIKE '%' || #{searchValue} || '%'
-				OR ARTICLE_CONTENT LIKE '%' || #{searchValue} || '%'
-				)
-			</if>
-		</where>
-		ORDER BY article_date DESC
-		)
-		)
-		WHERE page = #{page}
-	</select>
-
-	<!-- 게시글 상세 조회 -->
-	<select id="articleView" resultType="ArticleDto">
-		SELECT ARTICLE_AUTHOR, ARTICLE_TITLE, ARTICLE_CONTENT, TO_CHAR(ARTICLE_DATE, 'YY-MM-DD HH24:MI') ARTICLE_DATE,ARTICLE_NUM,MEMBER_NUM
-		FROM ARTICLE
-		WHERE ARTICLE_NUM = #{articleNum}
-	</select>
-
-
-	<delete id="deleteArticle" parameterType="map">
-		DELETE
-		FROM ARTICLE
-		WHERE ARTICLE_NUM = #{articleNum} AND MEMBER_NUM = #{memberNum}
-	</delete>
-
-	<!-- 특정 게시판의 검색 조건에 따른 게시글 전체 갯수 반환 -->
-	<select id="countBySearchCondition" resultType="int">
-		SELECT
-		COUNT(ARTICLE_NUM) "cnt"
-		FROM
-		article
-		<where>
-			<if test="searchDto.searchValue != null">AND ARTICLE_AUTHOR = #{searchDto.searchValue}</if>
-			<if test="searchDto.searchValue != null">OR ARTICLE_TITLE LIKE '%' || #{searchDto.searchValue} || '%'</if>
-			<if test="searchDto.searchValue != null">OR ARTICLE_CONTENT LIKE '%' || #{searchDto.searchValue} || '%'</if>
-		</where>
-	</select>
-
-	<!-- 관리자 모드 전체 게시판 수 출력 -->
-	<select id="articleCount" resultType="int">
-		SELECT COUNT(*) AS count
-		FROM ARTICLE
-	</select>
+    <!-- 관리자 모드 전체 게시판 수 출력 -->
+    <select id="articleCount" resultType="int">
+        SELECT COUNT(*) AS count
+        FROM ARTICLE
+    </select>
 
 </mapper>
 

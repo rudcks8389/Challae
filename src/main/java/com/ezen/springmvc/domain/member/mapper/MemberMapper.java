@@ -1,30 +1,49 @@
 package com.ezen.springmvc.domain.member.mapper;
 
 import com.ezen.springmvc.domain.member.dto.MemberDto;
-import com.ezen.springmvc.domain.member.dto.MemberSearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
-//@Repository
+/**
+ * member 테이블 관련 Mapper
+ */
 @Mapper
 public interface MemberMapper {
+
+    /**
+     * 신규 회원가입
+     */
     public void create(MemberDto member);
 
+    /**
+     * 아이디로 회원정보 얻기
+     */
     public MemberDto findById(String id);
 
+    /**
+     * 회원정보 수정
+     */
     void update(MemberDto memberDto);
 
+    /**
+     * 전체 회원 목록 반환
+     */
     public List<MemberDto> findByAll();
 
+    /**
+     * 아이디와 비밀번호로 로그인하기
+     */
     public MemberDto findByIdAndPasswd(@Param("id") String id, @Param("passwd") String passwd);
-    public List<MemberDto> findByAgeRange(@Param("begin") int begin, @Param("end") int end);
-    public List<MemberDto> findByNameLike(String name);
-    // 검색 타입별 회원 검색
+
+    /**
+     * 이름과 이메일로 아이디 찾기
+     */
     public MemberDto findId(@Param("name") String name, @Param("email") String email);
-    // 관리자모드에서 보는 회원 수 출력
+    /**
+     * 관리자 모드에서 전체 회원 수 보기
+     */
     public int memberCount();
 
     /**
@@ -37,9 +56,15 @@ public interface MemberMapper {
      */
     public int deleteMember(int memberNum);
 
+    /**
+     * 회원의 비밀번호 찾기
+     */
+    public MemberDto findMemberByIdNameEmail(@Param("id") String memberId, @Param("name") String name, @Param("email") String email);
 
-    // 통합 검색
-    public List<MemberDto> findBySearchAllOption(MemberSearchCondition searchCondition);
+    /**
+     * 임시 비밀번호 설정
+     */
+    public void updatePassword(@Param("id") String memberId, @Param("password") String password);
 
 
 

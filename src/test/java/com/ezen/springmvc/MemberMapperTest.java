@@ -58,17 +58,6 @@ class MemberMapperTest {
         log.info("로그인 회원정보 : {}", memberDto.toString());
     }
 
-    @Test
-    @DisplayName("성으로 회원 검색 테스트")
-    @Disabled
-    void findByNameLikeTest() {
-        String findName = "김";
-        List<MemberDto> list = memberMapper.findByNameLike(findName);
-        log.info("이름 와일드카드 검색 : {}", list);
-        for (MemberDto memberDto : list) {
-            log.info(memberDto.toString());
-        }
-    }
 
     @Test
     @DisplayName("회원 등록 테스트")
@@ -109,30 +98,30 @@ class MemberMapperTest {
 ////        log.info("검색 타입별 검색 회원 전체목록 : {}", list);
 //    }
 
-    @Test
-    @DisplayName("아이디 또는 성으로 회원 통합 검색 테스트")
-    @Disabled
-     void findBySearchAllTest() {
-//		List<MemberDto> list = memberMapper.findBySearchAll("bangry");
-        List<MemberDto> list = memberMapper.findBySearchAll("김");
-        log.info("모든 검색 전체목록 : {}", list);
-    }
+//    @Test
+//    @DisplayName("아이디 또는 성으로 회원 통합 검색 테스트")
+//    @Disabled
+//     void findBySearchAllTest() {
+////		List<MemberDto> list = memberMapper.findBySearchAll("bangry");
+//        List<MemberDto> list = memberMapper.findBySearchAll("김");
+//        log.info("모든 검색 전체목록 : {}", list);
+//    }
 
-    @Test
-    @DisplayName("회원 통합 검색 테스트")
-//	@Disabled
-    void findBySearchAllOptionTest() {
-        MemberSearchCondition searchCondition =
-                MemberSearchCondition
-                        .builder()
-				.memberId("bangry")
-				.name("김")
-				.email("bangry@gmail.com")
-                        .build();
-        List<MemberDto> list = memberMapper.findBySearchAllOption(searchCondition);
-        log.info("검색 옵션별 전체목록 : {}", list);
-        log.info("검색 수 : {}", list.size());
-    }
+//    @Test
+//    @DisplayName("회원 통합 검색 테스트")
+////	@Disabled
+//    void findBySearchAllOptionTest() {
+//        MemberSearchCondition searchCondition =
+//                MemberSearchCondition
+//                        .builder()
+//				.memberId("bangry")
+//				.name("김")
+//				.email("bangry@gmail.com")
+//                        .build();
+//        List<MemberDto> list = memberMapper.findBySearchAllOption(searchCondition);
+//        log.info("검색 옵션별 전체목록 : {}", list);
+//        log.info("검색 수 : {}", list.size());
+//    }
 
     @Test
     @DisplayName("내 팀 팀원 출력 테스트")

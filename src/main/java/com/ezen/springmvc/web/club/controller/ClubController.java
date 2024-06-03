@@ -183,6 +183,7 @@ public class ClubController {
         return "/club/clubdetail";
     }
 
+
     // 새로운 경기 생성하기
     @GetMapping("/create")
     public String create(Model model) {
