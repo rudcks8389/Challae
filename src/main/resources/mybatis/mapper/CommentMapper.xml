@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.ezen.springmvc.domain.comment.mapper.CommentMapper">
+
+
+
+	<!-- 댓글 보기 -->
+	<select id="viewComments"  resultType="CommentDto">
+		SELECT COMMENT_NUM, COMMENT_AUTHOR, COMMENT_CONTENT, COMMENT_DATE, MEMBER_NUM, ARTICLE_NUM
+		FROM COMMENTS
+		WHERE ARTICLE_NUM = #{articleNum}
+	</select>
+
+	<!-- 댓글 등록 -->
+	<insert id="register" parameterType="CommentDto" >
+		INSERT INTO COMMENTS (COMMENT_NUM,COMMENT_AUTHOR, COMMENT_CONTENT, COMMENT_DATE,MEMBER_NUM,ARTICLE_NUM)
+		VALUES (COMMENT_SEQ.nextval,#{commentAuthor},#{commentContent},SYSDATE, #{memberNum},#{articleNum})
+
+	</insert>
+
+	<!-- 댓글 수 보기 -->
+	<select id="count"  resultType="int">
+		SELECT COUNT(*) AS count
+		FROM COMMENTS
+		WHERE ARTICLE_NUM = #{articleNum}
+
+	</select>
+
+	<!-- 댓글 삭제하기 (댓글 작성자 기준) -->
+	<delete id="deleteComment" parameterType="map">
+		DELETE FROM COMMENTS
+		WHERE COMMENT_NUM = #{commentNum} AND MEMBER_NUM = #{memberNum}
+	</delete>
+
+
+
+</mapper>
+

@@ -31,4 +31,44 @@ public class ClubServiceImpl implements ClubService {
         return clubMapper.myClubData(clubNum);
     }
 
+    /**
+     *  관리자모드에서 승인대기 클럽 출력
+     */
+    @Override
+    public List<ClubDto> findPendingClubs() {
+        return clubMapper.findPendingClubs();
+    }
+
+    /**
+     *  관리자모드에서 클럽 생성 승인
+     */
+    @Override
+    public void updateStatus(int clubNum, String status) {
+        clubMapper.updateStatus(clubNum, status);
+    }
+
+    /**
+     *  관리자모드에서 클럽 생성 거절
+     */
+    @Override
+    public void deleteClub(int clubNum) {
+        clubMapper.deleteClub(clubNum);
+    }
+
+    /**
+     *  관리자모드에서 보는 클럽 수 출력
+     */
+    @Override
+    public int clubCount() {
+        return clubMapper.clubCount();
+    }
+
+    /**
+     *  관리자모드에서 이메일 발송을 위한 아이디 찾기
+     */
+    @Override
+    public String findClubById(int clubNum) {
+        return clubMapper.findClubById(clubNum);
+    }
+
 }

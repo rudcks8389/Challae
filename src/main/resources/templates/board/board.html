@@ -29,6 +29,15 @@
     <div class="main-left">
       <h1>Q&A 게시판</h1>
 
+      <form id="searchForm" class="mb-1" th:object="${parameterForm}">
+        <div class="input-group">
+          <input type="search" class="form-control" placeholder="작성자, 글제목, 글내용" th:field="*{searchValue}">
+          <div class="input-group-append" id="button-addon4">
+            <button class="btn btn-success btn-search" type="button">검색</button>
+          </div>
+        </div>
+      </form>
+
       <div class="table_wrap list">
         <table>
           <thead>
@@ -40,40 +49,39 @@
           </tr>
           </thead>
           <tbody>
-          <tr id="team_detail" class="clickable-row" data-href="/board/view" th:each="article : ${articleList}">
+          <tr id="team_detail" class="clickable-row" th:attr="data-href=@{/board/view(articleNum=${article.getArticleNum()})}" th:each="article : ${articleList}">
             <td th:text="${article.getArticleNum()}"></td>
             <td th:text="${article.getArticleAuthor()}"></td>
-            <td class="tb" th:text="${article.getArticleTitle()}"></td>
+            <td class="tb" th:text="${article.getArticleTitle()} + ' (' + ${commentCounts[__${article.getArticleNum()}__]} + ')'"></td>
             <td th:text="${article.getArticleDate()}"></td>
           </tr>
-          <!-- 다른 데이터들 -->
           </tbody>
         </table>
-
-        <th:block th:if="${session.loginMember == null}">
-          <a id="gologin" href="/member/signin">게시글 작성하기</a>
-        </th:block>
-
-        <th:block th:if="${session.loginMember != null}">
           <a id="gowrite" href="/board/write">게시글 작성하기</a>
-        </th:block>
-
-
 
 
       </div>
+
+
       <div class="pagination">
-        <a href="#">❮❮</a>
-        <a href="#">❮</a>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">❯</a>
-        <a href="#">❯❯</a>
+        <!-- 처음으로 출력 -->
+        <a class="page-link" th:if="${pagination.showFirst}" th:href="@{/board/list(requestPage=1, searchValue=${parameterForm.searchValue})}">❮❮</a>
+        <!-- 이전목록 출력 -->
+        <a class="page-link" th:if="${pagination.showPrevious}" th:href="@{/board/list(requestPage=${pagination.previousStartPage}, searchValue=${parameterForm.searchValue})}">❮</a>
+
+        <!-- 페이지번호 반복 -->
+        <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+          <a class="page-link" th:href="@{/board/list(requestPage=${i}, searchValue=${parameterForm.searchValue})}" th:text="${i}"></a>
+        </th:block>
+
+        <!-- 다음목록 출력 -->
+        <a class="page-link" th:if="${pagination.showNext}" th:href="@{/board/list(requestPage=${pagination.nextStartPage}, searchValue=${parameterForm.searchValue})}">❯</a>
+        <!-- 끝으로 출력 -->
+        <a class="page-link" th:if="${pagination.showLast}" th:href="@{/board/list(requestPage=${pagination.totalPages}, searchValue=${parameterForm.searchValue})}">❯❯</a>
       </div>
     </div>
+
+
     <!-- 공지 사항  -->
 
     <div class="main-right">

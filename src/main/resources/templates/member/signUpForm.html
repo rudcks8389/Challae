@@ -14,12 +14,15 @@
 </th:block>
 <th:block th:fragment="script">
     <script src="/js/filepath.js" defer></script>
+    <script src="/js/validator.js" defer></script>
+    <script src="/js/memberregister.js" defer></script>
+<!--    <script src="/js/setDefaultProfile.js" defer></script>-->
 </th:block>
 
 <th:block th:fragment="content">
 
             <div class="signup" id="detailDiv" style="display: block;">
-                <form name="registerForm" novalidate method="post" th:object="${memberForm}" enctype="multipart/form-data">
+                <form name="registerForm" method="post" th:object="${memberForm}" enctype="multipart/form-data">
 
                 <div class="layer_cont">
                     <h1>회원가입을 환영합니다!</h1>
@@ -37,6 +40,7 @@
                                 <th scope="row">이름</th>
                                 <td class="al_left">
                                     <input type="text" th:field="*{name}">
+                                    <p th:errors="*{name}" th:class="text-danger">이름 관련 입력 오류 메시지</p>
                                 </td>
                             </tr>
 
@@ -44,22 +48,28 @@
                                 <th scope="row">아이디</th>
                                 <td class="al_left">
                                     <input type="text" th:field="*{id}">
+                                    <p th:errors="*{id}" th:class="text-danger">아이디 관련 입력 오류 메시지</p>
+                                    <br>
+                                    <span id="checkedId"></span>
                                 </td>
                             </tr>
 
                             <tr>
                                 <th scope="row">비밀번호</th>
                                 <td class="al_left"><input type="password" th:field="*{passwd}"></td>
+                                <p th:errors="*{passwd}" th:class="text-danger">비밀번호 관련 입력 오류 메시지</p>
                             </tr>
 
                             <tr>
                                 <th scope="row">비밀번호 확인</th>
                                 <td class="al_left"><input type="password" th:field="*{rePasswd}"></td>
+                                <p th:errors="*{rePasswd}" th:class="text-danger">비밀번호 확인 관련 입력 오류 메시지</p>
                             </tr>
 
                             <tr>
                                 <th scope="row">이메일</th>
                                 <td class="al_left"><input type="email" th:field="*{email}"></td>
+                                <p th:errors="*{email}" th:class="text-danger">이메일 관련 입력 오류 메시지</p>
                             </tr>
 
                             <tr>

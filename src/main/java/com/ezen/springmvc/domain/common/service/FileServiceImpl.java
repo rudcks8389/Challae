@@ -1,9 +1,7 @@
 package com.ezen.springmvc.domain.common.service;
 
 import com.ezen.springmvc.domain.common.dto.UploadFile;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,17 +16,24 @@ import java.util.UUID;
 @Slf4j
 public class FileServiceImpl implements FileService {
 
-    private boolean existUploadDirectory(String directoryName){
+    private boolean existUploadDirectory(String directoryName) {
         return new File(directoryName).exists();
     }
+
     private void makeUploadDirectory(String directoryName) {
         new File(directoryName).mkdirs();
     }
 
     /** 단일 업로드 파일 저장 */
     public UploadFile storeFile(MultipartFile multipartFile, String storePath) {
-        if(!existUploadDirectory(storePath)){
+        if (!existUploadDirectory(storePath)) {
             makeUploadDirectory(storePath);
+        }
+
+        if (multipartFile.isEmpty()) {
+            // 기본 이미지 처리 (예: default.jpg)
+            String defaultImage = "default.jpg";
+            return new UploadFile(defaultImage, defaultImage);
         }
 
         String uploadFileName = multipartFile.getOriginalFilename();
@@ -43,12 +48,11 @@ public class FileServiceImpl implements FileService {
 
     /** 다중 업로드 파일 저장 */
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles, String storePath) {
-        List<UploadFile> storeFileResult = new ArrayList<UploadFile>();
+        List<UploadFile> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if (!multipartFile.isEmpty()) {
                 // 업로드 파일 저장
-                UploadFile uploadFile = null;
-                uploadFile = storeFile(multipartFile, storePath);
+                UploadFile uploadFile = storeFile(multipartFile, storePath);
                 storeFileResult.add(uploadFile);
             }
         }
@@ -61,16 +65,23 @@ public class FileServiceImpl implements FileService {
         List<String> list = new ArrayList<>();
         File directory = new File(storePath);
         File[] files = directory.listFiles();
-        Arrays.asList(files).forEach(file -> {
-            list.add(file.getName());
-        });
+        if (files != null) {
+            Arrays.asList(files).forEach(file -> {
+                list.add(file.getName());
+            });
+        }
         return list;
     }
 
     // 업로드된 파일이 중복되지 않게 저장될 파일명 생성
     private String createStoreFileName(String uploadFileName) {
         int position = uploadFileName.lastIndexOf(".");
-        String prefix =uploadFileName.substring(0, position);
+        if (position == -1) {
+            // 확장자가 없는 경우
+            String uuid = UUID.randomUUID().toString();
+            return uuid;  // 확장자 없이 UUID만 사용
+        }
+        String prefix = uploadFileName.substring(0, position);
         String suffix = uploadFileName.substring(position + 1);
         String uuid = UUID.randomUUID().toString();
         return prefix + "-" + uuid + "." + suffix;

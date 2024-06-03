@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+
+
+.signup{
+  border: solid 1px #0068FF;
+  border-radius: 20px;
+  top: 60px;
+  left: 625px;
+  box-shadow: 30px 20px 20px 10px #0068FF40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem;
+}
+
+
+/* 본문 시작 */
+#detailDiv {
+  margin: 0 auto;
+  width: 800px;
+  height: 480px;
+  padding: 20px 70px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+/* 테이블 */
+#detailDiv .add_table {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 13%;
+  font-size: 25px;
+  line-height: 70px;
+}
+
+/* 테이블 input */
+.signup input {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  font-size: 25px;
+  text-align: center;
+  outline: none;
+}
+
+#logo_flex{
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.logo_btn {
+  width: 120px;
+  font-size: 22px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  margin-bottom: 7px
+}
+
+#detailDiv .detail_join_btn {
+  width: 120px;
+  font-size: 30px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border: none;
+  margin-bottom: 7px
+}
+
+/* 본문 끝 */

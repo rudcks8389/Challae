@@ -31,11 +31,15 @@
                 <label id="passwd">패스워드</label>
             </div>
 
+            <h5 th:text="${loginError}" th:style="'color: red;'"></h5>
+            <br>
+
             <input type="checkbox" th:field="*{rememberLoginId}" th:checked="*{rememberLoginId}" /><label>아이디 기억하기</label>
 
             <button class="login_btn" type="submit">로그인</button>
 
-            <p class="text">아이디를 잊으셨나요? <a href="#">아이디찾기</a></p>
+            <p class="text">아이디를 잊으셨나요? <a href="/member/find">아이디찾기</a></p>
+            <p class="text">비밀번호를 잊으셨나요? <a href="/member/findPasswd">비밀번호 찾기</a></p>
         </form>
     </div>
 </th:block>

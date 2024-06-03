@@ -1,33 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper	namespace="com.ezen.springmvc.domain.club.mapper.ClubMapper">
+<mapper namespace="com.ezen.springmvc.domain.club.mapper.ClubMapper">
 
-<!--     전체 클럽 조회 -->
+    <!--     전체 클럽 조회 -->
     <select id="clubList" resultType="ClubDto">
         SELECT CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
         FROM CLUB
     </select>
 
-
-    <!-- 회원 등록 -->
-    <insert id="clubRegister" parameterType="ClubDto" >
-        INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_PRESIDENT, CLUB_INFO, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE, CLUB_PHOTO, CLUB_STOREDPHOTO)
-        VALUES (CLUB_SEQ.NEXTVAL, #{clubName}, #{clubPresident}, #{clubInfo}, #{clubLevel}, #{clubLocation}, #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto})
+    <!-- 클럽 등록 -->
+    <insert id="clubRegister" parameterType="ClubDto">
+        INSERT INTO CLUB (CLUB_NUM, CLUB_NAME, CLUB_PRESIDENT, CLUB_INFO, CLUB_LEVEL, CLUB_LOCATION, CLUB_PHONE,
+                          CLUB_PHOTO, CLUB_STOREDPHOTO, STATUS)
+        VALUES (CLUB_SEQ.NEXTVAL, #{clubName}, #{clubPresident}, #{clubInfo}, #{clubLevel}, #{clubLocation},
+                #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto}, '보류')
     </insert>
 
-<!--내팀보기에서 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진, -->
+    <!--내팀보기에서 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진, -->
     <select id="myClubData" parameterType="String" resultType="ClubDto">
-    SELECT club_num, club_name, club_info, club_president, TO_CHAR(club_regdate,'yyyy-MM-DD') club_regdate, club_membercount, club_photo
-    FROM club
-    WHERE club_num = #{clubNum}
+        SELECT club_num,
+               club_name,
+               club_info,
+               club_president,
+               TO_CHAR(club_regdate, 'yyyy-MM-DD') club_regdate,
+               club_membercount,
+               club_photo
+        FROM club
+        WHERE club_num = #{clubNum}
     </select>
 
+    <!-- 전체 클럽 수 출력 -->
+    <select id="clubCount" resultType="int">
+        SELECT COUNT(*) AS count
+        FROM CLUB
+    </select>
 
+    <!-- 승인 대기 클럽 조회 -->
+    <select id="findPendingClubs" resultType="ClubDto">
+        SELECT *
+        FROM CLUB
+        WHERE STATUS = '보류'
+    </select>
 
+    <!-- 클럽 신청 승인 -->
+    <update id="updateStatus" parameterType="map">
+        UPDATE CLUB
+        SET STATUS = #{status}
+        WHERE CLUB_NUM = #{clubNum}
+    </update>
 
+    <!-- 클럽 신청  거절 -->
+    <delete id="deleteClub" parameterType="int">
+        DELETE
+        FROM CLUB
+        WHERE club_num = #{clubNum}
+    </delete>
 
-
-
+    <!--    클럽번호로 정보 가져오기 -->
+    <select id="findClubById" parameterType="int">
+        SELECT
+            m.MEMBER_EMAIL
+        FROM
+            CLUB c
+                JOIN
+            MEMBER m
+            ON
+                c.CLUB_PRESIDENT = m.MEMBER_NAME
+        WHERE
+            c.CLUB_NUM = #{clubNum}
+    </select>
 
 
 </mapper>
