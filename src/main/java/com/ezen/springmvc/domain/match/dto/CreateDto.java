@@ -2,6 +2,10 @@ package com.ezen.springmvc.domain.match.dto;
 
 import lombok.*;
 
+/**
+ * 경기 일정 생성을 위한 DTO
+ */
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -15,6 +19,6 @@ public class CreateDto {
     private String matchTime; // 매치시간
     private int clubNum; // 클럽번호
     private int fieldNum; // 구장번호
-    private String matchPhoto; // 전략판 사진
+    private String matchPhoto; // 전략판 사진이름
 
 }

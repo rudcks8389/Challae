@@ -34,6 +34,12 @@ public class CreateServiceImpl implements CreateService {
         return createMapper.findByClubNum(clubNum);
     }
 
+
+    /**
+     * 프리셋 삭제하기 / CreateMapper 에서 parameterType 이 2개 필요하므로 Map 에 담아서 인자를 전달
+     * @param clubNum
+     * @param type
+     */
     @Override
     public void deleteMatchBoard(int clubNum, String type) {
         Map<String, Object> params = new HashMap<>();
@@ -47,6 +53,12 @@ public class CreateServiceImpl implements CreateService {
         createMapper.createMatchBoard(matchBoardDto);
     }
 
+    /**
+     * 프리셋 불러오기 / CreateMapper 에서 parameterType 이 2개 필요하므로 Map 에 담아 인자를 전달
+     * @param clubNum
+     * @param type
+     * @return
+     */
     @Override
     public MatchBoardDto loadMatchBoard(int clubNum, String type) {
         Map<String, Object> params = new HashMap<>();

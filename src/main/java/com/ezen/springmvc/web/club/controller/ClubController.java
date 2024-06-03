@@ -1,7 +1,6 @@
 package com.ezen.springmvc.web.club.controller;
 
 import com.ezen.springmvc.domain.club.dto.ClubDto;
-import com.ezen.springmvc.domain.club.service.ClubServiceImpl;
 import com.ezen.springmvc.domain.common.dto.UploadFile;
 import com.ezen.springmvc.domain.common.service.FileService;
 
@@ -16,13 +15,10 @@ import com.ezen.springmvc.domain.community.service.CommunityService;
 
 import com.ezen.springmvc.domain.member.service.MemberService;
 import com.ezen.springmvc.web.club.form.CommunityForm;
-import com.ezen.springmvc.web.member.form.MemberForm;
 import jakarta.servlet.http.HttpServletRequest;
 
 import com.ezen.springmvc.domain.field.dto.FieldDto;
 import com.ezen.springmvc.domain.match.dto.CreateDto;
-import com.ezen.springmvc.domain.match.service.CreateService;
-import com.ezen.springmvc.domain.member.dto.MemberDto;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -47,7 +43,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Member;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -154,7 +149,13 @@ public class ClubController {
         return "/club/clubdetail";
     }
 
-    // 새로운 경기 생성하기
+
+    /**
+     * 새로운 경기 생성 하기 ( 인록 )
+     * @param model
+     * @param request
+     * @return
+     */
     @GetMapping("/create")
     public String create(Model model, HttpServletRequest request) {
         // 세션에서 클럽번호 가져오기
@@ -173,7 +174,12 @@ public class ClubController {
         return "/club/createMatch";
     }
 
-    // 단순 경기일정 생성
+    /**
+     * 단순 경기 일정 생성 ( 인록 )
+     * @param createDto
+     * @param request
+     * @return
+     */
     @PostMapping("/create")
 //    @ResponseBody
     public String createMatch(@ModelAttribute CreateDto createDto, HttpServletRequest request) {
@@ -186,24 +192,27 @@ public class ClubController {
             createDto.setClubNum(Integer.parseInt(member.getClubNum()));
         } else {
             log.warn("클럽 번호가 세션에 존재하지 않습니다.");
-            // 클럽 번호가 없을 경우의 로직
         }
 
-        log.info("dto: {}", createDto); // Dto 데이터 여부 체크
+//        log.info("dto: {}", createDto); // Dto 데이터 여부 체크
         /* 경기 일정 생성하기 */
         createService.createMatch(createDto);
         return "redirect:/club/create";
     }
 
-    // 단순 경기일정 생성 시 캔버스 그림 업로드
+    /**
+     * 단순 경기 일정 생성 시 캔버스 이미지 등록 ( 인록 )
+     * @param canvasImage
+     * @return
+     */
     @PostMapping("/uploadCanvas")
     @ResponseBody
     public Map<String, String> uploadCanvas(@RequestPart("canvasImage") MultipartFile canvasImage) {
         String fileName = canvasImage.getOriginalFilename();
         String filePath = soccerBoardUploadPath + canvasImage.getOriginalFilename();
 
-        log.info("경로포함된 업로드 파일 : " + filePath);
-        log.info("DB에 업로드 파일 : " + fileName);
+//        log.info("경로포함된 업로드 파일 : " + filePath);
+//        log.info("DB에 업로드 파일 : " + fileName);
 
         try {
             canvasImage.transferTo(new File(filePath));
@@ -214,7 +223,14 @@ public class ClubController {
         return Collections.singletonMap("filePath", fileName);
     }
 
-    // 프리셋 저장
+    /**
+     * 프리셋 생성 및 저장하기 ( 인록 )
+     * @param presetName
+     * @param option
+     * @param canvasImage
+     * @param request
+     * @return
+     */
     @PostMapping("/createMatchBoard")
     public ResponseEntity<String> createMatchBoard(
             @RequestParam("presetName") String presetName,
@@ -244,17 +260,22 @@ public class ClubController {
                 .mbType(option)
                 .build();
 
-        log.info("등록된 프리셋 : {}", matchBoardDto);
+//        log.info("등록된 프리셋 : {}", matchBoardDto);
 
         // DB에 동일 클럽번호의 동일 프리셋 타입이 있으면 기존에 있던 프리셋 지우기
         createService.deleteMatchBoard(Integer.parseInt(member.getClubNum()), option);
-        // 서비스 호출
+        // 새로운 프리셋 저장
         createService.createMatchBoard(matchBoardDto);
 
         return ResponseEntity.ok("데이터 저장 성공");
     }
 
-    // 프리셋 캔버스 불러오기
+    /**
+     * 프리셋 캔버스 불러오기 ( 인록 )
+     * @param type
+     * @param session
+     * @return
+     */
     @GetMapping("/loadCanvas")
     public ResponseEntity<?> loadCanvas(@RequestParam String type, HttpSession session) {
         MemberDto member = (MemberDto) session.getAttribute("loginMember");

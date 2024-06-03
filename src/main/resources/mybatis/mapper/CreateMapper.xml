@@ -7,26 +7,26 @@
         FROM field
     </select>
 
-    <!--  매치 생성-->
+    <!--  경기 일정 생성  -->
     <insert id="createMatch" parameterType="CreateDto">
         INSERT INTO MATCH(match_num, match_date, match_info, match_time, club_num, field_num, match_photo)
         VALUES (MATCH_SEQ.NEXTVAL, #{matchDate}, #{matchInfo}, #{matchTime}, #{clubNum}, #{fieldNum}, #{matchPhoto})
     </insert>
 
-    <!--     로그인한 상태에서 같은 클럽원 목록(이름, 저장된 사진, 클럽 번호) 가져오기-->
+    <!--  로그인한 상태에서 같은 클럽원 목록(이름, 저장된 사진, 클럽 번호) 가져오기    -->
     <select id="findByClubNum" parameterType="int" resultType="MemberDto">
         select member_name "name", member_storedphoto "storedProfile", club_num "clubNum"
         from member
         where club_num = #{value}
     </select>
 
-    <!-- 저장하기 버튼 눌렀을 때 매치보드 생성하기   -->
+    <!-- 저장하기 버튼 눌렀을 때 매치보드 생성하기 -->
     <insert id="createMatchBoard" parameterType="MatchBoardDto">
         INSERT INTO MATCHBOARD(mb_num, mb_name, mb_file, club_num, mb_type)
         VALUES (MB_SEQ.NEXTVAL, #{mbName}, #{mbFile}, #{clubNum}, #{mbType})
     </insert>
 
-    <!-- 전략판 프리셋 저장할 때 동일한 프리셋 값이 이미 있으면 먼저 지우기   -->
+    <!-- 전략판 프리셋 저장할 때 동일한 프리셋 값이 이미 있으면 먼저 지우기 -->
     <delete id="deleteMatchBoard" parameterType="map">
         DELETE
         FROM MATCHBOARD

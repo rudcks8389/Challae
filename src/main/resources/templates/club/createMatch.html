@@ -15,7 +15,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
             defer></script>
 
-    <!--   alert 창 변경   -->
+    <!--   sweet alert (alert 창 변경)   -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </head>
@@ -39,7 +39,6 @@
 
 <th:block th:fragment="content">
 
-
     <p style="width: 100%; text-align: center; font-size: 35px; border-bottom: 2px solid darkgray;">경기 일정 등록</p>
     <!-- main 하단 부분  -->
     <div class="main-content">
@@ -60,7 +59,6 @@
                     <span class="textTotal" style="font-size: 16px; color: #0e6efd">/&nbsp;100자</span>
                 </p>
 
-
                 <textarea id="match-notice" th:field="*{matchInfo}" maxlength="100" placeholder="100자 내외 입력"
                           style="resize: none"></textarea>
 
@@ -78,9 +76,9 @@
                                         class="fa fa-clock-o"></i></span></div>
 
                             </div>
-                            <input type="text" placeholder="상세시간 입력(10자 내외)" class="form-control py-4 px-4"
+                            <input type="text" placeholder="상세시간 입력(15자 내외)" class="form-control py-4 px-4"
                                    id="reservationTime"
-                                   name="reservationTime" maxlength="10" style="border-radius: 2px; margin-top: -46px;"
+                                   name="reservationTime" maxlength="15" style="border-radius: 2px; margin-top: -46px;"
                                    th:field="*{matchTime}">
 
                         </div><!-- DEnd ate Picker Input -->
@@ -92,7 +90,6 @@
                             <input type="hidden" id="clubNumTest" name="clubNumTest" th:field="*{clubNum}">
                             <!-- 캔버스 이미지 저장 위한 필드 -->
                             <input type="hidden" id="canvasData" name="canvasData" th:field="*{matchPhoto}">
-                            <!-- 캔버스 이미지 저장 위한 필드 -->
                             <button type="submit"
                                     class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm">
                                 일정 등록하기
@@ -111,12 +108,13 @@
                     <input type="radio" id="option1" name="option" value="A"><label for="option1">A</label>
                     <input type="radio" id="option2" name="option" value="B"><label for="option2">B</label>
                     <input type="radio" id="option3" name="option" value="C"><label for="option3">C</label>
-                    <input type="text" id="presetName" name="presetName" maxlength="9" placeholder="프리셋 이름[10자 미만]">
+                    <input type="text" id="presetName" name="presetName" maxlength="9" placeholder="프리셋 이름[10자 미만]" style="margin-left: 15px">
                     <button type="button" id="saveButton" name="저장" onclick="submitPresetForm()"> 저 장</button>
                     <button type="button" id="loadButton" name="불러오기"> 불러오기</button>
+                    <p style="color: #FF0000; margin-top: 10px"> ⚠︎ 유의사항 : 불러온 프리셋은 선 추가만 가능합니다.</p>
                 </form>
             </div>
-            <p style="color: #0e6efd; margin-bottom: -2rem; margin-top: 15px; font-size: 19px"> ✔︎ 더블 클릭 시 요소를 삭제할 수
+            <p style="color: #0e6efd; margin-bottom: -2rem; margin-top: 13px; font-size: 19px"> ✔︎ 더블 클릭 시 요소를 삭제할 수
                 있습니다. &nbsp;✔︎ 마우스 드래그를 통해 선수들의 움직임을 선으로 표현할 수 있습니다. </p>
             <canvas id="soccer-board"
                     style="width: 670px; height: 550px; background-image: url('/img/soccer_board.png'); background-repeat: round;">

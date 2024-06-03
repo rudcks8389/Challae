@@ -1,107 +1,145 @@
 main .main-content {
-  height: 600px;
+    height: 600px;
 }
 
 main .main-content .match-left {
-  text-align: center;
-  width: 30%;
+    text-align: center;
+    width: 30%;
 }
 
 main .main-content textarea {
-  width: 70%;
-  height: 100px;
-  text-align: left;
-  background: #000;
-  color: #fff;
-  padding: 5px;
+    width: 70%;
+    height: 100px;
+    text-align: left;
+    background: #000;
+    color: #fff;
+    padding: 5px;
 
 }
 
 main .main-content .match-center {
-  text-align: center;
-  width: 50%;
+    text-align: center;
+    width: 50%;
 }
 
 main .main-content .match-center form input {
-  margin-right: 10px;
+    margin-right: 10px;
+}
+/**/
+main .main-content .match-center form input[type=radio]{
+    display: none;
 }
 
-main .main-content .match-center form label {
-  margin-right: 10px;
+main .main-content .match-center form input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 26px;
+    width: 40px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:16px;
+    margin-right: 8px;
+
+    border-radius: 10px;
+
+    background-color: #fff;
+    color: #333;
 }
+main .main-content .match-center form input[type=radio]:checked+label{
+    background-color: #0e6efd;
+    color: #fff;
+}
+
+main .main-content .match-center form input[type=radio]+label:hover {
+    color: #0e6efd;
+}
+/**/
+
+/*main .main-content .match-center form label {*/
+/*    margin-right: 10px;*/
+/*}*/
 
 main .main-content .match-center form button {
-  margin-left: 30px;
-  padding: 8px;
-  font-size: 20px;
-  background: #000;
-  color: #fff;
-  border: 1px solid #fff;
-  border-radius: 5px;
+    margin-left: 30px;
+    padding: 8px;
+    font-size: 20px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
 }
 
 main .main-content .match-center form #saveButton:hover {
-  /* color: rgb(124, 190, 255);
-  border: 1px solid rgb(124, 190, 255); */
-  color: #000;
-  border: 1px solid #000;
-  background: #fff;
+    /* color: rgb(124, 190, 255);
+    border: 1px solid rgb(124, 190, 255); */
+    color: #000;
+    border: 1px solid #000;
+    background: #fff;
 }
 
 main .main-content .match-center form #loadButton:hover {
-  /* color: rgb(124, 190, 255);
-  border: 1px solid rgb(124, 190, 255); */
-  color: #000;
-  border: 1px solid #000;
-  background: #fff;
+    /* color: rgb(124, 190, 255);
+    border: 1px solid rgb(124, 190, 255); */
+    color: #000;
+    border: 1px solid #000;
+    background: #fff;
+}
+
+.main-content #clear-button:hover {
+  color: #fff;
 }
 
 main .main-content .match-right {
-  text-align: center;
-  width: 20%;
-  overflow-y: auto;
-  margin-left: 50px;
+    text-align: center;
+    width: 20%;
+    overflow-y: auto;
+    margin-left: 50px;
 }
 
 main .main-content .match-right::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
+
 main .main-content .match-right::-webkit-scrollbar-track {
-  background-color: gray;
+    background-color: gray;
 }
+
 main .main-content .match-right::-webkit-scrollbar-thumb {
-  background-color: rgb(124, 190, 255);
+    background-color: rgb(124, 190, 255);
 }
+
 main .main-content .match-right::-webkit-scrollbar-button {
-  display: none;
+    display: none;
 }
 
 main .main-content .match-right table {
-  width: 98%;
-  height: 50%;
+    width: 98%;
+    height: 50%;
 }
 
 main .main-content .match-right table thead {
-  border-bottom: 3px solid rgb(124, 190, 255);
-  font-size: 22px;
-  font-style: italic;
+    border-bottom: 3px solid rgb(124, 190, 255);
+    font-size: 22px;
+    font-style: italic;
 }
 
-main .main-content .match-right table tr .draggable:hover{
-  cursor: pointer;
-  background: #d3d3d3;
-  color: #000;
+main .main-content .match-right table tr .draggable:hover {
+    cursor: pointer;
+    background: #d3d3d3;
+    color: #000;
 }
 
 table tbody tr {
-  border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 }
 
 table tbody td {
-  text-align: center;
-  /* padding: 10px; */
-  /*vertical-align: top;*/
-  border-bottom: 1px solid #ccc;
+    text-align: center;
+    /* padding: 10px; */
+    /*vertical-align: top;*/
+    border-bottom: 1px solid #ccc;
 }
 
 /*
@@ -110,40 +148,41 @@ table tbody td {
 * ==========================================
 */
 .datepicker td, .datepicker th {
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 0.85rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.85rem;
 }
 
 .datepicker {
-  margin-bottom: 3rem;
+    margin-bottom: 3rem;
 }
 
 .input-group {
-  border-radius: 30rem;
+    border-radius: 30rem;
 }
 
 input.form-control {
-  border-radius: 30rem 0 0 30rem;
-  border: none;
-  height: 50px;
+    border-radius: 30rem 0 0 30rem;
+    border: none;
+    height: 50px;
 }
 
 input.form-control:focus {
-  box-shadow: none;
+    box-shadow: none;
 }
 
 input.form-control::placeholder {
-  font-style: italic;
+    font-style: italic;
 }
 
 .input-group-text {
-  border-radius: 0 30rem 30rem 0;
-  border: none;
-  height: 50px;
+    border-radius: 0 30rem 30rem 0;
+    border: none;
+    height: 50px;
 }
 
 .datepicker-dropdown {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
+
 /*  ========================================== */
