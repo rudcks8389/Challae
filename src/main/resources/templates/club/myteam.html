@@ -50,6 +50,18 @@
     <script src="/js/my-team-alert.js" defer></script>
 </th:block>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        scrollToBottom();
+    });
+
+    function scrollToBottom() {
+        const chatContent = document.getElementById("team-table-body");
+        if (chatContent) {
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+    }
+</script>
 
 <th:block th:fragment="content">
     <!-- 롤링 리스트를 제외한 main 태그를 감싸는 구역 -->
@@ -105,7 +117,7 @@
                     </div>
                 </form>
 
-                <table class="" style="text-align: center;">
+                <table  style="text-align: center;">
                     <!-- <caption>팀원 목록</caption> -->
                     <thead>
                     <tr>
@@ -163,6 +175,7 @@
             </div>
 
 
+
             <!-- 팀 소통 공간 -->
             <div class="team-chat">
                 <h2 class="chat-title">소통공간</h2>
@@ -176,7 +189,7 @@
                             <th>작성날짜</th>
                         </tr>
                         </thead>
-                        <tbody >
+                        <tbody id="team-table-body">
                         <tr th:each="community:${community}" th:value="${community.commNum}">
                             <td class="member-name" th:text="${community.memberName} +' :'"></td>
                             <td class="comm-content" th:text="${community.commContent}"></td>
@@ -187,15 +200,9 @@
                                     <button type="button" onclick="confirmDelete(this.form)">x</button>
                                 </form>
                             </td>
-<!--                            <td th:if="${clubMember.dir} == 'N' and ${loginMember.dir} == 'Y'">-->
-<!--                                <form th:action="@{/club/kick}" method="post">-->
-<!--                                    <input type="hidden" name="memberNum" th:value="${clubMember.memberNum}" />-->
-<!--                                    <button type="button" onclick="confirmKick(this.form)">추방</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
                         </tr>
-
                         </tbody>
+
                         <tfoot></tfoot>
                     </table>
                 </div>
