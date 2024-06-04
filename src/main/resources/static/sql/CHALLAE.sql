@@ -1289,7 +1289,7 @@
 -- 2팀 멤버 더미 업데이트
 UPDATE member
 SET club_num = '101'
-WHERE member_name = '이주형';
+WHERE member_name = '송성문';
 commit;
 
 
