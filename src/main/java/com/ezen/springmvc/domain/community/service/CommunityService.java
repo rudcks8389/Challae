@@ -9,4 +9,6 @@ public interface CommunityService {
     public List<CommunityDto> getCommunityContents(String clubNum);
     // 접속한 멤버가 입력한 데이터 들어오게
     public void inputCommunity(CommunityDto communityDto);
+
+    public void deleteCommContent(CommunityDto communityDto);
 }

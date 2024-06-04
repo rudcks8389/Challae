@@ -33,6 +33,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -99,10 +100,13 @@ public class ClubController {
 
         if (loginMember != null) {
             String loginClubNumber = loginMember.getClubNum(); // 세션 객체에서 클럽번호 추출
-
             if (loginClubNumber == null) {
                 return "redirect:/club/list";
             }
+
+            String loginMemberClubStatus = loginMember.getStatus(); // 세션 객체에서 클럽상태 추출
+            model.addAttribute("loginMemberStatus",loginMemberClubStatus);
+
             // 로그인한 멤버의 클럽정보 출력
             List<ClubDto> clubData = clubService.clubDataService(loginClubNumber);
             model.addAttribute("clubData", clubData);
@@ -177,6 +181,48 @@ public class ClubController {
         }
 
         return "redirect:/club/myteam";
+    }
+
+    // 감독의 클럽원 추방
+    @PostMapping("/delete")
+    public String deleteComm(@RequestParam("commNum") String commNum, RedirectAttributes redirectAttributes) {
+        CommunityDto communityDto = new CommunityDto();
+        communityDto.setCommNum(commNum);
+//        MemberDto memberDto = new MemberDto();
+//        memberDto.setMemberNum(memberNum);
+        try {
+//            memberService.outClubMember(memberDto);
+            communityService.deleteCommContent(communityDto);
+            redirectAttributes.addFlashAttribute("deleteMessage", "성공적으로 삭제되었습니다.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("deleteMessage", "삭제에 실패했습니다.");
+        }
+
+        return "redirect:/club/myteam";
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<?> checkClubStatus(HttpServletRequest request) {
+        HttpSession session = request.getSession(false); // 기존 세션을 반환하거나 없으면 null 반환
+
+            // 로그인한 회원 정보 가져오기
+            MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+            if (loginMember.getClubNum() == null) {
+                // 클럽에 가입되지 않은 경우
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("클럽에 가입되지 않음");
+            }
+
+            String clubStatus = loginMember.getStatus(); // 클럽 상태 가져오기
+
+            if ("승인".equals(clubStatus)) {
+                // 클럽 상태가 "승인"인 경우
+                return ResponseEntity.ok().body("클럽 상태: 승인");
+            } else {
+                // 클럽 상태가 "승인"이 아닌 경우
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("클럽 상태: 승인되지 않음");
+            }
+
     }
 
     // 클럽 상세보기

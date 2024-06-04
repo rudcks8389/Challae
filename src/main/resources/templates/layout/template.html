@@ -41,11 +41,17 @@
     <th:block th:replace="${fontawesome}"></th:block>
     <!-- fontawesome -->
 
+    <!--Sweet Alert-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+    <!--Sweet Alert-->
+
     <!-- 일반 js -->
     <th:block th:replace="${script}"></th:block>
     <script src="/js/rolling-list.js" defer></script>
     <script src="/js/edit-member.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="/js/loginMember-clubStatus.js" defer></script>
     <!-- 일반 js -->
 </head>
 
@@ -64,7 +70,7 @@
                     <a href="/club/list"><span>팀 목록</span></a>
                 </li>
                 <li>
-                    <a href="/club/myteam"><span>내 팀 보기</span></a>
+                    <a href="#" onclick="fetchClubStatus(event)"><span>내 팀 보기</span></a>
                 </li>
                 <li>
                     <a href="/field/list"><span>구장 정보</span></a>

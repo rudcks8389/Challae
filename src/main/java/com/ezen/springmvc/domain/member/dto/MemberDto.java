@@ -22,4 +22,6 @@ public class MemberDto {
     private String passwd;
     private String phone;
     private String regdate;
+    private String clubName;
+    private String status;
 }

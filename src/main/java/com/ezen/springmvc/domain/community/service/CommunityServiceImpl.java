@@ -24,4 +24,9 @@ public class CommunityServiceImpl implements CommunityService{
         communityMapper.communityCreate(communityDto);
     }
 
+    @Override
+    public void deleteCommContent(CommunityDto communityDto) {
+        communityMapper.ClubCommDelete(communityDto);
+    }
+
 }

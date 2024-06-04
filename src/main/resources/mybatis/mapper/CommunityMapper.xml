@@ -15,6 +15,11 @@
         insert into community(comm_num,comm_content,club_num,member_num)
                     VALUES (comm_seq.nextval,#{commContent},#{clubNum},#{memberNum})
     </insert>
+<!-- 삭제기능 -->
+    <delete id="ClubCommDelete" parameterType="CommunityDto">
+        DELETE from community
+        where comm_num = #{commNum}
+    </delete>
 
 
 </mapper>
