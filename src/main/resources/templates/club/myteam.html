@@ -98,7 +98,7 @@
               <span id="member-count"> <!-- 총 팀원 숫자 보여주는 곳 -->
                 <h2 th:text="${clubData.clubMemberCount}">25 명</h2>
               </span>
-                    <h4 class="team-all-record-fc">3승 2패 (정적데이터)</h4>
+
                 </div>
             </div>
         </div>
@@ -124,7 +124,7 @@
                         <th>이름</th>
                         <th>직책</th>
                         <th>전화번호</th>
-                        <th></th>
+                        <th  th:text="${loginMember.dir} == 'N' ? '' : '추방'"></th>
                     </tr>
                     </thead>
                     <tbody th:each="clubMember : ${clubMember}" th:object="${MemberDto}" >
@@ -134,11 +134,11 @@
                         <td th:text="${clubMember.dir} == 'N' ? '팀원' : '감독'"></td>
                         <td th:text="${clubMember.phone}"></td>
                         <!-- 감독 제외 팀원에게만 뜨는 추방 -->
-                        <td>
+
                         <td th:if="${clubMember.dir} == 'N' and ${loginMember.dir} == 'Y'">
                             <form th:action="@{/club/kick}" method="post">
                                 <input type="hidden" name="memberNum" th:value="${clubMember.memberNum}" />
-                                <button type="button" onclick="confirmKick(this.form)">추방</button>
+                                <button class="kickBtn" type="button" onclick="confirmKick(this.form)">추방</button>
                             </form>
                         </td>
                     </tr>
@@ -228,7 +228,7 @@
 
             <!-- 새 경기 등록 버튼 있는 구역 -->
             <div class="new-match-add" th:if="${loginMember.dir == 'Y'}">
-                <a href="/club/create" class="btn-new-match-add">새 경기 등록</a>
+                <a href="/club/create" class="btn-new-match-add">+ ADD</a>
             </div>
 
             <!-- 각각의 경기들을 보여주는 구역 클라이언트 사이드 랜더링 이용-->

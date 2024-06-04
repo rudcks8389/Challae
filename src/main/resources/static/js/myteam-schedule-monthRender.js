@@ -5,13 +5,11 @@ const renderMonth = async () => {
 
     const nowYear = date.getFullYear();
     const nowMonth = date.getMonth() + 1;
-    // const nowDay = date.getDay(); 날짜는 현재 사용 x
     console.log(nowYear);
     console.log(nowMonth);
 
     document.querySelector(".cal-year-month").textContent = `${nowYear}년 ${nowMonth}월`;
 
-    // const scheduleKey = `${nowYear}-${String(nowMonth).padStart(2, '0')}`;
 
 
     // 경기 일정 렌더링
@@ -55,13 +53,14 @@ const renderMonth = async () => {
         const dateParts = schedule.matchDate.split('-'); // "2024-05-24" -> ["2024", "05", "24"]
         const dayOnly = dateParts[2]; // 일 부분만 추출
         const dateLi = document.createElement("li");
-        dateLi.textContent = "< "+dayOnly+"일 >"; // 수정된 부분: 전체 날짜 대신 일(day) 부분만 렌더링
+        dateLi.textContent = dayOnly+" 일"; // 수정된 부분: 전체 날짜 대신 일(day) 부분만 렌더링
         dateLi.classList.add("date-li"); //클래스 지정함
         ulInfo.appendChild(dateLi);
 
         //필드 이름
         const fieldLi = document.createElement("li");
-        fieldLi.textContent = schedule.fieldName;
+        const fieldName = schedule.fieldName;
+        fieldLi.textContent = "''"+fieldName+"''"
         fieldLi.classList.add("field-li");
         ulInfo.appendChild(fieldLi);
 
