@@ -73,7 +73,7 @@
 
             <!-- team-info-img : 팀 사진 -->
             <div class="team-info-img">
-                <img src="/img/cat-sun2.jpeg" alt="" style="width: 50%;">
+                <img th:src="@{'/clublogo/' + ${clubData.clubStoredPhoto}}" style="width: 50%;">
             </div>
 
             <!-- team-info-left : 팀 소개 왼쪽 구역 -->
@@ -93,13 +93,10 @@
 
             <!-- team-info-right : 팀 소개 오른쪽 구역 -->
             <div class="team-info-right">
-                <span>멤버 수</span><br>
-                <div class="team-info-right-membercount">
-              <span id="member-count"> <!-- 총 팀원 숫자 보여주는 곳 -->
-                <h2 th:text="${clubData.clubMemberCount}">25 명</h2>
-              </span>
 
-                </div>
+                <h2  class="memberCount" th:text="${clubData.clubMemberCount}"></h2>
+                <h1 class="memberCountBar">/</h1>
+                <p class="countText"> 멤버 수</p>
             </div>
         </div>
 
@@ -194,7 +191,7 @@
                             <td class="member-name" th:text="${community.memberName} +' :'"></td>
                             <td class="comm-content" th:text="${community.commContent}"></td>
                             <td class="comm-date" th:text="${community.commDate}"></td>
-                            <td class="comm-delete" th:if="${loginMember.memberNum} == ${community.memberNum}">
+                            <td class="comm-delete" th:if="${loginMember.memberNum} == ${community.memberNum} or ${loginMember.dir} =='Y' ">
                                 <form th:action = "@{/club/delete}" method="post">
                                     <input type="hidden" name="commNum" th:value="${community.commNum}"/>
                                     <button type="button" onclick="confirmDelete(this.form)">x</button>

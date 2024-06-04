@@ -13,15 +13,11 @@ main .main-wrapper .team-info {
   height: 50%;
   border: 1px solid black;
   border-radius: 10px;
-  background: #0c1f3d;
+  background: #18283e;
   display: flex;
   justify-content: space-evenly;
   padding: 10px;
-  opacity: 60%;
-
-  /*font-family: "Gothic A1", sans-serif;*/
-  /*font-weight: 400;*/
-  /*font-style: normal;*/
+  opacity: 80%;
 }
 
 /* 팀 사진 구역 */
@@ -35,28 +31,39 @@ main .main-wrapper .team-info .team-info-left {
   text-align: center;
 }
 
+#team-name{
+  padding: 0 8px;
+  display: inline-block;
+  background: linear-gradient(to top, rgba(124, 190, 255, 40%) 50%, transparent 50%);
+
+}
+
 main .main-wrapper .team-info .team-info-left .team-info-left-detail {
   margin: 10px 10px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 main .main-wrapper .team-info .team-info-left .team-info-left-detail #club-creation-date {
   margin-left: 20px;
-  padding-left: 20px;
+  padding-left: 22px;
   border-left: 2px solid #fff;
 }
 
 
 main .main-wrapper .team-info .team-info-right {
-  width: 30%;
+  width: 20%;
   text-align: center;
+  display: flex; /* 추가 */
+  align-items: end; /* 추가 */
+  justify-content: right; /* 필요시 추가 */
 
 }
 
-main .main-wrapper .team-info .team-info-right .team-info-right-membercount {
-  margin: 10px 10px;
-  font-size: 30px;
+main .main-wrapper .team-info .team-info-right .memberCount {
+  font-size: 40pt;
 }
+
+
 
 /*  */
 main .main-wrapper .team-content {
@@ -112,9 +119,7 @@ main .main-wrapper .team-table {
   margin-top: 50px;
   margin-left: 20px;
   width: 50%;
-  /*font-family: "Gothic A1", sans-serif;*/
   font-weight: 100;
-  /*font-style: normal;*/
 }
 
 main .main-wrapper .team-content .team-table table {
@@ -238,25 +243,21 @@ main .main-wrapper .chat-board {
 .chat-content td {
   padding: 0px 5px;
   margin-bottom: 7px;
-  /*display: table;*/
   font-size: 16pt;
 }
 .chat-content .comm-content{
-  border-bottom: 1px solid rgb(124, 190, 255) ; /* 밑줄 */
-  /*background: linear-gradient(to top, rgba(124, 190, 255,40%) 50%, transparent 50%); 형광펜 칠한 느낌*/
+  border-bottom: 1px solid rgb(124, 190, 255) ;
 }
 .chat-content .member-name {
   vertical-align: bottom;
   font-size: 12pt;
   margin: 0px 3px;
-  /*border-radius: 5px;*/
 }
 .chat-content .comm-date {
   vertical-align: bottom;
   font-size: 10pt;
   font-weight: lighter;
   margin: 0px 3px;
-  /*padding: 0px 3px ;*/
 }
 .chat-content tr {
   display: table;

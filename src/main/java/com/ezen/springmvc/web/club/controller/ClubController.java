@@ -33,6 +33,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,6 +55,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +71,10 @@ public class ClubController {
     @Value("${upload.soccerboard.path}")
     private String soccerBoardUploadPath;
 
+    // 클럽 로고
+    @Value("${upload.clublogo.path}")
+    private String clublogoUploadPath;
+
 
     @Autowired
     private CreateService createService;
@@ -74,13 +84,31 @@ public class ClubController {
     private CommunityService communityService;
     @Autowired
     private MemberService memberService;
-
-
     @Autowired
     private FileService fileService;
 
-    @Value("${upload.clublogo.path}")
-    private String clublogoUploadPath;
+
+
+    // 클럽 로고 사진 요청 처리
+    @GetMapping("/image/{clubLogoFileName}")
+    @ResponseBody
+    public ResponseEntity<Resource> showImage(@PathVariable("clubLogoFileName") String profileFileName) throws IOException {
+        Path path = Paths.get(clublogoUploadPath + "/" + profileFileName);
+
+        if (!Files.exists(path) || profileFileName == null || profileFileName.isEmpty()) {
+            path = Paths.get("src/main/resources/static/img/teamlogo.jpg");
+        }
+
+        String contentType = Files.probeContentType(path);
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        Resource resource = new FileSystemResource(path);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+    }
 
     // 전체 클럽 목록
     @GetMapping("/list")
@@ -188,10 +216,7 @@ public class ClubController {
     public String deleteComm(@RequestParam("commNum") String commNum, RedirectAttributes redirectAttributes) {
         CommunityDto communityDto = new CommunityDto();
         communityDto.setCommNum(commNum);
-//        MemberDto memberDto = new MemberDto();
-//        memberDto.setMemberNum(memberNum);
         try {
-//            memberService.outClubMember(memberDto);
             communityService.deleteCommContent(communityDto);
             redirectAttributes.addFlashAttribute("deleteMessage", "성공적으로 삭제되었습니다.");
         } catch (Exception e) {
@@ -200,6 +225,7 @@ public class ClubController {
 
         return "redirect:/club/myteam";
     }
+
 
     @GetMapping("/status")
     public ResponseEntity<?> checkClubStatus(HttpServletRequest request) {
