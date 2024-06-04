@@ -1289,7 +1289,7 @@
 -- 2팀 멤버 더미 업데이트
 UPDATE member
 SET club_num = '101'
-WHERE member_name = '';
+WHERE member_name = '이주형';
 commit;
 
 
@@ -1314,7 +1314,7 @@ commit;
 -- SET club_num = '102'
 -- WHERE member_name = '김도영';
 
--- commit;
+commit;
 
 
 -- BOARD 테이블에 더미 데이터 삽입
@@ -1333,8 +1333,8 @@ commit;
 
 
 
-
-
+-- delete from community
+-- where comm_num = 28;
 
 
 

@@ -46,7 +46,7 @@ function confirmDelete(form) {
         cancelButtonColor: '#d33',
         confirmButtonText: '네, 삭제합니다!',
         cancelButtonText: '취소',
-
+git
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire({

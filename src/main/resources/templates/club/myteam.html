@@ -138,7 +138,7 @@
 
 
                     <!-- 페이지번호 반복 -->
-                <ul class="pagination h-100 justify-content-center align-items-center">
+                <ul class="pagination h-30 justify-content-center align-items-center" id ="pageUl" >
                     <!-- 처음으로 출력 -->
                     <li class="page-item" th:if="${pagination.showFirst}"><a class="page-link" th:href="@{myteam(requestPage=1, searchValue=${parameterForm.searchValue})}">처음으로</a></li>
                     <!-- 이전목록 출력 -->
@@ -146,7 +146,7 @@
 
                     <!-- 페이지번호 반복 -->
                     <th:block th:each="i : ${#numbers.sequence(pagination.getStartPage(), pagination.getEndPage())}">
-                        <li class="page-item active" th:if="${i == pagination.params.requestPage}" >
+                        <li class="page-item active" th:if="${i == pagination.params.requestPage}" id="activeBtn">
                             <a class="page-link"th:text="${i}">1</a>
                         </li>
                         <li class="page-item" th:if="${i != pagination.params.requestPage}" >
