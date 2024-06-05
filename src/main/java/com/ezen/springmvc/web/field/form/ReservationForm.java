@@ -1,8 +1,6 @@
-package com.ezen.springmvc.domain.reservation.dto;
+package com.ezen.springmvc.web.field.form;
 
 import lombok.*;
-
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,16 +8,13 @@ import java.util.Date;
 @Setter
 @ToString
 @Builder
-public class ReservationDto {
-    private int resNum;
-    private String resDate;
+public class ReservationForm {
+    private String resNum;
+    private String resResDate;
     private int resPrice;
     private String resTime;
     private String resMemo;
+    private String resName;
+    private String resPhone;
     private int memberNum;
-    private int fieldNum;
-
-
-
-
 }

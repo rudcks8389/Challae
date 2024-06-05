@@ -82,6 +82,8 @@ public class MemberController {
     // 회원 가입 결과 화면 요청 처리
     @GetMapping("/signup/result")
     public String signUpResult() {
+
+
         return "/member/signUpResult";
     }
 
