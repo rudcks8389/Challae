@@ -211,7 +211,10 @@ public class ClubController {
         return "redirect:/club/myteam";
     }
 
-    // 감독의 클럽원 추방
+    /**
+     * 본인이 작성한 댓글 삭제 기능 처리
+     * @param commNum 댓글 번호
+     */
     @PostMapping("/delete")
     public String deleteComm(@RequestParam("commNum") String commNum, RedirectAttributes redirectAttributes) {
         CommunityDto communityDto = new CommunityDto();
