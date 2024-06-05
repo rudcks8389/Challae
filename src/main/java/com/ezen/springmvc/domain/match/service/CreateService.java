@@ -53,7 +53,7 @@ public interface CreateService {
      */
     public MatchBoardDto loadMatchBoard(int clubNum, String type); // clubNum 만 서버에서 받아 쓰기.
 
-=======
+    /**
      * myteam페이지 일정 랜더링 서비스
      * @param clubNum 클럽번호
      */
@@ -64,5 +64,5 @@ public interface CreateService {
      * @param matchNum 매치번호
      */
     public CreateDto getMachDetail (String matchNum);
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
+
 }

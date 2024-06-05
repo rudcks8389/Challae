@@ -95,6 +95,16 @@ public class ApiController {
     }
 
     /**
+     * 모든 클럽 목록 반환 API
+     **/
+    @GetMapping("/allClub")
+    public List<ClubDto> getAllClub() {
+        return clubService.allClubView();
+    }
+
+
+
+    /**
      * 회원 강제 탈퇴 API
      **/
     @CrossOrigin(origins = "http://localhost:3000")

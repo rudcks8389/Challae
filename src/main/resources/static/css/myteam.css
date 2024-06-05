@@ -10,7 +10,7 @@ main .main-wrapper .team-info {
   width: 90%;
   text-align: center;
   margin: 0 auto;
-  height: 50%;
+  height: 200px;
   border: 1px solid black;
   border-radius: 10px;
   background: #18283e;
@@ -20,11 +20,6 @@ main .main-wrapper .team-info {
   opacity: 80%;
 }
 
-/* 팀 사진 구역 */
-main .main-wrapper .team-info .team-info-img {
-  width: 20%;
-  text-align: right;
-}
 
 main .main-wrapper .team-info .team-info-left {
   width: 30%;

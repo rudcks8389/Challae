@@ -44,5 +44,10 @@ public interface ClubService {
      */
     public String findClubById(int clubNum);
 
+    /**
+     *  관리자모드에서 전체 클럽 목록 보기
+     */
+    public List<ClubDto> allClubView();
+
 
 }

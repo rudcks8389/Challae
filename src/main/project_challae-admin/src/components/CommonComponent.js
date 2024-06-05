@@ -36,6 +36,7 @@ const CommonComponent = () => {
                         <li><Link to='/'>홈</Link></li>
                         <li><Link to='/dashboard'>대시보드</Link></li>
                         <li><Link to='/member'>멤버 관리</Link></li>
+                        <li><Link to='/club'>클럽 목록</Link></li>
                         <li><Link to='/team'>팀 승인</Link></li>
                     </ul>
                 </nav>

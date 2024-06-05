@@ -19,7 +19,7 @@
     </insert>
 
     <!-- 게시글 전체 조회 -->
-    <select id="findByAll" parameterType="com.ezen.springmvc.domain.common.dto.SearchDto"
+    <select id="findByAll" parameterType="SearchDto"
             resultType="com.ezen.springmvc.domain.article.dto.ArticleDto">
         SELECT
         ARTICLE_NUM,
@@ -68,6 +68,7 @@
     </select>
 
 
+    <!--    게시글 삭제 -->
     <delete id="deleteArticle" parameterType="map">
         DELETE
         FROM ARTICLE

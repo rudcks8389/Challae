@@ -45,7 +45,7 @@
 
                 <h2 class="tactic-title">전략판</h2>
             <div id="tactic-board">
-                <img th:src="@{'../../upload/'+ ${matchDetail.matchPhoto}}" class="match-photo"/>
+                <img th:src="@{/upload/soccerboard/{matchPhoto}(matchPhoto=${matchDetail.matchPhoto})}" class="match-photo"/>
             </div>
 
         </div>
@@ -83,8 +83,8 @@
 
 
             <h2>구장 오시는길</h2>
-            <p th:if="${matchDetail.fieldNewaddress != null}" th:text="${matchDetail.fieldNewaddress}"></p>
-            <p th:unless="${matchDetail.fieldNewaddress != null}" th:text="${matchDetail.fieldOldaddress}"></p>
+            <h4 th:if="${matchDetail.fieldNewaddress != null}" th:text="${matchDetail.fieldNewaddress}"></h4>
+            <h4 th:unless="${matchDetail.fieldNewaddress != null}" th:text="${matchDetail.fieldOldaddress}"></h4>
         </div>
 
     </div>

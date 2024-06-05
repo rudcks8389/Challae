@@ -35,7 +35,6 @@ public interface CreateMapper {
      */
     public void createMatch(CreateDto createDto);
 
-<<<<<<< HEAD
 
     /**
      * clubNum 과 선택한 프리셋 타입을 사용해 기존에 있던 프리셋 삭제
@@ -57,7 +56,7 @@ public interface CreateMapper {
      * @return
      */
     public MatchBoardDto loadMatchBoard(Map<String, Object> param);
-=======
+
     /**
      * myteam 페이지 일정 랜더링
      * @param clubNum 클럽번호
@@ -70,6 +69,4 @@ public interface CreateMapper {
      */
     public CreateDto clubDetailByMatchNum(String MatchNum);
 
-
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
 }

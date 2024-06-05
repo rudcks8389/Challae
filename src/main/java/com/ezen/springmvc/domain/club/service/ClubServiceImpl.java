@@ -78,5 +78,11 @@ public class ClubServiceImpl implements ClubService {
         return clubMapper.findClubById(clubNum);
     }
 
+    /**
+     * 관리자 모드에서 전체 클럽 목록 보기
+     */
+    public List<ClubDto> allClubView() {
+        return clubMapper.allClubView();
+    }
 
 }

@@ -5,10 +5,7 @@ import com.ezen.springmvc.domain.common.dto.UploadFile;
 import com.ezen.springmvc.domain.common.service.FileService;
 
 import com.ezen.springmvc.domain.match.dto.MatchBoardDto;
-import com.ezen.springmvc.domain.club.dto.SearchDto;
-import com.ezen.springmvc.domain.club.service.ClubServiceImpl;
-
-import com.ezen.springmvc.domain.match.dto.ClubMatchDto;
+import com.ezen.springmvc.domain.common.dto.SearchDto;
 import com.ezen.springmvc.domain.match.service.CreateService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.web.club.form.ClubRegisterForm;
@@ -262,9 +259,6 @@ public class ClubController {
     public String clubDetail() {
         return "/club/clubdetail";
     }
-
-
-
     /**
      * 새로운 경기 생성 하기 ( 인록 )
      * @param model
@@ -317,7 +311,7 @@ public class ClubController {
 //        log.info("dto: {}", createDto); // Dto 데이터 여부 체크
         /* 경기 일정 생성하기 */
         createService.createMatch(createDto);
-        return "redirect:/club/create";
+        return "redirect:/club/myteam";
     }
 
     /**

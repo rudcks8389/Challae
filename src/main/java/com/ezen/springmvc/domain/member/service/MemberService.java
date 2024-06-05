@@ -1,6 +1,6 @@
 package com.ezen.springmvc.domain.member.service;
 
-import com.ezen.springmvc.domain.club.dto.SearchDto;
+import com.ezen.springmvc.domain.common.dto.SearchDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -68,8 +68,7 @@ public interface MemberService {
 	 */
 	public  void updateClub(int clubNum);
 
-	// 내 팀보기
-	public List<MemberDto> getTeamMember(String clubNum);
+
 	/**
 	 * 클럽 승인 후 감독여부 수정
 	 */
@@ -80,8 +79,7 @@ public interface MemberService {
 	 */
 	public void updateClubNumByPresident(int clubNum);
 
-
-=======
+    /**
 	 * 클럽원 출력(조회) 서비스
 	 * @param clubNum 클럽번호
 	 * @param searchDto 검색 Dto
@@ -100,5 +98,5 @@ public interface MemberService {
 	 * @param memberDto 회원Dto
 	 */
 	public void outClubMember (MemberDto memberDto);
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
+
 }

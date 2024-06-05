@@ -13,28 +13,19 @@ import lombok.*;
 @ToString
 @Builder
 public class CreateDto {
+    private String matchDate;  /** 매치날짜 **/
+    private String matchInfo; /** 전달사항 **/
+    private String matchTime; /** 매치시간 **/
+    private int clubNum; /** 클럽번호 **/
+    private int fieldNum; /** 구장번호 **/
+    private String matchPhoto; /** 전략판 사진이름 **/
+    private String matchNum; /** 전략판 매치번호 **/
+    private String matchDateForm; /** 매치 날짜폼 **/
+    private String fieldName; /** 구장이름 **/
+    private String fieldNewaddress; /** 도로명 주소 **/
+    private String fieldOldaddress; /** 구 주소 **/
+    private String fieldX; /** 전략판 X축 **/
+    private String fieldY; /** 전략판 Y축 **/
 
-<<<<<<< HEAD
-    private String matchDate;  // 매치날짜
-    private String matchInfo; // 전달사항
-    private String matchTime; // 매치시간
-    private int clubNum; // 클럽번호
-    private int fieldNum; // 구장번호
-    private String matchPhoto; // 전략판 사진이름
-=======
-    private String matchNum;
-    private String matchDate;
-    private String matchDateForm;
-    private String matchInfo;
-    private String matchTime;
-    private String matchPhoto;
-    private int clubNum;
-    private int fieldNum;
-    private String fieldName;
-    private String fieldNewaddress;
-    private String fieldOldaddress;
-    private String fieldX;
-    private String fieldY;
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
 
 }

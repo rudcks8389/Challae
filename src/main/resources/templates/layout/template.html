@@ -51,11 +51,8 @@
     <th:block th:replace="${script}"></th:block>
     <script src="/js/rolling-list.js" defer></script>
     <script src="/js/edit-member.js" defer></script>
-<<<<<<< HEAD
-=======
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="/js/loginMember-clubStatus.js" defer></script>
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
     <!-- 일반 js -->
 </head>
 
@@ -73,18 +70,12 @@
                 <li>
                     <a href="/club/list"><span>팀 목록</span></a>
                 </li>
-<<<<<<< HEAD
-
                 <th:block th:if="${session.loginMember != null && session.loginMember.id != 'admin'}">
                     <li>
-                        <a href="/club/myteam"><span>내 팀 보기</span></a>
+                        <a href="#" onclick="fetchClubStatus(event)"><span>내 팀 보기</span></a>
                     </li>
                 </th:block>
-=======
-                <li>
-                    <a href="#" onclick="fetchClubStatus(event)"><span>내 팀 보기</span></a>
-                </li>
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
+
                 <li>
                     <a href="/field/list"><span>구장 정보</span></a>
                 </li>
@@ -103,7 +94,6 @@
 
         <!-- 로그인 / 회원가입 div -->
         <div class="nav-login">
-
             <!-- 내 정보 toggle창 -->
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight" style="background-color: #000; border: none; font-size: 20px;">내 정보
@@ -115,23 +105,13 @@
                     <h5 class="offcanvas-title" id="offcanvasRightLabel"
                         style="margin-top: 40px; padding-left: 10px; font-size: 25px;"><i class="fa-solid fa-user"></i>
                         내 정보</h5>
-
-
                     <th:block th:if="${session.loginMember == null}">
                         <img src="/img/teamlogo.jpg"
                              style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
                     </th:block>
-
                     <th:block th:if="${session.loginMember != null}">
-<<<<<<< HEAD
-
-
                         <img id="backprofile"
                              th:src="@{/upload/profile/{profileFileName}(profileFileName=${session.loginMember.storedProfile})}"
-
-=======
-                        <img th:src="@{/upload/profile/{profileFileName}(profileFileName=${session.loginMember.storedProfile})}"
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
                              style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
                     </th:block>
 

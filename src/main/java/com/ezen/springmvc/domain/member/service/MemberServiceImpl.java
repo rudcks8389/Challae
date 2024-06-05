@@ -1,6 +1,6 @@
 package com.ezen.springmvc.domain.member.service;
 
-import com.ezen.springmvc.domain.club.dto.SearchDto;
+import com.ezen.springmvc.domain.common.dto.SearchDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -107,8 +107,6 @@ public class MemberServiceImpl implements MemberService{
 	public void updateClub(int clubNum) {
 		memberMapper.updateClub(clubNum);
 	}
-
-
 
 
 	/**

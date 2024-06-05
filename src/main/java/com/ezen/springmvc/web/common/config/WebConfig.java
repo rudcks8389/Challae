@@ -36,6 +36,12 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addResourceHandler("/upload/profile/**")
                 .addResourceLocations("file:c:/fullstack/workspace2/Project_CHALLAE/src/main/upload/profile/");
+
+        registry.addResourceHandler("/upload/clublogo/**")
+                .addResourceLocations("file:c:/fullstack/workspace2/Project_CHALLAE/src/main/upload/clublogo/");
+
+        registry.addResourceHandler("/upload/soccerboard/**")
+                .addResourceLocations("file:c:/fullstack/workspace2/Project_CHALLAE/src/main/upload/soccerboard/");
     }
 }
 

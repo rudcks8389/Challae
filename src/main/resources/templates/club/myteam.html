@@ -74,7 +74,7 @@
 
             <!-- team-info-img : 팀 사진 -->
             <div class="team-info-img">
-                <img th:src="@{'/clublogo/' + ${clubData.clubStoredPhoto}}" style="width: 50%;">
+                <img th:src="@{/upload/clublogo/{clubLogoFileName}(clubLogoFileName=${clubData.clubStoredPhoto})}" height="100%" >
             </div>
 
             <!-- team-info-left : 팀 소개 왼쪽 구역 -->

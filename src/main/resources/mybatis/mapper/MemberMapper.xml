@@ -47,7 +47,6 @@
         ORDER BY regdate DESC
     </select>
 
-<<<<<<< HEAD
     <!-- 회원 로그인 -->
     <select id="findByIdAndPasswd" resultType="MemberDto">
         SELECT m.MEMBER_ID          AS "id",
@@ -67,27 +66,6 @@
         WHERE m.MEMBER_ID = #{id}
           AND m.MEMBER_PASSWD = #{passwd}
     </select>
-=======
-	<!-- 회원 로그인 -->
-	<select id="findByIdAndPasswd" resultType="MemberDto">
-		SELECT m.MEMBER_ID          AS "id",
-			   m.MEMBER_NAME        AS "name",
-			   m.MEMBER_PHOTO       AS "profileImage",
-			   m.MEMBER_STOREDPHOTO AS "storedProfile",
-			   m.MEMBER_EMAIL       AS "email",
-			   m.CLUB_NUM           AS "clubNum",
-			   m.MEMBER_PASSWD      AS "passwd",
-			   m.MEMBER_DIR         AS "dir",
-			   m.MEMBER_NUM         AS "memberNum",
-			   c.CLUB_NAME          AS "clubName",
-			   c.STATUS             AS "status"
-		FROM member m
-				 LEFT JOIN
-			 club c ON m.CLUB_NUM = c.CLUB_NUM
-		WHERE m.MEMBER_ID = #{id}
-		  AND m.MEMBER_PASSWD = #{passwd}
-	</select>
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
 
     <!-- 회원 아이디 찾기 검색 -->
     <select id="findId" parameterType="string" resultType="MemberDto">
@@ -139,22 +117,6 @@
         WHERE MEMBER_NUM = #{memberNum}
     </delete>
 
-
-    <!-- 내 팀보기) 팀별 회원목록 출력 [이름 , 직책, 번호]	-->
-    <select id="myTeamList" parameterType="String" resultType="MemberDto">
-        SELECT member_num,
-               member_name "name",
-               member_dir "dir",
-               member_phone "phone"
-        FROM member
-        WHERE club_num = #{clubNum}
-        ORDER BY CASE
-                     WHEN member_dir = 'Y' THEN 0
-                     ELSE 1
-                     END
-    </select>
-
-<<<<<<< HEAD
     <!-- 클럽 생성 이후 멤버 테이블의 DIR 수정 -->
     <update id="updateMemberWithClubInfo" parameterType="int">
         UPDATE Member
@@ -165,7 +127,7 @@
             WHERE club_num = #{clubNum}
         )
     </update>
-=======
+
 	<!-- 회원 아이디 또는 이름 회원 통합 검색 -->
 	<select id="findBySearchAll" parameterType="string"	resultType="MemberDto">
 		SELECT member_id "id", name, email, TO_CHAR(regdate, 'yyyy-MM-DD HH24:MI:SS') regdate
@@ -235,7 +197,6 @@
 			<if test="searchDto.searchValue != null">AND member_name LIKE '%' || #{searchDto.searchValue} || '%'</if>
 		</where>
 	</select>
->>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
 
     <!-- 클럽 생성 이후 멤버 테이블의 ClubNum 수정 -->
     <update id="updateClubNumByPresident"  parameterType="int">
@@ -255,10 +216,6 @@
             WHERE c.CLUB_NUM = #{clubNum}
         )
     </update>
-
-
-
-
 
 	<!-- 클럽원 강퇴 -->
 	<update id="ClubMemberDelete" parameterType="MemberDto">
