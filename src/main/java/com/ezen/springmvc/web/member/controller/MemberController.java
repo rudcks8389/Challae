@@ -104,6 +104,8 @@ public class MemberController {
     /** 신규 회원가입 결과 요청 **/
     @GetMapping("/signup/result")
     public String signUpResult() {
+
+
         return "/member/signUpResult";
     }
 

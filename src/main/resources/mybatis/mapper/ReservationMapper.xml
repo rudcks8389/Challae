@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.springmvc.domain.reservation.mapper.ReservationMapper">
+    <!-- 예약정보를 DB에 저장하는 SQL문-->
+    <insert id="insertReservation" parameterType="com.ezen.springmvc.domain.reservation.dto.ReservationDto">
+        INSERT INTO RESERVATION (RES_NUM, RES_RESDATE, RES_PRICE, MEMBER_NUM, RES_TIME, RES_MEMO)
+        VALUES (RES_SEQ.NEXTVAL, TO_DATE(#{resDate}, 'YYYY-MM-DD'), #{resPrice}, #{memberNum}, #{resTime}, #{resMemo})
+
+        <selectKey keyProperty="resNum" resultType="int" order="AFTER">
+            SELECT RES_SEQ.CURRVAL FROM dual
+        </selectKey>
+    </insert>
+    <!--예약번호 찾기 sql문-->
+    <select id="findByReservationNum" resultType="com.ezen.springmvc.domain.reservation.dto.ReservationDto">
+        SELECT  M.MEMBER_NAME, M.MEMBER_PHONE,
+                R.RES_TIME, TO_CHAR(R.RES_RESDATE, 'YYYY-MM-DD') as resDate, R.RES_PRICE, R.RES_MEMO
+        FROM MEMBER M
+                 JOIN RESERVATION R ON M.MEMBER_NUM = R.MEMBER_NUM
+        WHERE R.RES_NUM = #{resNum}
+    </select>
+    <!--membernum을 찾는 sql문-->
+    <select id="findByMemberNum" parameterType="int" resultType="MemberDto">
+        SELECT member_name "name", member_phone "phone"
+        FROM member
+        WHERE member_num = #{value}
+    </select>
+</mapper>
+

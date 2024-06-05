@@ -1,38 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
-
 <head>
     <meta charset="UTF-8">
 </head>
-
 <body>
-
 <th:block th:fragment="css">
     <link href="/css/playall.css" rel="stylesheet" />
 </th:block>
-
 <th:block th:fragment="script">
     <script src="/js/weather.js" defer></script>
 </th:block>
-
 <th:block th:fragment="fontawesome">
     <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </th:block>
-
-
 <th:block th:fragment="content">
-
-
+    <!--구장리스트페이지-->
     <div id="list">
-        <!-- <div class="title"><h1>구장목록</h1></div>  -->
         <div class="maintit">구장목록</div>
-
         <!-- list에 출력되어야할 구장리스트 시작 -->
         <div class="bodywrapper" th:each="field : ${fieldList}">
-            <div class="leftwrap">
-                <img th:src="@{'/img/play/' + ${field.fieldPhoto}}" class="image"/>
-            </div>
+            <div class="leftwrap"><img th:src="@{'/img/play/' + ${field.fieldPhoto}}" class="image"/></div>
             <div class="rightwrap">
                 <h2 class="tit" th:text="${field.fieldName}"></h2>
                 <p class="addinfo">
@@ -40,27 +28,19 @@
                     <span th:if="${not #strings.isEmpty(field.fieldNewAddress)}" th:text="${field.fieldNewAddress}"></span>
                     <span th:unless="${not #strings.isEmpty(field.fieldNewAddress)}" th:text="${field.fieldOldAddress}"></span>
                 </p>
-
-
                 <p class="numinfo">
                     <i class="fa-solid fa-phone-volume" style="border: 1px solid white; padding: 5px;"></i>
                     <span th:text="${field.fieldPhone}"></span>
                 </p>
-                <div class="btnwrap" >
-                    <a href="/field/reservation"><button class="abtn">예약하기</button></a>
-                    <a  th:href="@{/field/view(fieldNum=${field.fieldNum})}"><button class="bbtn">지점소개</button></a>
+                <div class="btnwrap">
+                    <th:block th:if="${session.loginMember == null}"><a href="/member/signin"><button class="abtn">예약하기</button></a></th:block>
+                    <th:block th:if="${session.loginMember != null}"><a  th:href="@{/field/reservation(fieldNum=${field.fieldNum})}"><button class="abtn">예약하기</button></a></th:block>
+                    <a th:href="@{/field/view(fieldNum=${field.fieldNum})}"><button class="bbtn">지점소개</button></a>
                 </div>
             </div>
         </div>
-
-
-
-        <!-- list에 출력되어야할 구장리스트 끝 -->
-
+        <!-- 구장리스트 끝 -->
     </div>
 </th:block>
-
-
 </body>
-
 </html>

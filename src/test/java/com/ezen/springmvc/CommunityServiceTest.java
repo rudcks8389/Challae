@@ -26,9 +26,13 @@ public class CommunityServiceTest {
         log.info("comm Content : {}", comm);
     }
 
+<<<<<<< HEAD
 //    @Test
 //    @DisplayName("커뮤니티 입력 저장테스트")
 //    void inputCommTest(){
 //        CommunityDto communityDto =
 //    }
+=======
+
+>>>>>>> b4ab504d41e01dc4860cddc8d2390e6ee8f8847a
 }
