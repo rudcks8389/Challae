@@ -18,7 +18,7 @@ const eventRegister = function () {
     });
 };
 
-// 아이디 중복 체크 이벤트 처리
+/** 아이디 중복체크 관련 처리 */
 const handleChangeInput = async function (event) {
     let inputId = event.target.value;
     const url = `/member/idcheck/${inputId}`;
@@ -43,7 +43,7 @@ const handleChangeInput = async function (event) {
     showIdResult(resultMessage);
 };
 
-// 아이디 입력 관련 메시지 출력
+/** 아이디 입력 관련 메시지 */
 const showIdResult = function (message) {
     const resultView = document.querySelector("#checkedId");
     console.log(resultView);
@@ -52,7 +52,7 @@ const showIdResult = function (message) {
     }
 };
 
-// 회원 가입 이벤트 처리
+/** 회원가입 이벤트 처리 */
 const handleSubmitButton = function (event) {
     event.preventDefault();
 
@@ -99,7 +99,7 @@ const handleSubmitButton = function (event) {
     form.submit();
 };
 
-// 검증 오류 메시지 출력
+/** 검증 오류 메시지 출력 */
 const showErrorMessage = function (input, message) {
     // 기존 에러 메시지 제거
     const existingError = input.nextElementSibling;
@@ -115,7 +115,7 @@ const showErrorMessage = function (input, message) {
     input.focus();
 };
 
-// 아이디 필드 클릭 이벤트 처리
+/** 아이디 필드 클릭 이벤트 처리 */
 const handleClickInput = function (event) {
     // 기존 에러 메시지 제거
     const nextElement = event.target.nextElementSibling;

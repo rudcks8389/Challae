@@ -128,52 +128,5 @@ public class Pagination {
 	public boolean isShowNext() {
 		return endPage < totalPages;
 	}
-	
-	
-	/** 테스트을 위한 main */
-	public static void main(String[] args) {
-		ParameterForm params = ParameterForm.builder()
-				.elementSize(15)
-				.pageSize(5)
-				.requestPage(25)
-				.rowCount(2048)
-				.build();
-		Pagination pagination = new Pagination(params);
-		
-		System.out.println("테이블에서 검색된 행의수: " + params.getRowCount());
-		System.out.println("사용자 요청페이지: " + params.getRequestPage());
-		System.out.println("계산된 전체페이지수: " + pagination.getTotalPages());
-		
-		System.out.println("계산된 현재목록의 시작페이지 번호: " + pagination.getStartPage());
-		System.out.println("계산된 현재목록의 끝페이지 번호: " + pagination.getEndPage());
-		
-		System.out.println("처음으로 보여주기 여부: " + pagination.isShowFirst());
-		System.out.println("이전목록 보여주기 여부: " + pagination.isShowPrevious());
-		
-		System.out.println("다음목록 보여주기 여부: " + pagination.isShowNext());
-		System.out.println("끝으로 보여주기 여부: " + pagination.isShowLast());
-		
-		// JSP에서 페이징 처리 시
-		if(pagination.isShowFirst()) {
-			System.out.print("처음으로 ");
-		}
-		
-		if(pagination.isShowPrevious()) {
-			System.out.print("이전목록 ");
-		}
-				
-		for(int i=pagination.getStartPage(); i<=pagination.getEndPage(); i++){
-			System.out.print(i + " ");
-		}
-		
-		if(pagination.isShowNext()) {
-			System.out.print("다음목록 ");
-		}
-		
-		if(pagination.isShowLast()) {
-			System.out.print("끝으로 ");
-		}
-		System.out.println();
-		
-	}
+
 }

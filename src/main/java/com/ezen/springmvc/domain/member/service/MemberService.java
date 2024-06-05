@@ -60,7 +60,22 @@ public interface MemberService {
 	 */
 	public MemberDto findMemberByIdNameEmail(String memberId, String name, String email);
 
+	/**
+	 * 클럽 생성시 회원정보 수정
+	 */
+	public  void updateClub(int clubNum);
 
 	// 내 팀보기
 	public List<MemberDto> getTeamMember(String clubNum);
+	/**
+	 * 클럽 승인 후 감독여부 수정
+	 */
+	public void updateMemberWithClubInfo(int clubNum);
+
+	/**
+	 * 클럽 승인 후 Club_President에게 Member테이블 ClubNum부여
+	 */
+	public void updateClubNumByPresident(int clubNum);
+
+
 }

@@ -1,6 +1,8 @@
 package com.ezen.springmvc.web.api.controller;
+
 import com.ezen.springmvc.domain.article.service.ArticleService;
 import com.ezen.springmvc.domain.club.dto.ClubDto;
+import com.ezen.springmvc.domain.club.mapper.ClubMapper;
 import com.ezen.springmvc.domain.club.service.ClubService;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import com.ezen.springmvc.domain.member.service.MemberService;
@@ -31,15 +33,21 @@ public class ApiController {
     @Autowired
     private MemberService memberService;
 
-    /** 회원 프로필사진 업로드 경로 **/
+    /**
+     * 회원 프로필사진 업로드 경로
+     **/
     @Value("${upload.profile.path}")
     private String profileFileUploadPath;
 
-    /** 메일을 보내는 사람의 주소 **/
+    /**
+     * 메일을 보내는 사람의 주소
+     **/
     @Value("${spring.mail.username}")
     private String from;
 
-    /** 클럽 프로필사진 업로드 경로 **/
+    /**
+     * 클럽 프로필사진 업로드 경로
+     **/
     @Value("${upload.clublogo.path}")
     private String clublogoUploadPath;
 
@@ -51,32 +59,44 @@ public class ApiController {
 
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ClubMapper clubMapper;
 
-    /** 전체 회원 수 반환 API **/
+    /**
+     * 전체 회원 수 반환 API
+     **/
     @GetMapping("/memberCount")
     public int getMemberCount() {
         return memberService.memberCount();
     }
 
-    /** 전체 클럽 수 반환 API **/
+    /**
+     * 전체 클럽 수 반환 API
+     **/
     @GetMapping("/clubCount")
     public int getClubCount() {
         return clubService.clubCount();
     }
 
-    /** 전체 게시판 수 반환 API **/
+    /**
+     * 전체 게시판 수 반환 API
+     **/
     @GetMapping("/articleCount")
     public int getArticleCount() {
         return articleService.articleCount();
     }
 
-    /** 모든 회원 목록 반환 API **/
+    /**
+     * 모든 회원 목록 반환 API
+     **/
     @GetMapping("/allMember")
     public List<MemberDto> getAllMember() {
         return memberService.viewAllMember();
     }
 
-    /** 회원 강제 탈퇴 API **/
+    /**
+     * 회원 강제 탈퇴 API
+     **/
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/deleteMember")
     public ResponseEntity<Void> deleteMember(@RequestParam int memberNum) {
@@ -84,18 +104,28 @@ public class ApiController {
         return ResponseEntity.ok().build();
     }
 
-    /** 클럽 생성을 기다리는 클럽 목록 API **/
+    /**
+     * 클럽 생성을 기다리는 클럽 목록 API
+     **/
     @GetMapping("/pending")
     public List<ClubDto> getPendingClubs() {
         return clubService.findPendingClubs();
     }
 
-    /** 클럽 생성 승인 API **/
+
+    /**
+     * 클럽 생성 승인 API
+     **/
     @PostMapping("/approve")
     public void approveClub(@RequestParam int clubNum) {
         clubService.updateStatus(clubNum, "승인");
 
         String presidentEmail = clubService.findClubById(clubNum);
+
+        memberService.updateMemberWithClubInfo(clubNum);
+
+        memberService.updateClubNumByPresident(clubNum);
+
 
         // 클럽 승인 이메일 발송
         String subject = "[찰래 홈페이지] 클럽 승인 안내";
@@ -108,7 +138,9 @@ public class ApiController {
         }
     }
 
-    /** 클럽 생성 거절 API **/
+    /**
+     * 클럽 생성 거절 API
+     **/
     @PostMapping("/reject")
     public void rejectClub(@RequestParam int clubNum) {
         String presidentEmail = clubService.findClubById(clubNum);
@@ -124,7 +156,9 @@ public class ApiController {
         }
     }
 
-    /** 회원 프로필사진 업로드 **/
+    /**
+     * 회원 프로필사진 업로드
+     **/
     @GetMapping("/image/{profileFileName}")
     @ResponseBody
     public ResponseEntity<Resource> showImage(@PathVariable("profileFileName") String profileFileName) throws IOException {
@@ -146,7 +180,9 @@ public class ApiController {
         return new ResponseEntity<>(resource, headers, HttpStatus.OK);
     }
 
-    /** 클럽 로고 업로드 **/
+    /**
+     * 클럽 로고 업로드
+     **/
     @GetMapping("/clublogo/{clubLogoName}")
     @ResponseBody
     public ResponseEntity<Resource> showClublogo(@PathVariable("clubLogoName") String clubLogoName) throws IOException {
@@ -168,7 +204,9 @@ public class ApiController {
         return new ResponseEntity<>(resource, headers, HttpStatus.OK);
     }
 
-    /** 이메일 발송 메서드 **/
+    /**
+     * 이메일 발송 메서드
+     **/
     private void sendEmail(String to, String subject, String body) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -178,4 +216,6 @@ public class ApiController {
         messageHelper.setText(body);
         javaMailSender.send(message);
     }
+
+
 }

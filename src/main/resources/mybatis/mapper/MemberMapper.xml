@@ -58,7 +58,8 @@
                m.MEMBER_PASSWD      AS "passwd",
                m.MEMBER_DIR         AS "dir",
                m.MEMBER_NUM         AS "memberNum",
-               c.CLUB_NAME          AS "clubName"
+               c.CLUB_NAME          AS "clubName",
+               c.STATUS             AS "status"
         FROM member m
                  LEFT JOIN
              club c ON m.CLUB_NUM = c.CLUB_NUM
@@ -131,6 +132,35 @@
                      END
     </select>
 
+    <!-- 클럽 생성 이후 멤버 테이블의 DIR 수정 -->
+    <update id="updateMemberWithClubInfo" parameterType="int">
+        UPDATE Member
+        SET member_dir = 'Y'
+        WHERE MEMBER_NAME = (
+            SELECT club_president
+            FROM Club
+            WHERE club_num = #{clubNum}
+        )
+    </update>
+
+    <!-- 클럽 생성 이후 멤버 테이블의 ClubNum 수정 -->
+    <update id="updateClubNumByPresident"  parameterType="int">
+        UPDATE member m
+        SET m.CLUB_NUM = (
+            SELECT c.CLUB_NUM
+            FROM (
+                     SELECT c.CLUB_NUM, c.CLUB_PRESIDENT,
+                            ROW_NUMBER() OVER (PARTITION BY c.CLUB_PRESIDENT ORDER BY c.CLUB_NUM) rn
+                     FROM club c
+                 ) c
+            WHERE c.CLUB_PRESIDENT = m.MEMBER_NAME AND c.rn = 1
+        )
+        WHERE m.MEMBER_NAME IN (
+            SELECT c.CLUB_PRESIDENT
+            FROM club c
+            WHERE c.CLUB_NUM = #{clubNum}
+        )
+    </update>
 
 </mapper>
 

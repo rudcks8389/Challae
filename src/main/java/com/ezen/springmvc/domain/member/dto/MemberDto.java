@@ -25,4 +25,5 @@ public class MemberDto {
     private String phone;          /** 회원의 전화번호 */
     private String regdate;        /** 회원의 가입일자 */
     private String clubName;       /** 회원이 가입된 클럽의 이름 */
+    private String status;         /** 회원이 가입된 클럽의 상태 */
 }

@@ -25,12 +25,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-<<<<<<< HEAD
-=======
+
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
->>>>>>> main
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -185,16 +184,14 @@ public class ClubController {
     }
 
 
-<<<<<<< HEAD
+
     /**
      * 새로운 경기 생성 하기 ( 인록 )
      * @param model
      * @param request
      * @return
      */
-=======
-    // 새로운 경기 생성하기
->>>>>>> main
+
     @GetMapping("/create")
     public String create(Model model, HttpServletRequest request) {
         // 세션에서 클럽번호 가져오기
@@ -213,15 +210,14 @@ public class ClubController {
         return "/club/createMatch";
     }
 
-<<<<<<< HEAD
+
     /**
      * 단순 경기 일정 생성 ( 인록 )
      * @param createDto
      * @param request
      * @return
      */
-=======
->>>>>>> main
+
     @PostMapping("/create")
 //    @ResponseBody
     public String createMatch(@ModelAttribute CreateDto createDto, HttpServletRequest request) {
@@ -265,7 +261,7 @@ public class ClubController {
         return Collections.singletonMap("filePath", fileName);
     }
 
-<<<<<<< HEAD
+
     /**
      * 프리셋 생성 및 저장하기 ( 인록 )
      * @param presetName
@@ -340,9 +336,7 @@ public class ClubController {
     }
 
     // 새로운 클럽 생성하기
-=======
-    // 클럽 생성 화면
->>>>>>> main
+
     @GetMapping("/register")
     public String clubRegister(Model model) {
         ClubRegisterForm clubRegisterForm = ClubRegisterForm.builder().build();
@@ -374,7 +368,6 @@ public class ClubController {
         clubService.clubRegister(clubDto);
         redirectAttributes.addFlashAttribute("clubDto", clubDto);
 
-//        관리자한테 Dto 전체 넘겨주고 관리자 처리 시, 클럽소속 시켜주고 member_dir 'Y'로 변경
         return "redirect:/club/registersuccess";
     }
 

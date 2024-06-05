@@ -42,4 +42,7 @@ public interface ClubMapper {
      */
     public String findClubById(int clubNum);
 
+//    ==============================================
+
+
 }

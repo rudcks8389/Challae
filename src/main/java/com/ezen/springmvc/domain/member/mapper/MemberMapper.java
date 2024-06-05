@@ -66,6 +66,20 @@ public interface MemberMapper {
      */
     public void updatePassword(@Param("id") String memberId, @Param("password") String password);
 
+    /**
+     * 클럽 생성시 멤버 테이블 수정
+     */
+    public void updateClub(int clubNum);
+
+    /**
+     * 클럽 승인 후 감독여부 수정
+     */
+    public void updateMemberWithClubInfo(int clubNum);
+
+    /**
+     * 클럽 승인 후 Club_President에게 Member테이블 ClubNum부여
+     */
+    public void updateClubNumByPresident(int clubNum);
 
 
     // 내 팀보기에서 쓸 멤버 클럽번호에 따른 팀원목록 출력

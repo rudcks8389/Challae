@@ -99,9 +99,36 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.findMemberByIdNameEmail(memberId,name,email);
 	}
 
+	/**
+	 * 클럽 생성시 회원정보 수정
+	 */
+	@Override
+	public void updateClub(int clubNum) {
+		memberMapper.updateClub(clubNum);
+	}
+
+
+
+
 	@Override
 	public List<MemberDto> getTeamMember(String clubNum) {
 		return memberMapper.myTeamList(clubNum);
+	}
+
+	/**
+	 * 클럽 승인 후 감독여부 수정
+	 */
+	@Override
+	public void updateMemberWithClubInfo(int clubNum) {
+		memberMapper.updateMemberWithClubInfo(clubNum);
+	}
+
+	/**
+	 * 클럽 승인 후 Club_President에게 Member테이블 ClubNum부여
+	 */
+	@Transactional
+	public void updateClubNumByPresident(int clubNum) {
+		memberMapper.updateClubNumByPresident(clubNum);
 	}
 
 

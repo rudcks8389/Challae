@@ -1,3 +1,6 @@
+/**
+ * 토글에서 회원 정보 수정 창 처리
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const editButton = document.getElementById('editButton');
     const editForm = document.getElementById('editForm');
@@ -11,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+/**
+ * 토글에서 회원 정보 수정하기
+ */
 function updateMemberInfo() {
     const form = document.getElementById('editForm');
     const newEmail = form.querySelector('#newEmail').value;

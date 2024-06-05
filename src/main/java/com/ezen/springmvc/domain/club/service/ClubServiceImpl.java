@@ -4,8 +4,11 @@ import com.ezen.springmvc.domain.club.dto.ClubDto;
 import com.ezen.springmvc.domain.club.mapper.ClubMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -70,5 +73,6 @@ public class ClubServiceImpl implements ClubService {
     public String findClubById(int clubNum) {
         return clubMapper.findClubById(clubNum);
     }
+
 
 }

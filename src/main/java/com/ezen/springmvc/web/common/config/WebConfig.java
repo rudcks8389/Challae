@@ -32,7 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/preset/**")  // upload/preset 으로 들어오는 요청들은 ↓ 밑의 주소로 ..
-                .addResourceLocations("file:/Applications/ezen-fullstack/workspace/Project-CHALLAE/src/main/upload/presetboard/");
+                .addResourceLocations("file:c:/fullstack/workspace2/Project_CHALLAE/src/main/upload/presetboard/");
 
         registry.addResourceHandler("/upload/profile/**")
                 .addResourceLocations("file:c:/fullstack/workspace2/Project_CHALLAE/src/main/upload/profile/");
