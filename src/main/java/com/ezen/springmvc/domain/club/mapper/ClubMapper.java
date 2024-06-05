@@ -13,7 +13,10 @@ public interface ClubMapper {
     // 클럽 생성하기
     public void clubRegister(ClubDto clubDto);
 
-    // 내 팀보기 클럽데이터 출력용
+    /**
+     * /myteam 페이지 클럽데이터 출력
+     * @param clubNum 클럽번호
+     */
     public List<ClubDto> myClubData(String clubNum);
 
     /**

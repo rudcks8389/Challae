@@ -1,10 +1,12 @@
 package com.ezen.springmvc.domain.match.mapper;
 
 import com.ezen.springmvc.domain.field.dto.FieldDto;
+import com.ezen.springmvc.domain.match.dto.ClubMatchDto;
 import com.ezen.springmvc.domain.match.dto.CreateDto;
 import com.ezen.springmvc.domain.match.dto.MatchBoardDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,7 @@ public interface CreateMapper {
      */
     public void createMatch(CreateDto createDto);
 
+<<<<<<< HEAD
 
     /**
      * clubNum 과 선택한 프리셋 타입을 사용해 기존에 있던 프리셋 삭제
@@ -54,4 +57,19 @@ public interface CreateMapper {
      * @return
      */
     public MatchBoardDto loadMatchBoard(Map<String, Object> param);
+=======
+    /**
+     * myteam 페이지 일정 랜더링
+     * @param clubNum 클럽번호
+     */
+    public List<ClubMatchDto> clubMatchByClubNum(String clubNum);
+
+    /**
+     * 경기 상세일정 정보 출력
+     * @param MatchNum 매치번호
+     */
+    public CreateDto clubDetailByMatchNum(String MatchNum);
+
+
+>>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
 }

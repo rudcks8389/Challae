@@ -19,34 +19,33 @@
 
 <th:block th:fragment="content">
 
-    <h1 id="header"> ??날의 경기정보 </h1>
+    <h1 id="header" th:text="|${matchDetail.matchDateForm}일 의 경기정보|"></h1>
 
     <div id="info-board">
-
         <div id="game-info">
-
             <table id="info-table">
 
                 <tr>
                     <th scope="col"> 날 짜 </th>
-                    <td>024년 7월 11일 [ 11시 55분 ]</td>
+                    <td th:text="${matchDetail.matchDate}"></td>
                 </tr>
 
                 <tr>
                     <th scope="col"> 구장 이름 </th>
-                    <td>소루 발로차 구장</td>
+                    <td th:text="${matchDetail.fieldName}" }></td>
                 </tr>
 
                 <tr>
                     <th scope="col">기타 전달사항 </th>
-                    <td>거 선크림 야무지게 바르고 오슈~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</td>
+                    <td class="match-info" th:text="${matchDetail.matchInfo}"></td>
                 </tr>
 
 
             </table>
 
+                <h2 class="tactic-title">전략판</h2>
             <div id="tactic-board">
-                <h2>전략판</h2>
+                <img th:src="@{'../../upload/'+ ${matchDetail.matchPhoto}}" class="match-photo"/>
             </div>
 
         </div>
@@ -54,26 +53,38 @@
 
         <div id="map-today">
             <h2>경기장 위치</h2>
-            <h3 id="map-name">??????? 구장</h3>
+            <h3 id="map-name" th:text="${matchDetail.fieldName}"></h3>
             <div>
                 <div id="map-img">
-                    <!-- <img src="/project_chal-lae/img/A.jpeg" alt=" 지도 들어갈거임 "> -->
-                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a3ea03be2bb55d4686b970ff6653edab"></script>
-                    <script>
-                        var container = document.getElementById('map-img');
-                        var options = {
-                            center: new kakao.maps.LatLng(33.450701, 126.570667),
-                            level: 3
-                        };
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	94449e96205beb140bfba2b02da6e26e"></script>
+                    <script th:inline="javascript">
+                    <!--좌표 Data-->
+                        var fieldX = [[${matchDetail.fieldX}]];
+                        var fieldY = [[${matchDetail.fieldY}]];
+                        var filedName = [[${matchDetail.fieldName}]];
 
-                        var map = new kakao.maps.Map(container, options);
+                        var staticMapContainer  = document.getElementById('map-img'), // 이미지 지도를 표시할 div
+                            staticMapOption = {
+                                marker : {
+                                    text : filedName, // 마커와 함께 표시할 텍스트
+                                    position: new kakao.maps.LatLng(fieldX, fieldY) // 좌표가 없으면 지도 중심에 마커가 표시된다
+                                },
+                                center: new kakao.maps.LatLng(fieldX, fieldY), // 이미지 지도의 중심 좌표
+                                level: 3, // 이미지 지도의 확대 레벨
+                                mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+                            };
+
+                        // 이미지 지도를 생성한다
+                        var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+
                     </script>
                 </div>
             </div>
 
 
             <h2>구장 오시는길</h2>
-            <p>블라시 블라구 블라동 777-777 (뚜르뚜주르르 옆)</p>
+            <p th:if="${matchDetail.fieldNewaddress != null}" th:text="${matchDetail.fieldNewaddress}"></p>
+            <p th:unless="${matchDetail.fieldNewaddress != null}" th:text="${matchDetail.fieldOldaddress}"></p>
         </div>
 
     </div>

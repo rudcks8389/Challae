@@ -1,3 +1,4 @@
+
 * {
     margin: 0px;
     padding: 0px;
@@ -13,50 +14,62 @@ body {
 #header {
     font-size: 42pt;
     text-align: center;
-    margin: 30px;
-    height: 100px;
+    margin: 30px auto;
+    width: 380px;
+    height: 70px;
+    background: linear-gradient(to top, rgba(124, 190, 255, 40%) 60%, transparent 50%);
 }
 
 #game-info {
-    /* border: 1px solid white; */
     width: 50%;
 }
 
-
 th, td {
-
     color: black;
     border-radius: 10px;
     border: 3px solid black;
-    padding: 15px 10px;
+    padding: 5px 10px;
     margin: auto;
     font-size: 20pt;
 }
-td{
-    background-color:aliceblue;
+
+td {
+    background-color: aliceblue;
     text-align: center;
+    font-size: 24pt;
     width: 60%;
 }
 
-th {
-    background-color:rgb(124, 190, 255);
-    width: 20%;
-    /* text-align: right; */
+.match-info {
+    font-size: 18pt;
 }
 
-#info-table{
-    margin: 30px auto;
+th {
+    background-color: rgb(124, 190, 255);
+    width: 20%;
+    text-align: right;
+    vertical-align: top;
+}
 
+#info-table {
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
+
+}
+
+.tactic-title {
+    margin: 30px auto;
 }
 
 #tactic-board {
-    margin: auto;
+    margin: 30px auto;
     width: 95%;
     height: 65%;
     border: 1px solid rgb(124, 190, 255);
 }
 
-#info-head{
+#info-head {
     width: 120px;
 }
 
@@ -69,18 +82,20 @@ th {
 
 h2 {
     text-align: center;
-    border: 1px solid rgb(124, 190, 255);
-    background-color: rgb(124, 190, 255);
     color: black;
     border-radius: 20px;
     width: 200px;
     margin: 20px auto;
+    background-color: rgb(219, 236, 255);
+    border: 5px solid #50779d;
 }
 
 #map-name {
-    height: 30px;
+    height: 35px;
+    width: 200px;
     margin: 20px auto;
     font-size: 24pt;
+    background: linear-gradient(to top, rgba(124, 190, 255, 35%) 40%, transparent 50%);
 }
 
 #map-today {
@@ -89,13 +104,19 @@ h2 {
     margin-right: 0px;
 }
 
-
-#map-img{
+#map-img {
     margin: auto;
     height: 600px;
     width: 600px;
+    border-radius: 20px;
+    border: 10px solid #50779d;
 }
 
-p {
+.p {
     font-size: 18pt;
+}
+
+.match-photo {
+    width: 500px;
+    height: 600px;
 }

@@ -28,7 +28,11 @@ public class ClubServiceImpl implements ClubService {
         clubMapper.clubRegister(clubDto);
     }
 
-    // 내 팀보기 클럽데이터 출력
+    /**
+     * 클럽 정보 제공 서비스
+     * @param clubNum 클럽번호
+     * @return
+     */
     @Override
     public List<ClubDto> clubDataService(String clubNum) {
         return clubMapper.myClubData(clubNum);

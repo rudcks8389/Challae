@@ -42,10 +42,20 @@
     <th:block th:replace="${fontawesome}"></th:block>
     <!-- fontawesome -->
 
+    <!--Sweet Alert-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+    <!--Sweet Alert-->
+
     <!-- 일반 js -->
     <th:block th:replace="${script}"></th:block>
     <script src="/js/rolling-list.js" defer></script>
     <script src="/js/edit-member.js" defer></script>
+<<<<<<< HEAD
+=======
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="/js/loginMember-clubStatus.js" defer></script>
+>>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
     <!-- 일반 js -->
 </head>
 
@@ -63,12 +73,18 @@
                 <li>
                     <a href="/club/list"><span>팀 목록</span></a>
                 </li>
+<<<<<<< HEAD
 
                 <th:block th:if="${session.loginMember != null && session.loginMember.id != 'admin'}">
                     <li>
                         <a href="/club/myteam"><span>내 팀 보기</span></a>
                     </li>
                 </th:block>
+=======
+                <li>
+                    <a href="#" onclick="fetchClubStatus(event)"><span>내 팀 보기</span></a>
+                </li>
+>>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
                 <li>
                     <a href="/field/list"><span>구장 정보</span></a>
                 </li>
@@ -107,11 +123,15 @@
                     </th:block>
 
                     <th:block th:if="${session.loginMember != null}">
+<<<<<<< HEAD
 
 
                         <img id="backprofile"
                              th:src="@{/upload/profile/{profileFileName}(profileFileName=${session.loginMember.storedProfile})}"
 
+=======
+                        <img th:src="@{/upload/profile/{profileFileName}(profileFileName=${session.loginMember.storedProfile})}"
+>>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
                              style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
                     </th:block>
 

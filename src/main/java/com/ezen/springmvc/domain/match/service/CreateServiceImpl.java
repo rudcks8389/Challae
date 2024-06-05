@@ -1,6 +1,7 @@
 package com.ezen.springmvc.domain.match.service;
 
 import com.ezen.springmvc.domain.field.dto.FieldDto;
+import com.ezen.springmvc.domain.match.dto.ClubMatchDto;
 import com.ezen.springmvc.domain.match.dto.CreateDto;
 import com.ezen.springmvc.domain.match.dto.MatchBoardDto;
 import com.ezen.springmvc.domain.match.mapper.CreateMapper;
@@ -34,6 +35,7 @@ public class CreateServiceImpl implements CreateService {
         return createMapper.findByClubNum(clubNum);
     }
 
+<<<<<<< HEAD
 
     /**
      * 프리셋 삭제하기 / CreateMapper 에서 parameterType 이 2개 필요하므로 Map 에 담아서 인자를 전달
@@ -65,5 +67,25 @@ public class CreateServiceImpl implements CreateService {
         params.put("clubNum", clubNum);
         params.put("type", type);
         return createMapper.loadMatchBoard(params);
+=======
+    /**
+     * myteam페이지 일정 랜더링
+     * @param clubNum 클럽번호
+     * @return
+     */
+    @Override
+    public List<ClubMatchDto> getMatch(String clubNum) {
+        return createMapper.clubMatchByClubNum(clubNum);
+    }
+
+    /**
+     * 경기 상세정보 출력
+     * @param matchNum 매치번호
+     * @return
+     */
+    @Override
+    public CreateDto getMachDetail(String matchNum) {
+        return createMapper.clubDetailByMatchNum(matchNum);
+>>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
     }
 }

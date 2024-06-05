@@ -1,8 +1,10 @@
 package com.ezen.springmvc.domain.member.service;
 
+import com.ezen.springmvc.domain.club.dto.SearchDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Param;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 /**
@@ -36,6 +38,7 @@ public interface MemberService {
 	public void editMember(MemberDto member);
 
 	/**
+<<<<<<< HEAD
 	 * 이름과 이메일로 아이디 찾기
 	 */
 	public MemberDto findId(String name , String email);
@@ -78,4 +81,24 @@ public interface MemberService {
 	public void updateClubNumByPresident(int clubNum);
 
 
+=======
+	 * 클럽원 출력(조회) 서비스
+	 * @param clubNum 클럽번호
+	 * @param searchDto 검색 Dto
+	 */
+	public List<MemberDto> getTeamMember(String clubNum, SearchDto searchDto);
+
+	/**
+	 * 팀원 목록 카운팅 서비스 (for pagination)
+	 * @param clubNum 클럽번호
+	 * @param searchDto 검색Dto
+	 */
+	public  int getTeamMemberCount (String clubNum, SearchDto searchDto);
+
+	/**
+	 * 팀원 팀강퇴서비스
+	 * @param memberDto 회원Dto
+	 */
+	public void outClubMember (MemberDto memberDto);
+>>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
 }

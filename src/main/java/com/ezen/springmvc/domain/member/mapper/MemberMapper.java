@@ -1,9 +1,16 @@
 package com.ezen.springmvc.domain.member.mapper;
 
+import com.ezen.springmvc.domain.club.dto.SearchDto;
 import com.ezen.springmvc.domain.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+<<<<<<< HEAD
+=======
+import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestParam;
+>>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 /**
@@ -36,6 +43,7 @@ public interface MemberMapper {
      * 아이디와 비밀번호로 로그인하기
      */
     public MemberDto findByIdAndPasswd(@Param("id") String id, @Param("passwd") String passwd);
+<<<<<<< HEAD
 
     /**
      * 이름과 이메일로 아이디 찾기
@@ -81,9 +89,35 @@ public interface MemberMapper {
      */
     public void updateClubNumByPresident(int clubNum);
 
+=======
+    public List<MemberDto> findByAgeRange(@Param("begin") int begin, @Param("end") int end);
+    public List<MemberDto> findByNameLike(String name);
+    public List<MemberDto> findBySearchType(@Param("type") String type, @Param("value") String value);
+    public List<MemberDto> findBySearchAll(String value);
+    public List<MemberDto> findBySearchAllOption(MemberSearchCondition searchCondition);
+>>>>>>> 1f11d145f106574e0d5099fde22f45caab614fcb
 
-    // 내 팀보기에서 쓸 멤버 클럽번호에 따른 팀원목록 출력
-     public List<MemberDto> myTeamList(String clubNum); // xml로 인자 두개 이상을 받아올 때 @param으로 지정
+
+    /**
+     * myTeam 페이지 클럽원 조회, 검색
+     * @param clubNum 클럽번호
+     * @return
+     */
+     public List<MemberDto> myTeamList(@Param("clubNum") String clubNum, @Param("searchDto")SearchDto searchDto); // xml로 인자 두개 이상을 받아올 때 @param으로 지정
+
+    /**
+     * 팀원 목록 카운팅 (for pagination)
+     * @param clubNum 클럽번호
+     * @param searchDto 검색 Dto
+     * @return
+     */
+    public int countMyTeamList(@Param("clubNum") String clubNum,@Param("searchDto") SearchDto searchDto);
+
+    /**
+     * 팀원 강퇴
+     * @param memberDto 회원 Dto
+     */
+    public void ClubMemberDelete (MemberDto memberDto);
 }
 
 
