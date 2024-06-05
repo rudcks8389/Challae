@@ -18,10 +18,16 @@ public interface CreateMapper {
 
     public void createMatch(CreateDto createDto);
 
-    // myteam 경기일정 불러오기
+    /**
+     * myteam 페이지 일정 랜더링
+     * @param clubNum 클럽번호
+     */
     public List<ClubMatchDto> clubMatchByClubNum(String clubNum);
 
-    // 경기 상세 일정
+    /**
+     * 경기 상세일정 정보 출력
+     * @param MatchNum 매치번호
+     */
     public CreateDto clubDetailByMatchNum(String MatchNum);
 
 

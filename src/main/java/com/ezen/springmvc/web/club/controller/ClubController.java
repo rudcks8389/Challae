@@ -88,7 +88,6 @@ public class ClubController {
     private FileService fileService;
 
 
-
     // 클럽 로고 사진 요청 처리
     @GetMapping("/image/{clubLogoFileName}")
     @ResponseBody
@@ -118,7 +117,10 @@ public class ClubController {
         return "/club/clublist";
     }
 
-    // 내 클럽 정보 보기
+    /**
+     * 내 팀보기 접속 시 해당하는 클럽정보 출력
+     *
+     */
     @GetMapping("/myteam")
     public String myteam(@ModelAttribute ParameterForm parameterForm, HttpServletRequest request, Model model) {
 
@@ -133,14 +135,13 @@ public class ClubController {
             }
 
             String loginMemberClubStatus = loginMember.getStatus(); // 세션 객체에서 클럽상태 추출
-            model.addAttribute("loginMemberStatus",loginMemberClubStatus);
+            model.addAttribute("loginMemberStatus", loginMemberClubStatus);
 
-            // 로그인한 멤버의 클럽정보 출력
+            /** 로그인한 멤버의 클럽정보 출력 **/
             List<ClubDto> clubData = clubService.clubDataService(loginClubNumber);
             model.addAttribute("clubData", clubData);
 
-//        // 로그인한 멤버의 클럽원목록 출력
-
+            /** 로그인한 멤버의 클럽원 목록 출력 **/
             SearchDto searchDto = SearchDto.builder()
                     .limit(parameterForm.getElementSize())
                     .page(parameterForm.getRequestPage())
@@ -148,23 +149,23 @@ public class ClubController {
                     .build();
             List<MemberDto> clubMember = memberService.getTeamMember(loginClubNumber, searchDto);
 
-            // 멤버 목록 행 갯수
+            /** 페이지네이션을 위한 멤버목록 행에 대한 갯수 **/
             int memberListCount = memberService.getTeamMemberCount(loginClubNumber, searchDto);
             parameterForm.setRowCount(memberListCount);
 
             Pagination pagination = new Pagination(parameterForm);
 
-            model.addAttribute("loginMember",loginMember);
+            model.addAttribute("loginMember", loginMember);
             model.addAttribute("clubMember", clubMember);
             model.addAttribute("parameterForm", parameterForm);
             model.addAttribute("pagination", pagination);
 
-            // 클럽 커뮤니티 내용데이터 출력 (단순 DB 데이터 출력)
+            /** 클럽 커뮤니티 (소통공간) 데이터 출력**/
             List<CommunityDto> community = communityService.getCommunityContents(loginClubNumber);
             model.addAttribute("community", community);
 
 
-            // CommunityForm 객체를 모델에 추가
+            /** CommunityForm 객체를 모델에 추가**/
             CommunityForm communityForm = CommunityForm.builder().build();
             model.addAttribute("communityForm", communityForm);
 
@@ -176,7 +177,10 @@ public class ClubController {
         }
     }
 
-    // 소통공간의 입력한 내용을 DB에 저장
+    /**
+     * 소통공간에 입력된 내용을 DB에 저장시키는 부분
+     * @param communityForm 커뮤니티 임력 폼
+     */
     @PostMapping("/myteam")
     public String inputCommDate(@ModelAttribute CommunityForm communityForm, HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -196,7 +200,10 @@ public class ClubController {
         return "redirect:/club/myteam";
     }
 
-    // 감독의 클럽원 추방
+    /**
+     * 클럽원 추방 (클라이언트 쪽에서는 감독한테만 보이게)
+     * @param memberNum 회원번호
+     */
     @PostMapping("/kick")
     public String deleteMember(@RequestParam("memberNum") String memberNum, RedirectAttributes redirectAttributes) {
         MemberDto memberDto = new MemberDto();
@@ -213,6 +220,7 @@ public class ClubController {
 
     /**
      * 본인이 작성한 댓글 삭제 기능 처리
+     *
      * @param commNum 댓글 번호
      */
     @PostMapping("/delete")
@@ -229,28 +237,30 @@ public class ClubController {
         return "redirect:/club/myteam";
     }
 
-
+    /**
+     * 유저의 클럽상태에 따른 페이지 안내 (승인, 대기, null...)
+     */
     @GetMapping("/status")
     public ResponseEntity<?> checkClubStatus(HttpServletRequest request) {
         HttpSession session = request.getSession(false); // 기존 세션을 반환하거나 없으면 null 반환
 
-            // 로그인한 회원 정보 가져오기
-            MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+        // 로그인한 회원 정보 가져오기
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
 
-            if (loginMember.getClubNum() == null) {
-                // 클럽에 가입되지 않은 경우
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("클럽에 가입되지 않음");
-            }
+        if (loginMember.getClubNum() == null) {
+            // 클럽에 가입되지 않은 경우
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("클럽에 가입되지 않음");
+        }
 
-            String clubStatus = loginMember.getStatus(); // 클럽 상태 가져오기
+        String clubStatus = loginMember.getStatus(); // 클럽 상태 가져오기
 
-            if ("승인".equals(clubStatus)) {
-                // 클럽 상태가 "승인"인 경우
-                return ResponseEntity.ok().body("클럽 상태: 승인");
-            } else {
-                // 클럽 상태가 "승인"이 아닌 경우
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("클럽 상태: 승인되지 않음");
-            }
+        if ("승인".equals(clubStatus)) {
+            // 클럽 상태가 "승인"인 경우
+            return ResponseEntity.ok().body("클럽 상태: 승인");
+        } else {
+            // 클럽 상태가 "승인"이 아닌 경우
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("클럽 상태: 승인되지 않음");
+        }
 
     }
 

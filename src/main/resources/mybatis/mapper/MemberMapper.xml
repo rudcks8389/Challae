@@ -95,8 +95,7 @@
 		</where>
 	</select>
 
-
-	<!-- 내 팀보기) 팀별 회원목록 출력 [이름 , 직책, 번호]	-->
+	<!-- 내 팀보기) 팀별 회원목록 출력 [이름, 직책, 번호] / 직책과 이름순으로 정렬	-->
 	<select id="myTeamList" resultType="MemberDto">
 		SELECT member_num, member_name "name", member_dir "dir", member_phone "phone", club_num
 		FROM (
@@ -129,7 +128,8 @@
 	)
 		WHERE page = #{searchDto.page}
 	</select>
-	<!-- 클럽원 갯수 반환 -->
+
+	<!-- 클럽원 갯수 반환 (페이지네이션을 위함) -->
 	<select id="countMyTeamList" resultType="int">
 		SELECT
 		COUNT(member_id) "clubMembercount"
@@ -146,7 +146,7 @@
 
 
 
-<!--	클럽원 강퇴 -->
+	<!-- 클럽원 강퇴 -->
 	<update id="ClubMemberDelete" parameterType="MemberDto">
 		UPDATE member
 		SET club_num= null

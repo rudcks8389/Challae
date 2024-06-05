@@ -35,7 +35,6 @@ main .main-wrapper .team-info .team-info-left {
   padding: 0 8px;
   display: inline-block;
   background: linear-gradient(to top, rgba(124, 190, 255, 40%) 50%, transparent 50%);
-
 }
 
 main .main-wrapper .team-info .team-info-left .team-info-left-detail {
@@ -49,39 +48,36 @@ main .main-wrapper .team-info .team-info-left .team-info-left-detail #club-creat
   border-left: 2px solid #fff;
 }
 
-
 main .main-wrapper .team-info .team-info-right {
   width: 20%;
   text-align: center;
-  display: flex; /* 추가 */
-  align-items: end; /* 추가 */
-  justify-content: right; /* 필요시 추가 */
-
+  display: flex;
+  align-items: end;
+  justify-content: right;
 }
 
 main .main-wrapper .team-info .team-info-right .memberCount {
   font-size: 40pt;
 }
 
-
-
-/*  */
 main .main-wrapper .team-content {
   display: flex;
   width: 100%;
   height: 550px;
 }
+
 .input-group{
   width: 500px;
   margin-top: 10px;
   margin: 10px auto;
-
 }
+
 .input-group input{
   background-color: black;
   border: none;
   border-bottom: 1px solid #7bbcfd;
 }
+
 .input-group input:focus{
  background: #8ec5ff;
   color: #1b1e21;
@@ -115,6 +111,7 @@ main .main-wrapper .team-content {
   font-size: 24pt;
   text-align: center;
 }
+
 main .main-wrapper .team-table {
   margin-top: 50px;
   margin-left: 20px;
@@ -129,7 +126,6 @@ main .main-wrapper .team-content .team-table table {
   height: 380px;
   margin: 1rem auto;
   background-color: #000;
-
 }
 
 main .main-wrapper .team-content .team-table table thead th {
@@ -142,7 +138,6 @@ main .main-wrapper .team-content .team-table table thead th {
 
 main .main-wrapper .team-content .team-table tr {
   border-bottom: 1px solid #ccc;
-
 }
 
 .main-wrapper .team-content .team-table table tbody td {
@@ -153,13 +148,13 @@ main .main-wrapper .team-content .team-table tr {
   border-bottom: 1px solid #ccc;
 }
 
-
 main .main-wrapper .team-content .team-table table tbody tr:hover {
   background-color: #bcddff;
   color: #000;
   opacity: 0.9;
   cursor: auto;
 }
+
 .kickBtn {
   padding: 0px 3px;
   border:3px solid #ff5353 ;
@@ -167,6 +162,7 @@ main .main-wrapper .team-content .team-table table tbody tr:hover {
   background: #151515;
   border-radius: 5px;
 }
+
 .kickBtn:hover {
   padding: 0px 3px;
   border:3px solid black ;
@@ -175,12 +171,10 @@ main .main-wrapper .team-content .team-table table tbody tr:hover {
   border-radius: 5px;
 }
 
-
 /* 페이징 처리 숫자 , 페이지 시작 */
 .pagination {
   display: flex;
   justify-content: center;
-
 }
 
 .pagination a {
@@ -227,12 +221,14 @@ main .main-wrapper .chat-board {
   border: 2px solid rgb(124, 190, 255);
   border-radius: 10px;
 }
+
 .chat-content {
   text-align: center;
   margin: 15px;
   width: 670px;
   height: 380px;
 }
+
 .chat-content tbody{
   width: 100%;
   display: block;
@@ -245,24 +241,29 @@ main .main-wrapper .chat-board {
   margin-bottom: 7px;
   font-size: 16pt;
 }
+
 .chat-content .comm-content{
   border-bottom: 1px solid rgb(124, 190, 255) ;
 }
+
 .chat-content .member-name {
   vertical-align: bottom;
   font-size: 12pt;
   margin: 0px 3px;
 }
+
 .chat-content .comm-date {
   vertical-align: bottom;
   font-size: 10pt;
   font-weight: lighter;
   margin: 0px 3px;
 }
+
 .chat-content tr {
   display: table;
   border-bottom: none;
 }
+
 .chat-content th {
 display: none;
 }
@@ -284,6 +285,7 @@ display: none;
   border: none;
   border-bottom: 1px solid rgb(124, 190, 255);
 }
+
 #chat:focus{
     background: #8ec5ff;
     color: #1b1e21;
@@ -304,9 +306,6 @@ display: none;
   border: 1px solid #ccc;
 }
 
-/*  */
-
-
 /* team-match-schedule : 경기 일정을 보여주는 구역 */
 main .main-wrapper .team-match-schedule {
   margin: 70px auto;
@@ -316,6 +315,7 @@ main .main-wrapper .team-match-schedule {
   /* border: 2px solid rgb(124, 190, 255); */
   border-radius: 10px;
 }
+
 .match-title{
   width: 180px;
   background-color: rgb(124, 190, 255);
@@ -371,7 +371,6 @@ main .main-wrapper .team-match-schedule .ctr-box .btn-cal.next:hover {
   color: rgb(124, 190, 255);
 }
 
-
 /* new-match-add : 새 경기 등록 버튼에 관한 구역 */
 main .main-wrapper .team-match-schedule .new-match-add {
   width: 80%;
@@ -410,20 +409,23 @@ main .main-wrapper .team-match-schedule .team-match-schedule-detail div {
   margin: auto;
   border-radius: 20px;
   border: 10px solid #50779d;
-
 }
+
 .team-match-schedule-detail li {
   list-style: none;
   text-align: center;
   margin: 0px auto;
 }
+
 .team-match-schedule-detail ul{
   padding: 0px 0px;
   margin-top: 20px;
 }
+
 .team-match-schedule-detail .date-li{
   font-size: 18pt;
 }
+
 .team-match-schedule-detail .field-li{
   display: inline-block;
   max-width: 190px; /* 필요에 따라 최대 너비를 설정 */
@@ -434,16 +436,19 @@ main .main-wrapper .team-match-schedule .team-match-schedule-detail div {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .team-match-schedule-detail .time-li{
   font-size: 24pt;
 }
+
 .team-match-schedule-detail .info-li a {
   padding: 5px;
   border: none;
   background: linear-gradient(to top, rgba(124, 190, 255,40%) 60%, transparent 50%);
   color: black;
 }
-/* 새 경기 등록 */
+
+/* 새 경기 등록 버튼 */
 .new-match-add a {
   text-decoration: none;
   font-weight: lighter;

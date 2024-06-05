@@ -1,3 +1,4 @@
+
 * {
     margin: 0px;
     padding: 0px;
@@ -16,17 +17,14 @@ body {
     margin: 30px auto;
     width: 380px;
     height: 70px;
-    background: linear-gradient(to top, rgba(124, 190, 255,40%) 60%, transparent 50%);
+    background: linear-gradient(to top, rgba(124, 190, 255, 40%) 60%, transparent 50%);
 }
 
 #game-info {
-    /* border: 1px solid white; */
     width: 50%;
 }
 
-
 th, td {
-
     color: black;
     border-radius: 10px;
     border: 3px solid black;
@@ -34,30 +32,33 @@ th, td {
     margin: auto;
     font-size: 20pt;
 }
-td{
-    background-color:aliceblue;
+
+td {
+    background-color: aliceblue;
     text-align: center;
     font-size: 24pt;
     width: 60%;
 }
-.match-info{
+
+.match-info {
     font-size: 18pt;
 }
 
 th {
-    background-color:rgb(124, 190, 255);
+    background-color: rgb(124, 190, 255);
     width: 20%;
-     text-align: right;
+    text-align: right;
     vertical-align: top;
 }
 
-#info-table{
+#info-table {
     margin: auto;
     margin-top: 15px;
     margin-bottom: 10px;
 
 }
-.tactic-title{
+
+.tactic-title {
     margin: 30px auto;
 }
 
@@ -68,7 +69,7 @@ th {
     border: 1px solid rgb(124, 190, 255);
 }
 
-#info-head{
+#info-head {
     width: 120px;
 }
 
@@ -87,7 +88,6 @@ h2 {
     margin: 20px auto;
     background-color: rgb(219, 236, 255);
     border: 5px solid #50779d;
-
 }
 
 #map-name {
@@ -95,8 +95,7 @@ h2 {
     width: 200px;
     margin: 20px auto;
     font-size: 24pt;
-    background: linear-gradient(to top, rgba(124, 190, 255,35%) 40%, transparent 50%);
-
+    background: linear-gradient(to top, rgba(124, 190, 255, 35%) 40%, transparent 50%);
 }
 
 #map-today {
@@ -105,8 +104,7 @@ h2 {
     margin-right: 0px;
 }
 
-
-#map-img{
+#map-img {
     margin: auto;
     height: 600px;
     width: 600px;
@@ -114,11 +112,11 @@ h2 {
     border: 10px solid #50779d;
 }
 
-p {
+.p {
     font-size: 18pt;
 }
 
-.match-photo{
+.match-photo {
     width: 500px;
     height: 600px;
 }

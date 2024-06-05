@@ -2,12 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.ezen.springmvc.domain.club.mapper.ClubMapper">
 
-<!--     전체 클럽 조회 -->
+    <!-- 전체 클럽 조회 -->
     <select id="clubList" resultType="ClubDto">
         SELECT CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
         FROM CLUB
     </select>
-
 
     <!-- 회원 등록 -->
     <insert id="clubRegister" parameterType="ClubDto" >
@@ -15,7 +14,7 @@
         VALUES (CLUB_SEQ.NEXTVAL, #{clubName}, #{clubPresident}, #{clubInfo}, #{clubLevel}, #{clubLocation}, #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto})
     </insert>
 
-<!--내팀보기에서 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진, -->
+    <!-- /myteam 이동 시 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진 -->
     <select id="myClubData" parameterType="String" resultType="ClubDto">
     SELECT club_num, club_name, club_info, club_president, TO_CHAR(club_regdate,'yyyy-MM-DD') club_regdate, club_membercount, club_photo
     FROM club

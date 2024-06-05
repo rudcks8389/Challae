@@ -25,17 +25,22 @@ public class MatchController {
     private CreateService createService;
 
     // 경기 정보 보기
+
+    /**
+     * 선택한 경기의 정보 보기
+     * @param matchNum 경기 번호
+     */
     @GetMapping("/matchView")
     public String todayMatch(@RequestParam("matchNum") String matchNum, Model model) {
         CreateDto matchDetail = createService.getMachDetail(matchNum);
 
-        // 날짜 형식 변환
+        /** 출력 형식에 맞는 날짜 형식 변환**/
         SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat targetFormat = new SimpleDateFormat("dd");
         try {
-            Date date = originalFormat.parse(matchDetail.getMatchDate()); // 문자열을 Date 객체로 파싱
-            String formattedDate = targetFormat.format(date); // "dd" 형식으로 날짜 부분 추출
-            matchDetail.setMatchDateForm(formattedDate); // 변환된 날짜로 matchDate 설정
+            Date date = originalFormat.parse(matchDetail.getMatchDate());
+            String formattedDate = targetFormat.format(date);
+            matchDetail.setMatchDateForm(formattedDate);
         } catch (ParseException e) {
             e.printStackTrace();
             log.info("날짜 형식 변경중 오류 발생");

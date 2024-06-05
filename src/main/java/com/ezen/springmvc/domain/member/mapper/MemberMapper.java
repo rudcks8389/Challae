@@ -25,26 +25,30 @@ public interface MemberMapper {
     public MemberDto findByIdAndPasswd(@Param("id") String id, @Param("passwd") String passwd);
     public List<MemberDto> findByAgeRange(@Param("begin") int begin, @Param("end") int end);
     public List<MemberDto> findByNameLike(String name);
-    // 검색 타입별 회원 검색
     public List<MemberDto> findBySearchType(@Param("type") String type, @Param("value") String value);
-    // 통합 검색
     public List<MemberDto> findBySearchAll(String value);
-    // 통합 검색
     public List<MemberDto> findBySearchAllOption(MemberSearchCondition searchCondition);
 
 
     /**
-     * myTeam을 위한 memberMapper
-     * @param clubNum
+     * myTeam 페이지 클럽원 조회, 검색
+     * @param clubNum 클럽번호
      * @return
      */
-    // 내 팀보기에서 쓸 멤버 클럽번호에 따른 팀원목록 출력
      public List<MemberDto> myTeamList(@Param("clubNum") String clubNum, @Param("searchDto")SearchDto searchDto); // xml로 인자 두개 이상을 받아올 때 @param으로 지정
 
-    /** 팀원 목록 카운팅 (for pagination)**/
+    /**
+     * 팀원 목록 카운팅 (for pagination)
+     * @param clubNum 클럽번호
+     * @param searchDto 검색 Dto
+     * @return
+     */
     public int countMyTeamList(@Param("clubNum") String clubNum,@Param("searchDto") SearchDto searchDto);
 
-    // 팀원 목록에서 감독이 팀원 삭제하는 기능
+    /**
+     * 팀원 강퇴
+     * @param memberDto 회원 Dto
+     */
     public void ClubMemberDelete (MemberDto memberDto);
 }
 

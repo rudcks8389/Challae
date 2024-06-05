@@ -3,6 +3,9 @@ package com.ezen.springmvc.web.club.form;
 
 import lombok.*;
 
+/**
+ * 커뮤니티 (소통공간) 입력을 위한 form
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -11,6 +14,4 @@ import lombok.*;
 @Builder
 public class CommunityForm {
     private String content;
-//    private String clubNum;
-//    private  String MemberNum;
 }

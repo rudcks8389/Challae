@@ -31,11 +31,21 @@ public class CreateServiceImpl implements CreateService {
         return createMapper.findByClubNum(clubNum);
     }
 
+    /**
+     * myteam페이지 일정 랜더링
+     * @param clubNum 클럽번호
+     * @return
+     */
     @Override
     public List<ClubMatchDto> getMatch(String clubNum) {
         return createMapper.clubMatchByClubNum(clubNum);
     }
 
+    /**
+     * 경기 상세정보 출력
+     * @param matchNum 매치번호
+     * @return
+     */
     @Override
     public CreateDto getMachDetail(String matchNum) {
         return createMapper.clubDetailByMatchNum(matchNum);

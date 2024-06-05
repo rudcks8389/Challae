@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.ezen.springmvc.domain.community.mapper.CommunityMapper">
 
-    <!--  출력 [커뮤니티 식별을 위한 클럽번호 / 출력 내용, 이름, 날짜]  -->
+    <!-- 출력 [커뮤니티 식별을 위한 클럽번호 / 출력 내용, 이름, 날짜] -->
     <select id="getClubCommunity" parameterType="String" resultType="CommunityDto">
         select community.comm_num, community.comm_content, TO_CHAR(community.comm_date,'MM/DD') comm_date, community.club_num, community.member_num, member.member_name
         FROM community
@@ -10,12 +10,14 @@
         WHERE community.club_num = #{clubNum}
         order by comm_num asc
     </select>
-<!--    입력기능 (데이터 저장)-->
+
+    <!-- 커뮤니티(소통공간) 입력(저장)기능 -->
     <insert id="communityCreate" parameterType="CommunityDto">
         insert into community(comm_num,comm_content,club_num,member_num)
                     VALUES (comm_seq.nextval,#{commContent},#{clubNum},#{memberNum})
     </insert>
-<!-- 삭제기능 -->
+
+    <!-- 커뮤니티(소통공간) 삭제기능 -->
     <delete id="ClubCommDelete" parameterType="CommunityDto">
         DELETE from community
         where comm_num = #{commNum}

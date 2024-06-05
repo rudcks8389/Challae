@@ -1,3 +1,7 @@
+/**
+ * myteam 페이지에 사용될 월간 일정표 (클라이언트 사이드 랜더링)
+ */
+
 const date = new Date();
 const  clubNum  = "101";
 
@@ -5,31 +9,29 @@ const renderMonth = async () => {
 
     const nowYear = date.getFullYear();
     const nowMonth = date.getMonth() + 1;
-    console.log(nowYear);
-    console.log(nowMonth);
 
     document.querySelector(".cal-year-month").textContent = `${nowYear}년 ${nowMonth}월`;
 
 
 
-    // 경기 일정 렌더링
+    /** 경기 일정 렌더링**/
     let schedules = [];
     try{
-        // fetch 요청을 사용하여 서버로부터 데이터 가져오기
+        /** fetch 요청을 사용하여 서버로부터 데이터 가져오기**/
         const response = await fetch(`/api/schedules/${clubNum}`);
         if(response.ok){
-            schedules = await response.json(); // 서버로부터 받은 JSON 데이터를 파싱
+            schedules = await response.json(); /**서버로부터 받은 JSON 데이터를 파싱**/
+
         } else {
-            // 서버로부터 정상적인 응답을 받지 못했을 경우
             console.error("서버로부터 데이터를 가져오는 데 실패했습니다.");
             console.error(`http 상태코드 : ${response.status}`);
         }
     } catch (error) {
-        // 요청 과정에서 에러 발생
+        /** 에러 발생 시 **/
         console.error("데이터를 가져오는 과정에서 에러가 발생했습니다:", error);
     }
 
-    // 현재 선택한 달에 해당하는 경기 일정만 필터링
+    /** 현재 선택한 달에 해당하는 경기 일정만 필터링**/
     const scheduleKey = `${nowYear}-${String(nowMonth).padStart(2, '0')}`;
     const monthSchedules = schedules.filter(schedule => {
         const scheduleDate = new Date(schedule.matchDate);
@@ -39,7 +41,7 @@ const renderMonth = async () => {
 
 
     const schedulesContainer = document.querySelector(".team-match-schedule-detail");
-    schedulesContainer.innerHTML = ''; // 이전 일정 삭제
+    schedulesContainer.innerHTML = ''; /** 이전 일정 초기화 **/
 
 
     monthSchedules.forEach(schedule => {
@@ -49,12 +51,12 @@ const renderMonth = async () => {
         const ulInfo = document.createElement("ul");
         matchInfo.appendChild(ulInfo)
 
-        // 경기일자에서 일(day) 부분만 추출하여 표시
-        const dateParts = schedule.matchDate.split('-'); // "2024-05-24" -> ["2024", "05", "24"]
-        const dayOnly = dateParts[2]; // 일 부분만 추출
+        /** 경기일자에서 일자부분만 추출 **/
+        const dateParts = schedule.matchDate.split('-');
+        const dayOnly = dateParts[2];
         const dateLi = document.createElement("li");
-        dateLi.textContent = dayOnly+" 일"; // 수정된 부분: 전체 날짜 대신 일(day) 부분만 렌더링
-        dateLi.classList.add("date-li"); //클래스 지정함
+        dateLi.textContent = dayOnly+" 일";
+        dateLi.classList.add("date-li");
         ulInfo.appendChild(dateLi);
 
         //필드 이름
@@ -85,17 +87,19 @@ const renderMonth = async () => {
     });
 
 }
-
+/** 이전 달 **/
 const prevMonth = () => {
     date.setMonth(date.getMonth() - 1);
     renderMonth();
 };
 
+/** 다음 달 **/
 const nextMonth = () => {
     date.setMonth(date.getMonth() + 1);
     renderMonth();
 };
 
+/** 당일로 가는 기능 **/
 const goTodayMonth = () => {
    date.setMonth(new Date().getMonth());
     renderMonth();

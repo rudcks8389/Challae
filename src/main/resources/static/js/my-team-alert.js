@@ -1,5 +1,9 @@
 
 
+/**
+ * 멤버 추방 alert
+ * @param form
+ */
 function confirmKick(form) {
     Swal.fire({
         title: '정말로 추방하시겠습니까?',
@@ -25,8 +29,8 @@ function confirmKick(form) {
                 allowOutsideClick: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // 여기서 폼 제출
-                    form.submit(); // 예시로 폼을 제출하는 코드
+
+                    form.submit();
                 }
 
             });
@@ -34,6 +38,10 @@ function confirmKick(form) {
     });
 }
 
+/**
+ * 커뮤니티 글 삭제 alert
+ * @param form
+ */
 function confirmDelete(form) {
     Swal.fire({
         title: '정말로 삭제하시겠습니까?',
@@ -58,8 +66,8 @@ function confirmDelete(form) {
                 allowOutsideClick: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // 여기서 폼 제출
-                    form.submit(); // 예시로 폼을 제출하는 코드
+
+                    form.submit();
                 }
 
             });

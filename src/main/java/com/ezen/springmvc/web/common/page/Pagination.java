@@ -1,9 +1,6 @@
 package com.ezen.springmvc.web.common.page;
 
-/**
- * 페이징 처리 계산
- * @author 김기정
- */
+
 public class Pagination {
 	
 	// 페이징 계산에 필요한 속성

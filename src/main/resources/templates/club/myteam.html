@@ -50,11 +50,11 @@
     <script src="/js/my-team-alert.js" defer></script>
 </th:block>
 
+<!-- 페이지 로드시 스크롤 하부로 이동 -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         scrollToBottom();
     });
-
     function scrollToBottom() {
         const chatContent = document.getElementById("team-table-body");
         if (chatContent) {
@@ -62,6 +62,7 @@
         }
     }
 </script>
+<!-- 페이지 로드시 스크롤 하부로 이동 -->
 
 <th:block th:fragment="content">
     <!-- 롤링 리스트를 제외한 main 태그를 감싸는 구역 -->
@@ -176,7 +177,6 @@
             <!-- 팀 소통 공간 -->
             <div class="team-chat">
                 <h2 class="chat-title">소통공간</h2>
-                <!-- 추후 리스트 형식으로 변경 테이블 헤더 제거-->
                 <div class="chat-board">
                     <table class="chat-content">
                         <thead>
