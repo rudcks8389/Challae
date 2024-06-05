@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.ezen.springmvc.domain.field.mapper.FieldMapper">
-
     <!--  구장 정보 가져오기  -->
     <select id="findByAll" resultType="FieldDto">
         SELECT FIELD_NUM, FIELD_NAME, FIELD_NEWADDRESS, FIELD_OLDADDRESS, FIELD_PHONE, FIELD_PHOTO
         FROM FIELD
     </select>
-
+    <!--구장번호에 맞는 구장정보를 가져오기(구장상세보기에서 사용)-->
     <select id="findByFieldNum" resultType="fieldDto">
         SELECT FIELD_NUM, FIELD_NAME, FIELD_NEWADDRESS, FIELD_OLDADDRESS, FIELD_PHONE, FIELD_PHOTO, FIELD_SIZE, FIELD_DAYPRICE, FIELD_ENDPRICE , FIELD_X, FIELD_Y
         FROM FIELD
         WHERE FIELD_NUM = #{fieldNum}
     </select>
-
+    <!--구장번호에 맞는 구장정보를 가져오기(구장예약페이지에서 사용)-->
     <select id="findByFieldNum2" resultType="fieldDto">
         SELECT FIELD_NUM, FIELD_NAME, FIELD_NEWADDRESS, FIELD_OLDADDRESS, FIELD_PHONE, FIELD_PHOTO, FIELD_SIZE, FIELD_X, FIELD_Y, FIELD_OPENTIME, FIELD_ClOSETIME,FIELD_DAYPRICE, FIELD_ENDPRICE
         FROM FIELD
         WHERE FIELD_NUM = #{fieldNum}
     </select>
-
-
 </mapper>

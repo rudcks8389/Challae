@@ -7,20 +7,17 @@
 <th:block th:fragment="css">
     <link href="/css/playall.css" rel="stylesheet" />
 </th:block>
-
 <th:block th:fragment="script">
     <script src="/js/weather.js" defer></script>
 </th:block>
-
 <th:block th:fragment="fontawesome">
     <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </th:block>
-
 <th:block th:fragment="content">
+    <!--구장리스트페이지-->
     <div id="list">
         <div class="maintit">구장목록</div>
-
         <!-- list에 출력되어야할 구장리스트 시작 -->
         <div class="bodywrapper" th:each="field : ${fieldList}">
             <div class="leftwrap"><img th:src="@{'/img/play/' + ${field.fieldPhoto}}" class="image"/></div>

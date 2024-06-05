@@ -13,10 +13,9 @@
 </th:block>
 <th:block th:fragment="script">
   <script src="/js/weather.js" defer></script>
-
 </th:block>
 <th:block th:fragment="content">
-  <!-- main 하단 부분  -->
+  <!--구장상세보기 페이지-->
   <div id="detail">
     <div class="big" th:href="@{/field/view(fieldNum=${fieldDetail.fieldNum})}">
     <div class="maintit" th:text="${fieldDetail.fieldName}">구장이름</div>
@@ -31,6 +30,7 @@
         </div>
         <div class="wrapperleft">
           <div class="stadium">
+            <!--구장정보+유의사항+예약하기 버튼-->
             <table class="stadiumtable">
               <h3>구장안내</h3>
               <thead>
@@ -51,7 +51,6 @@
             </table>
           </div>
           <br><br><br>
-          <!-- error : 구장안내의 테이블과 유의사항의 p태그가 겹침-->
           <div class="rule">
             <h3>유의사항</h3>
             <p> <i class="fa-solid fa-triangle-exclamation"></i> <span> 풋살장 내 음식물섭취 금지 </span>(물 / 음료 제외) <br>
@@ -66,40 +65,33 @@
           </div>
         </div>
       </div>
+      <!--구장지도, 대금요금안내 및 환불규정관련-->
       <div class="right">
         <h2>구장위치</h2>
         <div class="location">
-
           <div class="mapcontent">
-            <!--  지도 위치 -->
+            <!--카카오맵 출력위치-->
             <div id="map" style="width:100%;height:400px;"></div>
-
             <p><i class="fa-solid fa-location-dot" style=" padding: 5px 8px; border-radius: 100%;" ></i>
               <span th:if="${not #strings.isEmpty(fieldDetail.fieldNewAddress)}" th:text="${fieldDetail.fieldNewAddress}"></span>
               <span th:unless="${not #strings.isEmpty(fieldDetail.fieldNewAddress)}" th:text="${fieldDetail.fieldOldAddress}"></span>
             </p>
-
             <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94449e96205beb140bfba2b02da6e26e"></script>
+            <!--카카오맵 스크립트-->
             <script>
-              // <![CDATA[
               var mapContainer = document.getElementById('map');
               var mapOption = {
                 center: new kakao.maps.LatLng([[${fieldDetail.fieldX}]], [[${fieldDetail.fieldY}]]), // 구장의 좌표
                 level: 3 // 확대 레벨
               };
-              var map = new kakao.maps.Map(mapContainer, mapOption);
-
-              // // 마커가 표시될 위치입니다
-              var markerPosition = new kakao.maps.LatLng([[${fieldDetail.fieldX}]], [[${fieldDetail.fieldY}]]);
-              // // 마커를 생성합니다
+              var map = new kakao.maps.Map(mapContainer, mapOption); // 마커가 표시될 위치입니다
+              var markerPosition = new kakao.maps.LatLng([[${fieldDetail.fieldX}]], [[${fieldDetail.fieldY}]]); // // 마커를 생성합니다
               var marker = new kakao.maps.Marker({
                 position: markerPosition
               });
-              //
-              // 마커가 지도 위에 표시되도록 설정합니다
-              marker.setMap(map);
+              marker.setMap(map); // 마커가 지도 위에 표시되도록 설정합니다
 
-              // // 인포윈도우에 표시할 내용
+              // 인포윈도우에 표시할 내용
               var iwContent = '<div style="padding:5px; color: black;">' +
                       '[[${fieldDetail.fieldName}]]' + '<br>' +
                       '<a href="https://map.kakao.com/link/map/' + '[[${fieldDetail.fieldName}]]' + ',' +
@@ -108,18 +100,12 @@
                       '<a href="https://map.kakao.com/link/to/Hello World!,' +
                       '[[${fieldDetail.fieldX}]]' + ',' + '[[${fieldDetail.fieldY}]]' + '"' +
                       ' style="color:blue" target="_blank">길찾기</a></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-
-              var iwPosition = new kakao.maps.LatLng([[${fieldDetail.fieldX}]], [[${fieldDetail.fieldY}]]);
-              //인포윈도우 표시 위치입니다
-              // 인포윈도우를 생성합니다
+              var iwPosition = new kakao.maps.LatLng([[${fieldDetail.fieldX}]], [[${fieldDetail.fieldY}]]); //인포윈도우 표시 위치입니다
               var infowindow = new kakao.maps.InfoWindow({
                 position: iwPosition,
                 content: iwContent
-              });
-
-              // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-              infowindow.open(map, marker);
-              // ]]>
+              });  // 인포윈도우를 생성합니다
+              infowindow.open(map, marker); // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
             </script>
           </div>
         </div>

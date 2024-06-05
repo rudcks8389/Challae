@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
 </head>
 <body>
-
 <th:block th:fragment="css">
   <link href="/css/style.css" rel="stylesheet" />
   <link href="/css/reservation.css" rel="stylesheet" />
@@ -17,10 +16,9 @@
 </th:block>
 <th:block th:fragment="script">
   <script src="/js/weather.js" defer></script>
-<!--  <script src="/js/calendar.js" defer></script>-->
 </th:block>
 <th:block th:fragment="content">
-  <!-- main 하단 부분  -->
+  <!--예약페이지-->
   <div id="reservation">
     <div class="big" th:href="@{/field/view(fieldNum=${fieldDetail2.fieldNum})}">
     <div class="title">대관예약</div>
@@ -54,6 +52,7 @@
       </div>
       <div class="right">
         <div id="rightinner">
+          <!--예약 달력 테이블-->
           <table id="calendar">
             <tr class="month">
               <td><label onclick="prevCalendar()"> ◀ </label></td>
@@ -71,16 +70,14 @@
             </tr>
             <script type="text/javascript">buildCalendar();</script>
           </table>
-          <!-- 예약 달력들어갈 자리 -->
+          <!--시간 선택 테이블-->
           <table id = "timeTable">	</table>
-
-          <!-- 달력에서 선택한 날짜가 동적으로 들어가는 자리 -->
         </div>
         <div class="inner">
-
           <span class="subtit">선택된 날짜 : <span id="selectedDate"></span> </span>
           <div class="tablewrap">
             <form novalidate method="post" th:object="${reservationForm}" >
+            <!--예약자정보 데이블-->
             <table class="reservationtable" >
               <h2>대관 예약자 정보</h2>
               <colgroup>
@@ -100,7 +97,6 @@
                 <th scope="row">예약일자</th>
                 <td id="dateBottom"><span id="selectedDate2"></span> </td>
               </tr>
-
               <tr>
                 <th scope="row">예약시간</th>
                 <td id="timeBottom" >예약시간 선택 없음</td>
@@ -111,84 +107,69 @@
               </tr>
               <tr>
                 <th scope="row">메모</th>
-                <td><span class="textarea"><textarea name="r_memo" rows="" cols=""></textarea></span></td>
+                <td><span class="textarea"><textarea name="r_memo" rows="" cols="" maxlength="30"></textarea></span></td>
               </tr>
               </tbody>
-            </table> </form>
+            </table>
+            </form>
           </div>
+          <!--예약 및 결제 버튼->클릭하면 db에 저장과 동시에 결제api함수 호출-->
           <div class="payment"><button onclick="handleReservationAndPayment()"><i class="fa-solid fa-calendar-days"></i>예약 및 결제</button></div>
-
-
         </div>
       </div>
     </div>
     </div>
-
   </div>
 </th:block>
 </body>
 </html>
+<!--결제api 및 예약달력 스크립트-->
 <script type="text/javascript">
   var fields = '[[${fields}]]';
   var today = new Date();
-  var currentMonth = today.getMonth();  // 현재 월
-  var currentYear = today.getFullYear();
-
-  // fieldOpentime과 fieldClosetime을 Thymeleaf로 전달받아 JavaScript 변수에 할당
-  var fieldOpentime = '[[${fieldDetail2.fieldOpentime}]]'; // 초기값은 오전 9시, 실제 값으로 대체됩니다.
-  var fieldClosetime = '[[${fieldDetail2.fieldClosetime}]]'; // 초기값은 오후 6시, 실제 값으로 대체됩니다.
+  var currentMonth = today.getMonth(); //현재날짜 월
+  var currentYear = today.getFullYear(); //현재날짜 년도
+  var fieldOpentime = '[[${fieldDetail2.fieldOpentime}]]';
+  var fieldClosetime = '[[${fieldDetail2.fieldClosetime}]]';
   var fieldDayprice = '[[${fieldDetail2.fieldDayprice}]]';
   var fieldEndprice = '[[${fieldDetail2.fieldEndprice}]]';
-
-  var selectedTimes = [];
-
+  var selectedTimes = []; //선택된시간을 배열에 저장
+  // 달력기본설정(토요일일요일 구분 및 일주일계산)
   function buildCalendar(){
     var row = null;
     var cnt = 0;
     var calendarTable = document.getElementById("calendar");
     var calendarTableTitle = document.getElementById("calendarTitle");
     calendarTableTitle.innerHTML = today.getFullYear()+"년"+(today.getMonth()+1)+"월";
-
     var firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
     var lastDate = new Date(today.getFullYear(), today.getMonth()+1, 0);
     while(calendarTable.rows.length > 2){
       calendarTable.deleteRow(calendarTable.rows.length -1);
     }
-
     row = calendarTable.insertRow();
-
     for(i = 0; i < firstDate.getDay(); i++){
       cell = row.insertCell();
       cnt += 1;
     }
-
     for (i = 1; i <= lastDate.getDate(); i++) {
       if (cnt % 7 === 0) {
         row = calendarTable.insertRow();
       }
-
       cell = row.insertCell();
       cnt += 1;
-
       cell.setAttribute('id', i);
       cell.innerHTML = i;
       cell.style.textAlign = "center";
-
       cell.onclick = function(){
         var clickedYear = today.getFullYear();
         var clickedMonth = ( 1 + today.getMonth() );
         var clickedDate = this.getAttribute('id');
-
         clickedDate = clickedDate >= 10 ? clickedDate : '0' + clickedDate;
         clickedMonth = clickedMonth >= 10 ? clickedMonth : '0' + clickedMonth;
         var clickedYMD = clickedYear + "-" + clickedMonth + "-" + clickedDate;
-
         document.getElementById("selectedDate").innerText = clickedYMD;
         document.getElementById("selectedDate2").innerText = clickedYMD;
-
         var clickedDay = new Date(clickedYear, clickedMonth - 1, clickedDate).getDay();
-
-        // 주말인 경우
         if (clickedDay == 0 || clickedDay == 6) {
           document.getElementById("priceBottom").innerText = fieldEndprice + "원"; // 주말 가격 표시
         } else {
@@ -209,6 +190,7 @@
       }
     }
   }
+  //현재날짜 기준으로 이전 달출력
   function prevCalendar(){
     if(today.getFullYear() > currentYear || (today.getFullYear() === currentYear && today.getMonth() > currentMonth)){
       today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
@@ -216,6 +198,7 @@
       buildTimeTable();
     }
   }
+  //현재날짜 기준으로 다음 달출력
   function nextCalendar(){
     if(today.getFullYear() < currentYear || (today.getFullYear() === currentYear && today.getMonth() < currentMonth + 1)){
       today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
@@ -223,6 +206,7 @@
       buildTimeTable();
     }
   }
+  //시간선택테이블
   function buildTimeTable() {
     var timeTable = document.getElementById("timeTable")
     // 기존 테이블 내용 초기화
@@ -245,7 +229,7 @@
       };
     }
   }
-
+  //시간선택하면 선택확인 및 선택취소 관련 기능
   function toggleTimeSelection(cell) {
     var timeText = cell.innerText;
     var index = selectedTimes.indexOf(timeText);
@@ -279,11 +263,10 @@
     }
     updateSelectedTimes();
   }
-
+  //정보 업데이트
   function updateSelectedTimes() {
     var timeBottom = document.getElementById("timeBottom");
     timeBottom.innerText = selectedTimes.join(", ");
-
     // 총 결제금액 업데이트
     var priceBottom = document.getElementById("priceBottom");
     var clickedDate = document.getElementById("selectedDate").innerText;
@@ -317,17 +300,15 @@
     }
     return true;
   }
-
   buildCalendar();
   buildTimeTable();
-
+  //결제 api 호출
   function requestPay(resNum) {
     IMP.init('imp66680553'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
     var selectedDate = document.getElementById("selectedDate").innerText;
     var totalPrice = document.getElementById("priceBottom").innerText;
     var buyerName = '사용자 이름'; // 사용자 이름
     var buyerTel = '010-1234-5678'; // 사용자 전화번호
-
     IMP.request_pay({
       pg: "html5_inicis",
       pay_method: "card",
@@ -342,8 +323,6 @@
     }, function (rsp) { // callback
       console.log(rsp);
       if (rsp.success) {
-        var msg = '결제가 완료되었습니다.';
-        alert(msg);
         // 서버에 예약 번호 전달
         location.href = `/field/payfinish/${resNum}`;
       } else {
@@ -354,7 +333,7 @@
     });
     console.log("결제 API 호출");
   }
-
+  //정보를 db에 저장과 동시에 결제api호출
   function handleReservationAndPayment() {
     // 예약 정보를 GET 요청으로 서버에 전송
     var resResDate = document.getElementById('selectedDate2').innerText; // 예약 날짜
@@ -362,23 +341,15 @@
     var resTime = document.getElementById('timeBottom').innerText; // 예약 시간
     var resMemo = document.querySelector('textarea[name="r_memo"]').value; // 메모 내용
     var memberNum = 1; // 멤버 번호
-
     var url = `/field/saveReservation?resResDate=${resResDate}&resPrice=${resPrice}&resTime=${resTime}&resMemo=${resMemo}`;
-
     // 예약 정보를 저장하는 GET 요청을 보내고 결제 API 호출
     fetch(url)
             .then(response => response.json())
             .then(reservation => {
-              //console.log('서버로 부터 수신한 예약 정보 : ' + reservation);
-              //console.dir(reservation);
-              // 결제 API 호출
               requestPay(reservation.resNum);
             })
             .catch(error => {
               console.error('Error saving reservation:', error);
-              // 화면에 예약 오류메시지 출력
-              // 결제 API 호출 (실패해도 결제는 시도)
-              //requestPay();
             });
   }
 </script>
