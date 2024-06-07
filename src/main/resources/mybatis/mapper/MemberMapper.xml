@@ -59,7 +59,8 @@
                m.MEMBER_DIR         AS "dir",
                m.MEMBER_NUM         AS "memberNum",
                c.CLUB_NAME          AS "clubName",
-               c.STATUS             AS "status"
+               c.STATUS             AS "status",
+               m.MEMBER_PHONE       AS "phone"
         FROM member m
                  LEFT JOIN
              club c ON m.CLUB_NUM = c.CLUB_NUM

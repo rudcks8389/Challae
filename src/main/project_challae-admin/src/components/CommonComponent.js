@@ -17,7 +17,7 @@ const CommonComponent = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // 로컬호스트로 리디렉션
-                window.location.href = 'http://localhost';
+                window.location.href = 'http://192.168.0.5';
             }
         });
     };

@@ -7,7 +7,6 @@ const httpRequest = function (url) {
             return response.json();
         });
 };
-
 /** 이벤트 타겟에 이벤트 핸들러 연결(등록) */
 const eventRegister = function () {
     document.registerForm.addEventListener("submit", handleSubmitButton);
@@ -46,7 +45,6 @@ const handleChangeInput = async function (event) {
 /** 아이디 입력 관련 메시지 */
 const showIdResult = function (message) {
     const resultView = document.querySelector("#checkedId");
-    console.log(resultView);
     if (resultView) {
         resultView.innerHTML = message;
     }

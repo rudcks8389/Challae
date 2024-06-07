@@ -21,11 +21,4 @@ Validator.isEmail = function (input) {
   return /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(input);
 }
 
-// 참고
-// const Validate = {};
-// Validate.isEmail  = function (input) {
-//   return /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(input);
-// }
-
-
 

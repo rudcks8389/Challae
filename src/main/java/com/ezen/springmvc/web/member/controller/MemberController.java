@@ -200,7 +200,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-    /** 회원 정보 수정 처리 API **/
+    /** 회원 정보 수정 처리  **/
     @PostMapping("/update")
     public String updateMemberInfo(
             @RequestParam(value = "newEmail", required = false) String newEmail,
@@ -307,7 +307,6 @@ public class MemberController {
     /** 아이디 중복체크 처리 API **/
     @GetMapping("/idcheck/{id}")
     public @ResponseBody Map<String, Object> idDupCheckAction(@PathVariable("id") String inputId) {
-        log.info("요청 아이디 : {}", inputId);
 
         Map<String, Object> map = new HashMap<>();
         map.put("result", true);
