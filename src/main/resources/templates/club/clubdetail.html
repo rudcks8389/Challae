@@ -1,189 +1,126 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: template(~{this :: css}, ~{this :: script}, ~{this :: content}, ~{this :: fontawesome})}">
 <head>
-  <meta charset="UTF-8">
-
+    <meta charset="UTF-8">
 </head>
-
-
 <body>
-
-
 <th:block th:fragment="css">
-  <link href="/css/clubdetail.css" rel="stylesheet"/>
+    <link href="/css/clubdetail.css" rel="stylesheet"/>
 </th:block>
 
 <th:block th:fragment="script">
-  <script src="/js/weather.js" defer></script>
-  <script src="/js/notice_popup.js" defer></script>
-
+    <script src="/js/weather.js" defer></script>
+    <script src="/js/notice_popup.js" defer></script>
 </th:block>
 
 <th:block th:fragment="fontawesome">
-  <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://kit.fontawesome.com/89ab2ce88f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </th:block>
 
 <th:block th:fragment="content">
+    <div class="main-wrapper" th:href="@{/club/detail(clubNum=${clubDetail.clubNum})}">
+        <div class="team_list_text">
+            <span id="text1">클럽 상세정보</span><span id="text2">Detailed Information</span>
+        </div>
 
+        <div class="team-info">
+            <div class="team-info-img">
+                <img th:src="@{'/clublogo/' + ${clubDetail.clubStoredPhoto}}">
+            </div>
 
-  <!-- 롤링 리스트를 제외한 main 태그를 감싸는 구역 -->
-  <div class="main-wrapper">
+            <div class="team-info-content">
+                <div class="team-info-header">
+                    <h1 id="team-name" th:text="${clubDetail.clubName}"></h1>
+                    <div class="team-info-details">
+                        <span>클럽장 :</span>
+                        <span id="club-master" th:text="${clubDetail.clubPresident}"></span>
+                        <span class="president-regdate-divide"></span>
+                        <span>클럽 생성일 :</span>
+                        <span id="club-creation-date" th:text="${clubDetail.clubRegdate}"></span>
+                    </div>
+                </div>
 
-    <div class="team_list_text">
-      <span id="text1">클럽 상세정보</span><span id="text2">Detailed information</span>
+                <div class="team-info-stats">
+                    <div class="team-info-item">
+                        <span>멤버수</span>
+                        <h3 id="member-count" th:text="${clubDetail.clubMemberCount}"></h3>
+                    </div>
+                    <div class="team-info-item">
+                        <span>수준</span>
+                        <h3 id="club_level" th:text="${clubDetail.clubLevel}"></h3>
+                    </div>
+                    <div class="team-info-item">
+                        <span>활동지역</span>
+                        <h5 id="play-area" th:text="${clubDetail.clubLocation}"></h5>
+                    </div>
+                    <div class="team-info-item">
+                        <span>소개</span>
+                        <h5 id="club_info_textarea" th:text="${clubDetail.clubInfo}"></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team_join_div">
+                <button class="team_join_btn">
+                    <a class="team_join_a" href="/club/join">가입신청 <i class="fa-solid fa-right-to-bracket"></i></a>
+                </button>
+            </div>
+        </div>
+
+        <div class="team-content">
+            <div class="team-table">
+                <h3 id="club_member">멤버</h3>
+                <table style="text-align: center;">
+                    <thead>
+                    <tr>
+                        <th>사진</th>
+                        <th>이름</th>
+                        <th>직책</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="clubMember : ${clubMembers}">
+                        <td id="img_td"><img id="club_member_img" th:src="@{/profile/{fileName}(fileName=${clubMember.storedProfile})}"></td>
+                        <td th:text="${clubMember.name}"></td>
+                        <td th:text="${clubMember.dir}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <a href="#">❮❮</a>
+                    <a href="#">❮</a>
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">❯</a>
+                    <a href="#">❯❯</a>
+                </div>
+            </div>
+
+<!--            <div class="team-table">-->
+<!--                <h3 id="game_score">최근 활동</h3>-->
+<!--                <table style="text-align: center;">-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th>날짜</th>-->
+<!--                        <th>경기장</th>-->
+<!--                        <th>결과</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                    <tr th:each="clubRec : ${clubRecs}">-->
+<!--                        <td th:text="${clubRec.recDate}"></td>-->
+<!--                        <td th:text="${clubRec.recFid}"></td>-->
+<!--                        <td th:text="${clubRec.recSco}"></td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
+        </div>
     </div>
-    <!-- team-info : 팀에 대한 소개 구역 -->
-    <div class="team-info">
-
-      <!-- team-info-img : 팀 사진 -->
-      <div class="team-info-img">
-        <img src="/img/team_logo.jpeg" alt="" style="width: 50%;">
-      </div>
-
-      <!-- team-info-left : 팀 소개 왼쪽 구역 -->
-      <div class="team-info-left">
-        <div>
-          <h1 id="team-name"> 토토넘 핫스팟 </h1> <!-- 클럽 이름 -->
-        </div>
-        <div class="team-info-left-detail">
-          <span id="club-master"> 클럽장 : 손흥만 </span> <!-- club-master : 클럽장에 대한 구역 -->
-          <span id="club-creation-date"> 클럽 생성일 : 2023.01.26 </span> <!-- club-creation-date : 클럽 생성일에 대한 구역 -->
-        </div>
-        <div class="team-info-left-detail">
-          <h5>리그 1위까지 열심히 달리실 분 연락주세요.</h5> <!-- 클럽 소개 보여주는 곳 -->
-        </div>
-      </div>
-
-      <!-- team-info-right : 팀 소개 중간 구역 -->
-      <div class="team-info-right">
-        <span>멤버수</span><br>
-        <div class="team-info-right-membercount">
-              <span id="member-count"> <!-- 총 팀원 숫자 보여주는 곳 -->
-                <h2>25명</h2>
-              </span>
-        </div>
-
-        <span>활동지역</span><br>
-        <div class="team-info-right-membercount">
-              <span id="play-area"> <!-- 활동 지역 보여주는 곳 -->
-                <h2>노원구</h2>
-              </span>
-        </div>
-      </div>
-
-      <!-- team-info-right : 팀 소개 오른쪽 구역 -->
-      <div class="team-info-right">
-        <div class="team_join_div">
-          <button class="team_join_btn"><a class="team_join_a" href="/club/join">가입신청 <i class="fa-solid fa-right-to-bracket"></i></a></button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- team-content: 팀원 소개구역을 제외한 나머지 main 구역, (팀원 목록과 소통공간이 있는 구역) -->
-    <div class="team-content">
-      <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
-        <h3 id="club_member">멤버</h3>
-        <table style="text-align: center;">
-          <!-- <caption>팀원 목록</caption> -->
-          <thead>
-          <tr>
-            <th>직책</th>
-            <th>이름</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>클럽장</td>
-            <td scope="row">신연재</td>
-          </tr>
-          <tr>
-            <td>클럽원</td>
-            <td scope="row">민경찬</td>
-          </tr>
-          <tr>
-            <td>클럽원</td>
-            <td scope="row">박 &nbsp; &nbsp;솔</td>
-          </tr>
-          <tr>
-            <td>클럽원</td>
-            <td scope="row">윤인록</td>
-          </tr>
-          <tr>
-            <td>클럽원</td>
-            <td scope="row">이덕재</td>
-          </tr>
-          </tbody>
-          <tfoot>
-          </tfoot>
-        </table>
-        <div class="pagination"> <!-- 테이블 밑에 숫자(페이징 처리)-->
-          <a href="#">❮❮</a>
-          <a href="#">❮</a>
-          <a href="#" class="active">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">❯</a>
-          <a href="#">❯❯</a>
-        </div>
-      </div>
-
-      <div class="team-table"> <!-- team-table : 팀원 목록을 보여주는 테이블이 있는 구역 -->
-        <h3 id="game_score">최근 활동</h3>
-        <table style="text-align: center;">
-          <!-- <caption>팀원 목록</caption> -->
-          <thead>
-          <tr>
-            <th>경기일</th>
-            <th>결과</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>2024년 5월 28일</td>
-            <td scope="row">승</td>
-          </tr>
-
-          <tr>
-            <td>2024년 5월 21일</td>
-            <td scope="row">승</td>
-          </tr>
-
-          <tr>
-            <td>2024년 5월 4일</td>
-            <td scope="row">패</td>
-          </tr>
-
-          <tr>
-            <td>2024년 4월 30일</td>
-            <td scope="row">패</td>
-          </tr>
-
-          <tr>
-            <td>2024년 4월 19일</td>
-            <td scope="row">승</td>
-          </tr>
-
-          </tbody>
-          <tfoot>
-          </tfoot>
-        </table>
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
 </th:block>
 </body>
-
 </html>

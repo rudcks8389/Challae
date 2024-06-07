@@ -37,6 +37,7 @@ public interface MemberService {
 	 */
 	public void editMember(MemberDto member);
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * 이름과 이메일로 아이디 찾기
@@ -99,4 +100,14 @@ public interface MemberService {
 	 */
 	public void outClubMember (MemberDto memberDto);
 
+=======
+	// 내 팀보기
+	public List<MemberDto> getTeamMember(String clubNum);
+
+	// 클럽상세페이지 멤버목록
+	public List<MemberDto> clubMemberList(String clubNum);
+
+	// 클럽신청 승인(clubNum update)
+	public void clubJoinUpdateClubNum(int clubNum);
+>>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
 }

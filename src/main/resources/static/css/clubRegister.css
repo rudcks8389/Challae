@@ -47,7 +47,7 @@ li {
 #detailDiv {
     margin: 0 auto;
     width: 800px;
-    height: 800px;
+    height: 1000px;
     padding: 20px 60px;
     display: flex;
     justify-content: center;
@@ -67,6 +67,7 @@ li {
     width: 150px;
     height: 150px;
     border: 1px solid #ccc;
+    border-radius: 50%;
     background-color: #fff;
     cursor: pointer;
     display: flex;
@@ -152,7 +153,8 @@ input {
     background-color: black;
     color: white;
     min-width: 33%;
-    min-height: 80%;
+    min-height: 100%;
+    height: 50px;
 }
 
 /* 소개 textarea */
@@ -186,3 +188,5 @@ input {
 
 
 /* 본문 끝 */
+
+/* 유효성 검사 */

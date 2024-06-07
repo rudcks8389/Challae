@@ -6,7 +6,6 @@ import com.ezen.springmvc.domain.member.dto.MemberSearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 /**
@@ -84,13 +83,6 @@ public interface MemberMapper {
      */
     public void updateClubNumByPresident(int clubNum);
 
-
-    public List<MemberDto> findByAgeRange(@Param("begin") int begin, @Param("end") int end);
-    public List<MemberDto> findByNameLike(String name);
-    public List<MemberDto> findBySearchType(@Param("type") String type, @Param("value") String value);
-    public List<MemberDto> findBySearchAll(String value);
-    public List<MemberDto> findBySearchAllOption(MemberSearchCondition searchCondition);
-
     /**
      * myTeam 페이지 클럽원 조회, 검색
      * @param clubNum 클럽번호
@@ -111,6 +103,14 @@ public interface MemberMapper {
      * @param memberDto 회원 Dto
      */
     public void ClubMemberDelete (MemberDto memberDto);
+
+
+    /**
+     *    클럽신청 승인(clubNum update)
+     */
+
+    public void clubJoinUpdateClubNum(int clubNum);
+
 }
 
 

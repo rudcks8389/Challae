@@ -2,13 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.springmvc.domain.club.mapper.ClubMapper">
 
-
-    <!-- 전체 클럽 조회 -->
+<!--     전체 클럽 조회 / club_list -->
     <select id="clubList" resultType="ClubDto">
-        SELECT CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
+        SELECT CLUB_NUM, CLUB_STOREDPHOTO, CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
         FROM CLUB
+        WHERE STATUS = '승인'
+        ORDER BY CLUB_NUM DESC
     </select>
 
+    <!-- 클럽목록의 검색 조건에 따른 클럽 전체 목록 반환 / club_list -->
+    <select id="findBySearchCondition" resultType="ClubDto">
+        SELECT CLUB_NUM, CLUB_STOREDPHOTO, CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
+        FROM (
+        SELECT CEIL(rownum / #{searchDto.limit}) page, CLUB_NUM, CLUB_STOREDPHOTO, CLUB_NAME, CLUB_PRESIDENT,
+        CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
+        FROM (
+        SELECT CLUB_NUM, CLUB_STOREDPHOTO, CLUB_NAME, CLUB_PRESIDENT, CLUB_LOCATION, CLUB_LEVEL, CLUB_MEMBERCOUNT
+        FROM CLUB
+        WHERE STATUS = '승인'
+        <if test="searchDto.searchValue != null">
+            <if test="searchDto.searchType != null">
+                <choose>
+                    <when test="searchDto.searchType == 'clubName'">
+                        AND CLUB_NAME LIKE '%' || #{searchDto.searchValue} || '%'
+                    </when>
+                    <when test="searchDto.searchType == 'clubPresident'">
+                        AND CLUB_PRESIDENT LIKE '%' || #{searchDto.searchValue} || '%'
+                    </when>
+                    <when test="searchDto.searchType == 'clubLocation'">
+                        AND CLUB_LOCATION LIKE '%' || #{searchDto.searchValue} || '%'
+                    </when>
+                    <when test="searchDto.searchType == 'clubLevel'">
+                        AND CLUB_LEVEL = #{searchDto.searchValue}
+                    </when>
+                </choose>
+            </if>
+            <if test="searchDto.searchType == null">
+                <choose>
+                    <when test="searchDto.searchValue != null">
+                        AND (CLUB_NAME LIKE '%' || #{searchDto.searchValue} || '%'
+                        OR CLUB_PRESIDENT LIKE '%' || #{searchDto.searchValue} || '%'
+                        OR CLUB_LOCATION LIKE '%' || #{searchDto.searchValue} || '%'
+                        OR CLUB_LEVEL = #{searchDto.searchValue})
+                    </when>
+                </choose>
+            </if>
+        </if>
+        ORDER BY CLUB_NUM DESC
+        )
+        )
+        WHERE page = #{searchDto.page}
+    </select>
 
     <!-- 클럽 등록 -->
     <insert id="clubRegister" parameterType="ClubDto">
@@ -18,7 +62,78 @@
                 #{clubPhone}, #{clubPhoto}, #{clubStoredPhoto}, '보류')
     </insert>
 
-    <!-- /myteam 이동 시 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진 -->
+    <!-- 클럽의 검색 조건에 따른 클럽 전체 개수 반환 / club_list -->
+    <select id="countBySearchCondition" resultType="int">
+        SELECT COUNT(CLUB_NUM) "cnt"
+        FROM CLUB
+        WHERE STATUS = '승인'
+        <if test="searchDto.searchValue != null">
+            <if test="searchDto.searchType != null">
+                <choose>
+                    <when test="searchDto.searchType == 'clubName'">
+                        AND CLUB_NAME LIKE '%' || #{searchDto.searchValue} || '%'
+                    </when>
+                    <when test="searchDto.searchType == 'clubPresident'">
+                        AND CLUB_PRESIDENT LIKE '%' || #{searchDto.searchValue} || '%'
+                    </when>
+                    <when test="searchDto.searchType == 'clubLocation'">
+                        AND CLUB_LOCATION LIKE '%' || #{searchDto.searchValue} || '%'
+                    </when>
+                    <when test="searchDto.searchType == 'clubLevel'">
+                        AND CLUB_LEVEL = #{searchDto.searchValue}
+                    </when>
+                </choose>
+            </if>
+            <if test="searchDto.searchType == null">
+                <choose>
+                    <when test="searchDto.searchValue != null">
+                        AND (CLUB_NAME LIKE '%' || #{searchDto.searchValue} || '%'
+                        OR CLUB_PRESIDENT LIKE '%' || #{searchDto.searchValue} || '%'
+                        OR CLUB_LOCATION LIKE '%' || #{searchDto.searchValue} || '%'
+                        OR CLUB_LEVEL = #{searchDto.searchValue})
+                    </when>
+                </choose>
+            </if>
+        </if>
+    </select>
+
+
+<!--    클럽번호 찾기 후 상세정보 출력 / club_detail -->
+    <select id="findByClubNum" resultType="ClubDto">
+        SELECT CLUB_NUM, CLUB_STOREDPHOTO, CLUB_NAME, CLUB_PRESIDENT, TO_CHAR(CLUB_REGDATE,'YYYY-MM-DD') CLUB_REGDATE, CLUB_MEMBERCOUNT, CLUB_LEVEL, CLUB_LOCATION, CLUB_INFO
+        FROM CLUB
+        WHERE CLUB_NUM = #{clubNum} AND STATUS = '승인'
+    </select>
+
+<!--    클럽 가입신청자 정보 클럽장에게 보내기 / club_join -->
+    <insert id="clubJoinRequest" parameterType="ClubJoinListDto">
+        INSERT INTO CLUBJOINLIST (JOIN_NUM, CLUB_NUM, MEMBER_NUM, JOIN_MEMBERPHOTO, JOIN_MEMBERNAME, JOIN_MEMBERPHONE, JOIN_MEMBEREMAIL, JOIN_MEMBERLEVEL, JOIN_MEMBERINFO, JOIN_DATE, JOIN_STATUS)
+        VALUES (JOIN_SEQ.NEXTVAL, #{clubNum}, #{memberNum}, #{joinMemberPhoto}, #{joinMemberName}, #{joinMemberPhone}, #{joinMemberEmail}, #{joinMemberLevel}, #{joinMemberInfo}, SYSDATE, '대기')
+    </insert>
+
+<!--    클럽장이 가입신청서 받기 / club_join -->
+    <select id="clubJoinView" resultType="ClubJoinListDto">
+        SELECT JOIN_NUM, CLUB_NUM, MEMBER_NUM, JOIN_MEMBERLEVEL, JOIN_MEMBERINFO, JOIN_DATE, JOIN_STATUS, JOIN_MEMBERNAME, JOIN_MEMBERPHONE, JOIN_MEMBEREMAIL, JOIN_MEMBERPHOTO
+        FROM CLUBJOINLIST
+        WHERE CLUB_NUM = #{clubNum} AND JOIN_STATUS = '대기'
+    </select>
+
+<!--    클럽 가입 승인(status 업데이트) / club_join -->
+    <update id="clubJoinApprove" parameterType="ClubJoinListDto">
+        UPDATE CLUBJOINLIST
+        SET JOIN_STATUS = '승인'
+        WHERE JOIN_NUM = #{joinNum}
+    </update>
+
+<!--    클럽 가입 거절(status 업데이트) / club_join -->
+    <update id="clubJoinRefuse" parameterType="ClubJoinListDto">
+        UPDATE CLUBJOINLIST
+        SET JOIN_STATUS = '거절'
+        WHERE JOIN_NUM = #{joinNum}
+    </update>
+
+<!--내팀보기에서 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진, -->
+>>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
     <select id="myClubData" parameterType="String" resultType="ClubDto">
         SELECT club_num,
                club_name,
@@ -89,5 +204,11 @@
         ORDER BY CLUB_NUM DESC
     </select>
 
+<!--   클럽 생성 유효성 검사를 위한 클럽명 확인하기 -->
+    <select id="getClubName" parameterType="string" resultType="clubDto">
+        SELECT CLUB_NAME
+        FROM CLUB
+        WHERE CLUB_NAME = #{clubName}
+    </select>
 
 </mapper>

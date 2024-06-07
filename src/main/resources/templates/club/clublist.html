@@ -14,6 +14,8 @@
 
 <th:block th:fragment="script">
     <script src="/js/weather.js" defer></script>
+    <script src="/js/board.js" defer></script>
+    <script src="/js/clubListSubmitForm.js" defer></script>
 
 </th:block>
 
@@ -27,7 +29,7 @@
 
     <!-- 팀목록 텍스트 -->
     <div class="team_list_text">
-        <span id="text1">클럽 목록</span><span id="text2">Club list</span>
+        <span id="text1">클럽 목록</span><span id="text2">Club List</span>
     </div>
 
     <!-- 상세정보안내, 생성하기버튼 div flex -->
@@ -46,24 +48,24 @@
         <table>
             <thead>
             <tr>
+                <th scope="col">로고</th>
                 <th scope="col">클럽</th>
                 <th scope="col">감독</th>
                 <th scope="col" class="tb">지역</th>
                 <th scope="col">수준</th>
                 <th scope="col">인원수</th>
-                <th scope="col">상세보기</th>
             </tr>
             </thead>
 
             <!-- 데이터 -->
             <tbody>
-            <tr th:each="clubList : ${clubs}">
+            <tr class="clickable-row" th:each="clubList : ${clubs}" th:attr="data-href=@{/club/detail(clubNum=${clubList.clubNum})}">
+                <td id="img_td"><img th:src="@{/clublogo/{clubLogoFileName}(clubLogoFileName=${clubList.clubStoredPhoto})}"></td>
                 <td th:text="${clubList.clubName}"></td>
                 <td th:text="${clubList.clubPresident}"></td>
                 <td th:text="${clubList.clubLocation}"></td>
                 <td th:text="${clubList.clubLevel}"></td>
                 <td th:text="${clubList.clubMemberCount}"></td>
-                <td><a href="/club/detail">상세보기</a></td>
             </tr>
 
             </tbody>
@@ -75,38 +77,39 @@
     <div class="pager_wrap">
 
         <!-- 검색 -->
-        <form method="post" action="?" name="srchForm">
+        <form id="searchForm" name="srchForm" th:object="${parameterForm}" onsubmit="return submitForm()">
             <div class="search">
-                <label for="search_select"></label>
-                <select id="search_select" name="sMatchType">
+                <label for="search_select" hidden="hidden">검색유형</label>
+                <select id="search_select" name="searchType">
                     <option value="">검색유형</option>
-
-                    <option value="team_search">클럽</option>
-
-                    <option value="area_search">지역</option>
-
-                    <option value="level_search">수준</option>
-
+                    <option value="clubName">클럽명</option>
+                    <option value="clubPresident">클럽장</option>
+                    <option value="clubLocation">지역</option>
+                    <option value="clubLevel">수준</option>
                 </select>
 
-                <input type="text" id="search_input" name="sword" placeholder="검색어를 입력하세요."/>
-
-                <button type="button" id="search_button" onCLick="document.srchForm.submit();"><span
-                        class="hide">검색</span></button>
+                <input type="search" id="search_input" name="searchValue" placeholder="검색어를 입력하세요." th:value="${parameterForm.searchValue}">
+                <button type="submit" id="search_button">검색</button>
             </div>
         </form>
 
         <!-- 페이지내이션 -->
         <div class="pagination">
-            <a href="#">❮❮</a>
-            <a href="#">❮</a>
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">❯</a>
-            <a href="#">❯❯</a>
+            <a th:href="@{list(requestPage=1, searchValue=${parameterForm.searchValue})}">❮❮</a>
+            <a th:href="@{list(requestPage=${pagination.previousStartPage}, searchValue=${parameterForm.searchValue})}">❮</a>
+
+            <!-- 페이지번호 반복 -->
+            <th:block th:each="i : ${#numbers.sequence(pagination.getStartPage(), pagination.getEndPage())}">
+                <li th:if="${i == pagination.params.requestPage}" >
+                    <a th:text="${i}">1</a>
+                </li>
+                <li th:if="${i != pagination.params.requestPage}" >
+                    <a th:href="@{list(requestPage=${i}, searchValue=${parameterForm.searchValue})}" th:text="${i}">1</a>
+                </li>
+            </th:block>
+
+            <a th:href="@{list(requestPage=${pagination.nextStartPage}, searchValue=${parameterForm.searchValue})}">❯</a>
+            <a th:href="@{list(requestPage=${pagination.totalPages}, searchValue=${parameterForm.searchValue})}">❯❯</a>
         </div>
 
     </div>

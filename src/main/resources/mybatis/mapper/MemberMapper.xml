@@ -68,6 +68,7 @@
           AND m.MEMBER_PASSWD = #{passwd}
     </select>
 
+
     <!-- 회원 아이디 찾기 검색 -->
     <select id="findId" parameterType="string" resultType="MemberDto">
         SELECT MEMBER_ID "id"
@@ -187,6 +188,7 @@
 		WHERE page = #{searchDto.page}
 	</select>
 
+
 	<!-- 클럽원 갯수 반환 (페이지네이션을 위함) -->
 	<select id="countMyTeamList" resultType="int">
 		SELECT
@@ -223,6 +225,30 @@
 		UPDATE member
 		SET club_num= null
 		WHERE member_num = #{memberNum}
+    </update>
+
+	<!--    클럽상세페이지 멤버목록 / club_detail 페이지 -->
+	<select id="clubMemberList" resultType="MemberDto">
+		SELECT CLUB_NUM, MEMBER_NUM, MEMBER_STOREDPHOTO "storedProfile", MEMBER_NAME "name",
+			   (CASE WHEN MEMBER_DIR = 'Y' THEN '클럽장' ELSE '클럽원' END) "dir"
+		FROM MEMBER
+		WHERE CLUB_NUM = #{clubNum}
+		ORDER BY MEMBER_DIR DESC
+	</select>
+
+	<!--    클럽 가입 승인(clubNum 업데이트) / club_join -->
+	<update id="clubJoinUpdateClubNum" parameterType="int">
+		UPDATE MEMBER
+		SET CLUB_NUM = (
+			SELECT CLUB_NUM
+			FROM CLUBJOINLIST
+			WHERE JOIN_NUM = #{joinNum}
+		)
+		WHERE MEMBER_NUM = (
+			SELECT MEMBER_NUM
+			FROM CLUBJOINLIST
+			WHERE JOIN_NUM = #{joinNum}
+		)
 
 	</update>
 

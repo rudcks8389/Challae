@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 회원 DTO클래스
  */
 public class MemberDto {
+<<<<<<< HEAD
     private String memberNum;      /** 회원 식별번호 */
     private String id;             /** 회원 아이디 */
     private String name;           /** 회원 이름 */
@@ -26,5 +27,19 @@ public class MemberDto {
     private String regdate;        /** 회원의 가입일자 */
     private String clubName;       /** 회원이 가입된 클럽의 이름 */
     private String status;         /** 회원이 가입된 클럽의 상태 */
+=======
+    private String memberNum;
+    private String id;
+    private String name;
+    private String email;
+    private String profileImage;
+    private String storedProfile;
+    private String dir;
+    private String clubNum;
+    private String passwd;
+    private String phone;
+    private String regdate;
+
+>>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
 
 }

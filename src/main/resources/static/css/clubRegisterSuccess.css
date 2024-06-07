@@ -47,7 +47,7 @@ li {
 #detailDiv {
   margin: 0 auto;
   width: 800px;
-  height: 800px;
+  height: 500px;
   padding: 20px 60px;
   display: flex;
   justify-content: center;
@@ -55,41 +55,6 @@ li {
   border-bottom: 10px;
   background-color: rgba(0, 0, 0, 0.85);
   border: 1px solid #ccc;
-}
-
-/* 클럽로고 + 클럽명 */
-#logo_clubname_flex {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-
-#logo_clubname_flex #logo_div {
-  margin-right: 5%;
-  margin: 0 auto;
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  align-items: center;
-}
-
-#logo_clubname_flex #logo_div #logo_img {
-  width: 100px;
-  height: 100px;
-  text-align: center;
-}
-
-#logo_clubname_flex #club_name_div {
-  margin-right: 5%;
-  margin: 0 auto;
-  text-align: center;
-  align-items: center;
-}
-
-#logo_clubname_flex #logo_div #logo_img {
-  width: 100px;
-  height: 100px;
-  text-align: center;
 }
 
 /* 테이블 */
@@ -103,7 +68,7 @@ li {
 }
 
 /* 테이블 input */
-input {
+.head-input input {
   display: inline-block;
   background-color: black;
   color: white;
@@ -116,34 +81,42 @@ input {
 }
 
 /* 소개 textarea */
-#detailDiv #team_memo {
+#team_memo_top{
   display: inline-block;
   background-color: black;
   color: white;
   resize: none;
-  border-radius: 3px;
+  border: none;
   text-align: center;
+  vertical-align: bottom;
   padding: 10px;
   margin-top: 10px;
   width: 450px;
-  height: 200px;
+  height: 100px;
   font-size: 20px;
 }
 
-/* 내팀보기, 홈페이지 */
+#team_memo_bot{
+  display: inline-block;
+  background-color: black;
+  color: white;
+  resize: none;
+  border: none;
+  text-align: center;
+  vertical-align: top;
+  padding: 10px;
+  margin-top: 10px;
+  width: 450px;
+  height: 100px;
+  font-size: 20px;
+}
+
+/* 목록이동 */
 #detailDiv .btn_wrap {
   display: inline-block;
   margin-top: 20px;
   text-align: center;
   font-size: 35px;
-}
-
-#detailDiv .detail_join_btn {
-  margin-right: 5px;
-}
-
-#detailDiv .detail_close_btn {
-  margin-left: 5px;
 }
 
 /* 본문 끝 */

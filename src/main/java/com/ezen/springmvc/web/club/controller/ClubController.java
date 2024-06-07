@@ -1,6 +1,8 @@
 package com.ezen.springmvc.web.club.controller;
 
 import com.ezen.springmvc.domain.club.dto.ClubDto;
+import com.ezen.springmvc.domain.club.dto.ClubJoinListDto;
+import com.ezen.springmvc.domain.common.dto.SearchDto;
 import com.ezen.springmvc.domain.common.dto.UploadFile;
 import com.ezen.springmvc.domain.common.service.FileService;
 
@@ -62,11 +64,17 @@ public class ClubController {
     // 전략판(캔버스) 저장되는 경로를 변수로 지정
     @Value("${upload.soccerboard.path}")
     private String soccerBoardUploadPath;
+
     @Value("${upload.presetboard.path}")
     private String soccerPresetBoardUploadPath;
     // 클럽 로고
     @Value("${upload.clublogo.path}")
     private String clublogoUploadPath;
+
+    // 멤버 사진
+    @Value("${upload.profile.path}")
+    private String profileFileUploadPath;
+
     @Autowired
     private CreateService createService;
     @Autowired
@@ -78,34 +86,67 @@ public class ClubController {
     @Autowired
     private FileService fileService;
 
-    // 클럽 로고 사진 요청 처리
+
+
+    /**
+     * 클럽 로고 사진 요청 처리
+     *
+     * @param profileFileName 클럽 로고 파일 이름
+     * @return 클럽 로고 이미지 리소스와 HTTP 상태
+     * @throws IOException 파일 입출력 예외 발생 시
+     */
     @GetMapping("/image/{clubLogoFileName}")
     @ResponseBody
     public ResponseEntity<Resource> showImage(@PathVariable("clubLogoFileName") String profileFileName) throws IOException {
         Path path = Paths.get(clublogoUploadPath + "/" + profileFileName);
 
-        if (!Files.exists(path) || profileFileName == null || profileFileName.isEmpty()) {
-            path = Paths.get("src/main/resources/static/img/teamlogo.jpg");
+            if (!Files.exists(path) || profileFileName == null || profileFileName.isEmpty()) {
+                path = Paths.get("src/main/resources/static/img/teamlogo.jpg");
+            }
+
+            String contentType = Files.probeContentType(path);
+            if (contentType == null) {
+                contentType = "application/octet-stream";
+            }
+
+            Resource resource = new FileSystemResource(path);
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+            return new ResponseEntity<>(resource, headers, HttpStatus.OK);
         }
 
-        String contentType = Files.probeContentType(path);
-        if (contentType == null) {
-            contentType = "application/octet-stream";
-        }
-
-        Resource resource = new FileSystemResource(path);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, contentType);
-        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
-    }
-
-    // 전체 클럽 목록
+    /**
+     * 클럽 목록 요청 처리 (검색 및 페이징 처리)
+     *
+     * @param parameterForm 파라미터 폼 객체
+     * @param model         모델 객체
+     * @return 클럽 목록 페이지
+     */
     @GetMapping("/list")
-    public String clubList(Model model) {
-        List<ClubDto> clubs = clubService.clubList();
+    public String clubList(@ModelAttribute ParameterForm parameterForm, Model model) {
+        SearchDto searchDto = SearchDto.builder()
+                .limit(parameterForm.getElementSize())
+                .page(parameterForm.getRequestPage())
+                .searchValue(parameterForm.getSearchValue())
+                .searchType(parameterForm.getSearchType() != null && !parameterForm.getSearchType().isEmpty() ? parameterForm.getSearchType() : null)
+                .build();
+
+        // 클럽 목록
+        List<ClubDto> clubs = clubService.getClubList(searchDto);
+
+        // 페이징 처리를 위한 테이블 행의 개수 조회
+        int selectedRowCount = clubService.getClubCount(searchDto);
+        parameterForm.setRowCount(selectedRowCount);
+
+        Pagination pagination = new Pagination(parameterForm);
+
         model.addAttribute("clubs", clubs);
+        model.addAttribute("parameterForm", parameterForm);
+        model.addAttribute("pagination", pagination);
+
         return "/club/clublist";
     }
+
 
     /**
      * 내 팀보기 접속 시 해당하는 클럽정보 출력
@@ -113,7 +154,6 @@ public class ClubController {
      */
     @GetMapping("/myteam")
     public String myteam(@ModelAttribute ParameterForm parameterForm, HttpServletRequest request, Model model) {
-
         HttpSession session = request.getSession();
         MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
 
@@ -253,10 +293,28 @@ public class ClubController {
 
     }
 
-
-    // 클럽 상세보기
+    /**
+     * 클럽 상세보기
+     *
+     * @param clubNum 클럽 번호
+     * @param model   모델 객체
+     * @param session HTTP 세션 객체
+     * @return 클럽 상세 페이지
+     */
     @GetMapping("/detail")
-    public String clubDetail() {
+    public String clubDetail(@RequestParam("clubNum") String clubNum, Model model, HttpSession session) {
+
+        // 클럽 정보
+        ClubDto clubDetail = clubService.findByClubNum(clubNum);
+        model.addAttribute("clubDetail", clubDetail);
+
+        // 멤버 정보
+        List<MemberDto> clubMembers = memberService.clubMemberList(clubNum);
+        model.addAttribute("clubMembers", clubMembers);
+
+        // 클럽번호 세션 저장
+        session.setAttribute("clubNum", clubNum);
+
         return "/club/clubdetail";
     }
     /**
@@ -293,22 +351,17 @@ public class ClubController {
      */
 
     @PostMapping("/create")
-//    @ResponseBody
     public String createMatch(@ModelAttribute CreateDto createDto, HttpServletRequest request) {
         // 세션에서 클럽번호 가져오기
         HttpSession session = request.getSession();
         MemberDto member = (MemberDto) session.getAttribute("loginMember");
         Integer clubNum = (Integer) session.getAttribute("clubNum");
 
-
-        log.info("세션에서 가져온 클럽 번호: {}", member.getClubNum());
         if (member.getClubNum() != null) {
             createDto.setClubNum(Integer.parseInt(member.getClubNum()));
         } else {
             log.warn("클럽 번호가 세션에 존재하지 않습니다.");
         }
-
-//        log.info("dto: {}", createDto); // Dto 데이터 여부 체크
         /* 경기 일정 생성하기 */
         createService.createMatch(createDto);
         return "redirect:/club/myteam";
@@ -333,7 +386,6 @@ public class ClubController {
         }
         return Collections.singletonMap("filePath", fileName);
     }
-
 
     /**
      * 프리셋 생성 및 저장하기 ( 인록 )
@@ -404,21 +456,33 @@ public class ClubController {
         return ResponseEntity.ok(response);
     }
 
-    // 새로운 클럽 생성하기
-
+    /**
+     * 클럽 생성 화면
+     *
+     * @param model 모델 객체
+     * @return 클럽 생성 페이지
+     */
     @GetMapping("/register")
     public String clubRegister(Model model) {
         ClubRegisterForm clubRegisterForm = ClubRegisterForm.builder().build();
         model.addAttribute("clubRegisterForm", clubRegisterForm);
         return "/club/clubregister";
     }
-    // 클럽 생성 요청 처리
+
+    /**
+     * 클럽 생성 요청 처리
+     *
+     * @param clubRegisterForm   클럽 등록 폼 객체
+     * @param redirectAttributes 리다이렉트 속성 객체
+     * @param session            HTTP 세션 객체
+     * @return 클럽 목록 페이지로 리다이렉트
+     */
+
     @PostMapping("/register")
     public String clubRegisterAction(@ModelAttribute ClubRegisterForm clubRegisterForm, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
         // 로그인한 사용자 정보에서 이름 가져오기 => 클럽장
         MemberDto memberDto = (MemberDto) session.getAttribute("loginMember");
         String clubPresident = memberDto.getName();
-
         // 업로드 로고 사진 저장
         UploadFile uploadFile = fileService.storeFile(clubRegisterForm.getClubPhoto(), clublogoUploadPath);
 
@@ -440,17 +504,129 @@ public class ClubController {
         return "redirect:/club/registersuccess";
     }
 
-
-    // 클럽생성 완료 페이지
+    /**
+     * 클럽 생성 신청 완료 페이지
+     *
+     * @return 클럽 생성 신청 완료 페이지 뷰
+     */
     @GetMapping("/registersuccess")
     public String registersuccess() {
         return "/club/clubregistersuccess";
     }
 
-    // 클럽가입 페이지
+    /**
+     * 클럽 가입 신청 페이지
+     *
+     * @return 클럽 가입 신청 페이지 뷰
+     */
     @GetMapping("/join")
     public String clubJoin() {
         return "/club/clubjoin";
+    }
+
+    /**
+     * 클럽 가입 요청 처리(클럽장에게 가입신청자 정보전달)
+     *
+     * @param clubNum     클럽 번호
+     * @param memberLevel 멤버 레벨
+     * @param memberInfo  멤버 정보
+     * @param session     HTTP 세션 객체
+     * @param model       모델 객체
+     * @return 클럽 목록 페이지로 리다이렉트
+     */
+    @PostMapping("/join")
+    public String clubJoinRequest(@RequestParam("clubNum") String clubNum,
+                                  @RequestParam String memberLevel,
+                                  @RequestParam String memberInfo,
+                                  HttpSession session,
+                                  Model model) {
+
+        // 선택한 클럽번호 가져오기
+        String getClubNum = (String) session.getAttribute("clubNum");
+
+        // 로그인 된 사용자의 정보 가져오기
+        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
+
+        // 클럽장에게 전달할 정보 생성
+        ClubJoinListDto clubJoinRequest = new ClubJoinListDto();
+
+        // 멤버넘버 식별
+        clubJoinRequest.setMemberNum(Integer.parseInt(loginMember.getMemberNum()));
+
+        // 전달할 정보(디비정보)
+        clubJoinRequest.setClubNum(Integer.parseInt(getClubNum));
+        clubJoinRequest.setJoinMemberPhoto(loginMember.getStoredProfile());
+        clubJoinRequest.setJoinMemberName(loginMember.getName());
+        clubJoinRequest.setJoinMemberPhone(loginMember.getPhone());
+        clubJoinRequest.setJoinMemberEmail(loginMember.getEmail());
+
+        // 전달할 정보(신청자 작성)
+        clubJoinRequest.setJoinMemberLevel(memberLevel);
+        clubJoinRequest.setJoinMemberInfo(memberInfo);
+
+        // 클럽장에게 정보 전달
+        clubService.clubJoinRequest(clubJoinRequest);
+
+        return "redirect:/club/list";
+    }
+
+    /**
+     * 클럽장이 클럽 가입 신청서 보기
+     *
+     * @param clubNum 클럽 번호
+     * @return 클럽 가입 신청 목록
+     */
+    @GetMapping("/joinList")
+    @ResponseBody
+    public List<ClubJoinListDto> clubJoinView(@RequestParam("clubNum") String clubNum, Model model, HttpSession session) {
+        return clubService.clubJoinView(clubNum);
+    }
+
+    /**
+     * 클럽 가입 신청 승인
+     *
+     * @param joinNum 가입 신청 번호
+     * @return HTTP 상태 OK 응답
+     */
+    @PostMapping("/joinApprove")
+    @ResponseBody
+    public ResponseEntity<Void> joinApprove(@RequestParam("joinNum") int joinNum) {
+        // STATUS 업데이트
+        clubService.clubJoinApprove(joinNum);
+        // CLUB_NUM 업데이트
+        memberService.clubJoinUpdateClubNum(joinNum);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * 클럽가입신청 거절
+     *
+     * @param joinNum 가입 신청 번호
+     * @return HTTP 상태 OK 응답
+     */
+    @PostMapping("/joinRefuse")
+    @ResponseBody
+    public ResponseEntity<Void> joinRefuse(@RequestParam("joinNum") int joinNum) {
+        clubService.clubJoinRefuse(joinNum);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * 클럽명 중복체크 처리 API
+     * @param clubName
+     * @return
+     */
+    @GetMapping("/idcheck/{clubName}")
+    public @ResponseBody Map<String, Object> idDupCheckAction(@PathVariable("clubName") String clubName) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("result", true);
+        map.put("message", "사용 가능한 클럽명입니다.");
+        ClubDto clubDto = clubService.getClubName(clubName);
+        if (clubDto != null) {
+            map.put("result", false);
+            map.put("message", "이미 사용중인 클럽명입니다.");
+        }
+        return map;
     }
 
 }

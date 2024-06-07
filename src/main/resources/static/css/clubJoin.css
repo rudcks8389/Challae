@@ -80,6 +80,20 @@ input {
   outline: none;
 }
 
+/* 내 사진 */
+.myImg_div {
+  width: 120px;
+  height: 120px;
+  background: white;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.myImg_div img {
+  width: 120px;
+  height: 120px;
+}
+
 
 /* 팀 수준 */
 #levelbox {
@@ -107,40 +121,6 @@ input {
   height: 52px;
 }
 
-/* 팀 로고 파일 업로드 */
-#filebox {
-  margin-top: 10px;
-  padding: 0 10px;
-  display: flex;
-  justify-content: flex-end;
-  vertical-align: middle;
-}
-
-#filebox .upload_name {
-  color: #c8c8c8;
-  font-size: 21px;
-  padding-top: 8px;
-}
-
-#filebox label {
-  width: 120px;
-  font-size: 25px;
-  text-align: center;
-  background-color: black;
-  color: white;
-  border: 1px solid white;
-  margin-bottom: 8px;
-}
-
-#filebox input[type="file"] {
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-}
-
 /* 소개 textarea */
 #detailDiv #team_memo {
   display: inline-block;
@@ -156,20 +136,19 @@ input {
   font-size: 20px;
 }
 
-/* 신청하기, 닫기 */
+/* 신청하기 */
 #detailDiv .btn_wrap {
   display: inline-block;
-  margin-top: 20px;
   text-align: center;
   font-size: 35px;
 }
 
-#detailDiv .detail_join_btn {
-  margin-right: 5px;
+#join_btn {
+  background: black;
+  color: white;
+  border: none;
 }
 
-#detailDiv .detail_close_btn {
-  margin-left: 5px;
-}
+
 
 /* 본문 끝 */
