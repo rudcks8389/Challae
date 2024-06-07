@@ -60,7 +60,7 @@
             <!-- 데이터 -->
             <tbody>
             <tr class="clickable-row" th:each="clubList : ${clubs}" th:attr="data-href=@{/club/detail(clubNum=${clubList.clubNum})}">
-                <td id="img_td"><img th:src="@{/clublogo/{clubLogoFileName}(clubLogoFileName=${clubList.clubStoredPhoto})}"></td>
+                <td id="img_td"><img th:src="@{/upload/clublogo/{clubLogoFileName}(clubLogoFileName=${clubList.clubStoredPhoto})}"></td>
                 <td th:text="${clubList.clubName}"></td>
                 <td th:text="${clubList.clubPresident}"></td>
                 <td th:text="${clubList.clubLocation}"></td>

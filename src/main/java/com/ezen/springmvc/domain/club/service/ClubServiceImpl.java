@@ -6,11 +6,8 @@ import com.ezen.springmvc.domain.club.mapper.ClubMapper;
 import com.ezen.springmvc.domain.common.dto.SearchDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @RequiredArgsConstructor
 @Service
@@ -23,7 +20,7 @@ public class ClubServiceImpl implements ClubService {
      * @return 클럽 목록을 반환합니다.
      */
     @Override
-    public List<ClubDto> clubList(){
+    public List<ClubDto> clubList() {
         return clubMapper.clubList();
     }
 
@@ -60,12 +57,18 @@ public class ClubServiceImpl implements ClubService {
     }
 
     /**
-<<<<<<< HEAD
      * 클럽 정보 제공 서비스
+     *
      * @param clubNum 클럽번호
      * @return
      */
-=======
+    @Override
+    public List<ClubDto> clubDataService(String clubNum) {
+        return clubMapper.myClubData(clubNum);
+    }
+
+
+    /**
      * 클럽 번호로 클럽 찾기
      *
      * @param clubNum 클럽 번호
@@ -82,7 +85,7 @@ public class ClubServiceImpl implements ClubService {
      * @param clubJoinListDto 클럽 가입 신청 정보를 포함한 DTO
      */
     @Override
-    public void clubJoinRequest(ClubJoinListDto clubJoinListDto){
+    public void clubJoinRequest(ClubJoinListDto clubJoinListDto) {
         clubMapper.clubJoinRequest(clubJoinListDto);
     }
 
@@ -103,7 +106,7 @@ public class ClubServiceImpl implements ClubService {
      * @param joinNum 가입 신청 번호
      */
     @Override
-    public void clubJoinApprove(int joinNum){
+    public void clubJoinApprove(int joinNum) {
         clubMapper.clubJoinApprove(joinNum);
     }
 
@@ -113,20 +116,12 @@ public class ClubServiceImpl implements ClubService {
      * @param joinNum 가입 신청 번호
      */
     @Override
-    public void clubJoinRefuse(int joinNum){
+    public void clubJoinRefuse(int joinNum) {
         clubMapper.clubJoinRefuse(joinNum);
     }
 
-    // 내 팀보기 클럽데이터 출력
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
-    @Override
-    public List<ClubDto> clubDataService(String clubNum) {
-        return clubMapper.myClubData(clubNum);
-    }
-
     /**
-<<<<<<< HEAD
-     *  관리자모드에서 승인대기 클럽 출력
+     * 관리자모드에서 승인대기 클럽 출력
      */
     @Override
     public List<ClubDto> findPendingClubs() {
@@ -134,7 +129,7 @@ public class ClubServiceImpl implements ClubService {
     }
 
     /**
-     *  관리자모드에서 클럽 생성 승인
+     * 관리자모드에서 클럽 생성 승인
      */
     @Override
     public void updateStatus(int clubNum, String status) {
@@ -142,7 +137,7 @@ public class ClubServiceImpl implements ClubService {
     }
 
     /**
-     *  관리자모드에서 클럽 생성 거절
+     * 관리자모드에서 클럽 생성 거절
      */
     @Override
     public void deleteClub(int clubNum) {
@@ -150,7 +145,7 @@ public class ClubServiceImpl implements ClubService {
     }
 
     /**
-     *  관리자모드에서 보는 클럽 수 출력
+     * 관리자모드에서 보는 클럽 수 출력
      */
     @Override
     public int clubCount() {
@@ -158,7 +153,7 @@ public class ClubServiceImpl implements ClubService {
     }
 
     /**
-     *  관리자모드에서 이메일 발송을 위한 아이디 찾기
+     * 관리자모드에서 이메일 발송을 위한 아이디 찾기
      */
     @Override
     public String findClubById(int clubNum) {
@@ -170,16 +165,17 @@ public class ClubServiceImpl implements ClubService {
      */
     public List<ClubDto> allClubView() {
         return clubMapper.allClubView();
-=======
+    }
+
+    /**
      * 클럽 생성 중복 검사를 위한 클럽명 불러오기
      *
      * @param clubName 클럽명
      * @return 해당 클럽명을 가진 클럽의 정보를 반환합니다.
      */
     @Override
-    public ClubDto getClubName(String clubName){
+    public ClubDto getClubName(String clubName) {
         return clubMapper.getClubName(clubName);
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
     }
 
 }

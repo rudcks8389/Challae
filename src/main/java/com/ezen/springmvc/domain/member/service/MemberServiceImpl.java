@@ -154,13 +154,17 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.updateClubNumByPresident(clubNum);
 	}
 
-	// 클럽상세페이지 멤버목록
+	/**
+	 * 	클럽상세페이지 멤버목록
+ 	 */
 	@Override
 	public List<MemberDto> clubMemberList(String clubNum) {
 		return memberMapper.clubMemberList(clubNum);
 	}
 
-	// 클럽신청 승인(clubNum update)
+	/**
+	 * 	클럽신청 승인(clubNum update)
+	 */
 	public void clubJoinUpdateClubNum(int clubNum) {
 		memberMapper.clubJoinUpdateClubNum(clubNum);
 	}

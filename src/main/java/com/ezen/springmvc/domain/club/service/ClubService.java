@@ -84,8 +84,9 @@ public interface ClubService {
     public List<ClubDto> allClubView();
 
 
-=======
-     * 클럽 가입 신청하기 (클럽장에게 가입 신청 보내기)
+
+     /**
+      * 클럽 가입 신청하기 (클럽장에게 가입 신청 보내기)
      *
      * @param clubJoinListDto 클럽 가입 신청 정보를 포함한 DTO
      */
@@ -113,7 +114,6 @@ public interface ClubService {
      */
     public void clubJoinRefuse(int joinNum);
 
-    public List<ClubDto> clubDataService(String clubNum);
 
     /**
      * 클럽 생성 중복 검사를 위한 클럽명 불러오기
@@ -122,5 +122,4 @@ public interface ClubService {
      * @return 해당 클럽명을 가진 클럽의 정보를 반환합니다.
      */
     public ClubDto getClubName(String clubName);
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
 }

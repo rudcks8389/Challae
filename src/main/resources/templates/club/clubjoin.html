@@ -39,7 +39,7 @@
                             <input type="hidden" name="clubNum" th:value="${clubNum}" />
 
                             <div class="myImg_div">
-                                <img th:src="@{/profile/{fileName}(fileName=${session.loginMember != null ? session.loginMember.storedProfile : ''})}">
+                                <img th:src="@{/upload/profile/{fileName}(fileName=${session.loginMember != null ? session.loginMember.storedProfile : ''})}">
                             </div>
 
                             <tbody>

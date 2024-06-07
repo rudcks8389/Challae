@@ -133,7 +133,6 @@
     </update>
 
 <!--내팀보기에서 식별할 클럽번호 / 클럽 정보 출력을 위한 이름, 소개, 클럽장(감독), 클럽생성일 , 멤버 수, 사진, -->
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
     <select id="myClubData" parameterType="String" resultType="ClubDto">
         SELECT club_num,
                club_name,

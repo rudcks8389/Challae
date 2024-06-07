@@ -41,7 +41,6 @@ public interface ClubMapper {
     public void clubRegister(ClubDto clubDto);
 
     /**
-<<<<<<< HEAD
      * /myteam 페이지 클럽데이터 출력
      * @param clubNum 클럽번호
      */
@@ -80,8 +79,8 @@ public interface ClubMapper {
 
 
 
-=======
-     * 클럽 번호로 클럽 상세보기
+
+     /** 클럽 번호로 클럽 상세보기
      *
      * @param clubNum 클럽 번호
      * @return 해당 클럽 번호에 해당하는 클럽의 상세 정보를 반환합니다.
@@ -117,8 +116,6 @@ public interface ClubMapper {
      */
     public void clubJoinRefuse(int joinNum);
 
-    // 내 팀보기 클럽데이터 출력용
-    public List<ClubDto> myClubData(String clubNum);
 
     /**
      * 클럽 생성 중복 검사를 위한 클럽명 불러오기
@@ -127,5 +124,5 @@ public interface ClubMapper {
      * @return 해당 클럽명을 가진 클럽의 정보를 반환합니다.
      */
     public ClubDto getClubName(String clubName);
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
+
 }

@@ -80,8 +80,6 @@ public class MemberController {
     /** 신규 회원가입 요청 처리 **/
     @PostMapping("/signup")
     public String signUpAction(@ModelAttribute MemberForm memberForm, RedirectAttributes redirectAttributes, Model model) {
-        log.info("회원 정보 : {}", memberForm.toString());
-
             // 업로드 프로필 사진 저장
         UploadFile uploadFile = fileService.storeFile(memberForm.getProfileImage(), profileFileUploadPath);
 
@@ -235,7 +233,6 @@ public class MemberController {
     @PostMapping("/find")
     public String findIdFormAction(@ModelAttribute FindIdForm findIdForm, RedirectAttributes redirectAttributes) {
         MemberDto foundMember = memberService.findId(findIdForm.getName(), findIdForm.getEmail());
-        log.info("@@찾은 아이디 : {}", foundMember);
         if (foundMember == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "해당 정보로 등록된 아이디를 찾을 수 없습니다.");
         } else {

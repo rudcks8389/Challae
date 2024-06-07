@@ -38,7 +38,7 @@ function fetchJoinRequests() {
             data.forEach(request => {
                 if (request.joinStatus === '대기') {
                     tr += `<tr>`;
-                    tr += `<td><img src="${request.joinMemberPhoto}" alt="profile photo" style="width: 100px; height: 100px;"></td>`;
+                    tr += `<td><img src="/upload/profile/${request.joinMemberPhoto}" style="width: 100px; height: 100px;"></td>`;
                     tr += `<td>${request.joinMemberName}</td>`;
                     tr += `<td>${request.joinMemberPhone}</td>`;
                     tr += `<td>${request.joinMemberEmail}</td>`;

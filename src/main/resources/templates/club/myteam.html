@@ -15,7 +15,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="../../static/css/myteam.css">
     <!--jQuery-->
 
     <!--Sweet Alert-->
@@ -47,16 +46,10 @@
 
 <th:block th:fragment="script">
     <script src="/js/weather.js" defer></script>
-<<<<<<< HEAD
     <script src="/js/myteam-schedule-monthRender.js" defer></script>
     <script src="/js/my-team-alert.js" defer></script>
-=======
-    <script src="/js/myteam-schedule.js" defer></script>
-    <!--  <script src="/js/teamSetModal.js" defer></script>-->
     <script src="/js/clubJoinViewModal.js" defer></script>
     <script src="/js/clubJoinListFetch.js" defer></script>
-
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
 </th:block>
 
 <!-- 페이지 로드시 스크롤 하부로 이동 -->
@@ -76,7 +69,6 @@
 <th:block th:fragment="content">
     <!-- 롤링 리스트를 제외한 main 태그를 감싸는 구역 -->
     <div class="main-wrapper">
-
 
         <!-- team-info : 팀에 대한 소개 구역 -->
         <div class="team-info" th:each="clubData : ${clubData}">
@@ -104,60 +96,46 @@
 
             <!-- team-info-right : 팀 소개 오른쪽 구역 -->
             <div class="team-info-right">
-<<<<<<< HEAD
 
                 <h2  class="memberCount" th:text="${clubData.clubMemberCount}"></h2>
                 <h1 class="memberCountBar">/</h1>
                 <p class="countText"> 멤버 수</p>
-=======
-                <span>멤버 수</span><br>
-                <div class="team-info-right-membercount">
-              <span id="member-count"> <!-- 총 팀원 숫자 보여주는 곳 -->
-                <h2 th:text="${clubData.clubMemberCount}">25 명</h2>
-              </span>
-                    <h4 class="team-all-record-fc">3승 2패 (정적데이터)</h4>
-                </div>
+            </div>
+            <!-- 클럽장만 볼 수 있는 클럽가입신청 모달 구역 -->
+            <div>
+                <button id="myBtn" class="refuse-btn" th:if="${session.loginMember.dir == 'Y'}">가입 신청 관리</button>
+            </div>
 
-                <!-- 클럽장만 볼 수 있는 클럽가입신청 모달 구역 -->
-                <div>
-                    <button id="myBtn" th:if="${session.loginMember.dir == 'Y'}">가입 신청 관리</button>
-                </div>
+            <!-- 모달 배경 -->
+            <div id="joinRequestModal" class="modal">
+                <!-- 모달 내용 -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>가입 신청 관리</h2>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 가입 신청 목록을 표시할 테이블 -->
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>사진</th>
+                                <th>이름</th>
+                                <th>연락처</th>
+                                <th>이메일</th>
+                                <th>수준</th>
+                                <th>소개</th>
+                                <th>상태</th>
+                                <th>승인</th>
+                                <th>거절</th>
+                            </tr>
+                            </thead>
+                            <tbody id="joinRequestsTable">
 
-                <!-- 모달 배경 -->
-                <div id="joinRequestModal" class="modal">
-                    <!-- 모달 내용 -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <span class="close">&times;</span>
-                            <h2>가입 신청 관리</h2>
-                        </div>
-                        <div class="modal-body">
-                            <!-- 가입 신청 목록을 표시할 테이블 -->
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>사진</th>
-                                    <th>이름</th>
-                                    <th>연락처</th>
-                                    <th>이메일</th>
-                                    <th>수준</th>
-                                    <th>소개</th>
-                                    <th>상태</th>
-                                    <th>승인</th>
-                                    <th>거절</th>
-                                </tr>
-                                </thead>
-
-                                <tbody id="joinRequestsTable">
-<!--                                    clubJoinViewModal.js 동적으로 데이터 받기 -->
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
             </div>
         </div>
 
@@ -200,14 +178,11 @@
                             </form>
                         </td>
                     </tr>
-
                     </tbody>
                     <tfoot>
                     </tfoot>
                 </table>
-
-
-                    <!-- 페이지번호 반복 -->
+                <!-- 페이지번호 반복 -->
                 <ul class="pagination h-30 justify-content-center align-items-center" id ="pageUl" >
                     <!-- 처음으로 출력 -->
                     <li class="page-item" th:if="${pagination.showFirst}"><a class="page-link" th:href="@{myteam(requestPage=1, searchValue=${parameterForm.searchValue})}">처음으로</a></li>
@@ -231,8 +206,6 @@
                 </ul>
 
             </div>
-
-
 
             <!-- 팀 소통 공간 -->
             <div class="team-chat">
@@ -287,10 +260,8 @@
             <div class="new-match-add" th:if="${loginMember.dir == 'Y'}">
                 <a href="/club/create" class="btn-new-match-add">+ ADD</a>
             </div>
-
             <!-- 각각의 경기들을 보여주는 구역 클라이언트 사이드 랜더링 이용-->
             <div class="team-match-schedule-detail" >
-
             </div>
         </div>
 

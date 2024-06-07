@@ -1,23 +1,12 @@
 package com.ezen.springmvc.web.common.page;
 
-<<<<<<< HEAD
-
 /**
  * 페이징 처리 계산
-=======
-/**
- * 페이징 처리 계산
- * @author 김기정
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
  */
 public class Pagination {
 	
 	// 페이징 계산에 필요한 속성
 	private ParameterForm params;        /** 여러개의 파라메터 저장 */
-<<<<<<< HEAD
-=======
-
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
 	// 계산 결과 저장을 위한 필드
 	private int totalPages;           /** 전체 페이지 수 */
 	private int listNo;               /** 목록별 식별번호 */
@@ -137,10 +126,7 @@ public class Pagination {
 	public boolean isShowNext() {
 		return endPage < totalPages;
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
 	
 	
 	/** 테스트을 위한 main */
@@ -152,23 +138,7 @@ public class Pagination {
 				.rowCount(2048)
 				.build();
 		Pagination pagination = new Pagination(params);
-		
-<<<<<<< HEAD
-=======
-		System.out.println("테이블에서 검색된 행의수: " + params.getRowCount());
-		System.out.println("사용자 요청페이지: " + params.getRequestPage());
-		System.out.println("계산된 전체페이지수: " + pagination.getTotalPages());
-		
-		System.out.println("계산된 현재목록의 시작페이지 번호: " + pagination.getStartPage());
-		System.out.println("계산된 현재목록의 끝페이지 번호: " + pagination.getEndPage());
-		
-		System.out.println("처음으로 보여주기 여부: " + pagination.isShowFirst());
-		System.out.println("이전목록 보여주기 여부: " + pagination.isShowPrevious());
-		
-		System.out.println("다음목록 보여주기 여부: " + pagination.isShowNext());
-		System.out.println("끝으로 보여주기 여부: " + pagination.isShowLast());
-		
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
+
 		// JSP에서 페이징 처리 시
 		if(pagination.isShowFirst()) {
 			System.out.print("처음으로 ");
@@ -192,8 +162,4 @@ public class Pagination {
 		System.out.println();
 		
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> 1776326671b77b631dcaf6d8dc377d02609568b6
 }

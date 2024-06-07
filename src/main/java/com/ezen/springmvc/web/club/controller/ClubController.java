@@ -355,7 +355,6 @@ public class ClubController {
         // 세션에서 클럽번호 가져오기
         HttpSession session = request.getSession();
         MemberDto member = (MemberDto) session.getAttribute("loginMember");
-        Integer clubNum = (Integer) session.getAttribute("clubNum");
 
         if (member.getClubNum() != null) {
             createDto.setClubNum(Integer.parseInt(member.getClubNum()));

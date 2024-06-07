@@ -26,7 +26,7 @@
 
         <div class="team-info">
             <div class="team-info-img">
-                <img th:src="@{'/clublogo/' + ${clubDetail.clubStoredPhoto}}">
+                <img th:src="@{/upload/clublogo/{clubLogoFileName}(clubLogoFileName=${clubDetail.clubStoredPhoto})}">
             </div>
 
             <div class="team-info-content">
@@ -81,7 +81,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="clubMember : ${clubMembers}">
-                        <td id="img_td"><img id="club_member_img" th:src="@{/profile/{fileName}(fileName=${clubMember.storedProfile})}"></td>
+                        <td id="img_td"><img id="club_member_img" th:src="@{/upload/profile/{fileName}(fileName=${clubMember.storedProfile})}"></td>
                         <td th:text="${clubMember.name}"></td>
                         <td th:text="${clubMember.dir}"></td>
                     </tr>
