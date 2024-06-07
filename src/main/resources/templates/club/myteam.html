@@ -15,6 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="../../static/css/myteam.css">
     <!--jQuery-->
 
 </head>
@@ -42,6 +43,9 @@
     <script src="/js/weather.js" defer></script>
     <script src="/js/myteam-schedule.js" defer></script>
     <!--  <script src="/js/teamSetModal.js" defer></script>-->
+    <script src="/js/clubJoinViewModal.js" defer></script>
+    <script src="/js/clubJoinListFetch.js" defer></script>
+
 </th:block>
 
 
@@ -60,6 +64,7 @@
 
             <!-- team-info-left : 팀 소개 왼쪽 구역 -->
             <div class="team-info-left">
+                <div style="display: none" id="clubNum" th:text="${clubData.clubNum}"></div>
                 <div>
                     <h1 id="team-name" th:text="${clubData.clubName}"></h1> <!-- 클럽 이름 -->
                 </div>
@@ -82,6 +87,46 @@
               </span>
                     <h4 class="team-all-record-fc">3승 2패 (정적데이터)</h4>
                 </div>
+
+                <!-- 클럽장만 볼 수 있는 클럽가입신청 모달 구역 -->
+                <div>
+                    <button id="myBtn" th:if="${session.loginMember.dir == 'Y'}">가입 신청 관리</button>
+                </div>
+
+                <!-- 모달 배경 -->
+                <div id="joinRequestModal" class="modal">
+                    <!-- 모달 내용 -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="close">&times;</span>
+                            <h2>가입 신청 관리</h2>
+                        </div>
+                        <div class="modal-body">
+                            <!-- 가입 신청 목록을 표시할 테이블 -->
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>사진</th>
+                                    <th>이름</th>
+                                    <th>연락처</th>
+                                    <th>이메일</th>
+                                    <th>수준</th>
+                                    <th>소개</th>
+                                    <th>상태</th>
+                                    <th>승인</th>
+                                    <th>거절</th>
+                                </tr>
+                                </thead>
+
+                                <tbody id="joinRequestsTable">
+<!--                                    clubJoinViewModal.js 동적으로 데이터 받기 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 

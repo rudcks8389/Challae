@@ -77,6 +77,8 @@ li {
 
 /* 팀 사진 구역 */
 .team-info-img {
+    border: 1px solid white;
+    border-radius: 50%;
     margin-bottom: 20px;
 }
 
@@ -184,14 +186,14 @@ li {
 /* 테이블의 간격을 좁히기 위해 team-content의 flex 속성 조정 */
 main .main-wrapper .team-content {
     display: flex;
-    justify-content: space-between; /* 테이블들 사이의 균등한 간격을 보장 */
+    justify-content: center; /* 테이블들 사이의 균등한 간격을 보장 */
     width: 80%; /* 전체 너비를 조정하여 더 많은 공간 확보 */
     margin: 0 auto; /* 내용을 가운데로 정렬 */
 }
 
 main .main-wrapper .team-table {
     margin-top: 50px;
-    width: 48%; /* 각 테이블의 너비 조정 */
+    width: 60%; /* 각 테이블의 너비 조정 */
     font-family: "Gothic A1", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -220,8 +222,17 @@ table tbody tr {
 table tbody td {
     text-align: center;
     padding: 10px;
-    vertical-align: top;
+    vertical-align: center;
     border-bottom: 1px solid #ccc;
+}
+
+table tbody #img_td {
+    padding: 0;
+}
+
+#club_member_img {
+    width: 44px;
+    height: 44px;
 }
 
 main .main-wrapper .team-content table tbody tr:hover {
@@ -254,109 +265,3 @@ main .main-wrapper .team-content table tbody tr:hover {
     border-radius: 5px;
 }
 
-
-/* team-chat : 팀 소통공간 구역 */
-main .main-wrapper .team-chat {
-    margin-top: 50px;
-    width: 40%;
-    border: 2px solid rgb(124, 190, 255);
-    border-radius: 10px;
-}
-
-/* team-match-schedule : 경기 일정을 보여주는 구역 */
-main .main-wrapper .team-match-schedule {
-    margin: 70px auto;
-    width: 80%;
-    height: 400px;
-    text-align: center;
-    /* border: 2px solid rgb(124, 190, 255); */
-    border-radius: 10px;
-}
-
-/* 경기 일정 구역 중 년월을 보여주는 요소들에 관한 CSS */
-main .main-wrapper .team-match-schedule .ctr-box {
-    width: 20%;
-    padding: 0 16px;
-    margin: 20px auto;
-    font-size: 30px;
-    color: #fff;
-}
-
-.ctr-box .btn-cal {
-    position: relative;
-    float: left;
-    width: 25px;
-    height: 25px;
-    font-size: 30px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: #fff;
-}
-
-main .main-wrapper .team-match-schedule .ctr-box .btn-cal.prev:after {
-    content: '<';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-main .main-wrapper .team-match-schedule .ctr-box .btn-cal.prev:hover {
-    color: rgb(124, 190, 255);
-}
-
-main .main-wrapper .team-match-schedule .ctr-box .btn-cal.next {
-    float: right;
-}
-
-main .main-wrapper .team-match-schedule .ctr-box .btn-cal.next:after {
-    content: '>';
-}
-
-main .main-wrapper .team-match-schedule .ctr-box .btn-cal.next:hover {
-    color: rgb(124, 190, 255);
-}
-
-
-/* new-match-add : 새 경기 등록 버튼에 관한 구역 */
-main .main-wrapper .team-match-schedule .new-match-add {
-    width: 80%;
-    margin: 0 auto;
-    text-align: right;
-}
-
-main .main-wrapper .team-match-schedule .new-match-add #btn-new-match-add {
-    padding: 5px;
-    width: 10%;
-    background: #000;
-    color: #fff;
-    border: 1px solid #fff;
-}
-
-main .main-wrapper .team-match-schedule .new-match-add #btn-new-match-add:hover {
-    color: rgb(124, 190, 255);
-    border: 1px solid rgb(124, 190, 255);
-}
-
-/* team-match-schedule-detail : 경기 일정들에 대해 보여주는 구역 */
-main .main-wrapper .team-match-schedule .team-match-schedule-detail {
-    width: 80%;
-    height: 60%;
-    margin: 70px auto;
-    display: flex;
-    justify-content: space-around;
-}
-
-/* match-info : 경기 일정들에 대해 보여주는 구역에 위치하는 각각의 경기정보에 대한 CSS */
-main .main-wrapper .team-match-schedule .team-match-schedule-detail .match-info {
-    color: #000;
-    background-color: #dcdcdc;
-    width: 20%;
-    height: 100%;
-
-    border-radius: 10px;
-    border-bottom: 10px solid #282828;
-
-}

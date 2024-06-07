@@ -53,4 +53,8 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.clubMemberList(clubNum);
 	}
 
+	// 클럽신청 승인(clubNum update)
+	public void clubJoinUpdateClubNum(int clubNum) {
+		memberMapper.clubJoinUpdateClubNum(clubNum);
+	}
 }

@@ -17,9 +17,10 @@ public class MemberDto {
     private String profileImage;
     private String storedProfile;
     private String dir;
-    private String backNumber;
     private String clubNum;
     private String passwd;
     private String phone;
     private String regdate;
+
+
 }

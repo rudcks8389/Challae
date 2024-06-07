@@ -26,7 +26,7 @@
   <div class="team_add">
     <!-- 팀 텍스트 -->
     <div class="team_add_text">
-      <span id="text1">클럽이 성공적으로 생성되었습니다.</span><span id="text2"></span>
+      <span id="text1">클럽 생성</span><span id="text2">Club Register</span>
     </div>
 
     <div class="layer_popup class" id="detailDiv" style="display: block;">
@@ -42,52 +42,28 @@
             </colgroup>
 
 
-            <div id="logo_clubname_flex">
-              <div id="logo_div">
-                <img src="/img/team_logo.jpeg" id="logo_img">
-              </div>
-
-              <div id="club_name_div">
-                <h2 id="club_name">토토넘 핫스팟</h2>
-              </div>
-            </div>
-
             <tbody>
             <tr>
-              <th scope="row">클럽 수준</th>
-              <td class="al_left" id="levelbox">
-                <input type="text" class="level_input" value="값 불러오기" readonly>
-
+              <td class="head-input">
+                <input type="text" class="info_input" value="클럽 생성 대기" readonly>
               </td>
             </tr>
 
             <tr>
-              <th scope="row">활동 지역</th>
-              <td class="al_left"><input type="text" value="깂 불러오기" readonly></td>
-            </tr>
-
-            <tr>
-              <th scope="row">연락처</th>
-              <td class="al_left"><input type="text" class="" value="값 불러오기" readonly></td>
-            </tr>
-
-            <tr>
-              <th scope="row" style="padding-bottom: 200px;">소개</th>
-              <td class="al_left" colspan="3" style="border-bottom: none;">
-                <div class="match_meno">
-                  <textarea name="" id="team_memo" readonly>값 불러오기</textarea>
-                </div>
+              <td class="al_left">
+                <input id="team_memo_top" value="클럽 생성 요청이 완료되었습니다." readonly>
+                <input id="team_memo_bot" value="3영업일 이내 사이트 관리자가 검토 후 승인하여 완료됩니다." readonly>
               </td>
             </tr>
+
 
             </tbody>
           </table>
 
 
           <div class="btn_wrap">
-            <a href="javascript:;" onclick="" class="detail_join_btn">내팀보기</a>
 
-            <a href="javascript:;" onclick="" class="detail_close_btn">홈페이지</a>
+            <a href="list" onclick="" class="list_btn">클럽목록</a>
 
           </div>
         </div>

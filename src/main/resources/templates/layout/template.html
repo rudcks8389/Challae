@@ -19,8 +19,8 @@
     <!-- 부트스트랩 -->
 
     <!-- 파비콘 -->
-    <link rel="icon" href="/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="/img/favicon.ico" />
+    <link rel="icon" href="/img/favicon.ico"/>
+    <link rel="apple-touch-icon" href="/img/favicon.ico"/>
 
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous" defer></script>
@@ -28,13 +28,14 @@
 
     <!-- 일반 CSS -->
     <th:block th:replace="${css}"></th:block>
-    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet"/>
     <!-- 일반 CSS -->
 
     <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=IBM+Plex+Sans+KR&family=Jua&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=IBM+Plex+Sans+KR&family=Jua&display=swap"
+          rel="stylesheet">
     <!-- 구글 폰트 -->
 
     <!-- fontawesome -->
@@ -46,6 +47,7 @@
     <script src="/js/rolling-list.js" defer></script>
     <script src="/js/edit-member.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+
     <!-- 일반 js -->
 </head>
 
@@ -54,7 +56,7 @@
     <!-- 상단 nav 구역 -->
     <nav>
         <!-- 로고 div -->
-        <a class="nav-logo" href="/"><img src="/img/chal-lae2.png" style="height: 100%; width: 90%;" />
+        <a class="nav-logo" href="/"><img src="/img/chal-lae2.png" style="height: 100%; width: 90%;"/>
             <span></span>
         </a>
         <!-- 상단 메뉴 div 구역 -->
@@ -81,17 +83,20 @@
 
             <!-- 내 정보 toggle창 -->
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight" style="background-color: #000; border: none; font-size: 20px;">내 정보</button>
+                    aria-controls="offcanvasRight" style="background-color: #000; border: none; font-size: 20px;">내 정보
+            </button>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
                  style="height: 100%; background-color: #d2d2d2; padding: 10px;">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasRightLabel"
-                        style="margin-top: 40px; padding-left: 10px; font-size: 25px;"><i class="fa-solid fa-user"></i> 내 정보</h5>
+                        style="margin-top: 40px; padding-left: 10px; font-size: 25px;"><i class="fa-solid fa-user"></i>
+                        내 정보</h5>
 
 
                     <th:block th:if="${session.loginMember == null}">
-                        <img src="/img/teamlogo.jpg" style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
+                        <img src="/img/teamlogo.jpg"
+                             style="width: 100px; height: 100px; background-repeat: round; margin-left: 30px;">
                     </th:block>
 
                     <th:block th:if="${session.loginMember != null}">
@@ -108,9 +113,9 @@
                         <hr>
                         <!-- 내 정보 상단 -->
                         <div class="toggle-top" style="margin-bottom: 50px;">
-                            <span>이름</span ><br>
-                            <span>이메일</span ><br>
-                            <span>소속 클럽</span ><br>
+                            <span>이름</span><br>
+                            <span>이메일</span><br>
+                            <span>소속 클럽</span><br>
                         </div>
                         <hr>
                     </th:block>
@@ -122,21 +127,23 @@
                             <span th:text="${session.loginMember != null ? session.loginMember.name : ''}"></span><br>
                             <span th:text="${session.loginMember != null ? session.loginMember.id : ''}"></span><br>
                             <span th:text="${session.loginMember != null ? session.loginMember.email : ''}"></span><br>
-                            <span th:if="${session.loginMember.clubNum != null}" th:text="${session.loginMember.clubNum}"></span>
+                            <span th:if="${session.loginMember.clubNum != null}"
+                                  th:text="${session.loginMember.clubNum}"></span>
                             <span th:unless="${session.loginMember.clubNum != null}">소속클럽이 없습니다</span>
                             <button id="editButton"><span>회원정보 수정하기</span></button>
-                       </span>
+                            </span>
                         </div>
                         <hr>
-                        <div>#감독일 경우 여기에 승인 칸#</div>
+
                         <!-- 숨겨진 편집 폼 -->
                         <form id="editForm" action="/member/update" method="post" style="display: none;">
-                            <i class="fa-solid fa-user"></i>  <span th:text="${session.loginMember != null ? session.loginMember.id + '님의 정보입니다' : ''}"></span>
+                            <i class="fa-solid fa-user"></i> <span
+                                th:text="${session.loginMember != null ? session.loginMember.id + '님의 정보입니다' : ''}"></span>
 
                             <div class="form-group">
                                 <label for="currentEmail">현재 이메일</label>
                                 <br>
-                                <span type="email" id="currentEmail"th:text="${session.loginMember.email}"></span>
+                                <span type="email" id="currentEmail" th:text="${session.loginMember.email}"></span>
                             </div>
 
                             <div class="form-group">
@@ -169,7 +176,8 @@
                 <span><a href="/member/signup">회원가입</a></span>
             </th:block>
             <th:block th:if="${session.loginMember != null}">
-                <span><a href="/" th:text="${session.loginMember != null ? session.loginMember.id + '님 환영합니다!' : ''}"></a></span>
+                <span><a href="/"
+                         th:text="${session.loginMember != null ? session.loginMember.id + '님 환영합니다!' : ''}"></a></span>
                 <span><a href="/member/signout">로그아웃</a></span>
             </th:block>
 
@@ -208,7 +216,7 @@
         </section>
 
         <!-- main 하단 부분  -->
-            <th:block th:replace="${content}"></th:block>
+        <th:block th:replace="${content}"></th:block>
 
     </main>
 

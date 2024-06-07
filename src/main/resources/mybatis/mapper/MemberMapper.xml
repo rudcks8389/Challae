@@ -31,7 +31,7 @@
 
 	<!-- 회원 로그인 -->
 	<select id="findByIdAndPasswd" resultType="MemberDto">
-		SELECT MEMBER_ID "id", MEMBER_NAME "name",MEMBER_PHOTO "profileImage" ,MEMBER_STOREDPHOTO "storedProfile",MEMBER_EMAIL "email",CLUB_NUM "clubNum",MEMBER_PASSWD "passwd", MEMBER_DIR "dir",MEMBER_NUM "memberNum"
+		SELECT MEMBER_ID "id", MEMBER_NAME "name",MEMBER_PHOTO "profileImage" ,MEMBER_STOREDPHOTO "storedProfile",MEMBER_EMAIL "email",CLUB_NUM "clubNum",MEMBER_PASSWD "passwd", MEMBER_DIR "dir",MEMBER_NUM "memberNum", MEMBER_PHONE "phone"
 		FROM member
 		WHERE member_id = #{id} AND MEMBER_PASSWD = #{passwd}
 	</select>
@@ -95,7 +95,7 @@
 				END
 	</select>
 
-	<!--    클럽상세페이지 멤버목록 -->
+	<!--    클럽상세페이지 멤버목록 / club_detail 페이지 -->
 	<select id="clubMemberList" resultType="MemberDto">
 		SELECT CLUB_NUM, MEMBER_NUM, MEMBER_STOREDPHOTO "storedProfile", MEMBER_NAME "name",
 			   (CASE WHEN MEMBER_DIR = 'Y' THEN '클럽장' ELSE '클럽원' END) "dir"
@@ -103,6 +103,21 @@
 		WHERE CLUB_NUM = #{clubNum}
 		ORDER BY MEMBER_DIR DESC
 	</select>
+
+	<!--    클럽 가입 승인(clubNum 업데이트) / club_join -->
+	<update id="clubJoinUpdateClubNum" parameterType="int">
+		UPDATE MEMBER
+		SET CLUB_NUM = (
+			SELECT CLUB_NUM
+			FROM CLUBJOINLIST
+			WHERE JOIN_NUM = #{joinNum}
+		)
+		WHERE MEMBER_NUM = (
+			SELECT MEMBER_NUM
+			FROM CLUBJOINLIST
+			WHERE JOIN_NUM = #{joinNum}
+		)
+	</update>
 
 </mapper>
 

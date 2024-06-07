@@ -21,6 +21,8 @@
     <script src="/js/level_select.js" defer></script>
     <script src="/js/img_preview.js" defer></script>
     <script src="/js/address_select.js" defer></script>
+    <script src="/js/validator.js" defer></script>
+    <script src="/js/clubRegisterVaildator.js" defer></script>
 
 </th:block>
 
@@ -30,14 +32,14 @@
     <div class="team_add">
         <!-- 팀 텍스트 -->
         <div class="team_add_text">
-            <span id="text1">클럽 생성</span><span id="text2">Club register</span>
+            <span id="text1">클럽 생성</span><span id="text2">Club Register</span>
         </div>
 
         <div class="layer_popup class" id="detailDiv" style="display: block;">
 
             <div class="layer_cont">
 
-                <form name="clubRegisterForm" novalidate method="post" th:object="${clubRegisterForm}" enctype="multipart/form-data">
+                <form name="clubRegisterForm" method="post" th:object="${clubRegisterForm}" enctype="multipart/form-data">
 
                     <div class="table_wrap" id="detail">
 
@@ -60,6 +62,8 @@
                             <tr>
                                 <th scope="row">클럽명</th>
                                 <td class="al_left"><input type="text" th:field="*{clubName}"></td>
+                                <p th:errors="*{clubName}" th:class="text-danger">클럽명 관련 입력 오류 메시지</p><br>
+                                <p id="checkedClubName"></p>
                             </tr>
 
                             <tr>
@@ -90,6 +94,7 @@
                             <tr>
                                 <th scope="row">연락처</th>
                                 <td class="al_left"><input type="text" th:field="*{clubPhone}"></td>
+<!--                                <p th:errors="*{clubPhone}" th:class="text-danger">연락처 관련 입력 오류 메시지</p>-->
                             </tr>
 
                             <tr>
@@ -99,6 +104,7 @@
                                         <textarea name="" id="team_memo" th:field="*{clubInfo}"></textarea>
                                     </div>
                                 </td>
+                                <p th:errors="*{clubInfo}" th:class="text-danger">클럽 소개 관련 입력 오류 메시지</p>
                             </tr>
 
                             </tbody>

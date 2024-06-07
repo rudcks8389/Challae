@@ -34,6 +34,9 @@ public interface MemberMapper {
 
     // 클럽상세페이지 멤버목록
     public List<MemberDto> clubMemberList(String clubNum);
+
+    // 클럽신청 승인(clubNum update)
+    public void clubJoinUpdateClubNum(int clubNum);
 }
 
 

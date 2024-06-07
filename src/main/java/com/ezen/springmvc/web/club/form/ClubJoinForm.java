@@ -9,7 +9,13 @@ import lombok.*;
 @ToString
 @Builder
 public class ClubJoinForm {
-    private String memberAddress;
+    // DB로 로그인 상태의 정보를 가져옴
+    private Long clubNum;
+    private String memberStoredProfile;
+    private String memberName;
+    private String memberPhone;
+    private String memberEmail;
+
     private String memberLevel;
     private String memberInfo;
 }
