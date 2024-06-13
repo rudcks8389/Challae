@@ -25,12 +25,14 @@
 8. 감독계정으로 로그인시 전략판 생성기능 (프리셋기능 포함)
 9. 커뮤니티 게시글/댓글
 10. Admin 기능(회원관리, 클럽관리, 팀 생성 승인)
+<br/>
 
 ## :clipboard: 개발환경
 * IntelliJ
 * Postman
 * VsCode
 * GitHub
+<br/>
 
 ## :clipboard: 사용 기술
 ### 백엔드
@@ -41,12 +43,15 @@
 * Spring AOP
 * MyBatis
 * Lombok
+<br/>
 
 #### Build tool
 * Gradle
+<br/>
 
 #### Database
 * ORACLE
+<br/>
 
 ### 프론트엔드
 * Javascript
@@ -55,6 +60,7 @@
 * Bootstrap
 * HTML Canvas
 * React
+<br/>
 
 ## :clipboard: 주요 키워드
 * REST API
@@ -64,9 +70,11 @@
 * 트랜잭션
 * 예외처리
 * Git 버전관리
+<br/>
 
 ## :factory: 시스템 구조
 ![system](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/c1e29dd3-59bc-41e4-aac0-7a42a3ee8204)
+<br/>
 
 ## 🪄프로젝트 시연!
 
@@ -89,10 +97,11 @@
 |마이페이지|어드민 페이지|
 |------|---|
 |![07_마이페이지](https://user-images.githubusercontent.com/86715916/223704372-038ad154-816d-4213-8eb0-ea9f176013e5.gif)|![08_어드민](https://user-images.githubusercontent.com/86715916/223704382-95c9ad86-c34d-48b1-9286-10144351df58.gif)|
-
+<br/>
 
 ## :link: ERD 설계
 [* [CHAL-LAE ERD](https://github.com/didrlgus/springboot-shoppingmall/issues/1)](https://www.erdcloud.com/d/HvoYGpFbmk8hRs6fT)
+<br/>
 
 ## :link: 최종 자료 PDF 
 [Project_CHALLAE.pdf](https://github.com/user-attachments/files/15814180/Project_CHALLAE.pdf)
