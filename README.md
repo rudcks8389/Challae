@@ -1,4 +1,4 @@
-![system](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/ccc6879a-9abe-4c44-974d-d5ea16257986)# :shopping_cart: 스프링 부트로 만드는 쇼핑몰 프로젝트
+스프링 부트로 만드는 풋살 커뮤니티 팀 프로젝트
 
 ## :clipboard: 개발환경
 * IntelliJ
@@ -61,5 +61,5 @@
 
 
 ## :link: ERD 설계
-* [shopping mall ERD](https://github.com/didrlgus/springboot-shoppingmall/issues/1)
+[* [shopping mall ERD](https://github.com/didrlgus/springboot-shoppingmall/issues/1)](https://www.erdcloud.com/d/HvoYGpFbmk8hRs6fT)
 
