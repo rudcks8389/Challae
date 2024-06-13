@@ -1,4 +1,4 @@
-# :shopping_cart: 스프링 부트로 만드는 쇼핑몰 프로젝트
+![system](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/ccc6879a-9abe-4c44-974d-d5ea16257986)# :shopping_cart: 스프링 부트로 만드는 쇼핑몰 프로젝트
 
 ## :clipboard: 개발환경
 * IntelliJ
@@ -57,7 +57,8 @@
 * Event Driven Architecture
 
 ## :factory: 시스템 구조
-<img src="https://user-images.githubusercontent.com/40568894/136735965-4b807c84-02b4-4410-8bb1-771840a04102.jpeg" width="80%" height="80%">
+![system](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/c1e29dd3-59bc-41e4-aac0-7a42a3ee8204)
+
 
 ## :link: ERD 설계
 * [shopping mall ERD](https://github.com/didrlgus/springboot-shoppingmall/issues/1)
