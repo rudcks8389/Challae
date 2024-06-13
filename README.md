@@ -1,7 +1,7 @@
 # 풋살을 사랑하는 풋살인들을 위한 커뮤니티 " 찰래?! "
 <br/>
 <img src="https://github.com/Gerrard0621/Project-CHALLAE/assets/160811627/69fd8ffe-e50a-4e09-8d16-bf96fa0d1f45" width=100%>
-<br> </br>
+<br/>
 
 ## 스프링 부트로 만드는 풋살 커뮤니티 팀 프로젝트입니다. 
 
