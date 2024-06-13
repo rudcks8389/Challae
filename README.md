@@ -14,6 +14,7 @@
 * Spring Boot 
 * Spring AOP
 * MyBatis
+* Lombok
 
 #### Build tool
 * Gradle
@@ -45,3 +46,5 @@
 ## :link: ERD 설계
 [* [CHAL-LAE ERD](https://github.com/didrlgus/springboot-shoppingmall/issues/1)](https://www.erdcloud.com/d/HvoYGpFbmk8hRs6fT)
 
+## :link: 최종 자료 PDF 
+[Project_CHALLAE.pdf](https://github.com/user-attachments/files/15814180/Project_CHALLAE.pdf)
