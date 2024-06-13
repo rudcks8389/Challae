@@ -1,4 +1,4 @@
-<img src="https://github.com/Gerrard0621/Project-CHALLAE/assets/160811627/69fd8ffe-e50a-4e09-8d16-bf96fa0d1f45" width=70%>
+<img src="https://github.com/Gerrard0621/Project-CHALLAE/assets/160811627/69fd8ffe-e50a-4e09-8d16-bf96fa0d1f45" width=98%>
 
 
 
