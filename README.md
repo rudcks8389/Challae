@@ -72,23 +72,24 @@
 
 |로그인페이지|고객센터 페이지|
 |------|---|
-|![01_코스추천](https://user-images.githubusercontent.com/86715916/223703985-2de089a6-9f56-4e58-8939-d0030af101f8.gif)|![02_코스추천 상세](https://user-images.githubusercontent.com/86715916/223704287-301d4d3b-86d9-4ccf-af22-f7ca462da5ed.gif)|
+|![login](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/0e8736d6-3ac9-4e9f-83c9-82d5b4781ac1)|![board](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/9588f3ea-4ade-444c-88fd-7970ba2c4a9a)|
 
 |클럽목록 페이지|클럽 상세 페이지|
 |------|---|
-|![03_커뮤니티](https://user-images.githubusercontent.com/86715916/223704302-26ff7fee-d7ed-4d85-8b70-53013f6702a4.gif)|![04_커뮤니티 상세](https://user-images.githubusercontent.com/86715916/223704316-c736e7b5-1ca2-44cc-a14c-8252089dbfcc.gif)|
+|![list](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/7b279a59-b7e7-4d93-bf7a-39a0322ee109)|![clubView](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/0d888394-97a7-4018-b086-a4d267396b39)|
 
 |My Team 페이지|경기 상세 정보|
 |------|---|
-|![05_쇼핑몰-공지사항](https://user-images.githubusercontent.com/86715916/223704336-a33b3be0-21b1-47d2-9cf3-e542861333f6.gif)|![06_친구-알람](https://user-images.githubusercontent.com/86715916/223704350-34147713-d5d1-4810-bfb4-7b26a66901cc.gif)|
+|![myteam](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/8d8bff8a-970b-4931-9fe7-444c4ea4d299)|![matchView](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/0a8b8e29-971c-497a-afb3-b53d1e73fd08)|
+
 
 |경기 일정 등록 페이지|구장 상세보기 페이지|
 |------|---|
-|![07_마이페이지](https://user-images.githubusercontent.com/86715916/223704372-038ad154-816d-4213-8eb0-ea9f176013e5.gif)|![08_어드민](https://user-images.githubusercontent.com/86715916/223704382-95c9ad86-c34d-48b1-9286-10144351df58.gif)|
+|![create](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/f89950d0-49f0-4367-a568-f24da90bf683)|![fieldView](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/8cf809eb-0c44-49e7-b473-ba9851275a81)|
 
 |예약 페이지|어드민 페이지|
 |------|---|
-|![07_마이페이지](https://user-images.githubusercontent.com/86715916/223704372-038ad154-816d-4213-8eb0-ea9f176013e5.gif)|![08_어드민](https://user-images.githubusercontent.com/86715916/223704382-95c9ad86-c34d-48b1-9286-10144351df58.gif)|
+|![reservation](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/fd026ba5-ba37-4d1b-af67-6ca47f54fc7e)|![admin](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/5fa17d20-f06d-4d1d-a755-5fd56406891d)|
 
 
 ## :link: ERD 설계
