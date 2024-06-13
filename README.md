@@ -1,4 +1,6 @@
-<img src="https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/e422e480-5f88-47dc-a96a-5de6271939e0](https://github.com/Gerrard0621/Project-CHALLAE/assets/160811627/22db3471-eebb-470c-a757-8b55286e84bf" width=30%>
+<img src="https://github.com/Gerrard0621/Project-CHALLAE/assets/160811627/69fd8ffe-e50a-4e09-8d16-bf96fa0d1f45" width=30%>
+
+
 
 스프링 부트로 만드는 풋살 커뮤니티 팀 프로젝트
 
