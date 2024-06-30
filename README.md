@@ -93,7 +93,7 @@
 
 
 ## :link: ERD 설계
-[CHAL-LAE ERD](https://www.erdcloud.com/d/HvoYGpFbmk8hRs6fT)
+[CHAL-LAE ERD]([https://www.erdcloud.com/d/HvoYGpFbmk8hRs6fT](https://www.erdcloud.com/d/HvoYGpFbmk8hRs6fT))
 
-## :link: 최종 자료 PDF 
+## :link: 최종 자료 PDF (클릭 시 다운로드)
 [Project_CHALLAE.pdf](https://github.com/user-attachments/files/15814180/Project_CHALLAE.pdf)
