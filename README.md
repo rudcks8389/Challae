@@ -91,11 +91,8 @@
 |------|---|
 |![reservation](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/fd026ba5-ba37-4d1b-af67-6ca47f54fc7e)|![admin](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/5fa17d20-f06d-4d1d-a755-5fd56406891d)|
 
-
 ## ERD 설계
-<img width="80%" height="80%" alt="CHALLAE_ERD" src="https://github.com/rudcks8389/Challae/assets/158795491/2c4adb2d-4c12-4186-93e3-102a39bef168">
-
-
+<img width="100%" height="100%" alt="CHALLAE_ERD" src="https://github.com/rudcks8389/Challae/assets/158795491/2c4adb2d-4c12-4186-93e3-102a39bef168">
 
 ## 최종 자료 PDF (클릭 시 다운로드)
 [Project_CHALLAE.pdf](https://github.com/user-attachments/files/15814180/Project_CHALLAE.pdf)
