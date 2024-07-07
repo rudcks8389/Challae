@@ -56,7 +56,7 @@
 * HTML Canvas
 * React
 
-## :clipboard: 주요 키워드
+## 🎯 주요 키워드
 * REST API
 * Mybatis
 * HTTP 통신
@@ -71,24 +71,24 @@
 ## 🎞️ 프로젝트 시연
 
 |로그인페이지|고객센터 페이지|
-|------|---|
+| --- | --- |
 |![login](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/0e8736d6-3ac9-4e9f-83c9-82d5b4781ac1)|![board](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/9588f3ea-4ade-444c-88fd-7970ba2c4a9a)|
 
 |클럽목록 페이지|클럽 상세 페이지|
-|------|---|
+| --- | --- |
 |![list](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/7b279a59-b7e7-4d93-bf7a-39a0322ee109)|![clubView](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/0d888394-97a7-4018-b086-a4d267396b39)|
 
 |My Team 페이지|경기 상세 정보|
-|------|---|
+| --- | --- |
 |![myteam](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/8d8bff8a-970b-4931-9fe7-444c4ea4d299)|![matchView](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/0a8b8e29-971c-497a-afb3-b53d1e73fd08)|
 
 
 |경기 일정 등록 페이지|구장 상세보기 페이지|
-|------|---|
+| --- | --- |
 |![create](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/f89950d0-49f0-4367-a568-f24da90bf683)|![fieldView](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/8cf809eb-0c44-49e7-b473-ba9851275a81)|
 
 |예약 페이지|어드민 페이지|
-|------|---|
+| --- | --- |
 |![reservation](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/fd026ba5-ba37-4d1b-af67-6ca47f54fc7e)|![admin](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/5fa17d20-f06d-4d1d-a755-5fd56406891d)|
 
 ## ERD 설계
