@@ -26,12 +26,12 @@
 9. 커뮤니티 게시글/댓글
 10. Admin 기능(회원관리, 클럽관리, 팀 생성 승인)
 
-## :clipboard: 개발환경
+## 🛠️ 개발환경
 * IntelliJ
 * VsCode
 * GitHub
 
-## :clipboard: 사용 기술
+## 🕹️ 사용 기술
 ### 백엔드
 #### Spring boot
 * JAVA 17
@@ -65,10 +65,10 @@
 * 예외처리
 * Git 버전관리
 
-## :factory: 시스템 구조
+## 🧬 시스템 구조
 ![system](https://github.com/Gerrard0621/Project-CHALLAE/assets/165990790/c1e29dd3-59bc-41e4-aac0-7a42a3ee8204)
 
-## 🪄프로젝트 시연!
+## 🎞️ 프로젝트 시연
 
 |로그인페이지|고객센터 페이지|
 |------|---|
